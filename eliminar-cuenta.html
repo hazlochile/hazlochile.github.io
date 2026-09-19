@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cómo eliminar tu cuenta de Hazlo Ahora y Hazlo Ahora Pro, y qué datos se borran.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23F26B1D%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
+<title>Eliminar cuenta Hazlo Ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5; --card:#FFFFFF; --sunk:#F1ECE5;
+  --ink:#1A1714; --ink-soft:#544E47; --muted:#8E867D; --line:#E7E0D7;
+  --brand:#FF6B2C; --brand-dark:#C9490F; --brand-soft:#FFEFE6;
+  --falta:#FBEEC8; --falta-ink:#7A5A05; --falta-line:#E0C368;
+  --gutter:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+    --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+    --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+    --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+  --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+  --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+  --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3,h4,.ui{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line)}
+.bar-in{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--brand);display:grid;place-items:center;flex:none}
+.marca{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.tabs{display:inline-flex;gap:4px;background:var(--sunk);padding:4px;border-radius:999px;margin-left:auto}
+.tab{font:inherit;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;font-weight:700;
+  padding:8px 15px;border:0;border-radius:999px;background:transparent;color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.tab[aria-selected="true"]{background:var(--brand);color:#fff}
+.tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+header.top{padding-block:40px 6px}
+.kicker{font-family:'Plus Jakarta Sans',system-ui,sans-serif;text-transform:uppercase;
+  letter-spacing:.13em;font-size:11.5px;font-weight:800;color:var(--brand-dark)}
+h1{font-size:clamp(28px,5vw,38px);line-height:1.12;letter-spacing:-.025em;margin:10px 0 0;font-weight:800;text-wrap:balance}
+.fecha{color:var(--muted);font-size:14.5px;margin-top:10px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+
+.borrador{display:flex;gap:12px;align-items:flex-start;background:var(--falta);color:var(--falta-ink);
+  border:1px solid var(--falta-line);border-radius:14px;padding:15px 17px;margin-top:24px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px;line-height:1.55}
+.borrador b{display:block;margin-bottom:3px}
+
+article{padding-block:8px 40px}
+h2{font-size:22px;margin:38px 0 10px;letter-spacing:-.02em;line-height:1.25;font-weight:800;scroll-margin-top:80px}
+h3{font-size:18px;margin:26px 0 8px;letter-spacing:-.01em;font-weight:700}
+h4{font-size:15px;margin:20px 0 6px;font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:7px}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+a{color:var(--brand-dark)}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:var(--sunk);
+  padding:2px 6px;border-radius:5px}
+blockquote{margin:20px 0;padding:14px 18px;background:var(--card);border-left:3px solid var(--brand);
+  border-radius:0 12px 12px 0;color:var(--ink-soft);font-size:16px}
+blockquote p:last-child{margin-bottom:0}
+mark.falta{background:var(--falta);color:var(--falta-ink);border:1px dashed var(--falta-line);
+  border-radius:4px;padding:1px 6px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:.85em;font-weight:700}
+.tw{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+footer{border-top:1px solid var(--line);padding-block:26px 46px;color:var(--muted);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="mark"><svg width="17" height="17" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+    <span class="marca">Hazlo Ahora</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <p class="kicker">Tu cuenta</p>
+    <h1>Eliminar tu cuenta de Hazlo Ahora</h1>
+    <p class="fecha">Aplica a las apps Hazlo Ahora y Hazlo Ahora Pro, de HAZLO AHORA SpA</p>
+  </header>
+
+  <article>
+<h2 id="desde-la-app">Desde la app (inmediato)</h2>
+<ol>
+<li>Abre <strong>Hazlo Ahora</strong> o <strong>Hazlo Ahora Pro</strong> e inicia sesión.</li>
+<li>Ve a la pestaña <strong>Cuenta</strong>.</li>
+<li>Toca <strong>Eliminar mi cuenta</strong> y confirma.</li>
+</ol>
+<p>La cuenta se elimina en ese momento. Si tienes un trabajo en curso, primero termínalo o cancélalo.</p>
+
+<h2 id="sin-la-app">Sin la app</h2>
+<p>Escríbenos a <a href="mailto:contacto@hazlochile.com?subject=Eliminar%20mi%20cuenta">contacto@hazlochile.com</a> desde el correo con que te registraste, con el asunto <strong>&quot;Eliminar mi cuenta&quot;</strong>. La eliminamos dentro de 30 días corridos y te avisamos por correo.</p>
+
+<h2 id="que-se-borra">Qué se borra</h2>
+<ul>
+<li><strong>Si nunca completaste un trabajo:</strong> se borra todo: tu perfil, tus datos, tus fotos, tus mensajes y tu acceso.</li>
+<li><strong>Si ya completaste trabajos:</strong> se borran tu nombre, tu teléfono, tu foto, tu verificación de identidad y el contenido de tus mensajes. Tu cuenta queda como &quot;Usuario eliminado&quot; y no se puede volver a usar.</li>
+</ul>
+
+<h2 id="que-se-conserva">Qué se conserva y por cuánto tiempo</h2>
+<p>El registro de que esos trabajos ocurrieron y sus montos, <strong>sin tu nombre ni forma de contactarte</strong>, se conserva por <strong>6 años</strong>, porque la ley tributaria chilena nos obliga. Las imágenes de la verificación de identidad las borra nuestro proveedor (Didit) a los 30 días de la verificación.</p>
+
+<p>Más detalles en nuestra <a href="legales.html#privacidad">Política de Privacidad</a>.</p>
+  </article>
+</div>
+
+<footer class="wrap">
+  <p>Hazlo Ahora · HAZLO AHORA SpA · Santiago de Chile</p>
+  <p><a href="mailto:contacto@hazlochile.com">contacto@hazlochile.com</a></p>
+</footer>
+
+</body>
+</html>
