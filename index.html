@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hazlo Ahora: maestros y profesionales verificados a domicilio en Santiago. Pide, compara cotizaciones y elige al que más te convenza.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23F26B1D%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
+<title>Hazlo Ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#FF6B2C; --brand-dark:#E4551A; --brand-soft:#FFF1EA; --brand-glow:#FFD3BF;
+  --ink:#1A1714; --ink-soft:#5B554E; --muted:#9B948C;
+  --line:#EDE7DF; --bg:#FAF7F3; --card:#FFFFFF; --night:#211D1A; --on-night:#FFFFFF;
+  --night-soft:rgba(255,255,255,.72); --night-line:rgba(255,255,255,.12); --night-fill:rgba(255,255,255,.06);
+  --ok:#0E9F7A; --ok-soft:#E3F6F0; --danger:#E0433D; --danger-soft:#FDECEB;
+  --shadow:0 8px 24px rgba(26,23,20,.07); --shadow-lift:0 24px 50px rgba(26,23,20,.16);
+  --gutter:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --brand:#FF7C42; --brand-dark:#FF9463; --brand-soft:#2E1D14; --brand-glow:#4A2D1C;
+    --ink:#F6F1EB; --ink-soft:#BAB2A8; --muted:#8B837A;
+    --line:#332C25; --bg:#14110E; --card:#1E1A16; --night:#0D0B09; --on-night:#F6F1EB;
+    --night-soft:rgba(246,241,235,.68); --night-line:rgba(246,241,235,.12); --night-fill:rgba(246,241,235,.05);
+    --ok:#3BC7A2; --ok-soft:#10352C; --danger:#FF7A74; --danger-soft:#3A1C1A;
+    --shadow:0 8px 24px rgba(0,0,0,.4); --shadow-lift:0 24px 50px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  --brand:#FF7C42; --brand-dark:#FF9463; --brand-soft:#2E1D14; --brand-glow:#4A2D1C;
+  --ink:#F6F1EB; --ink-soft:#BAB2A8; --muted:#8B837A;
+  --line:#332C25; --bg:#14110E; --card:#1E1A16; --night:#0D0B09; --on-night:#F6F1EB;
+  --night-soft:rgba(246,241,235,.68); --night-line:rgba(246,241,235,.12); --night-fill:rgba(246,241,235,.05);
+  --ok:#3BC7A2; --ok-soft:#10352C; --danger:#FF7A74; --danger-soft:#3A1C1A;
+  --shadow:0 8px 24px rgba(0,0,0,.4); --shadow-lift:0 24px 50px rgba(0,0,0,.55);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; text-wrap:balance; letter-spacing:-.02em; font-weight:800}
+p{margin:0}
+ul{margin:0; padding:0; list-style:none}
+a{color:inherit}
+.wrap{max-width:1060px; margin:0 auto; padding-inline:var(--gutter)}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+}
+.bar-in{display:flex; align-items:center; justify-content:space-between; height:62px}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; text-decoration:none; letter-spacing:-.03em}
+.mark{width:32px; height:32px; border-radius:10px; background:var(--brand); display:grid; place-items:center; flex:none}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 22px; border-radius:999px; font:inherit; font-weight:700; font-size:15px;
+  text-decoration:none; border:1.5px solid transparent; cursor:pointer;
+  transition:transform .12s ease, background .15s ease, border-color .15s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+.btn-brand{background:var(--brand); color:#fff; box-shadow:0 10px 26px rgba(255,107,44,.3)}
+.btn-brand:hover{background:var(--brand-dark)}
+.btn-line{background:transparent; color:var(--ink); border-color:var(--line)}
+.btn-line:hover{border-color:var(--brand); color:var(--brand-dark)}
+.btn-sm{padding:9px 16px; font-size:14px}
+
+/* ---------- hero ---------- */
+.hero{display:grid; gap:40px; align-items:center; padding-block:56px 40px}
+@media(min-width:880px){.hero{grid-template-columns:1.1fr .9fr; padding-block:80px 60px}}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px; background:var(--brand-soft); color:var(--brand-dark);
+  font-weight:700; font-size:12.5px; padding:7px 13px; border-radius:999px;
+  text-transform:uppercase; letter-spacing:.08em; margin-bottom:20px;
+}
+.beat{width:7px; height:7px; border-radius:50%; background:var(--brand); animation:beat 1.9s ease-in-out infinite}
+@keyframes beat{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.4; transform:scale(.8)}}
+@media (prefers-reduced-motion:reduce){.beat{animation:none}}
+h1{font-size:clamp(40px,7.5vw,64px); line-height:1.03; letter-spacing:-.035em}
+h1 em{font-style:normal; color:var(--brand); display:block}
+.lead{font-size:18px; color:var(--ink-soft); margin-block:20px 26px; max-width:30em}
+.lead strong{color:var(--ink); font-weight:700}
+.ctas{display:flex; flex-wrap:wrap; gap:12px}
+.note{font-size:13px; color:var(--muted); margin-top:14px; max-width:34em}
+
+/* ---------- phone ---------- */
+.phone{
+  justify-self:center; width:286px; flex:none;
+  background:var(--night); border-radius:40px; padding:11px; box-shadow:var(--shadow-lift);
+}
+.screen{background:var(--bg); border-radius:30px; padding:16px 13px; overflow:hidden}
+.st{display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:12px; font-variant-numeric:tabular-nums}
+.sh{font-size:19px; font-weight:800; letter-spacing:-.03em}
+.ss{font-size:11.5px; color:var(--ink-soft); margin-bottom:12px}
+.grid6{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-bottom:12px}
+.t{background:var(--card); border-radius:13px; padding:9px 6px; text-align:center; font-size:10px; font-weight:700; box-shadow:var(--shadow)}
+.t i{display:grid; place-items:center; width:32px; height:32px; border-radius:10px; margin:0 auto 5px; font-size:16px; font-style:normal}
+.job{background:var(--card); border-radius:15px; padding:11px; box-shadow:var(--shadow); margin-top:7px}
+.job-h{display:flex; justify-content:space-between; align-items:center; font-size:10.5px; color:var(--muted); margin-bottom:5px}
+.tag{font-weight:700; font-size:9.5px; padding:3px 8px; border-radius:999px; background:var(--brand-soft); color:var(--brand-dark); letter-spacing:.02em}
+.tag.sch{background:var(--ok-soft); color:var(--ok)}
+.job-t{font-weight:700; font-size:12.5px}
+.job-d{font-size:10.5px; color:var(--ink-soft)}
+.bid{display:flex; align-items:center; gap:7px; margin-top:8px; padding-top:8px; border-top:1px solid var(--line); font-size:10.5px; color:var(--ink-soft)}
+.av{width:21px; height:21px; border-radius:50%; background:var(--brand-glow); color:var(--brand-dark); display:grid; place-items:center; font-size:9px; font-weight:800}
+.amt{margin-left:auto; font-weight:800; color:var(--ink); font-variant-numeric:tabular-nums}
+
+/* ---------- sections ---------- */
+section{padding-block:52px}
+.label{text-transform:uppercase; letter-spacing:.11em; font-size:12px; font-weight:700; color:var(--brand-dark); margin-bottom:10px}
+h2{font-size:clamp(27px,4.4vw,38px); line-height:1.1}
+.sub{color:var(--ink-soft); font-size:17px; margin-top:10px; max-width:34em}
+
+.flow{display:grid; gap:2px; margin-top:30px; border-radius:22px; overflow:hidden; background:var(--line)}
+@media(min-width:760px){.flow{grid-template-columns:repeat(3,1fr)}}
+.stepbox{background:var(--card); padding:26px 22px}
+.stepno{font-size:13px; font-weight:800; color:var(--brand); font-variant-numeric:tabular-nums; margin-bottom:12px; display:block}
+.stepbox h3{font-size:18px; margin-bottom:6px}
+.stepbox p{color:var(--ink-soft); font-size:15px}
+
+.chips{display:flex; flex-wrap:wrap; gap:9px; margin-top:26px}
+.chip{display:inline-flex; align-items:center; gap:9px; background:var(--card); border:1.5px solid var(--line); padding:9px 15px 9px 12px; border-radius:13px; font-weight:600; font-size:14.5px}
+.chip b{width:9px; height:9px; border-radius:3px; flex:none}
+.more{align-self:center; color:var(--muted); font-size:14px; font-weight:600; padding-left:4px}
+
+.pair{display:grid; gap:18px; margin-top:26px}
+@media(min-width:760px){.pair{grid-template-columns:1fr 1fr}}
+.panel{background:var(--card); border-radius:22px; padding:26px; box-shadow:var(--shadow)}
+.panel h3{font-size:19px}
+.panel > p{color:var(--ink-soft); font-size:15px; margin-top:5px}
+.panel ul{margin-top:16px; display:grid; gap:10px}
+.panel li{display:flex; gap:10px; align-items:flex-start; font-size:15px; color:var(--ink-soft)}
+.panel li svg{flex:none; margin-top:3px}
+
+/* ---------- signup ---------- */
+.signup{background:var(--night); color:var(--on-night); border-radius:30px; padding:40px var(--gutter); margin-block:16px}
+@media(min-width:760px){.signup{padding:52px}}
+.signup h2{color:var(--on-night)}
+.signup .label{color:var(--brand)}
+.signup .sub{color:var(--night-soft)}
+.tabs{display:inline-flex; background:var(--night-fill); padding:5px; border-radius:999px; margin-block:24px 18px; gap:4px}
+.tab{padding:10px 18px; border-radius:999px; font:inherit; font-weight:700; font-size:14px; color:var(--night-soft); background:transparent; border:0; cursor:pointer; transition:background .15s, color .15s}
+.tab[aria-selected="true"]{background:var(--brand); color:#fff}
+.tab:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+form{display:grid; gap:15px; max-width:560px}
+.field label{display:block; font-size:13px; font-weight:600; color:var(--night-soft); margin-bottom:6px}
+input,textarea{
+  width:100%; font:inherit; font-size:16px; padding:13px 14px; border-radius:14px;
+  border:1.5px solid var(--night-line); background:var(--night-fill); color:var(--on-night); outline:0;
+}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+input:focus,textarea:focus{border-color:var(--brand); background:color-mix(in srgb, var(--brand) 10%, transparent)}
+textarea{min-height:82px; resize:vertical}
+.row2{display:grid; gap:15px}
+@media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+.trap{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+
+/* ---------- selector de servicios ---------- */
+.pick{display:grid; gap:10px}
+.pick-h{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.pick-h .hint{font-size:12.5px; color:var(--muted)}
+.mini{text-transform:uppercase; letter-spacing:.1em; font-size:11px; font-weight:700; color:var(--night-soft); margin-bottom:8px}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opt{
+  font:inherit; font-size:14px; font-weight:600; color:var(--on-night);
+  background:var(--night-fill); border:1.5px solid var(--night-line);
+  padding:9px 14px; border-radius:12px; cursor:pointer; text-align:left;
+  transition:background .14s, border-color .14s, color .14s;
+}
+.opt:hover{border-color:var(--brand)}
+.opt:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.opt[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff}
+.opt[aria-pressed="true"]::before{content:"✓ "; font-weight:800}
+.opt small{display:block; font-weight:500; font-size:11.5px; opacity:.72; margin-top:1px}
+.vermas{
+  background:transparent; border:1.5px dashed var(--night-line); color:var(--night-soft);
+  font:inherit; font-weight:700; font-size:13.5px; padding:9px 14px; border-radius:12px; cursor:pointer;
+}
+.vermas:hover{border-color:var(--brand); color:var(--brand)}
+.cats-all{display:grid; gap:16px; padding-top:4px; border-top:1px solid var(--night-line); margin-top:4px}
+.cuenta{font-size:12.5px; font-weight:700; color:var(--brand)}
+.msg{padding:13px 16px; border-radius:14px; font-weight:600; font-size:15px}
+.msg[data-kind="ok"]{background:var(--ok-soft); color:var(--ok)}
+.msg[data-kind="err"]{background:var(--danger-soft); color:var(--danger)}
+.legal{font-size:12.5px; color:var(--muted); max-width:44em}
+.legal a{color:var(--night-soft)}
+
+footer{padding-block:34px 46px; color:var(--muted); font-size:14px}
+.foot{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center}
+.social{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; color:var(--ink-soft); background:var(--card); border:1.5px solid var(--line); padding:8px 14px; border-radius:999px}
+.social:hover{border-color:var(--brand); color:var(--brand-dark)}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="logo" href="#top">
+      <span class="mark"><svg width="19" height="19" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+      Hazlo Ahora
+    </a>
+    <a class="btn btn-brand btn-sm" href="#registro">Quiero enterarme</a>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow"><span class="beat"></span> Partimos en Santiago</p>
+      <h1>Un maestro en tu puerta.<em>Al tiro.</em></h1>
+      <p class="lead">Gásfiter, electricista, aseo, flete, manicure, garzones para tu evento. Pides desde el celular, te llegan precios de personas verificadas cerca de ti y eliges. <strong>Ahora mismo o agendado</strong> para el día y la hora que necesites.</p>
+      <div class="ctas">
+        <a class="btn btn-brand" href="#registro" data-side="cliente">Necesito un servicio</a>
+        <a class="btn btn-line" href="#registro" data-side="prestador">Soy maestro o profesional</a>
+      </div>
+      <p class="note">Registrarte no cuesta nada. Te escribimos por WhatsApp o correo apenas Hazlo Ahora funcione en tu comuna.</p>
+    </div>
+
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <div class="st"><span>9:41</span><span>Maipú</span></div>
+        <p class="sh">¿Qué necesitas hoy?</p>
+        <p class="ss">12 prestadores cerca de ti</p>
+        <div class="grid6">
+          <div class="t"><i style="background:#FFF1EA">🔧</i>Gasfitería</div>
+          <div class="t"><i style="background:#FFF4DE">⚡</i>Electricidad</div>
+          <div class="t"><i style="background:#E3F6F0">🧹</i>Aseo</div>
+          <div class="t"><i style="background:#EAF0FE">🚚</i>Fletes</div>
+          <div class="t"><i style="background:#FCE7F3">💅</i>Belleza</div>
+          <div class="t"><i style="background:#F3E8FF">🎉</i>Eventos</div>
+        </div>
+        <div class="job">
+          <div class="job-h"><span>hace 2 min</span><span class="tag">Al tiro</span></div>
+          <p class="job-t">Llave de la cocina gotea</p>
+          <p class="job-d">Monomando, gotea cerrada</p>
+          <div class="bid"><span class="av">JR</span><span>Jorge R. · ★ 4,9</span><span class="amt">$25.000</span></div>
+        </div>
+        <div class="job">
+          <div class="job-h"><span>sáb 20 · 22:00–02:00</span><span class="tag sch">Agendado</span></div>
+          <p class="job-t">2 garzones para cumpleaños</p>
+          <p class="job-d">40 personas, La Florida</p>
+          <div class="bid"><span class="av">CM</span><span>Camila M. · ★ 5,0</span><span class="amt">$120.000</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <p class="label">Cómo funciona</p>
+    <h2>Tres pasos, sin llamadas ni cotizaciones a ciegas</h2>
+    <p class="sub">El orden importa: primero cuentas qué pasa, después comparas, y recién ahí alguien va a tu casa.</p>
+    <div class="flow">
+      <div class="stepbox">
+        <span class="stepno">PASO 1</span>
+        <h3>Cuenta qué necesitas</h3>
+        <p>Eliges el servicio, describes el problema y sacas una foto si quieres. Para ahora mismo o para una fecha y hora.</p>
+      </div>
+      <div class="stepbox">
+        <span class="stepno">PASO 2</span>
+        <h3>Comparas precios</h3>
+        <p>Los prestadores de ese oficio que están cerca te mandan su precio y en cuánto llegan. Ves su evaluación antes de decidir.</p>
+      </div>
+      <div class="stepbox">
+        <span class="stepno">PASO 3</span>
+        <h3>Sigues el trabajo</h3>
+        <p>Ves al prestador llegar en el mapa, conversas por chat sin dar tu número, y lo evalúas al terminar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <p class="label">Catálogo</p>
+    <h2>Más de 240 servicios a domicilio</h2>
+    <p class="sub">Partimos con los que más se piden en Chile y vamos sumando según lo que nos pidan ustedes.</p>
+    <div class="chips">
+      <span class="chip"><b style="background:#FF6B2C"></b>Gasfitería</span>
+      <span class="chip"><b style="background:#B7731A"></b>Electricidad</span>
+      <span class="chip"><b style="background:#0E9F7A"></b>Aseo del hogar</span>
+      <span class="chip"><b style="background:#2F6FED"></b>Fletes y mudanzas</span>
+      <span class="chip"><b style="background:#3C4A63"></b>Cerrajería</span>
+      <span class="chip"><b style="background:#C0367A"></b>Pintura</span>
+      <span class="chip"><b style="background:#0E9F7A"></b>Jardinería</span>
+      <span class="chip"><b style="background:#8A6A2E"></b>Armado de muebles</span>
+      <span class="chip"><b style="background:#2F6FED"></b>Aire acondicionado</span>
+      <span class="chip"><b style="background:#C0367A"></b>Manicure y peluquería</span>
+      <span class="chip"><b style="background:#3C4A63"></b>Mecánica e inspección pre-compra</span>
+      <span class="chip"><b style="background:#7C3AED"></b>Paseo y baño de mascotas</span>
+      <span class="chip"><b style="background:#0E9F7A"></b>Kinesiología y fonoaudiología</span>
+      <span class="chip"><b style="background:#2F6FED"></b>Clases particulares</span>
+      <span class="chip"><b style="background:#FF6B2C"></b>Garzones, bartender y parrilleros</span>
+      <span class="chip"><b style="background:#7C3AED"></b>Juegos inflables y taca-taca</span>
+      <span class="chip"><b style="background:#3C4A63"></b>Soporte computacional</span>
+      <span class="more">y muchos más</span>
+    </div>
+  </section>
+
+  <section id="confianza">
+    <p class="label">Por qué Hazlo Ahora</p>
+    <h2>Dos lados, el mismo trato justo</h2>
+    <div class="pair">
+      <div class="panel">
+        <h3>Si necesitas el servicio</h3>
+        <p>Saber quién entra a tu casa no debería ser un acto de fe.</p>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Identidad verificada con cédula y selfie antes de trabajar.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Tu dirección exacta la ve solo el prestador que aceptaste.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Chat dentro de la app: tu teléfono no se comparte con nadie.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>El precio se acuerda antes de que llegue, no después.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Si tú haces el trabajo</h3>
+        <p>Más pegas cerca de tu casa, sin pagar por adelantado.</p>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Te llegan solo las solicitudes de tu oficio, en el radio que elijas.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Tú pones el precio. Hazlo Ahora cobra comisión solo si haces el trabajo.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Trabajos al tiro y agendados. Si tienes equipo o dos camiones, tomas varios a la vez.</li>
+          <li><svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Tu reputación se construye con cada evaluación, y te sigue.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup" id="registro">
+    <p class="label">Lista de espera</p>
+    <h2>Avísame cuando esté listo</h2>
+    <p class="sub">Déjanos tu contacto y te escribimos apenas Hazlo Ahora funcione en tu comuna. Los primeros en registrarse prueban antes que nadie.</p>
+
+    <div class="tabs" role="tablist" aria-label="Tipo de registro">
+      <button class="tab" type="button" id="tab-cliente" role="tab" aria-selected="true" data-side="cliente">Necesito un servicio</button>
+      <button class="tab" type="button" id="tab-prestador" role="tab" aria-selected="false" data-side="prestador">Soy prestador</button>
+    </div>
+
+    <form id="lead-form" novalidate>
+      <input type="hidden" id="side" name="side" value="cliente">
+      <div class="trap" aria-hidden="true"><label for="website">No llenar</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+
+      <div class="row2">
+        <div class="field"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" maxlength="80" placeholder="Antonio" autocomplete="given-name"></div>
+        <div class="field"><label for="comuna">Comuna</label><input id="comuna" name="comuna" maxlength="60" placeholder="Maipú" autocomplete="address-level2"></div>
+      </div>
+
+      <div class="field"><label for="contacto">WhatsApp o correo</label><input id="contacto" name="contacto" maxlength="120" placeholder="+56 9 1234 5678 o tu@correo.cl" autocomplete="tel"></div>
+
+      <div class="field pick">
+        <div class="pick-h">
+          <label id="interes-label" for="top-opts">¿Qué servicios te gustaría pedir?</label>
+          <span class="hint" id="cuenta-hint">Marca los que quieras</span>
+        </div>
+
+        <div id="top-opts">
+          <p class="mini">Los más pedidos</p>
+          <div class="opts" id="opts-top"></div>
+        </div>
+
+        <div class="opts">
+          <button class="vermas" type="button" id="vermas" aria-expanded="false" aria-controls="cats-all">Ver todas las categorías</button>
+        </div>
+
+        <div class="cats-all" id="cats-all" hidden></div>
+
+        <div id="otro-box" hidden>
+          <label for="interes">Cuéntanos cuál</label>
+          <textarea id="interes" name="interes" maxlength="200" placeholder="Afilar cuchillos, arreglar una bicicleta…"></textarea>
+        </div>
+      </div>
+
+      <p class="msg" id="msg" role="status" hidden></p>
+
+      <div><button class="btn btn-brand" type="submit" id="enviar">Avisarme</button></div>
+
+      <p class="legal">Usamos tus datos solo para avisarte del lanzamiento y para saber qué servicios hacen falta en cada comuna. No se los damos a nadie. Si quieres que los borremos, escríbenos a <a href="mailto:hola@hazlochile.com">hola@hazlochile.com</a>.</p>
+    </form>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <span>© 2026 Hazlo Ahora · Santiago de Chile · <a href="/legales.html#privacidad" style="color:inherit">Privacidad</a> · <a href="/legales.html#terminos" style="color:inherit">Términos</a></span>
+    <a class="social" href="https://www.instagram.com/hazlo_app" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      @hazlo_app
+    </a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var URL_API = 'https://qimechlfblfmdvzspkmt.supabase.co/rest/v1/leads';
+  var KEY = 'sb_publishable_TEAlP8dlpwr-7H7rrq1ICQ_13KFdG9m';
+
+  var form = document.getElementById('lead-form');
+  var side = document.getElementById('side');
+  var interes = document.getElementById('interes');
+  var interesLabel = document.getElementById('interes-label');
+  var msg = document.getElementById('msg');
+  var enviar = document.getElementById('enviar');
+
+  // ---- Catálogo real de Hazlo Ahora (oficios activos, agrupados) ----
+  var TOP = [
+    ['Gasfitería', 'Llaves, WC, filtraciones'],
+    ['Electricidad', 'Enchufes, cortes, ampolletas'],
+    ['Aseo del hogar', 'Limpieza regular o profunda'],
+    ['Fletes y mudanzas', 'Camión con ayudantes'],
+    ['Cerrajería', 'Cerraduras y apertura'],
+    ['Pintura', 'Muros, techos, exterior'],
+    ['Uñas', 'Manicure y pedicure'],
+    ['Personal de evento', 'Garzones, bartender, parrillero']
+  ];
+  var CATS = [
+    ['Hogar y reparaciones', ['Electricidad', 'Gasfitería', 'Destape y alcantarillado', 'Pintura', 'Cerrajería', 'Armado de muebles', 'Instalaciones menores', 'Electrodomésticos y línea blanca']],
+    ['Limpieza y mantención', ['Aseo del hogar', 'Lavado de muebles y textiles']],
+    ['Transporte y logística', ['Fletes y mudanzas', 'Retiros']],
+    ['Eventos y celebraciones', ['Personal de evento', 'Seguridad de evento', 'Música y registro', 'Entretención y juegos', 'Mobiliario y vajilla', 'Decoración', 'Comida']],
+    ['Belleza y estética', ['Uñas', 'Cabello', 'Barbería', 'Cejas y pestañas', 'Maquillaje']],
+    ['Vehículos', ['Mecánica a domicilio', 'Mantención rápida', 'Diagnóstico y revisión', 'Limpieza de auto']],
+    ['Mascotas', ['Peluquería canina y felina', 'Paseo y cuidado']],
+    ['Tecnología', ['Celulares', 'Computadores', 'Redes y wifi']],
+    ['Clases y educación', ['Reforzamiento escolar', 'Baile', 'Deporte y bienestar']],
+    ['Salud a domicilio', ['Fonoaudiología']],
+    ['Exteriores y jardín', ['Jardinería']],
+    ['Cuidado de cosas', ['Zapatillas y calzado']]
+  ];
+  var OTRO = 'Otro';
+
+  var elegidos = [];
+  var hint = document.getElementById('cuenta-hint');
+  var otroBox = document.getElementById('otro-box');
+
+  function boton(nombre, detalle) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'opt';
+    b.dataset.name = nombre;
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span>' + nombre + '</span>' + (detalle ? '<small>' + detalle + '</small>' : '');
+    b.addEventListener('click', function () { alternar(nombre); });
+    return b;
+  }
+
+  function alternar(nombre) {
+    var i = elegidos.indexOf(nombre);
+    if (i >= 0) elegidos.splice(i, 1); else elegidos.push(nombre);
+    refrescar();
+    if (!otroBox.hidden && nombre === OTRO) interes.focus();
+  }
+
+  function refrescar() {
+    document.querySelectorAll('.opt').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(elegidos.indexOf(b.dataset.name) >= 0));
+    });
+    otroBox.hidden = elegidos.indexOf(OTRO) < 0;
+    hint.textContent = elegidos.length
+      ? elegidos.length + (elegidos.length === 1 ? ' elegido' : ' elegidos')
+      : 'Marca los que quieras';
+    hint.className = elegidos.length ? 'cuenta' : 'hint';
+    msg.hidden = true;
+  }
+
+  // Más pedidos
+  var cont = document.getElementById('opts-top');
+  TOP.forEach(function (t) { cont.appendChild(boton(t[0], t[1])); });
+  cont.appendChild(boton(OTRO, 'No está en la lista'));
+
+  // Todas las categorías
+  var todas = document.getElementById('cats-all');
+  CATS.forEach(function (c) {
+    var wrap = document.createElement('div');
+    var h = document.createElement('p');
+    h.className = 'mini';
+    h.textContent = c[0];
+    var fila = document.createElement('div');
+    fila.className = 'opts';
+    c[1].forEach(function (n) { fila.appendChild(boton(n, '')); });
+    wrap.appendChild(h); wrap.appendChild(fila);
+    todas.appendChild(wrap);
+  });
+
+  var vermas = document.getElementById('vermas');
+  vermas.addEventListener('click', function () {
+    var abierto = todas.hidden;
+    todas.hidden = !abierto;
+    vermas.setAttribute('aria-expanded', String(abierto));
+    vermas.textContent = abierto ? 'Ocultar categorías' : 'Ver todas las categorías';
+  });
+
+  function setSide(s) {
+    side.value = s;
+    document.querySelectorAll('.tab').forEach(function (t) {
+      t.setAttribute('aria-selected', String(t.dataset.side === s));
+    });
+    if (s === 'prestador') {
+      interesLabel.textContent = '¿En qué oficios trabajas?';
+      interes.placeholder = 'Mi oficio no está en la lista: …';
+    } else {
+      interesLabel.textContent = '¿Qué servicios te gustaría pedir?';
+      interes.placeholder = 'Afilar cuchillos, arreglar una bicicleta…';
+    }
+  }
+  document.querySelectorAll('[data-side]').forEach(function (el) {
+    el.addEventListener('click', function () { setSide(el.dataset.side); });
+  });
+
+  // De dónde llegó la visita, para saber si Instagram o TikTok traen gente: ?s=instagram
+  var p = new URLSearchParams(location.search);
+  var origen = (p.get('s') || p.get('utm_source') ||
+    (document.referrer || '').replace(/^https?:\/\/(www\.)?/, '').split('/')[0] || 'directo').slice(0, 40);
+
+  function aviso(kind, text) { msg.dataset.kind = kind; msg.textContent = text; msg.hidden = false; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (document.getElementById('website').value) return;
+
+    var nombre = form.nombre.value.trim();
+    var contacto = form.contacto.value.trim();
+    if (nombre.length < 2) { aviso('err', 'Escribe tu nombre para poder saludarte bien.'); form.nombre.focus(); return; }
+    var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto);
+    var esFono = /^\+?[\d\s().-]{8,}$/.test(contacto);
+    if (!esMail && !esFono) { aviso('err', 'Necesitamos un WhatsApp o un correo para avisarte.'); form.contacto.focus(); return; }
+
+    // Lo elegido + lo escrito en "Otro", en un solo texto.
+    var libre = interes.value.trim();
+    var partes = elegidos.filter(function (n) { return n !== OTRO; });
+    if (libre) partes.push('Otro: ' + libre);
+    var detalle = partes.join(', ').slice(0, 300) || null;
+
+    enviar.disabled = true; enviar.textContent = 'Enviando…'; msg.hidden = true;
+
+    fetch(URL_API, {
+      method: 'POST',
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({
+        side: side.value, name: nombre, contact: contacto,
+        comuna: form.comuna.value.trim() || null,
+        interest: detalle,
+        source: origen
+      })
+    }).then(function (r) {
+      if (r.ok) {
+        var s = side.value;
+        form.reset();
+        elegidos = []; refrescar();
+        setSide(s);
+        aviso('ok', s === 'prestador'
+          ? '¡Gracias! Te escribimos para sumarte a Hazlo Ahora antes del lanzamiento.'
+          : '¡Listo! Te avisamos apenas Hazlo Ahora esté disponible en tu comuna.');
+        return;
+      }
+      return r.text().then(function (t) {
+        if (/LEADS_REPETIDO/.test(t)) aviso('ok', 'Ya te teníamos anotado. ¡Gracias!');
+        else if (/LEADS_LIMITE/.test(t)) aviso('err', 'Estamos recibiendo muchos registros. Prueba en unos minutos.');
+        else aviso('err', 'No pudimos guardar tus datos. Inténtalo de nuevo.');
+      });
+    }).catch(function () {
+      aviso('err', 'No hay conexión. Inténtalo de nuevo en un momento.');
+    }).finally(function () {
+      enviar.disabled = false; enviar.textContent = 'Avisarme';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
+
