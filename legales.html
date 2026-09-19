@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Política de privacidad y términos y condiciones de Hazlo Ahora.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23F26B1D%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
+<title>Legales Hazlo Ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5; --card:#FFFFFF; --sunk:#F1ECE5;
+  --ink:#1A1714; --ink-soft:#544E47; --muted:#8E867D; --line:#E7E0D7;
+  --brand:#FF6B2C; --brand-dark:#C9490F; --brand-soft:#FFEFE6;
+  --falta:#FBEEC8; --falta-ink:#7A5A05; --falta-line:#E0C368;
+  --gutter:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+    --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+    --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+    --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+  --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+  --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+  --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3,h4,.ui{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line)}
+.bar-in{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--brand);display:grid;place-items:center;flex:none}
+.marca{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.tabs{display:inline-flex;gap:4px;background:var(--sunk);padding:4px;border-radius:999px;margin-left:auto}
+.tab{font:inherit;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;font-weight:700;
+  padding:8px 15px;border:0;border-radius:999px;background:transparent;color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.tab[aria-selected="true"]{background:var(--brand);color:#fff}
+.tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+header.top{padding-block:40px 6px}
+.kicker{font-family:'Plus Jakarta Sans',system-ui,sans-serif;text-transform:uppercase;
+  letter-spacing:.13em;font-size:11.5px;font-weight:800;color:var(--brand-dark)}
+h1{font-size:clamp(28px,5vw,38px);line-height:1.12;letter-spacing:-.025em;margin:10px 0 0;font-weight:800;text-wrap:balance}
+.fecha{color:var(--muted);font-size:14.5px;margin-top:10px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+
+.borrador{display:flex;gap:12px;align-items:flex-start;background:var(--falta);color:var(--falta-ink);
+  border:1px solid var(--falta-line);border-radius:14px;padding:15px 17px;margin-top:24px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px;line-height:1.55}
+.borrador b{display:block;margin-bottom:3px}
+
+article{padding-block:8px 40px}
+h2{font-size:22px;margin:38px 0 10px;letter-spacing:-.02em;line-height:1.25;font-weight:800;scroll-margin-top:80px}
+h3{font-size:18px;margin:26px 0 8px;letter-spacing:-.01em;font-weight:700}
+h4{font-size:15px;margin:20px 0 6px;font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:7px}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+a{color:var(--brand-dark)}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:var(--sunk);
+  padding:2px 6px;border-radius:5px}
+blockquote{margin:20px 0;padding:14px 18px;background:var(--card);border-left:3px solid var(--brand);
+  border-radius:0 12px 12px 0;color:var(--ink-soft);font-size:16px}
+blockquote p:last-child{margin-bottom:0}
+mark.falta{background:var(--falta);color:var(--falta-ink);border:1px dashed var(--falta-line);
+  border-radius:4px;padding:1px 6px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:.85em;font-weight:700}
+.tw{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+footer{border-top:1px solid var(--line);padding-block:26px 46px;color:var(--muted);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="mark"><svg width="17" height="17" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+    <span class="marca">Hazlo Ahora</span>
+    <span class="tabs" role="tablist" aria-label="Documentos">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-doc="priv">Privacidad</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-doc="term">Términos</button>
+    </span>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <p class="kicker" id="kicker">Documento legal</p>
+    <h1 id="titulo">Política de Privacidad</h1>
+    <p class="fecha" id="fecha">Versión 1.0 · Borrador del 16 de septiembre de 2026</p>
+    <div class="borrador">
+      <span aria-hidden="true">⚠️</span>
+      <span><b>Este documento es un borrador y no está vigente.</b>
+      Los campos marcados en amarillo se completan cuando exista la sociedad, y el texto
+      debe revisarlo un abogado antes de publicarse. Redactado considerando la Ley 21.719,
+      que entra en plena vigencia el 1 de diciembre de 2026.</span>
+    </div>
+  </header>
+
+  <article id="doc-priv">
+<hr>
+<h2 id="en-una-frase">En una frase</h2>
+<p>Hazlo Ahora guarda lo mínimo para que un maestro pueda llegar a tu casa y cobrarte lo acordado. No vendemos tus datos. No guardamos fotos de tu cédula. No compartimos tu teléfono con nadie.</p>
+<h2 id="1-qui-n-es-responsable-de-tus-datos">1. Quién es responsable de tus datos</h2>
+<p><mark class="falta">[RAZÓN SOCIAL]</mark>, RUT <mark class="falta">[RUT]</mark>, domicilio <mark class="falta">[DOMICILIO]</mark>, Chile.</p>
+<p><strong>Contacto para temas de datos personales:</strong> <mark class="falta">[correo]</mark></p>
+<h2 id="2-qu-datos-tratamos-y-para-qu">2. Qué datos tratamos y para qué</h2>
+<div class="tw"><table><thead><tr><th>Dato</th><th>Para qué</th><th>Base de licitud (Ley 21.719)</th></tr></thead><tbody><tr><td>Nombre y correo</td><td>Crear tu cuenta e identificarte</td><td>Ejecución del contrato</td></tr><tr><td>Teléfono</td><td>Contactarte por un problema con un trabajo</td><td>Ejecución del contrato</td></tr><tr><td>Dirección del servicio</td><td>Que el prestador llegue</td><td>Ejecución del contrato</td></tr><tr><td>Ubicación aproximada</td><td>Mostrarte prestadores cerca</td><td>Ejecución del contrato</td></tr><tr><td>Ubicación en tiempo real del prestador</td><td>Que el cliente vea cuánto falta, <strong>solo durante el trabajo</strong></td><td>Ejecución del contrato</td></tr><tr><td>Fotos del trabajo</td><td>Describir el problema y dejar registro de lo hecho</td><td>Ejecución del contrato</td></tr><tr><td>Resultado de la verificación de identidad</td><td>Seguridad de las personas en su casa</td><td>Interés legítimo y obligación de seguridad</td></tr><tr><td>Huella del RUT (no el RUT)</td><td>Evitar que una persona suspendida vuelva con otra cuenta</td><td>Interés legítimo</td></tr><tr><td>Calificaciones y comentarios</td><td>Reputación de la comunidad</td><td>Ejecución del contrato</td></tr><tr><td>Mensajes del chat</td><td>Coordinar el trabajo y resolver reclamos</td><td>Ejecución del contrato</td></tr><tr><td>Registro de trabajos y montos</td><td>Facturación y obligaciones tributarias</td><td>Obligación legal</td></tr><tr><td>Reportes de otros usuarios</td><td>Investigar conductas peligrosas</td><td>Interés legítimo</td></tr><tr><td>Datos técnicos del teléfono (token de notificaciones)</td><td>Enviarte los avisos</td><td>Ejecución del contrato</td></tr></tbody></table></div>
+<h2 id="3-qu-no-hacemos">3. Qué <strong>no</strong> hacemos</h2>
+<ul><li><strong>No guardamos la foto de tu cédula ni tu selfie.</strong> La verificación la hace un proveedor especializado (<mark class="falta">[proveedor]</mark>); nosotros recibimos únicamente el resultado (aprobada o rechazada) y la fecha de vencimiento del documento.</li><li><strong>No guardamos tu RUT en texto.</strong> Guardamos una huella criptográfica irreversible, que sirve para detectar duplicados pero de la que no se puede recuperar el número.</li><li><strong>No compartimos tu teléfono</strong> con el otro usuario. La comunicación va por el chat.</li><li><strong>No vendemos ni cedemos tus datos</strong> a terceros con fines publicitarios.</li><li><strong>No pedimos datos sensibles.</strong> No preguntamos por tu salud, tus alergias, tu religión, tu orientación sexual, tu origen ni tus opiniones políticas. Si los escribes por tu cuenta en la descripción de un trabajo, quedan en ese texto: te pedimos no hacerlo.</li></ul>
+<h2 id="4-con-qui-n-compartimos-datos">4. Con quién compartimos datos</h2>
+<p>Solo con quien es necesario para que el servicio funcione:</p>
+<div class="tw"><table><thead><tr><th>Con quién</th><th>Qué recibe</th><th>Dónde está</th></tr></thead><tbody><tr><td>El prestador que aceptaste</td><td>Tu nombre, tu dirección exacta y las fotos del trabajo</td><td>Chile</td></tr><tr><td>Los prestadores que cotizan</td><td>Solo la comuna, la descripción y una ubicación aproximada — <strong>nunca tu dirección exacta</strong></td><td>Chile</td></tr><tr><td><mark class="falta">[proveedor de verificación]</mark></td><td>Tu cédula y selfie, para verificarte</td><td><mark class="falta">[país]</mark></td></tr><tr><td>Supabase (base de datos y almacenamiento)</td><td>Los datos de la tabla anterior</td><td>São Paulo, Brasil</td></tr><tr><td>Expo (envío de notificaciones)</td><td>El token de tu teléfono y el texto del aviso</td><td>Estados Unidos</td></tr><tr><td>Autoridades</td><td>Lo que la ley obligue, previa orden competente</td><td>Chile</td></tr></tbody></table></div>
+<p><strong>Transferencias internacionales:</strong> los servidores de la base de datos están en Brasil y el envío de notificaciones pasa por Estados Unidos. Ambos proveedores mantienen cláusulas contractuales de protección de datos. <mark class="falta">[Confirmar el mecanismo del art. 27 de la Ley 21.719]</mark></p>
+<h2 id="5-cu-nto-tiempo-guardamos-cada-cosa">5. Cuánto tiempo guardamos cada cosa</h2>
+<div class="tw"><table><thead><tr><th>Dato</th><th>Cuánto</th></tr></thead><tbody><tr><td>Cuenta activa</td><td>Mientras la uses</td></tr><tr><td>Ubicación en tiempo real del prestador</td><td>Se borra al terminar o cancelar el trabajo</td></tr><tr><td>Mensajes del chat</td><td>2 años desde el término del trabajo</td></tr><tr><td>Fotos del trabajo</td><td>2 años desde el término del trabajo</td></tr><tr><td>Registro de trabajos y montos</td><td>6 años (obligación tributaria y comercial)</td></tr><tr><td>Resultado de verificación de identidad</td><td>Mientras seas prestador + 1 año</td></tr><tr><td>Reportes</td><td>3 años</td></tr><tr><td>Datos de cuentas eliminadas</td><td>Ver sección 7</td></tr></tbody></table></div>
+<h2 id="6-tus-derechos">6. Tus derechos</h2>
+<p>Bajo la Ley 21.719 puedes pedirnos, en cualquier momento y gratis:</p>
+<ul><li><strong>Acceso:</strong> qué datos tuyos tenemos.</li><li><strong>Rectificación:</strong> corregir lo que esté mal.</li><li><strong>Supresión:</strong> borrar tus datos (con los límites de la sección 7).</li><li><strong>Oposición:</strong> oponerte a un tratamiento determinado.</li><li><strong>Portabilidad:</strong> una copia de tus datos en formato legible por máquina.</li><li><strong>Bloqueo:</strong> suspender temporalmente el uso de un dato mientras se resuelve un reclamo.</li></ul>
+<p>Escribe a <mark class="falta">[correo]</mark>. <strong>Respondemos dentro de 30 días corridos.</strong> Si no quedas conforme, puedes reclamar ante la Agencia de Protección de Datos Personales.</p>
+<h2 id="7-eliminar-tu-cuenta">7. Eliminar tu cuenta</h2>
+<p>Puedes hacerlo tú mismo, desde la app: <strong>Cuenta → Eliminar mi cuenta</strong>.</p>
+<p><strong>Si nunca completaste un trabajo</strong>, se borra todo: tu perfil, tus datos, tus mensajes y tu acceso.</p>
+<p><strong>Si ya completaste trabajos</strong>, se borran igualmente tu nombre, tu teléfono, tu foto, tu verificación de identidad y el contenido de tus mensajes. Se conserva, <strong>sin tu nombre ni forma de llegar a ti</strong>, el registro de que esos trabajos ocurrieron y sus montos, porque la ley tributaria nos obliga a mantenerlo durante 6 años. Tu cuenta queda como &quot;Usuario eliminado&quot; y no se puede volver a acceder a ella.</p>
+<h2 id="8-seguridad">8. Seguridad</h2>
+<ul><li>Todo viaja cifrado (HTTPS/TLS) y los datos están cifrados en reposo.</li><li>Cada persona solo puede leer lo suyo: se aplica seguridad a nivel de fila en la base de datos, no solo en la app.</li><li>Las claves y secretos del servidor nunca están dentro de la aplicación.</li><li>Las fotos que subes pierden la información de ubicación (GPS) antes de guardarse.</li><li><strong>Si ocurre una brecha de seguridad</strong> que afecte tus datos, lo notificamos a la Agencia de Protección de Datos Personales dentro de 72 horas y te avisamos a ti cuando haya riesgo para tus derechos.</li></ul>
+<h2 id="9-menores-de-edad">9. Menores de edad</h2>
+<p>Hazlo Ahora es para mayores de 18 años. No recogemos datos de menores a sabiendas. Si detectamos una cuenta de un menor, la cerramos y borramos sus datos.</p>
+<h2 id="10-cambios-a-esta-pol-tica">10. Cambios a esta política</h2>
+<p>Si cambiamos algo relevante te avisaremos dentro de la app con al menos 10 días de anticipación antes de que empiece a regir.</p>
+<hr>
+<p><strong>Última actualización:</strong> <mark class="falta">[fecha de publicación]</mark></p>
+  </article>
+
+  <article id="doc-term" hidden>
+<hr>
+<h2 id="1-qui-nes-somos">1. Quiénes somos</h2>
+<p>Hazlo Ahora es una plataforma tecnológica operada por <mark class="falta">[RAZÓN SOCIAL]</mark>, RUT <mark class="falta">[RUT]</mark>, con domicilio en <mark class="falta">[DOMICILIO]</mark>, Chile (en adelante, &quot;Hazlo Ahora&quot;, &quot;nosotros&quot;).</p>
+<p>Contacto: <mark class="falta">[correo]</mark> · <mark class="falta">[teléfono]</mark></p>
+<h2 id="2-qu-es-hazlo-ahora-y-qu-no-es">2. Qué es Hazlo Ahora y qué <strong>no</strong> es</h2>
+<p>Hazlo Ahora es un <strong>lugar de encuentro</strong>. Conectamos a personas que necesitan un servicio a domicilio (&quot;Clientes&quot;) con personas o empresas que lo prestan (&quot;Prestadores&quot;).</p>
+<p><strong>Hazlo Ahora no presta los servicios.</strong> No somos gásfiteres, ni electricistas, ni empresa de aseo. No ejecutamos los trabajos, no los supervisamos en terreno y no los garantizamos.</p>
+<p><strong>Los Prestadores son independientes.</strong> No son trabajadores, empleados ni dependientes de Hazlo Ahora. No existe entre Hazlo Ahora y los Prestadores vínculo de subordinación ni dependencia en los términos del Código del Trabajo. Cada Prestador:</p>
+<ul><li>decide libremente si acepta o rechaza cada solicitud;</li><li>fija por sí mismo el precio que cotiza;</li><li>define sus horarios, su zona de trabajo y sus días de descanso;</li><li>aporta sus propias herramientas, materiales y medios de transporte;</li><li>puede prestar servicios en otras plataformas o por su cuenta, al mismo tiempo;</li><li>responde personalmente por sus obligaciones tributarias y previsionales.</li></ul>
+<p>El contrato por el servicio se celebra <strong>entre el Cliente y el Prestador</strong>. Hazlo Ahora no es parte de ese contrato.</p>
+<h2 id="3-qui-n-puede-usar-hazlo-ahora">3. Quién puede usar Hazlo Ahora</h2>
+<ul><li>Debes ser mayor de 18 años y tener capacidad legal para contratar.</li><li>Debes entregar datos verdaderos. Usar una identidad falsa es causal de cierre inmediato.</li><li>Una persona, una cuenta. No se pueden crear cuentas para terceros.</li><li>Para trabajar como Prestador debes completar la verificación de identidad (cédula + selfie) y, en los oficios que lo exigen (electricidad, gas), acreditar la certificación correspondiente ante la SEC.</li></ul>
+<h2 id="4-c-mo-funciona">4. Cómo funciona</h2>
+<ol><li>El Cliente publica una solicitud describiendo lo que necesita, con fotos si quiere, para ahora mismo o agendada.</li><li>Los Prestadores del oficio que están dentro del radio reciben la solicitud y pueden enviar una cotización con precio y tiempo estimado de llegada.</li><li>El Cliente elige una cotización. Desde ese momento ambos pueden conversar por el chat.</li><li>El Prestador ejecuta el trabajo y lo marca como completado.</li><li>Ambos se califican.</li></ol>
+<p><strong>El precio lo fija el Prestador.</strong> Hazlo Ahora no interviene en el precio ni lo sugiere.</p>
+<h2 id="5-precio-cambios-y-pago">5. Precio, cambios y pago</h2>
+<ul><li>El monto cotizado y aceptado es el precio del servicio.</li><li>Si al llegar el Prestador descubre que el trabajo es distinto, puede proponer un <strong>ajuste</strong> dentro de la app, explicando el motivo. El Cliente debe aceptarlo o rechazarlo. <strong>Ningún ajuste se aplica sin la aceptación del Cliente.</strong></li><li>Cualquier cobro exigido fuera de la app, o distinto al acordado, debe reportarse.</li><li>Por ahora, el Cliente paga el trabajo <strong>en efectivo directamente al Prestador</strong>. Cuando exista el pago con tarjeta dentro de la app, se informará en estos términos.</li><li><strong>Comisión:</strong> Hazlo Ahora cobra al Prestador una comisión del <strong>10 % con IVA incluido</strong> sobre el monto final del trabajo. La comisión se reserva cuando el Cliente acepta la cotización y se cobra cuando el Prestador marca su llegada al lugar. Si el trabajo se cancela antes de esa llegada, no se cobra. El Cliente no paga comisión.</li><li><strong>Saldo del Prestador:</strong> las comisiones se registran en el saldo del Prestador dentro de la app. El Prestador puede acumular un saldo pendiente hasta el tope informado en la app; sobre ese tope no podrá enviar nuevas cotizaciones hasta pagarlo.</li><li><strong>Propinas:</strong> el Cliente puede dejar una propina al terminar el trabajo. Las propinas son 100 % del Prestador y no pagan comisión.</li></ul>
+<h2 id="6-cancelaciones">6. Cancelaciones</h2>
+<ul><li>El Cliente puede cancelar sin costo mientras nadie haya sido aceptado.</li><li>Una vez aceptada una cotización, cancelar sin aviso razonable afecta la reputación.</li><li>El Prestador que cancela un trabajo ya aceptado, o que no llega, afecta su reputación y puede ser suspendido si lo hace de forma reiterada.</li><li><mark class="falta">[Definir política de cancelación tardía y eventual cobro]</mark></li></ul>
+<h2 id="7-reglas-de-convivencia">7. Reglas de convivencia</h2>
+<p>Está prohibido, y da lugar a la suspensión o cierre de la cuenta:</p>
+<ul><li>Entregar datos falsos o suplantar a otra persona.</li><li>Acosar, amenazar, discriminar o faltar el respeto a otro usuario.</li><li>Pedir o entregar datos de contacto para operar fuera de Hazlo Ahora con el fin de evitar la comisión (&quot;fuga&quot;), cuando el contacto se originó en la plataforma.</li><li>Publicar fotos de terceros sin su autorización, o fotos de carácter íntimo.</li><li>Usar Hazlo Ahora para actividades ilegales.</li><li>Crear cuentas nuevas después de haber sido suspendido.</li><li>Manipular las calificaciones (autocalificarse, comprar reseñas, calificar sin haber realizado el trabajo).</li></ul>
+<h2 id="8-calificaciones">8. Calificaciones</h2>
+<p>Las calificaciones las escriben los usuarios y reflejan su opinión personal, no la de Hazlo Ahora. Podemos eliminar una calificación que contenga insultos, datos personales de terceros o que sea evidentemente falsa. No eliminamos una calificación solo porque sea negativa.</p>
+<h2 id="9-seguridad-y-verificaci-n">9. Seguridad y verificación</h2>
+<ul><li>Verificamos la identidad de los Prestadores mediante cédula y selfie, a través de un proveedor especializado. <strong>No almacenamos las fotos de la cédula ni de la selfie.</strong></li><li>La verificación confirma que la persona es quien dice ser. <strong>No es una garantía de la calidad del trabajo</strong>, ni un certificado de antecedentes, ni un seguro.</li><li>La dirección exacta del Cliente se comparte únicamente con el Prestador aceptado.</li><li>Los teléfonos no se comparten entre usuarios: la comunicación es por el chat de la app.</li><li>La ubicación del Prestador se comparte con el Cliente <strong>solo mientras el trabajo está en curso</strong>, y se elimina al terminar o cancelar.</li></ul>
+<h2 id="10-responsabilidad">10. Responsabilidad</h2>
+<p>Hazlo Ahora pone a disposición una herramienta de contacto. En la medida que lo permite la ley chilena:</p>
+<ul><li>Hazlo Ahora <strong>no responde</strong> por la calidad, oportunidad o resultado del trabajo realizado por el Prestador, ni por los daños que éste pudiera causar.</li><li>Hazlo Ahora <strong>no responde</strong> por la veracidad de la descripción que el Cliente hace de su necesidad, ni por las condiciones del lugar donde se ejecuta el trabajo.</li><li>Los reclamos por el servicio deben dirigirse al Prestador. Hazlo Ahora colaborará facilitando la información de contacto y el registro de la operación cuando corresponda.</li><li>Hazlo Ahora sí responde por el correcto funcionamiento de la plataforma y por el resguardo de los datos personales según la sección 12.</li></ul>
+<p>Nada en estos términos limita los derechos que la <strong>Ley 19.496 sobre Protección de los Derechos de los Consumidores</strong> otorga a los consumidores en Chile.</p>
+<h2 id="11-suspensi-n-y-cierre-de-cuenta">11. Suspensión y cierre de cuenta</h2>
+<p>Podemos suspender o cerrar una cuenta cuando existan antecedentes fundados de infracción a estas reglas, de riesgo para otros usuarios o de fraude. Avisaremos el motivo, salvo que hacerlo comprometa una investigación o la seguridad de alguien.</p>
+<p><strong>Puedes eliminar tu cuenta cuando quieras</strong> desde Cuenta → Eliminar mi cuenta. Ver la sección correspondiente de la Política de Privacidad sobre qué se borra y qué se conserva.</p>
+<h2 id="12-datos-personales">12. Datos personales</h2>
+<p>El tratamiento de datos personales se rige por la <strong>Política de Privacidad de Hazlo Ahora</strong>, que forma parte de estos términos y se ajusta a la Ley 19.628 y a la Ley 21.719 sobre protección de datos personales.</p>
+<h2 id="13-propiedad-intelectual">13. Propiedad intelectual</h2>
+<p>La marca Hazlo Ahora, el logo, el diseño de la aplicación y su código son de propiedad de <mark class="falta">[RAZÓN SOCIAL]</mark>. Las fotos que sube cada usuario siguen siendo suyas; al subirlas nos autorizan a mostrarlas dentro de la plataforma con el fin de prestar el servicio.</p>
+<h2 id="14-cambios-a-estos-t-rminos">14. Cambios a estos términos</h2>
+<p>Podemos modificar estos términos. Los cambios relevantes se avisarán dentro de la app con al menos 10 días de anticipación. Si no estás de acuerdo, puedes dejar de usar Hazlo Ahora y eliminar tu cuenta.</p>
+<h2 id="15-ley-aplicable-y-tribunales">15. Ley aplicable y tribunales</h2>
+<p>Estos términos se rigen por la ley chilena. Cualquier controversia se someterá a los tribunales ordinarios de justicia de <mark class="falta">[comuna]</mark>, sin perjuicio del derecho del consumidor a recurrir al SERNAC o al juzgado de policía local que corresponda a su domicilio.</p>
+<hr>
+<p><strong>Última actualización:</strong> <mark class="falta">[fecha de publicación]</mark></p>
+  </article>
+</div>
+
+<footer class="wrap">
+  <p>Hazlo Ahora · Servicios a domicilio · Santiago de Chile</p>
+  <p>Borrador del 16 de septiembre de 2026. No constituye asesoría legal.</p>
+</footer>
+
+<script>
+(function () {
+  var docs = { priv: document.getElementById('doc-priv'), term: document.getElementById('doc-term') };
+  var titulos = { priv: 'Política de Privacidad', term: 'Términos y Condiciones de Uso' };
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var cual = t.dataset.doc;
+      document.querySelectorAll('.tab').forEach(function (o) {
+        o.setAttribute('aria-selected', String(o.dataset.doc === cual));
+      });
+      docs.priv.hidden = cual !== 'priv';
+      docs.term.hidden = cual !== 'term';
+      document.getElementById('titulo').textContent = titulos[cual];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      try { localStorage.setItem('hazlo-legal-doc', cual); } catch (e) {}
+    });
+  });
+  var h = (location.hash || '').replace('#','');
+  if (h === 'terminos') { document.querySelector('.tab[data-doc="term"]').click(); }
+  else if (h !== 'privacidad') {
+    try {
+      var guardado = localStorage.getItem('hazlo-legal-doc');
+      if (guardado === 'term') document.querySelector('.tab[data-doc="term"]').click();
+    } catch (e) {}
+  }
+})();
+</script>
+
+</body>
+</html>
