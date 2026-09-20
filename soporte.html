@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ayuda y soporte de Hazlo Ahora y Hazlo Ahora Pro: preguntas frecuentes para clientes y prestadores, y cómo contactarnos.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23F26B1D%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
+<title>Soporte Hazlo Ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F5; --card:#FFFFFF; --sunk:#F1ECE5;
+  --ink:#1A1714; --ink-soft:#544E47; --muted:#8E867D; --line:#E7E0D7;
+  --brand:#FF6B2C; --brand-dark:#C9490F; --brand-soft:#FFEFE6;
+  --falta:#FBEEC8; --falta-ink:#7A5A05; --falta-line:#E0C368;
+  --gutter:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+    --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+    --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+    --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141210; --card:#1D1A17; --sunk:#100E0C;
+  --ink:#F3EEE8; --ink-soft:#B4ACA2; --muted:#867E75; --line:#2F2923;
+  --brand:#FF7C42; --brand-dark:#FFA070; --brand-soft:#2C1B12;
+  --falta:#3A2E0F; --falta-ink:#E8C766; --falta-line:#6B5518;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3,h4,.ui{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+
+/* barra */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line)}
+.bar-in{display:flex;align-items:center;gap:12px;padding-block:12px;flex-wrap:wrap}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--brand);display:grid;place-items:center;flex:none}
+.marca{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.tabs{display:inline-flex;gap:4px;background:var(--sunk);padding:4px;border-radius:999px;margin-left:auto}
+.tab{font:inherit;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;font-weight:700;
+  padding:8px 15px;border:0;border-radius:999px;background:transparent;color:var(--ink-soft);cursor:pointer;
+  transition:background .15s,color .15s}
+.tab[aria-selected="true"]{background:var(--brand);color:#fff}
+.tab:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+header.top{padding-block:40px 6px}
+.kicker{font-family:'Plus Jakarta Sans',system-ui,sans-serif;text-transform:uppercase;
+  letter-spacing:.13em;font-size:11.5px;font-weight:800;color:var(--brand-dark)}
+h1{font-size:clamp(28px,5vw,38px);line-height:1.12;letter-spacing:-.025em;margin:10px 0 0;font-weight:800;text-wrap:balance}
+.fecha{color:var(--muted);font-size:14.5px;margin-top:10px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+
+.borrador{display:flex;gap:12px;align-items:flex-start;background:var(--falta);color:var(--falta-ink);
+  border:1px solid var(--falta-line);border-radius:14px;padding:15px 17px;margin-top:24px;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px;line-height:1.55}
+.borrador b{display:block;margin-bottom:3px}
+
+article{padding-block:8px 40px}
+h2{font-size:22px;margin:38px 0 10px;letter-spacing:-.02em;line-height:1.25;font-weight:800;scroll-margin-top:80px}
+h3{font-size:18px;margin:26px 0 8px;letter-spacing:-.01em;font-weight:700}
+h4{font-size:15px;margin:20px 0 6px;font-weight:700}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin-bottom:7px}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+a{color:var(--brand-dark)}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.88em;background:var(--sunk);
+  padding:2px 6px;border-radius:5px}
+blockquote{margin:20px 0;padding:14px 18px;background:var(--card);border-left:3px solid var(--brand);
+  border-radius:0 12px 12px 0;color:var(--ink-soft);font-size:16px}
+blockquote p:last-child{margin-bottom:0}
+mark.falta{background:var(--falta);color:var(--falta-ink);border:1px dashed var(--falta-line);
+  border-radius:4px;padding:1px 6px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  font-size:.85em;font-weight:700}
+.tw{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+footer{border-top:1px solid var(--line);padding-block:26px 46px;color:var(--muted);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px}
+footer p{margin:0 0 6px}
+
+/* preguntas frecuentes */
+.contacto{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:18px 20px;margin-top:24px;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px;line-height:1.55}
+.contacto .ic{width:40px;height:40px;border-radius:12px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.contacto b{display:block;font-size:16px;margin-bottom:2px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px;padding:0 18px}
+details[open]{padding-bottom:6px}
+summary{cursor:pointer;list-style:none;padding:15px 28px 15px 0;position:relative;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:700;font-size:16px;line-height:1.4}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:12px;font-size:22px;font-weight:700;color:var(--brand-dark)}
+details[open] summary::after{content:"\2212"}
+summary:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
+details p,details ul{font-size:16px}
+.nav-rapida{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.nav-rapida a{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14px;font-weight:700;text-decoration:none;
+  padding:8px 14px;border-radius:999px;background:var(--sunk);color:var(--ink-soft)}
+.nav-rapida a:hover{background:var(--brand-soft);color:var(--brand-dark)}
+
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap bar-in">
+    <span class="mark"><svg width="17" height="17" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+    <span class="marca">Hazlo Ahora</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <p class="kicker">Ayuda</p>
+    <h1>Soporte de Hazlo Ahora</h1>
+    <p class="fecha">Para las apps Hazlo Ahora (clientes) y Hazlo Ahora Pro (prestadores)</p>
+
+    <div class="contacto">
+      <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--brand-dark)"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+      <div><b>Escríbenos a <a href="mailto:soporte@hazlochile.com">soporte@hazlochile.com</a></b>
+      Te respondemos en horario hábil. Si es sobre un trabajo, incluye el servicio y la fecha. Dentro de la app también puedes reportar un problema desde la solicitud.</div>
+    </div>
+
+    <nav class="nav-rapida" aria-label="Secciones">
+      <a href="#clientes">Clientes</a>
+      <a href="#prestadores">Prestadores</a>
+      <a href="#seguridad">Seguridad</a>
+      <a href="#cuenta">Tu cuenta</a>
+    </nav>
+  </header>
+
+  <article>
+<h2 id="clientes">Si pides servicios</h2>
+
+<details><summary>¿Cómo pido un servicio?</summary>
+<p>Elige el servicio, cuenta qué necesitas (puedes agregar fotos) y di si es al tiro o para otro día. Los prestadores cercanos de ese oficio te mandan su precio y en cuánto llegan. Tú eliges.</p>
+</details>
+
+<details><summary>¿Cuánto cuesta usar la app?</summary>
+<p>Pedir y recibir cotizaciones no tiene costo para ti. Pagas el precio que aceptaste directamente al prestador. Si al llegar el trabajo resulta distinto, el prestador puede proponer un ajuste en la app, y solo se aplica si tú lo aceptas.</p>
+</details>
+
+<details><summary>¿Cómo pago?</summary>
+<p>Por ahora le pagas directo al prestador cuando termina el trabajo, en efectivo o por transferencia a él. Si quieres, puedes dejarle una propina desde la app: es 100 % para el prestador.</p>
+</details>
+
+<details><summary>¿Por qué me piden verificar mi identidad?</summary>
+<p>Antes de aceptar tu primera cotización verificamos tu cédula con una selfie, igual que a todos los prestadores. Así ambos saben con quién tratan. Lo hace un proveedor especializado (Didit) y <strong>Hazlo Ahora no guarda las fotos de tu cédula ni tu selfie</strong>.</p>
+</details>
+
+<details><summary>¿Puedo cancelar?</summary>
+<ul>
+<li><strong>Gratis</strong> antes de aceptar una cotización, mientras el prestador no marque "Voy en camino" y en los primeros 5 minutos después de aceptar.</li>
+<li><strong>$2.000</strong> si el prestador ya va en camino y <strong>$5.000</strong> si ya llegó. Ese monto es 100 % para el prestador, por su traslado.</li>
+<li><strong>Gratis</strong> si el prestador va más de 30 minutos atrasado.</li>
+</ul>
+<p>La app te muestra el monto antes de confirmar. Si crees que un cargo es un error, escríbenos.</p>
+</details>
+
+<details><summary>¿Por qué no veo el teléfono del prestador?</summary>
+<p>Para cuidar a ambos, todo se coordina por el chat de la app y los teléfonos no se comparten. Si alguien te pide hablar o pagar fuera de la app, repórtalo desde la solicitud ("Me pidió pagar o hablar fuera de la app"): fuera de la app pierdes la protección de Hazlo Ahora.</p>
+</details>
+
+<details><summary>Algo salió mal con un trabajo, ¿qué hago?</summary>
+<p>Abre la solicitud y toca <strong>Reportar un problema</strong>, o escríbenos a <a href="mailto:soporte@hazlochile.com">soporte@hazlochile.com</a>. Guardamos el chat y los estados del trabajo para revisar lo que pasó.</p>
+</details>
+
+<h2 id="prestadores">Si trabajas con Hazlo Ahora Pro</h2>
+
+<details><summary>¿Cómo empiezo?</summary>
+<p>Descarga Hazlo Ahora Pro, crea tu cuenta, elige tus oficios y verifica tu identidad con tu cédula. En cada oficio sube de 3 a 5 fotos de trabajos tuyos (tu portafolio). En electricidad y gas, además, tu certificación SEC.</p>
+</details>
+
+<details><summary>¿Cuánto cobra Hazlo Ahora?</summary>
+<p>Un <strong>10 % del trabajo, con IVA incluido</strong>. Las propinas son 100 % tuyas. La comisión:</p>
+<ul>
+<li>se <strong>reserva</strong> cuando el cliente acepta tu cotización;</li>
+<li>se <strong>cobra</strong> cuando marcas "Voy en camino";</li>
+<li>se <strong>devuelve</strong> si se cancela antes de que salgas, o si el cliente cancela (en ese caso recibes el cargo por cancelación);</li>
+<li><strong>no se devuelve</strong> si cancelas tú después de salir, o si intentaste pasar tu contacto para trabajar fuera de la app.</li>
+</ul>
+</details>
+
+<details><summary>¿Cómo pago la comisión?</summary>
+<p>Se anota en <strong>Cuenta → Comisiones y pagos</strong>. Puedes deber hasta $30.000 y seguir cotizando. Para pagar, transfiere y envía el comprobante a <a href="mailto:soporte@hazlochile.com">soporte@hazlochile.com</a> desde el correo de tu cuenta; lo cargamos a tu saldo.</p>
+</details>
+
+<details><summary>El cliente canceló cuando yo iba en camino, ¿qué pasa?</summary>
+<p>El cliente paga un cargo de $2.000 (o $5.000 si ya habías llegado), 100 % para ti, y tu comisión de ese trabajo se devuelve. Si te lo paga en efectivo, márcalo como recibido en la app.</p>
+</details>
+
+<details><summary>¿Por qué me rechazaron una foto del portafolio?</summary>
+<p>Las fotos tienen que ser de trabajos tuyos y de ese oficio. Se rechazan fotos sacadas de internet o hechas con IA, capturas de pantalla, fotos muy oscuras y fotos donde se lea un teléfono, WhatsApp, redes sociales o un código QR. Recórtala o tapa ese dato y súbela de nuevo.</p>
+</details>
+
+<h2 id="seguridad">Seguridad</h2>
+<p>Todas las personas en Hazlo Ahora están verificadas con su cédula. Si alguien te acosa o te sientes en peligro, repórtalo desde la app y lo revisamos de inmediato. <strong>En una emergencia, llama a Carabineros al 133.</strong></p>
+
+<h2 id="cuenta">Tu cuenta</h2>
+<ul>
+<li><a href="eliminar-cuenta.html">Cómo eliminar tu cuenta</a></li>
+<li><a href="legales.html">Términos y Condiciones y Política de Privacidad</a></li>
+</ul>
+  </article>
+</div>
+
+<footer class="wrap">
+  <p>Hazlo Ahora · HAZLO AHORA SpA · Santiago de Chile</p>
+  <p><a href="mailto:soporte@hazlochile.com">soporte@hazlochile.com</a> · <a href="mailto:contacto@hazlochile.com">contacto@hazlochile.com</a></p>
+</footer>
+
+</body>
+</html>
