@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hazlo Ahora · Panel</title>
+<link rel="icon" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF8F4; --card: #FFFFFF; --ink: #211D1A; --muted: #6E655D; --line: #EEE6DC;
+    --brand: #FF6B2C; --brand-ink: #B8430F; --ok: #1F8A4C; --warn: #B7791F; --bad: #C0392B; --soft: #FFF1E9;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  a { color: var(--brand-ink); }
+  header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; background: var(--card); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+  .logo { width: 34px; height: 34px; border-radius: 10px; background: var(--brand); color: #fff; font-weight: 800; display: grid; place-items: center; }
+  header h1 { font-size: 17px; margin: 0; flex: 1; }
+  header .who { font-size: 13px; color: var(--muted); }
+  nav { display: flex; gap: 6px; padding: 12px 20px 0; flex-wrap: wrap; }
+  nav button { border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 8px 14px; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 600; font-size: 13px; }
+  nav button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  nav button .n { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 6px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 11px; text-align: center; }
+  main { padding: 16px 20px 60px; max-width: 1280px; margin: 0 auto; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+  .stat b { display: block; font-size: 26px; font-weight: 800; }
+  .stat span { font-size: 12px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  tr:hover td { background: #FFFAF6; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; background: #F1ECE6; color: var(--muted); }
+  .pill.ok { background: #E4F5EA; color: var(--ok); } .pill.warn { background: #FFF3DD; color: var(--warn); } .pill.bad { background: #FBE4E1; color: var(--bad); } .pill.brand { background: var(--soft); color: var(--brand-ink); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
+  input[type=number] { width: 120px; }
+  button.btn { font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 10px; border: 0; background: var(--brand); color: #fff; cursor: pointer; }
+  button.btn.ghost { background: #F1ECE6; color: var(--ink); } button.btn.bad { background: var(--bad); } button.btn.sm { padding: 5px 10px; font-size: 12px; }
+  button:disabled { opacity: .5; cursor: default; }
+  .muted { color: var(--muted); font-size: 12px; }
+  .msg { padding: 10px 12px; border-radius: 10px; background: var(--soft); color: var(--brand-ink); font-size: 13px; margin: 8px 0; }
+  .msg.bad { background: #FBE4E1; color: var(--bad); } .msg.ok { background: #E4F5EA; color: var(--ok); }
+  #login { max-width: 380px; margin: 60px auto; }
+  #login input { width: 100%; margin: 6px 0 12px; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+  .switch { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); gap: 10px; }
+  .switch:last-child { border-bottom: 0; }
+  .wrap { overflow-x: auto; }
+  .hidden { display: none !important; }
+  details summary { cursor: pointer; color: var(--brand-ink); font-weight: 600; font-size: 12px; }
+  .chat { max-height: 320px; overflow: auto; background: #FBF8F4; border-radius: 10px; padding: 8px; font-size: 12px; }
+  .chat div { padding: 4px 0; border-bottom: 1px dashed var(--line); }
+  @media (max-width: 640px) { main, header, nav { padding-left: 12px; padding-right: 12px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">H</div>
+  <h1>Panel de Hazlo Ahora</h1>
+  <span class="who" id="who"></span>
+  <button class="btn ghost sm hidden" id="btnSalir">Salir</button>
+</header>
+
+<section id="login" class="card">
+  <h2 style="margin-top:0">Entrar</h2>
+  <p class="muted">Usa tu cuenta de administrador (la misma de la app).</p>
+  <label>Correo<input id="email" type="email" autocomplete="username"></label>
+  <label>Contraseña<input id="pass" type="password" autocomplete="current-password"></label>
+  <button class="btn" id="btnEntrar" style="width:100%">Entrar</button>
+  <div id="loginMsg"></div>
+</section>
+
+<nav id="nav" class="hidden">
+  <button data-tab="resumen" class="on">Resumen</button>
+  <button data-tab="solicitudes">Solicitudes</button>
+  <button data-tab="personas">Personas</button>
+  <button data-tab="verificaciones">Verificaciones <span class="n hidden" id="nVerif"></span></button>
+  <button data-tab="saldos">Saldos</button>
+  <button data-tab="alertas">Alertas de desvío</button>
+  <button data-tab="reportes">Reportes <span class="n hidden" id="nReportes"></span></button>
+  <button data-tab="cargos">Cargos</button>
+  <button data-tab="sugerencias">Sugerencias y contactos</button>
+  <button data-tab="ajustes">Ajustes</button>
+</nav>
+
+<main id="app" class="hidden">
+  <div id="globalMsg"></div>
+  <section id="tab-resumen"></section>
+  <section id="tab-solicitudes" class="hidden"></section>
+  <section id="tab-personas" class="hidden"></section>
+  <section id="tab-verificaciones" class="hidden"></section>
+  <section id="tab-saldos" class="hidden"></section>
+  <section id="tab-alertas" class="hidden"></section>
+  <section id="tab-reportes" class="hidden"></section>
+  <section id="tab-cargos" class="hidden"></section>
+  <section id="tab-sugerencias" class="hidden"></section>
+  <section id="tab-ajustes" class="hidden"></section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ---------------------------------------------------------------- conexión
+const SUPABASE_URL = 'https://qimechlfblfmdvzspkmt.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_TEAlP8dlpwr-7H7rrq1ICQ_13KFdG9m'; // clave pública: lo que se ve lo decide la base (RLS + is_admin)
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const clp = (n) => (n == null ? '—' : (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('es-CL'));
+const fecha = (iso) => iso ? new Date(iso).toLocaleString('es-CL', { timeZone: 'America/Santiago', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+const dia = (iso) => iso ? new Date(iso + (iso.length === 10 ? 'T12:00:00' : '')).toLocaleDateString('es-CL', { timeZone: 'America/Santiago', day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+const corto = (id) => id ? String(id).slice(0, 8) : '—';
+
+const ESTADO = {
+  buscando: ['Buscando', 'brand'], aceptada: ['Aceptada', 'ok'], en_camino: ['En camino', 'ok'], en_sitio: ['En el lugar', 'ok'],
+  en_trabajo: ['Trabajando', 'ok'], completada: ['Completada', ''], cancelada: ['Cancelada', 'bad'],
+  pendiente: ['Pendiente', 'warn'], pagado_hazlo: ['Pagado a Hazlo', 'ok'], pagado_prestador: ['Pagado al prestador', 'ok'], condonado: ['Condonado', ''],
+  sin_cargo: ['Sin cargo', ''], nuevo: ['Nuevo', 'warn'], en_revision: ['En revisión', 'warn'], resuelto: ['Resuelto', 'ok'], descartado: ['Descartado', ''],
+  nueva: ['Nueva', 'warn'], revisada: ['Revisada', ''], agregada: ['Agregada', 'ok'], descartada: ['Descartada', ''], revisando: ['Revisando', 'warn'], contactado: ['Contactado', 'ok'], convertido: ['Convertido', 'ok'], activo: ['Activo', 'ok'], suspendido: ['Suspendido', 'bad'], reservada: ['Reservada', 'warn'], cobrada: ['Cobrada', 'ok'],
+  devuelta: ['Devuelta', ''], liberada: ['Liberada', ''], aprobada: ['Aprobada', 'ok'], rechazada: ['Rechazada', 'bad'], duplicado: ['Duplicado', 'bad'], no_verificado: ['Sin verificar', ''], verificado: ['Verificado', 'ok'], rechazado: ['Rechazado', 'bad'],
+};
+const MOTIVO = { no_llego: 'No llegó', cobro_distinto: 'Cobró distinto a lo cotizado', trato_irrespetuoso: 'Trato irrespetuoso', trabajo_mal_hecho: 'Trabajo mal hecho', datos_falsos: 'Datos falsos', acoso: 'Acoso', inseguridad: 'Me sentí inseguro/a', estafa: 'Estafa', fuera_de_la_app: 'Me pidió pagar o hablar fuera de la app', otro: 'Otro' };
+const pill = (s) => { const e = ESTADO[s] || [s || '—', '']; return `<span class="pill ${e[1]}">${esc(e[0])}</span>`; };
+
+function msg(el, text, kind = '') { el.innerHTML = text ? `<div class="msg ${kind}">${esc(text)}</div>` : ''; }
+function errorTexto(e) {
+  const m = (e && (e.message || e.error_description || e.msg)) || String(e);
+  if (/Solo administrador|permission denied|row-level/i.test(m)) return 'Tu cuenta no tiene permiso de administrador. Cierra sesión en la app y vuelve a entrar para que se actualice, o revisa hazlo_fix_31.sql.';
+  if (/Invalid login credentials/i.test(m)) return 'Correo o contraseña incorrectos.';
+  if (/Failed to fetch|NetworkError/i.test(m)) return 'Sin conexión con el servidor.';
+  return m;
+}
+async function rpc(name, args) {
+  const { data, error } = await db.rpc(name, args || {});
+  if (error) throw error;
+  return data;
+}
+async function sel(table, build, cols = '*') {
+  let q = db.from(table).select(cols);
+  if (build) q = build(q);
+  const { data, error } = await q;
+  if (error) throw error;
+  return data || [];
+}
+function tabla(cols, rows, vacio = 'Nada por aquí todavía.') {
+  if (!rows.length) return `<p class="muted">${esc(vacio)}</p>`;
+  return `<div class="wrap"><table><thead><tr>${cols.map((c) => `<th>${esc(c[0])}</th>`).join('')}</tr></thead><tbody>${rows
+    .map((r) => `<tr>${cols.map((c) => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+
+// ---------------------------------------------------------------- sesión
+let perfiles = new Map(); // id → nombre
+let catNombre = new Map();
+let sesion = null;
+
+async function iniciar() {
+  const { data } = await db.auth.getSession();
+  sesion = data.session;
+  if (sesion) return entrar();
+  $('#login').classList.remove('hidden');
+}
+$('#btnEntrar').onclick = async () => {
+  msg($('#loginMsg'), '');
+  $('#btnEntrar').disabled = true;
+  try {
+    const { data, error } = await db.auth.signInWithPassword({ email: $('#email').value.trim(), password: $('#pass').value });
+    if (error) throw error;
+    sesion = data.session;
+    await entrar();
+  } catch (e) {
+    msg($('#loginMsg'), errorTexto(e), 'bad');
+  } finally {
+    $('#btnEntrar').disabled = false;
+  }
+};
+$('#pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#btnEntrar').click(); });
+$('#btnSalir').onclick = async () => { await db.auth.signOut(); location.reload(); };
+
+async function entrar() {
+  // ¿Es admin? Si no, la base responde "Solo administrador".
+  try {
+    await rpc('admin_stats');
+  } catch (e) {
+    await db.auth.signOut();
+    $('#login').classList.remove('hidden');
+    msg($('#loginMsg'), errorTexto(e), 'bad');
+    return;
+  }
+  $('#login').classList.add('hidden');
+  $('#nav').classList.remove('hidden');
+  $('#app').classList.remove('hidden');
+  $('#btnSalir').classList.remove('hidden');
+  $('#who').textContent = sesion.user.email;
+  try {
+    const [cats, profs] = await Promise.all([sel('categories'), sel('profiles', null, 'id, full_name')]);
+    cats.forEach((c) => catNombre.set(c.id, c.name));
+    profs.forEach((p) => perfiles.set(p.id, p.full_name || 'Sin nombre'));
+  } catch (e) { /* no es grave */ }
+  mostrar('resumen');
+}
+const nombre = (id) => (id ? esc(perfiles.get(id) || corto(id)) : '—');
+const cat = (id) => esc(catNombre.get(id) || id || '—');
+
+// ---------------------------------------------------------------- pestañas
+document.querySelectorAll('#nav button').forEach((b) => (b.onclick = () => mostrar(b.dataset.tab)));
+const vistas = { resumen, solicitudes, personas, verificaciones, saldos, alertas, reportes, cargos, sugerencias, ajustes };
+async function mostrar(tab) {
+  document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === tab));
+  document.querySelectorAll('main section').forEach((s) => s.classList.toggle('hidden', s.id !== 'tab-' + tab));
+  const el = $('#tab-' + tab);
+  el.innerHTML = '<p class="muted">Cargando…</p>';
+  try {
+    await vistas[tab](el);
+  } catch (e) {
+    el.innerHTML = `<div class="msg bad">${esc(errorTexto(e))}</div>`;
+  }
+}
+
+// ---------------------------------------------------------------- resumen
+async function resumen(el) {
+  const s = await rpc('admin_stats');
+  const n = s.reportes_nuevos || 0;
+  $('#nReportes').textContent = n; $('#nReportes').classList.toggle('hidden', !n);
+  const p = s.ajustes?.pruebas || {};
+  el.innerHTML = `
+    ${p.activo ? '<div class="msg">Modo prueba ACTIVO: nadie necesita verificar identidad ni subir certificado de antecedentes, y los prestadores ven solicitudes de todo Chile. Apágalo en Ajustes antes de lanzar.</div>' : ''}
+    <div class="stats">
+      <div class="stat"><b>${s.usuarios}</b><span>Cuentas creadas</span></div>
+      <div class="stat"><b>${s.prestadores}</b><span>Prestadores activos</span></div>
+      <div class="stat"><b>${s.buscando}</b><span>Solicitudes buscando</span></div>
+      <div class="stat"><b>${s.en_curso}</b><span>Trabajos en curso</span></div>
+      <div class="stat"><b>${s.completadas}</b><span>Completados</span></div>
+      <div class="stat"><b>${s.canceladas}</b><span>Cancelados</span></div>
+      <div class="stat"><b>${clp(s.comision_cobrada)}</b><span>Comisión cobrada (total)</span></div>
+      <div class="stat"><b>${clp(s.saldo_por_cobrar)}</b><span>Saldo que te deben los prestadores</span></div>
+      <div class="stat"><b>${s.reportes_nuevos}</b><span>Reportes nuevos</span></div>
+      <div class="stat"><b>${s.cargos_pendientes}</b><span>Cargos de cancelación pendientes</span></div>
+      <div class="stat"><b>${s.sugerencias_nuevas}</b><span>Sugerencias de servicios</span></div>
+      <div class="stat"><b>${s.leads}</b><span>Contactos de la web</span></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Últimas solicitudes</h3><div id="ultimas">Cargando…</div></div>`;
+  const rows = await sel('service_requests', (q) => q.order('created_at', { ascending: false }).limit(8));
+  $('#ultimas').innerHTML = tabla([
+    ['Cuándo', (r) => fecha(r.created_at)], ['Servicio', (r) => cat(r.category_id)], ['Comuna', (r) => esc(r.comuna || '—')],
+    ['Cliente', (r) => nombre(r.client_id)], ['Prestador', (r) => nombre(r.provider_id)], ['Estado', (r) => pill(r.status)],
+    ['Monto', (r) => clp(r.final_amount)],
+  ], rows);
+}
+
+// ---------------------------------------------------------------- solicitudes
+async function solicitudes(el) {
+  el.innerHTML = `<div class="card"><div class="row">
+      <select id="fEstado"><option value="">Todos los estados</option>${Object.entries(ESTADO).slice(0, 7).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join('')}</select>
+      <input id="fTexto" placeholder="Buscar por comuna o descripción" style="flex:1;min-width:200px">
+      <button class="btn" id="fBuscar">Buscar</button></div></div>
+    <div id="listaSol"></div>`;
+  const cargar = async () => {
+    $('#listaSol').innerHTML = '<p class="muted">Cargando…</p>';
+    const estado = $('#fEstado').value, texto = $('#fTexto').value.trim();
+    const rows = await sel('service_requests', (q) => {
+      q = q.order('created_at', { ascending: false }).limit(100);
+      if (estado) q = q.eq('status', estado);
+      if (texto) q = q.or(`comuna.ilike.%${texto}%,description.ilike.%${texto}%`);
+      return q;
+    });
+    $('#listaSol').innerHTML = tabla([
+      ['Cuándo', (r) => `${fecha(r.created_at)}<br><span class="muted">${r.scheduled_at ? 'Agendado ' + fecha(r.scheduled_at) : 'Al tiro'}</span>`],
+      ['Servicio', (r) => `${cat(r.category_id)}<br><span class="muted">${esc((r.description || '').slice(0, 90))}</span>`],
+      ['Comuna', (r) => esc(r.comuna || '—')], ['Cliente', (r) => nombre(r.client_id)], ['Prestador', (r) => nombre(r.provider_id)],
+      ['Estado', (r) => pill(r.status)], ['Monto / comisión', (r) => `${clp(r.final_amount)}<br><span class="muted">${clp(r.commission_amount)}</span>`],
+      ['', (r) => `<button class="btn ghost sm" onclick="detalle('${r.id}')">Ver</button>`],
+    ], rows, 'No hay solicitudes con ese filtro.');
+  };
+  $('#fBuscar').onclick = cargar;
+  $('#fTexto').addEventListener('keydown', (e) => { if (e.key === 'Enter') cargar(); });
+  await cargar();
+}
+window.detalle = async (id) => {
+  const el = $('#listaSol');
+  const [r, cots, msgs, evs, priv] = await Promise.all([
+    sel('service_requests', (q) => q.eq('id', id)).then((x) => x[0]),
+    sel('quotes', (q) => q.eq('request_id', id).order('created_at')),
+    sel('messages', (q) => q.eq('request_id', id).order('created_at').limit(200)),
+    sel('request_events', (q) => q.eq('request_id', id).order('created_at')),
+    sel('request_private', (q) => q.eq('request_id', id)).then((x) => x[0]),
+  ]);
+  const html = `<div class="card">
+    <div class="row" style="justify-content:space-between"><h3 style="margin:0">${cat(r.category_id)} · ${pill(r.status)}</h3><button class="btn ghost sm" onclick="mostrar('solicitudes')">Volver</button></div>
+    <p>${esc(r.description)}</p>
+    <p class="muted">Cliente: ${nombre(r.client_id)} · Prestador: ${nombre(r.provider_id)} · Creada ${fecha(r.created_at)}${r.scheduled_at ? ' · Agendada ' + fecha(r.scheduled_at) : ''}${priv ? ' · Dirección: ' + esc(priv.address) + (priv.address_detail ? ', ' + esc(priv.address_detail) : '') : ''}</p>
+    <div class="grid2">
+      <div><h4>Cotizaciones (${cots.length})</h4>${tabla([['Prestador', (c) => nombre(c.provider_id)], ['Monto', (c) => clp(c.amount)], ['Estado', (c) => pill(c.status)], ['Mensaje', (c) => esc(c.message || '')]], cots, 'Sin cotizaciones.')}</div>
+      <div><h4>Historial</h4>${tabla([['Cuándo', (e) => fecha(e.created_at)], ['Qué pasó', (e) => esc(e.event)], ['Quién', (e) => nombre(e.actor_id)]], evs, 'Sin eventos.')}</div>
+    </div>
+    <details style="margin-top:10px"><summary>Chat (${msgs.length} mensajes) — solo para revisar reclamos</summary>
+      <div class="chat">${msgs.map((m) => `<div><b>${nombre(m.sender_id)}</b> <span class="muted">${fecha(m.created_at)}</span><br>${esc(m.body)}${m.aviso ? ` <span class="pill warn">${esc(m.aviso)}</span>` : ''}</div>`).join('') || '<span class="muted">Sin mensajes.</span>'}</div>
+    </details></div>`;
+  el.innerHTML = html;
+};
+
+// ---------------------------------------------------------------- personas
+async function personas(el) {
+  el.innerHTML = `<div class="card"><div class="row"><input id="pTexto" placeholder="Buscar por correo o nombre" style="flex:1;min-width:200px"><button class="btn" id="pBuscar">Buscar</button></div><div id="pMsg"></div></div><div id="listaPer"></div>`;
+  const cargar = async () => {
+    $('#listaPer').innerHTML = '<p class="muted">Cargando…</p>';
+    const rows = await rpc('admin_users', { p_buscar: $('#pTexto').value.trim() || null, p_limite: 300 });
+    $('#listaPer').innerHTML = tabla([
+      ['Persona', (u) => `<b>${esc(u.full_name || 'Sin nombre')}</b><br><span class="muted">${esc(u.email)}</span>`],
+      ['Tipo', (u) => u.provider_status ? `Prestador ${pill(u.provider_status)}` : 'Cliente'],
+      ['Oficios', (u) => esc(u.oficios || '—')],
+      ['Identidad', (u) => u.identity_verified_until ? `<span class="pill ok">Verificada hasta ${dia(u.identity_verified_until)}</span>` : '<span class="pill">Sin verificar</span>'],
+      ['Calificación', (u) => u.rating_count ? `${Number(u.rating_avg).toFixed(1)} ★ (${u.rating_count})` : '—'],
+      ['Saldo', (u) => u.saldo == null ? '—' : `<b style="color:${u.saldo < 0 ? 'var(--bad)' : 'var(--ok)'}">${clp(u.saldo)}</b>`],
+      ['Desde', (u) => `${dia(u.created_at.slice(0, 10))}${u.deleted_at ? '<br><span class="pill bad">Cuenta eliminada</span>' : ''}${u.banned ? '<br><span class="pill bad">Bloqueada</span>' : ''}`],
+      ['', (u) => u.provider_status ? (u.provider_status === 'activo'
+        ? `<button class="btn bad sm" onclick="estadoPrestador('${u.id}','suspendido')">Suspender</button>`
+        : `<button class="btn sm" onclick="estadoPrestador('${u.id}','activo')">Reactivar</button>`) : ''],
+    ], rows, 'No se encontró a nadie.');
+  };
+  $('#pBuscar').onclick = cargar;
+  $('#pTexto').addEventListener('keydown', (e) => { if (e.key === 'Enter') cargar(); });
+  await cargar();
+}
+window.estadoPrestador = async (id, estado) => {
+  if (!confirm(estado === 'suspendido' ? '¿Suspender a este prestador? Dejará de ver solicitudes y de cotizar.' : '¿Reactivar a este prestador?')) return;
+  try { await rpc('admin_provider_status', { p_user: id, p_status: estado }); mostrar('personas'); }
+  catch (e) { msg($('#pMsg'), errorTexto(e), 'bad'); }
+};
+
+// ---------------------------------------------------------------- verificaciones de oficios (hazlo_fix_33)
+// Niñera, gas, podología…: el prestador sube su documento desde la app Pro y aquí se aprueba o rechaza.
+async function verificaciones(el) {
+  const [rows, ante] = await Promise.all([rpc('admin_trades_review'), rpc('admin_background_review')]);
+  const pendAnte = ante.filter((b) => b.status === 'en_revision' || b.nuevo_documento).length;
+  const pend = rows.filter((t) => t.verification_status === 'en_revision').length + pendAnte;
+  $('#nVerif').textContent = pend; $('#nVerif').classList.toggle('hidden', !pend);
+  const hoy = new Date().toISOString().slice(0, 10);
+  const fechaCL = (d) => (d ? String(d).slice(0, 10).split('-').reverse().join('/') : '');
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Certificados de antecedentes (todos los prestadores)</h3>
+    <p class="muted">Obligatorio para ver solicitudes y cotizar (hazlo_fix_37; en modo prueba no se exige si está marcado "Sin exigir certificado").
+    Revisa: que el <b>nombre y RUT</b> coincidan con la cédula verificada, que sea <b>reciente</b> (menos de 30 días) y que <b>no tenga anotaciones</b>.
+    Si trae código de verificación, compruébalo en registrocivil.cl (verificación de certificados). Criterio sugerido, a confirmar con el abogado: rechazar por delitos sexuales, violentos, contra la propiedad (robo, hurto) y de drogas.
+    Al <b>aprobar</b>, el archivo se borra y queda solo el resultado con la fecha de vencimiento.</p>
+    <div id="aVMsg"></div>
+    ${tabla([
+      ['Prestador', (b) => `<b>${esc(b.full_name || '—')}</b><br><span class="muted">${esc(b.email)}</span><br>${b.nombre_cedula ? '<span class="pill ok">Cédula: ' + esc(b.nombre_cedula) + '</span>' : '<span class="pill warn">Cédula sin verificar</span>'}`],
+      ['Estado', (b) => `${b.status === 'verificado' && b.vence_el && String(b.vence_el) < hoy ? '<span class="pill bad">Vencido</span>' : pill(b.status)}${b.nuevo_documento ? ' <span class="pill warn">Subió uno nuevo</span>' : ''}${b.vence_el ? '<br><span class="muted">Vence ' + fechaCL(b.vence_el) + '</span>' : ''}${b.review_notes ? '<br><span class="muted">' + esc(b.review_notes) + '</span>' : ''}`],
+      ['Código', (b) => (b.codigo ? `<code>${esc(b.codigo)}</code>` : '<span class="muted">—</span>')],
+      ['Certificado', (b) => `<div id="ante-${b.provider_id}" class="muted">${(b.paths || []).length ? 'Cargando…' : 'Sin archivo'}</div>`],
+      ['', (b) => ((b.paths || []).length ? `<button class="btn sm" onclick="verificarAntecedentes('${b.provider_id}',true)">Aprobar</button> <button class="btn bad sm" onclick="verificarAntecedentes('${b.provider_id}',false)">Rechazar</button>` : '')],
+    ], ante, 'Ningún prestador ha subido su certificado todavía.')}</div>
+    <div class="card"><h3 style="margin-top:0">Oficios que requieren revisar documentos</h3>
+    <p class="muted">Solo quien quede <b>verificado</b> recibe solicitudes de estos oficios (el modo prueba no se salta esta regla).
+    Para <b>niñeras y cuidado de adulto mayor</b>: revisa el certificado de antecedentes y, con el RUT que aparece en él, consulta el registro de inhabilidades para trabajar con menores de edad en registrocivil.cl. Para <b>salud</b> (kinesiología, enfermería, podología, masoterapia): busca a la persona en el Registro Nacional de Prestadores Individuales de Salud (superdesalud.gob.cl). Para <b>gas</b>: credencial SEC vigente. Para <b>conductor</b>: licencia vigente, hoja de vida y antecedentes.</p>
+    <div id="vMsg"></div>
+    ${tabla([
+      ['Prestador', (t) => `<b>${esc(t.full_name || '—')}</b><br><span class="muted">${esc(t.email)}</span><br>${t.identidad_hasta ? '<span class="pill ok">Cédula verificada</span>' : '<span class="pill warn">Cédula sin verificar</span>'}`],
+      ['Oficio', (t) => `${esc(t.oficio)}${t.requires_license ? ' <span class="pill brand">Con verificación</span>' : ''}`],
+      ['Estado', (t) => `${pill(t.verification_status)}${t.review_notes ? '<br><span class="muted">' + esc(t.review_notes) + '</span>' : ''}`],
+      ['Documentos', (t) => `<div id="docs-${t.trade_id}" class="muted">${t.credential_path ? 'Cargando…' : 'Aún no sube documentos'}</div>`],
+      ['', (t) => `<button class="btn sm" onclick="verificarOficio('${t.trade_id}','verificado')">Verificar</button> <button class="btn bad sm" onclick="verificarOficio('${t.trade_id}','rechazado')">Rechazar</button>`],
+    ], rows, 'Nadie ha pedido verificación todavía.')}</div>`;
+  // Enlaces temporales (10 min) a cada certificado de antecedentes.
+  for (const b of ante.filter((x) => (x.paths || []).length)) {
+    const box = document.getElementById('ante-' + b.provider_id);
+    try {
+      const links = [];
+      for (const path of b.paths) {
+        const { data: s } = await db.storage.from('credenciales').createSignedUrl(path, 600);
+        if (s?.signedUrl) links.push(`<a href="${s.signedUrl}" target="_blank" rel="noopener">Foto ${links.length + 1}</a>`);
+      }
+      box.innerHTML = links.length ? links.join('<br>') : 'Sin archivos';
+    } catch (e) {
+      box.textContent = 'No se pudo abrir: ' + errorTexto(e);
+    }
+  }
+  // Enlaces temporales (10 min) a los documentos de cada uno (carpeta credenciales/<prestador>/<oficio>/).
+  for (const t of rows.filter((x) => x.credential_path)) {
+    const box = document.getElementById('docs-' + t.trade_id);
+    try {
+      const carpeta = `${t.provider_id}/${t.subgroup_id}`;
+      const { data: files, error } = await db.storage.from('credenciales').list(carpeta, { limit: 20, sortBy: { column: 'created_at', order: 'desc' } });
+      if (error) throw error;
+      const links = [];
+      for (const f of files || []) {
+        const { data: s } = await db.storage.from('credenciales').createSignedUrl(`${carpeta}/${f.name}`, 600);
+        if (s?.signedUrl) links.push(`<a href="${s.signedUrl}" target="_blank" rel="noopener">${esc(t.credential_type || 'Documento')} ${links.length + 1}</a>`);
+      }
+      box.innerHTML = links.length ? links.join('<br>') : 'Sin archivos';
+    } catch (e) {
+      box.textContent = 'No se pudo abrir: ' + errorTexto(e);
+    }
+  }
+}
+window.verificarOficio = async (id, estado) => {
+  let nota = null;
+  if (estado === 'rechazado') {
+    nota = prompt('¿Por qué lo rechazas? El prestador verá este mensaje (ej: "El certificado está cortado, sube una foto completa").');
+    if (nota === null) return;
+  } else if (!confirm('¿Verificar este oficio? Desde ahora recibirá solicitudes de este tipo.')) return;
+  try { await rpc('admin_verify_trade', { p_trade: id, p_status: estado, p_notes: nota }); mostrar('verificaciones'); }
+  catch (e) { msg($('#vMsg'), errorTexto(e), 'bad'); }
+};
+
+window.verificarAntecedentes = async (id, ok) => {
+  let nota = null;
+  if (!ok) {
+    nota = prompt('¿Por qué lo rechazas? El prestador verá este mensaje (ej: "No se lee el RUT, sube una captura completa" o "Tiene más de 30 días, saca uno nuevo").');
+    if (nota === null) return;
+    if (!nota.trim()) return alert('Escribe el motivo del rechazo.');
+  } else if (!confirm('¿Aprobar el certificado? Quedará vigente y se borrará el archivo (solo se guarda el resultado).')) return;
+  try {
+    const archivos = await rpc('admin_verify_background', { p_provider: id, p_ok: ok, p_notes: nota });
+    if (ok && archivos && archivos.length) {
+      const { error } = await db.storage.from('credenciales').remove(archivos);
+      if (error) msg($('#aVMsg'), 'Aprobado, pero no se pudo borrar el archivo: ' + errorTexto(error), 'bad');
+    }
+    mostrar('verificaciones');
+  } catch (e) { msg($('#aVMsg'), errorTexto(e), 'bad'); }
+};
+
+// ---------------------------------------------------------------- saldos
+async function saldos(el) {
+  const [saldosRows, mov] = await Promise.all([
+    sel('saldos_prestadores', (q) => q.order('saldo', { ascending: true })),
+    sel('provider_ledger', (q) => q.order('created_at', { ascending: false }).limit(150)),
+  ]);
+  el.innerHTML = `
+    <div class="card"><h3 style="margin-top:0">Registrar un pago recibido</h3>
+      <p class="muted">Cuando un prestador te transfiere lo que debe, anótalo aquí: su saldo sube y puede volver a cotizar. Un monto negativo es un ajuste (descuento).</p>
+      <div class="row"><input id="sEmail" placeholder="correo del prestador" style="min-width:240px"><input id="sMonto" type="number" placeholder="monto $"><input id="sNota" placeholder="nota (opcional)" style="min-width:200px"><button class="btn" id="sGuardar">Registrar</button></div>
+      <div id="sMsg"></div></div>
+    <div class="card"><h3 style="margin-top:0">Saldo por prestador</h3><p class="muted">Negativo = te debe comisiones. El tope de crédito es ${clp((await rpc('admin_stats')).ajustes?.credito_prestador?.limite)}: al pasarlo no puede cotizar.</p>
+      ${tabla([['Prestador', (s) => `<b>${esc(s.full_name || '—')}</b><br><span class="muted">${esc(s.email)}</span>`], ['Saldo', (s) => `<b style="color:${s.saldo < 0 ? 'var(--bad)' : 'var(--ok)'}">${clp(s.saldo)}</b>`], ['Trabajos cobrados', (s) => s.trabajos_cobrados], ['Último movimiento', (s) => fecha(s.ultimo_movimiento)]], saldosRows, 'Ningún prestador tiene movimientos todavía.')}</div>
+    <div class="card"><h3 style="margin-top:0">Últimos movimientos</h3>
+      ${tabla([['Cuándo', (m) => fecha(m.created_at)], ['Prestador', (m) => nombre(m.provider_id)], ['Tipo', (m) => `${esc(m.kind)} ${pill(m.status)}`], ['Monto', (m) => clp(m.amount)], ['Nota', (m) => esc(m.note || '')], ['Solicitud', (m) => corto(m.request_id)]], mov)}</div>`;
+  $('#sGuardar').onclick = async () => {
+    try {
+      const saldo = await rpc('registrar_pago_prestador', { p_email: $('#sEmail').value.trim(), p_monto: Number($('#sMonto').value), p_nota: $('#sNota').value.trim() || null });
+      msg($('#sMsg'), `Listo. Saldo actual: ${clp(saldo)}`, 'ok');
+      setTimeout(() => mostrar('saldos'), 900);
+    } catch (e) { msg($('#sMsg'), errorTexto(e), 'bad'); }
+  };
+}
+
+// ---------------------------------------------------------------- alertas de desvío
+async function alertas(el) {
+  const [rows, intentos] = await Promise.all([
+    sel('alertas_desvio', (q) => q.order('intentos_30d', { ascending: false })),
+    sel('contact_attempts', (q) => q.order('created_at', { ascending: false }).limit(100)),
+  ]);
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Quién intenta pasar su contacto (últimos 30 días)</h3>
+    <p class="muted">El servidor oculta teléfonos, correos y enlaces. Aquí ves quién lo intenta y cuántas veces; muchos intentos + cancelaciones = se están arreglando por fuera.</p>
+    ${tabla([['Persona', (a) => `<b>${esc(a.full_name || '—')}</b> ${a.es_prestador ? '<span class="pill brand">Prestador</span>' : '<span class="pill">Cliente</span>'}`], ['Intentos', (a) => a.intentos_30d], ['Ocultados', (a) => a.ocultados_30d], ['Cancelaciones con intento', (a) => a.cancelaciones_con_intento_30d], ['Último', (a) => fecha(a.ultimo_intento)]], rows, 'Nadie ha intentado pasar datos de contacto. 🎉')}</div>
+    <div class="card"><h3 style="margin-top:0">Últimos intentos</h3>
+    ${tabla([['Cuándo', (i) => fecha(i.created_at)], ['Quién', (i) => nombre(i.user_id)], ['Dónde', (i) => esc(i.source)], ['Qué detectó', (i) => (i.motivos || []).map(esc).join(', ')], ['Oculto', (i) => i.oculto ? 'Sí' : 'No'], ['Solicitud', (i) => corto(i.request_id)]], intentos)}</div>`;
+}
+
+// ---------------------------------------------------------------- reportes
+async function reportes(el) {
+  const rows = await sel('reports', (q) => q.order('created_at', { ascending: false }).limit(200));
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Reportes de usuarios</h3><div id="rMsg"></div>
+    ${tabla([
+      ['Cuándo', (r) => fecha(r.created_at)], ['Reporta', (r) => nombre(r.reporter_id)], ['A quién', (r) => nombre(r.reported_id)],
+      ['Motivo', (r) => `<b>${esc(MOTIVO[r.reason] || r.reason)}</b><br><span class="muted">${esc(r.detail || '')}</span>`], ['Solicitud', (r) => r.request_id ? `<a href="#" onclick="mostrar('solicitudes').then(()=>detalle('${r.request_id}'));return false">${corto(r.request_id)}</a>` : '—'],
+      ['Estado', (r) => `${pill(r.status)}${r.resolution ? '<br><span class="muted">' + esc(r.resolution) + '</span>' : ''}`],
+      ['', (r) => r.status === 'resuelto' || r.status === 'descartado' ? '' : `<button class="btn sm" onclick="resolver('${r.id}','resuelto')">Resolver</button> <button class="btn ghost sm" onclick="resolver('${r.id}','descartado')">Descartar</button>`],
+    ], rows, 'No hay reportes.')}</div>`;
+}
+window.resolver = async (id, estado) => {
+  const nota = prompt(estado === 'resuelto' ? '¿Qué hiciste? (queda guardado)' : 'Motivo para descartar (opcional)') ;
+  if (nota === null) return;
+  try { await rpc('admin_resolve_report', { p_id: id, p_status: estado, p_resolution: nota || null }); mostrar('reportes'); }
+  catch (e) { msg($('#rMsg'), errorTexto(e), 'bad'); }
+};
+
+// ---------------------------------------------------------------- cargos por cancelación
+async function cargos(el) {
+  const rows = await sel('cargos_cancelacion', (q) => q.order('created_at', { ascending: false }).limit(200));
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Cargos por cancelación tardía</h3>
+    <p class="muted">$2.000 si el prestador ya iba en camino, $5.000 si ya había llegado; el 100 % es para el prestador. Cuando el cliente paga, márcalo: "Pagado a Hazlo" le abona el monto al prestador en su saldo; "Pagado al prestador" solo lo registra; "Condonar" lo perdona.</p>
+    <div id="cMsg"></div>
+    ${tabla([
+      ['Cuándo', (c) => fecha(c.created_at)], ['Servicio', (c) => cat(c.category_id)], ['Cliente', (c) => nombre(c.client_id)], ['Prestador', (c) => nombre(c.provider_id)],
+      ['Estado al cancelar', (c) => pill(c.status_before)], ['Cargo', (c) => clp(c.fee_amount)], ['Estado', (c) => `${pill(c.fee_status)}${c.fee_paid_at ? '<br><span class="muted">' + fecha(c.fee_paid_at) + '</span>' : ''}`],
+      ['', (c) => c.fee_status !== 'pendiente' ? '' : `<button class="btn sm" onclick="pagarCargo('${c.request_id}','hazlo')">Pagado a Hazlo</button> <button class="btn ghost sm" onclick="pagarCargo('${c.request_id}','prestador')">Pagado al prestador</button> <button class="btn ghost sm" onclick="pagarCargo('${c.request_id}','condonado')">Condonar</button>`],
+    ], rows, 'No hay cargos por cancelación.')}</div>`;
+}
+window.pagarCargo = async (id, via) => {
+  try { await rpc('registrar_pago_cargo', { p_request_id: id, p_via: via }); mostrar('cargos'); }
+  catch (e) { msg($('#cMsg'), errorTexto(e), 'bad'); }
+};
+
+// ---------------------------------------------------------------- sugerencias y leads
+async function sugerencias(el) {
+  const [sug, leads] = await Promise.all([
+    sel('service_suggestions', (q) => q.order('created_at', { ascending: false }).limit(200)),
+    sel('leads', (q) => q.order('created_at', { ascending: false }).limit(200)),
+  ]);
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Servicios que la gente pidió agregar</h3><div id="sgMsg"></div>
+    ${tabla([['Cuándo', (s) => fecha(s.created_at)], ['Quién', (s) => `${nombre(s.user_id)} <span class="pill">${esc(s.side)}</span>`], ['Qué pidió', (s) => `<b>${esc(s.text)}</b>`], ['Comuna', (s) => esc(s.comuna || '—')], ['Estado', (s) => pill(s.status)],
+      ['', (s) => s.status === 'nueva' ? `<button class="btn ghost sm" onclick="sugerenciaVista('${s.id}')">Marcar como vista</button>` : '']], sug, 'Nadie ha sugerido servicios todavía.')}</div>
+    <div class="card"><h3 style="margin-top:0">Contactos desde hazlochile.com (lista de espera)</h3>
+    ${tabla([['Cuándo', (l) => fecha(l.created_at)], ['Lado', (l) => `<span class="pill ${l.side === 'prestador' ? 'brand' : ''}">${esc(l.side)}</span>`], ['Nombre', (l) => esc(l.name)], ['Contacto', (l) => esc(l.contact)], ['Comuna', (l) => esc(l.comuna || '—')], ['Interés', (l) => esc(l.interest || '—')], ['Estado', (l) => pill(l.status)],
+      ['', (l) => l.status === 'nuevo' ? `<button class="btn ghost sm" onclick="leadContactado('${l.id}')">Contactado</button>` : '']], leads, 'Todavía no llegan contactos desde la web.')}</div>`;
+}
+window.sugerenciaVista = async (id) => {
+  const { error } = await db.from('service_suggestions').update({ status: 'revisada' }).eq('id', id);
+  if (error) msg($('#sgMsg'), errorTexto(error), 'bad'); else mostrar('sugerencias');
+};
+window.leadContactado = async (id) => {
+  const { error } = await db.from('leads').update({ status: 'contactado' }).eq('id', id);
+  if (error) msg($('#sgMsg'), errorTexto(error), 'bad'); else mostrar('sugerencias');
+};
+
+// ---------------------------------------------------------------- ajustes
+async function ajustes(el) {
+  const a = (await rpc('admin_stats')).ajustes || {};
+  const p = a.pruebas || {}, c = a.comision || {}, cr = a.credito_prestador || {}, po = a.portafolio || {}, ca = a.cancelacion || {}, an = a.antecedentes || {};
+  const sw = (id, label, on, ayuda) => `<div class="switch"><div><b>${label}</b><br><span class="muted">${ayuda}</span></div><input type="checkbox" id="${id}" ${on ? 'checked' : ''}></div>`;
+  el.innerHTML = `<div id="aMsg"></div><div class="grid2">
+    <div class="card"><h3 style="margin-top:0">Modo prueba</h3>
+      ${sw('pActivo', 'Modo prueba activo', p.activo, 'Con esto encendido se aplican las dos reglas de abajo. Apágalo antes de lanzar.')}
+      ${sw('pIdent', 'Sin exigir identidad', p.sin_identidad !== false, 'Cualquiera puede cotizar y aceptar sin verificar su cédula.')}
+      ${sw('pRadio', 'Sin límite de distancia', p.sin_radio !== false, 'Los prestadores ven solicitudes de todo Chile.')}
+      ${sw('pAnte', 'Sin exigir certificado de antecedentes', p.sin_antecedentes !== false, 'Los prestadores trabajan aunque no hayan subido su certificado.')}
+      <div class="row" style="margin-top:10px"><button class="btn" id="aPruebas">Guardar modo prueba</button></div></div>
+    <div class="card"><h3 style="margin-top:0">Portafolio</h3>
+      ${sw('poObl', 'Portafolio obligatorio para cotizar', po.obligatorio !== false, 'Exige fotos aprobadas por la IA antes de cotizar en cada oficio (los oficios con título no lo necesitan).')}
+      <div class="row" style="margin-top:8px"><label>Mínimo de fotos <input type="number" id="poMin" value="${po.minimo ?? 3}" min="1" max="10"></label><label>Máximo <input type="number" id="poMax" value="${po.maximo ?? 5}" min="1" max="20"></label></div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="aPortafolio">Guardar portafolio</button></div></div>
+    <div class="card"><h3 style="margin-top:0">Comisión y crédito</h3>
+      <div class="row"><label>Comisión (%) <input type="number" id="cTasa" value="${Math.round((c.tasa ?? 0.1) * 100)}" min="0" max="50"></label>
+      <label>Tope de deuda ($) <input type="number" id="crLim" value="${cr.limite ?? 30000}" min="0" step="1000"></label></div>
+      ${sw('cIntento', 'Cobrar comisión aunque cancelen, si hubo intento de pasar contacto', c.cobrar_si_intento_contacto !== false, 'Evita que se arreglen por fuera y cancelen para no pagar.')}
+      <p class="muted">La comisión se cobra en "${esc(c.cobrar_en || 'en_camino')}" (IVA incluido: ${c.iva_incluido === false ? 'no' : 'sí'}).</p>
+      <div class="row"><button class="btn" id="aComision">Guardar comisión</button></div></div>
+    <div class="card"><h3 style="margin-top:0">Certificado de antecedentes</h3>
+      ${sw('anObl', 'Obligatorio para todos los prestadores', an.obligatorio !== false, 'Sin certificado revisado y vigente no ven solicitudes ni pueden cotizar.')}
+      <div class="row" style="margin-top:8px"><label>Vigencia (meses) <input type="number" id="anMeses" value="${an.vigencia_meses ?? 6}" min="1" max="24"></label></div>
+      <p class="muted">La Ley Uber exige a los conductores entregarlo cada 6 meses. Aplica a los certificados que apruebes desde ahora.</p>
+      <div class="row" style="margin-top:10px"><button class="btn" id="aAnte">Guardar certificado</button></div></div>
+    <div class="card"><h3 style="margin-top:0">Cancelaciones</h3>
+      <div class="row"><label>Gratis hasta (min tras aceptar) <input type="number" id="caGratis" value="${ca.gratis_minutos ?? 5}" min="0"></label>
+      <label>Cargo en camino ($) <input type="number" id="caCamino" value="${ca.cargo_en_camino ?? 2000}" step="500"></label>
+      <label>Cargo en el lugar ($) <input type="number" id="caSitio" value="${ca.cargo_en_sitio ?? 5000}" step="500"></label>
+      <label>Atraso del prestador sin cargo (min) <input type="number" id="caAtraso" value="${ca.atraso_gratis_minutos ?? 30}" min="0"></label></div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="aCancel">Guardar cancelaciones</button></div></div>
+  </div>`;
+  const guardar = async (key, value) => {
+    try { await rpc('admin_set_setting', { p_key: key, p_value: value }); msg($('#aMsg'), 'Guardado. Aplica de inmediato en la app.', 'ok'); }
+    catch (e) { msg($('#aMsg'), errorTexto(e), 'bad'); }
+  };
+  $('#aPruebas').onclick = () => guardar('pruebas', { activo: $('#pActivo').checked, sin_identidad: $('#pIdent').checked, sin_radio: $('#pRadio').checked, sin_antecedentes: $('#pAnte').checked });
+  $('#aAnte').onclick = () => guardar('antecedentes', { obligatorio: $('#anObl').checked, vigencia_meses: Math.max(1, Math.min(24, Number($('#anMeses').value) || 6)) });
+  $('#aPortafolio').onclick = () => guardar('portafolio', { obligatorio: $('#poObl').checked, minimo: Number($('#poMin').value), maximo: Number($('#poMax').value) });
+  $('#aComision').onclick = () => guardar('comision', { ...c, tasa: Number($('#cTasa').value) / 100, cobrar_si_intento_contacto: $('#cIntento').checked })
+    .then(() => guardar('credito_prestador', { limite: Number($('#crLim').value) }));
+  $('#aCancel').onclick = () => guardar('cancelacion', { gratis_minutos: Number($('#caGratis').value), cargo_en_camino: Number($('#caCamino').value), cargo_en_sitio: Number($('#caSitio').value), atraso_gratis_minutos: Number($('#caAtraso').value) });
+}
+
+iniciar();
+</script>
+</body>
+</html>
