@@ -429,6 +429,9 @@ textarea{min-height:82px; resize:vertical}
 }
 .vermas:hover{border-color:var(--brand); color:var(--brand)}
 .cats-all{display:grid; gap:16px; padding-top:12px; border-top:1px solid var(--night-line); margin-top:4px}
+.ya{display:grid; gap:10px; padding:13px 14px; border-radius:14px; background:color-mix(in srgb, var(--ok) 18%, transparent); border:1px solid color-mix(in srgb, var(--ok) 45%, transparent)}
+.ya p{font-size:14.5px; font-weight:700; color:var(--on-night)}
+.ya .opts:empty{display:none}
 .cuenta{font-size:12.5px; font-weight:700; color:var(--brand)}
 .msg{padding:13px 16px; border-radius:14px; font-weight:600; font-size:15px}
 .msg[data-kind="ok"]{background:var(--ok-soft); color:var(--ok)}
@@ -747,6 +750,10 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           <label for="interes">Cuéntanos cuál</label>
           <textarea id="interes" name="interes" maxlength="200" placeholder="Afilar cuchillos, tapicería, instalar paneles solares…"></textarea>
         </div>
+        <div class="ya" id="ya" role="status" aria-live="polite" hidden>
+          <p id="ya-txt"></p>
+          <div class="opts" id="ya-opts"></div>
+        </div>
       </div>
 
       <p class="msg" id="msg" role="status" hidden></p>
@@ -973,10 +980,10 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   var t;
   buscar.addEventListener('input', function () { clearTimeout(t); t = setTimeout(mostrar, 120); });
 
-  function buscarServicios(texto, max, estricto) {
+  function buscarServicios(texto, max, estricto, soloMejores) {
     var q = norm(texto).trim();
     if (q.length < 3) return [];
-    var palabras = q.split(/\s+/).filter(function (w) { return w.length >= 3 && ['del','las','los','una','con','para','que','por','mis','hay','esta','tiene'].indexOf(w) < 0; });
+    var palabras = q.split(/\s+/).filter(function (w) { return w.length >= 3 && ['del','las','los','una','uno','unos','unas','con','para','que','por','mis','hay','esta','tiene','soy','hago','trabajo','necesito','quiero','busco','alguien','algo','como','mas','tambien','cosas','casa','depto','departamento'].indexOf(w) < 0 && w.indexOf('arregl') !== 0; });
     if (!palabras.length) palabras = [q];
     var hits = [];
     INDICE.forEach(function (it) {
@@ -987,6 +994,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         else if (it.k.indexOf(raiz) >= 0) pts += 1;
         else todas = false;
         if (it.on.indexOf(raiz) >= 0) pts += 2;
+        if (it.sn.indexOf(w) >= 0) pts += 2;
       });
       if (palabras.length > 1 && it.sn.indexOf(q) >= 0) pts += 4;
       if (pts > 0) hits.push({ it: it, pts: pts + (todas ? 2 : 0), todas: todas });
@@ -994,6 +1002,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     // Si algo calza con todas las palabras, se muestran solo esos.
     if (estricto || hits.some(function (x) { return x.todas; })) hits = hits.filter(function (x) { return x.todas; });
     hits.sort(function (a, b) { return b.pts - a.pts; });
+    if (soloMejores && hits.length) hits = hits.filter(function (x) { return x.pts === hits[0].pts; });
     var vistos = {}, lista = [];
     hits.forEach(function (x) {
       if (lista.length >= max) return;
@@ -1126,6 +1135,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   function setSide(s) {
     side.value = s;
+    var cajaYa = document.getElementById('ya'); if (cajaYa) cajaYa.hidden = true;
     document.querySelectorAll('.tab').forEach(function (t) {
       t.setAttribute('aria-selected', String(t.dataset.side === s));
     });
@@ -1175,6 +1185,41 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     (document.referrer || '').replace(/^https?:\/\/(www\.)?/, '').split('/')[0] || 'directo').slice(0, 40);
 
   function aviso(kind, text) { msg.dataset.kind = kind; msg.textContent = text; msg.hidden = false; }
+
+  // Si en "Otro" escriben algo que ya existe, se lo recomendamos para marcarlo con un toque.
+  var ya = document.getElementById('ya'), yaTxt = document.getElementById('ya-txt'), yaOpts = document.getElementById('ya-opts'), tYa;
+  interes.addEventListener('input', function () { clearTimeout(tYa); tYa = setTimeout(sugerirExistente, 250); });
+  function sugerirExistente() {
+    var vistos = {}, ofs = [];
+    buscarServicios(interes.value, 8, true, true).forEach(function (it) {
+      if (vistos[it.o] || elegidos.indexOf(it.o) >= 0 || ofs.length >= 3) return;
+      vistos[it.o] = 1; ofs.push(it);
+    });
+    yaOpts.textContent = '';
+    if (!ofs.length) { ya.hidden = true; return; }
+    yaTxt.textContent = side.value === 'prestador' ? '¡Ese oficio ya está en Hazlo Ahora! Márcalo aquí:' : '¡Eso ya lo tenemos! Márcalo aquí:';
+    ofs.forEach(function (it) {
+      var b = el('button', 'opt');
+      b.type = 'button';
+      b.appendChild(el('span', null, '+ ' + it.o));
+      b.appendChild(el('small', null, it.s));
+      b.addEventListener('click', function () { marcarExistente(it.o); });
+      yaOpts.appendChild(b);
+    });
+    ya.hidden = false;
+  }
+  function marcarExistente(oficio) {
+    if (elegidos.indexOf(oficio) < 0) elegidos.push(oficio);
+    interes.value = '';
+    var i = elegidos.indexOf(OTRO);
+    if (i >= 0) elegidos.splice(i, 1);
+    var top = side.value === 'prestador' ? TOP_PRO : TOP_CLIENTE;
+    if (!top.some(function (t) { return t[0] === oficio; })) abrirTodas(true);
+    refrescar();
+    yaOpts.textContent = '';
+    yaTxt.textContent = '✓ Listo, marcamos ' + oficio + '.';
+    ya.hidden = false;
+  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
