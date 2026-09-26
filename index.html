@@ -135,7 +135,7 @@ h1 em{font-style:normal; color:var(--brand); display:block}
 @media(min-width:480px){.ask-row{grid-template-columns:1fr 1fr}}
 .ask-btn{width:100%; padding-block:15px; font-size:16px}
 .ask-note{font-size:12.5px; color:var(--muted); text-align:center}
-.p-lista{position:absolute; z-index:5; left:0; right:0; top:calc(100% + 6px); background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:6px; box-shadow:var(--shadow-lift); display:grid; gap:2px; margin:0; list-style:none}
+.p-lista{margin:8px 0 0; background:var(--card); border:1.5px solid var(--line); border-radius:16px; padding:6px; display:grid; gap:2px; list-style:none}
 .p-op{display:flex; align-items:center; gap:10px; padding:8px; border-radius:11px; cursor:pointer}
 .p-op b{display:block; font-size:14.5px; line-height:1.25}
 .p-op small{display:block; font-size:12.5px; color:var(--muted)}
@@ -952,7 +952,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       if (o[1]) chip.title = 'Exige título, licencia o documento';
       ofs.appendChild(chip);
       o[2].split('|').forEach(function (s) {
-        INDICE.push({ s: s, o: o[0], g: g[0], k: norm(s + ' ' + o[0] + ' ' + o[3]) , sn: norm(s) });
+        INDICE.push({ s: s, o: o[0], g: g[0], k: norm(s + ' ' + o[0] + ' ' + o[3]), sn: norm(s), on: norm(o[0] + ' ' + o[3]) });
       });
     });
     card.appendChild(h); card.appendChild(ofs);
@@ -972,7 +972,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   var t;
   buscar.addEventListener('input', function () { clearTimeout(t); t = setTimeout(mostrar, 120); });
 
-  function buscarServicios(texto, max) {
+  function buscarServicios(texto, max, estricto) {
     var q = norm(texto).trim();
     if (q.length < 3) return [];
     var palabras = q.split(/\s+/).filter(function (w) { return w.length >= 3 && ['del','las','los','una','con','para','que','por','mis','hay','esta','tiene'].indexOf(w) < 0; });
@@ -981,16 +981,17 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     INDICE.forEach(function (it) {
       var pts = 0, todas = true;
       palabras.forEach(function (w) {
-        var raiz = w.length > 4 ? w.slice(0, w.length - 1) : w;
+        var raiz = w.length > 4 ? w.slice(0, Math.max(4, w.length - 2)) : w;
         if (it.sn.indexOf(raiz) >= 0) pts += 3;
         else if (it.k.indexOf(raiz) >= 0) pts += 1;
         else todas = false;
+        if (it.on.indexOf(raiz) >= 0) pts += 2;
       });
-      if (it.sn.indexOf(q) >= 0) pts += 4;
+      if (palabras.length > 1 && it.sn.indexOf(q) >= 0) pts += 4;
       if (pts > 0) hits.push({ it: it, pts: pts + (todas ? 2 : 0), todas: todas });
     });
     // Si algo calza con todas las palabras, se muestran solo esos.
-    if (hits.some(function (x) { return x.todas; })) hits = hits.filter(function (x) { return x.todas; });
+    if (estricto || hits.some(function (x) { return x.todas; })) hits = hits.filter(function (x) { return x.todas; });
     hits.sort(function (a, b) { return b.pts - a.pts; });
     var vistos = {}, lista = [];
     hits.forEach(function (x) {
@@ -1529,8 +1530,9 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       }
       var envio = h('form', { class: 'd-send' }, [inp, h('button', { type: 'submit', class: 'btn btn-brand btn-sm' }, ['Enviar'])]);
       envio.addEventListener('submit', function (e) { e.preventDefault(); enviarMsg(inp.value); inp.value = ''; });
-      var rapidos = h('div', { class: 'd-chips' }, ['¿En cuánto llegas?', 'Mi número es +56 9 8765 4321'].map(function (t) {
-        return h('button', { type: 'button', class: 'd-chip', onclick: function () { enviarMsg(t); } }, [t]);
+      // El botón nunca muestra el número: solo prueba qué pasa si alguien intenta pasarlo.
+      var rapidos = h('div', { class: 'd-chips' }, [['¿En cuánto llegas?', '¿En cuánto llegas?'], ['Intentar pasarle mi número', 'Mi número es +56 9 8765 4321']].map(function (t) {
+        return h('button', { type: 'button', class: 'd-chip', onclick: function () { enviarMsg(t[1]); } }, [t[0]]);
       }));
       var nota = h('p', { class: 'd-note', hidden: true }, ['Como ' + nom + ' ya va en camino, cancelar ahora cuesta $2.000, y ese monto es para ' + nom + ' por su tiempo. Antes de que saliera, era gratis.']);
       var cancelar = h('button', { type: 'button', class: 'd-link', 'aria-expanded': 'false' }, ['¿Y si cancelo?']);
@@ -1696,7 +1698,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   });
   document.getElementById('p-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    var it = pSel || buscarServicios(pq.value, 1)[0];
+    var it = pSel || buscarServicios(pq.value, 1, true)[0];
     if (!it) {
       perr.textContent = '';
       if (norm(pq.value).trim().length < 3) perr.textContent = 'Escribe qué necesitas, por ejemplo «fuga de agua».';
