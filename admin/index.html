@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<!-- Seguridad: solo se puede cargar código de este sitio y de jsDelivr, y hablar solo con nuestra base. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://qimechlfblfmdvzspkmt.supabase.co; img-src 'self' data: https://qimechlfblfmdvzspkmt.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<!-- Contra clickjacking: si alguien mete el panel dentro de otra página (iframe), no se muestra. -->
+<style id="antiFrame">html{display:none}</style>
+<script>if (self === top) { document.getElementById('antiFrame').remove(); } else { top.location = self.location; }</script>
 <title>Hazlo Ahora · Panel</title>
 <link rel="icon" href="../favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +90,7 @@
   <button data-tab="alertas">Alertas de desvío</button>
   <button data-tab="reportes">Reportes <span class="n hidden" id="nReportes"></span></button>
   <button data-tab="cargos">Cargos</button>
-  <button data-tab="sugerencias">Sugerencias y contactos</button>
+  <button data-tab="sugerencias">Sugerencias y «Otro»</button>
   <button data-tab="ajustes">Ajustes</button>
 </nav>
 
@@ -102,12 +108,14 @@
   <section id="tab-ajustes" class="hidden"></section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
 <script>
 // ---------------------------------------------------------------- conexión
 const SUPABASE_URL = 'https://qimechlfblfmdvzspkmt.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_TEAlP8dlpwr-7H7rrq1ICQ_13KFdG9m'; // clave pública: lo que se ve lo decide la base (RLS + is_admin)
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// La sesión del panel vive solo en esta pestaña (sessionStorage): al cerrarla hay que volver a entrar,
+// y otras páginas de hazlochile.com no pueden leerla.
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { storage: window.sessionStorage, storageKey: 'hazlo-admin', persistSession: true } });
 
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -179,14 +187,14 @@ $('#btnEntrar').onclick = async () => {
   }
 };
 $('#pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#btnEntrar').click(); });
-$('#btnSalir').onclick = async () => { await db.auth.signOut(); location.reload(); };
+$('#btnSalir').onclick = async () => { await db.auth.signOut({ scope: 'local' }); location.reload(); };
 
 async function entrar() {
   // ¿Es admin? Si no, la base responde "Solo administrador".
   try {
     await rpc('admin_stats');
   } catch (e) {
-    await db.auth.signOut();
+    await db.auth.signOut({ scope: 'local' });
     $('#login').classList.remove('hidden');
     msg($('#loginMsg'), errorTexto(e), 'bad');
     return;
@@ -492,17 +500,49 @@ async function cargos(el) {
     ], rows, 'No hay cargos por cancelación.')}</div>`;
 }
 window.pagarCargo = async (id, via) => {
+  const txt = { hazlo: '¿Confirmas que el cliente pagó el cargo a Hazlo Ahora? Se abonará al saldo del prestador.', prestador: '¿Confirmas que el cliente le pagó el cargo directo al prestador?', condonado: '¿Condonar (perdonar) este cargo? El cliente no tendrá que pagarlo.' }[via];
+  if (!confirm(txt || '¿Confirmas?')) return;
   try { await rpc('registrar_pago_cargo', { p_request_id: id, p_via: via }); mostrar('cargos'); }
   catch (e) { msg($('#cMsg'), errorTexto(e), 'bad'); }
 };
 
 // ---------------------------------------------------------------- sugerencias y leads
+// Palabras que se repiten en lo escrito en "Otro" (sin acentos ni palabras de relleno).
+const RELLENO = new Set('de del la las el los un una unos unas y o a en con para por que se me mi mis al lo le es no si su sus tengo quiero necesito hay hacer cambiar arreglar poner otro otra muy mas pero como'.split(' '));
+function palabrasRepetidas(filas) {
+  const cuenta = new Map();
+  for (const f of filas) {
+    const vistas = new Set();
+    for (let w of (f.texto || '').toLowerCase().replace(/ñ/g, '~').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/~/g, 'ñ').split(/[^a-z0-9ñ]+/)) {
+      if (w.length < 3 || RELLENO.has(w)) continue;
+      if (w.length > 4 && w.endsWith('s')) w = w.slice(0, -1); // cañerías → cañeria
+      if (vistas.has(w)) continue;
+      vistas.add(w);
+      const c = cuenta.get(w) || { n: 0, oficios: new Set() };
+      c.n++; c.oficios.add(f.oficio);
+      cuenta.set(w, c);
+    }
+  }
+  return [...cuenta.entries()].map(([w, c]) => ({ w, n: c.n, oficios: [...c.oficios].join(', ') })).sort((a, b) => b.n - a.n).slice(0, 20);
+}
+
 async function sugerencias(el) {
-  const [sug, leads] = await Promise.all([
+  const [sug, leads, otros] = await Promise.all([
     sel('service_suggestions', (q) => q.order('created_at', { ascending: false }).limit(200)),
     sel('leads', (q) => q.order('created_at', { ascending: false }).limit(200)),
+    rpc('admin_otros', { p_dias: 90 }).catch(() => []),
   ]);
-  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Servicios que la gente pidió agregar</h3><div id="sgMsg"></div>
+  const top = palabrasRepetidas(otros || []);
+  const porPregunta = new Map();
+  for (const o of otros || []) { const k = o.oficio + ' · ' + o.pregunta; porPregunta.set(k, (porPregunta.get(k) || 0) + 1); }
+  const preguntas = [...porPregunta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15);
+  el.innerHTML = `<div class="card"><h3 style="margin-top:0">Lo que escriben en «Otro» (últimos 90 días)</h3>
+    <p class="muted">Cuando ninguna opción calza, el cliente elige «Otro» y escribe lo suyo. Si algo se repite, conviene agregarlo como opción.</p>
+    ${otros && otros.length ? `<div class="grid2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      <div><b>Palabras que más se repiten</b>${tabla([['Palabra', (t) => `<b>${esc(t.w)}</b>`], ['Veces', (t) => esc(String(t.n))], ['Oficios', (t) => esc(t.oficios)]], top)}</div>
+      <div><b>Preguntas donde más eligen «Otro»</b>${tabla([['Oficio · pregunta', (p) => esc(p[0])], ['Veces', (p) => esc(String(p[1]))]], preguntas)}</div></div>` : ''}
+    ${tabla([['Cuándo', (o) => fecha(o.created_at)], ['Oficio', (o) => esc(o.oficio)], ['Pregunta', (o) => esc(o.pregunta)], ['Lo que escribió', (o) => `<b>${esc(o.texto)}</b>`], ['Solicitud', (o) => pill(o.status)]], otros || [], 'Nadie ha usado «Otro» todavía.')}</div>
+    <div class="card"><h3 style="margin-top:0">Servicios que la gente pidió agregar</h3><div id="sgMsg"></div>
     ${tabla([['Cuándo', (s) => fecha(s.created_at)], ['Quién', (s) => `${nombre(s.user_id)} <span class="pill">${esc(s.side)}</span>`], ['Qué pidió', (s) => `<b>${esc(s.text)}</b>`], ['Comuna', (s) => esc(s.comuna || '—')], ['Estado', (s) => pill(s.status)],
       ['', (s) => s.status === 'nueva' ? `<button class="btn ghost sm" onclick="sugerenciaVista('${s.id}')">Marcar como vista</button>` : '']], sug, 'Nadie ha sugerido servicios todavía.')}</div>
     <div class="card"><h3 style="margin-top:0">Contactos desde hazlochile.com (lista de espera)</h3>
@@ -553,6 +593,7 @@ async function ajustes(el) {
       <div class="row" style="margin-top:10px"><button class="btn" id="aCancel">Guardar cancelaciones</button></div></div>
   </div>`;
   const guardar = async (key, value) => {
+    if (!confirm('¿Guardar este cambio? Aplica de inmediato para todos los usuarios de la app.')) return;
     try { await rpc('admin_set_setting', { p_key: key, p_value: value }); msg($('#aMsg'), 'Guardado. Aplica de inmediato en la app.', 'ok'); }
     catch (e) { msg($('#aMsg'), errorTexto(e), 'bad'); }
   };
