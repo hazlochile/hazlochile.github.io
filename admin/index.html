@@ -43,6 +43,8 @@
   .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; background: #F1ECE6; color: var(--muted); }
   .pill.ok { background: #E4F5EA; color: var(--ok); } .pill.warn { background: #FFF3DD; color: var(--warn); } .pill.bad { background: #FBE4E1; color: var(--bad); } .pill.brand { background: var(--soft); color: var(--brand-ink); }
   .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .meta { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+  .meta b.si { color: var(--ok); } .meta b.no { color: var(--bad); } .meta b.na { color: var(--muted); }
   input, select, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); }
   input[type=number] { width: 120px; }
   button.btn { font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 10px; border: 0; background: var(--brand); color: #fff; cursor: pointer; }
@@ -53,6 +55,7 @@
   .msg.bad { background: #FBE4E1; color: var(--bad); } .msg.ok { background: #E4F5EA; color: var(--ok); }
   #login { max-width: 380px; margin: 60px auto; }
   #login input { width: 100%; margin: 6px 0 12px; }
+  #dosPasos { max-width: 420px; margin: 60px auto; }
   .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
   .switch { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); gap: 10px; }
   .switch:last-child { border-bottom: 0; }
@@ -81,8 +84,26 @@
   <div id="loginMsg"></div>
 </section>
 
+<section id="dosPasos" class="card hidden">
+  <h2 style="margin-top:0">Verificación en dos pasos</h2>
+  <div id="dpAlta" class="hidden">
+    <p class="muted">Se hace una sola vez. Desde ahora, además de la contraseña, el panel te va a pedir un código de tu teléfono.</p>
+    <p><b>1.</b> Instala en tu teléfono <b>Google Authenticator</b> o <b>Microsoft Authenticator</b> (gratis).</p>
+    <p><b>2.</b> En esa app toca <b>+</b> → <b>Escanear código QR</b> y apunta a este código:</p>
+    <div style="text-align:center"><img id="dpQr" alt="Código QR para la app de autenticación" width="200" height="200" style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px"></div>
+    <p class="muted">¿No puedes escanear? Elige "Ingresar clave de configuración" y escribe esta clave: <code id="dpSecreto" style="word-break:break-all;user-select:all"></code></p>
+    <p><b>3.</b> Escribe el código de 6 números que aparece en la app junto a "Hazlo Ahora":</p>
+  </div>
+  <p id="dpPide" class="hidden">Abre tu app de autenticación y escribe el código de 6 números que aparece junto a "Hazlo Ahora".</p>
+  <input id="dpCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="123456" style="width:100%;font-size:22px;letter-spacing:6px;text-align:center;margin:6px 0 12px">
+  <button class="btn" id="btnCodigo" style="width:100%">Verificar</button>
+  <p style="text-align:center;margin:10px 0 0"><button class="btn ghost sm" id="btnDpSalir">Cancelar y salir</button></p>
+  <div id="dpMsg"></div>
+</section>
+
 <nav id="nav" class="hidden">
   <button data-tab="resumen" class="on">Resumen</button>
+  <button data-tab="piloto">Piloto</button>
   <button data-tab="solicitudes">Solicitudes</button>
   <button data-tab="personas">Personas</button>
   <button data-tab="verificaciones">Verificaciones <span class="n hidden" id="nVerif"></span></button>
@@ -97,6 +118,7 @@
 <main id="app" class="hidden">
   <div id="globalMsg"></div>
   <section id="tab-resumen"></section>
+  <section id="tab-piloto" class="hidden"></section>
   <section id="tab-solicitudes" class="hidden"></section>
   <section id="tab-personas" class="hidden"></section>
   <section id="tab-verificaciones" class="hidden"></section>
@@ -141,6 +163,9 @@ function errorTexto(e) {
   if (/Solo administrador|permission denied|row-level/i.test(m)) return 'Tu cuenta no tiene permiso de administrador. Cierra sesión en la app y vuelve a entrar para que se actualice, o revisa hazlo_fix_31.sql.';
   if (/Invalid login credentials/i.test(m)) return 'Correo o contraseña incorrectos.';
   if (/Failed to fetch|NetworkError/i.test(m)) return 'Sin conexión con el servidor.';
+  if (/Invalid TOTP|invalid.*code|mfa_verification_failed/i.test(m)) return 'Código incorrecto o vencido. Espera a que la app muestre uno nuevo y vuelve a intentar.';
+  if (/mfa.*(disabled|not enabled)|enroll is disabled|verification is disabled/i.test(m)) return 'La verificación en dos pasos está apagada en Supabase (Authentication → Multi-Factor → TOTP). Actívala y vuelve a entrar.';
+  if (/too many|rate limit/i.test(m)) return 'Demasiados intentos. Espera unos minutos y vuelve a intentar.';
   return m;
 }
 async function rpc(name, args) {
@@ -190,6 +215,24 @@ $('#pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#btnEn
 $('#btnSalir').onclick = async () => { await db.auth.signOut({ scope: 'local' }); location.reload(); };
 
 async function entrar() {
+  // Aviso rápido para cuentas que no son admin (la seguridad de verdad la pone la base con is_admin).
+  if (sesion?.user?.app_metadata?.role !== 'admin') {
+    await db.auth.signOut({ scope: 'local' });
+    $('#dosPasos').classList.add('hidden');
+    $('#login').classList.remove('hidden');
+    msg($('#loginMsg'), 'Tu cuenta no tiene permiso de administrador.', 'bad');
+    return;
+  }
+  // Verificación en dos pasos (hazlo_fix_45.sql): sin el código del teléfono no se entra.
+  try {
+    if (!(await segundoPaso())) return;
+  } catch (e) {
+    await db.auth.signOut({ scope: 'local' });
+    $('#dosPasos').classList.add('hidden');
+    $('#login').classList.remove('hidden');
+    msg($('#loginMsg'), errorTexto(e), 'bad');
+    return;
+  }
   // ¿Es admin? Si no, la base responde "Solo administrador".
   try {
     await rpc('admin_stats');
@@ -211,12 +254,68 @@ async function entrar() {
   } catch (e) { /* no es grave */ }
   mostrar('resumen');
 }
+// ---------------------------------------------------------------- verificación en dos pasos
+// Devuelve true si la sesión ya pasó el segundo paso (aal2). Si no, muestra la pantalla del código
+// (y la primera vez, el QR para registrar la app de autenticación) y devuelve false.
+let dpFactor = null;
+async function segundoPaso() {
+  const { data: nivel, error } = await db.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (error) throw error;
+  if (nivel.currentLevel === 'aal2') { $('#dosPasos').classList.add('hidden'); return true; }
+  const { data: f, error: e2 } = await db.auth.mfa.listFactors();
+  if (e2) throw e2;
+  const listo = (f.totp || []).find((x) => x.status === 'verified');
+  $('#login').classList.add('hidden');
+  $('#dpMsg').innerHTML = '';
+  $('#dpCodigo').value = '';
+  if (listo) {
+    dpFactor = listo.id;
+    $('#dpAlta').classList.add('hidden');
+    $('#dpPide').classList.remove('hidden');
+  } else {
+    // Registros a medio hacer (se cerró la página antes de verificar): se borran y se parte de nuevo.
+    for (const x of (f.all || []).filter((x) => x.status !== 'verified')) await db.auth.mfa.unenroll({ factorId: x.id });
+    const { data: alta, error: e3 } = await db.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Panel Hazlo', issuer: 'Hazlo Ahora' });
+    if (e3) throw e3;
+    dpFactor = alta.id;
+    let qr = alta.totp.qr_code || '';
+    const i = qr.indexOf('<svg');
+    if (qr.startsWith('data:image/svg+xml') && i > 0) qr = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(qr.slice(i));
+    $('#dpQr').src = qr;
+    $('#dpSecreto').textContent = alta.totp.secret;
+    $('#dpPide').classList.add('hidden');
+    $('#dpAlta').classList.remove('hidden');
+  }
+  $('#dosPasos').classList.remove('hidden');
+  $('#dpCodigo').focus();
+  return false;
+}
+$('#btnCodigo').onclick = async () => {
+  const code = $('#dpCodigo').value.replace(/\D/g, '');
+  if (code.length !== 6) return msg($('#dpMsg'), 'Escribe los 6 números que muestra la app.', 'bad');
+  $('#btnCodigo').disabled = true;
+  msg($('#dpMsg'), '');
+  try {
+    const { error } = await db.auth.mfa.challengeAndVerify({ factorId: dpFactor, code });
+    if (error) throw error;
+    sesion = (await db.auth.getSession()).data.session;
+    $('#dosPasos').classList.add('hidden');
+    await entrar();
+  } catch (e) {
+    msg($('#dpMsg'), errorTexto(e), 'bad');
+  } finally {
+    $('#btnCodigo').disabled = false;
+  }
+};
+$('#dpCodigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#btnCodigo').click(); });
+$('#btnDpSalir').onclick = async () => { await db.auth.signOut({ scope: 'local' }); location.reload(); };
+
 const nombre = (id) => (id ? esc(perfiles.get(id) || corto(id)) : '—');
 const cat = (id) => esc(catNombre.get(id) || id || '—');
 
 // ---------------------------------------------------------------- pestañas
 document.querySelectorAll('#nav button').forEach((b) => (b.onclick = () => mostrar(b.dataset.tab)));
-const vistas = { resumen, solicitudes, personas, verificaciones, saldos, alertas, reportes, cargos, sugerencias, ajustes };
+const vistas = { resumen, piloto, solicitudes, personas, verificaciones, saldos, alertas, reportes, cargos, sugerencias, ajustes };
 async function mostrar(tab) {
   document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === tab));
   document.querySelectorAll('main section').forEach((s) => s.classList.toggle('hidden', s.id !== 'tab-' + tab));
@@ -227,6 +326,59 @@ async function mostrar(tab) {
   } catch (e) {
     el.innerHTML = `<div class="msg bad">${esc(errorTexto(e))}</div>`;
   }
+}
+
+// ---------------------------------------------------------------- piloto (producto/plan-piloto.md)
+let pilotoDesde = null;
+const pct = (a, b) => (b ? Math.round((100 * a) / b) : 0);
+const decimal = (n) => (n == null ? '—' : String(n).replace('.', ','));
+const minutos = (m) => (m == null ? '—' : m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${m % 60} min`);
+async function piloto(el) {
+  if (!pilotoDesde) { const d = new Date(Date.now() - 30 * 864e5); pilotoDesde = d.toISOString().slice(0, 10); }
+  const r = await rpc('admin_piloto', { p_desde: pilotoDesde });
+  const s = r.solicitudes || {};
+  const pt = r.prestadores_total || {};
+  const cerradas = (s.total || 0) - (s.abiertas || 0);
+  const pr = r.modo_prueba || {};
+  // Metas del plan del piloto: se muestran con ✓ / ✗ (— si todavía no hay datos).
+  const meta = (texto, valor, ok) => `<div class="meta"><b class="${valor == null ? 'na' : ok ? 'si' : 'no'}">${valor == null ? '—' : ok ? '✓' : '✗'}</b><span style="flex:1">${texto}</span><b>${valor == null ? 'sin datos' : esc(String(valor))}</b></div>`;
+  el.innerHTML = `
+    ${pr.activo ? '<div class="msg">Modo prueba activo: "reciben hoy" cuenta prestadores sin identidad ni certificado. "Listos" cuenta solo a los que tienen todo verificado de verdad.</div>' : ''}
+    <div class="card"><div class="row"><label style="margin:0">Desde <input id="pDesde" type="date" value="${esc(pilotoDesde)}" style="width:auto;display:inline-block;margin-left:6px"></label>
+      <button class="btn sm" id="pActualizar">Actualizar</button><span class="muted">Solicitudes publicadas desde esa fecha.</span></div></div>
+    <div class="stats" style="margin-top:12px">
+      <div class="stat"><b>${pt.listos ?? 0}</b><span>Prestadores listos (${pt.inscritos ?? 0} inscritos · ${pt.reciben_hoy ?? 0} reciben hoy)</span></div>
+      <div class="stat"><b>${s.total ?? 0}</b><span>Solicitudes (${s.al_tiro ?? 0} al tiro · ${s.agendadas ?? 0} agendadas)</span></div>
+      <div class="stat"><b>${pct(s.con_cotizacion || 0, s.total || 0)} %</b><span>Con al menos 1 cotización</span></div>
+      <div class="stat"><b>${minutos(s.min_primera_cot)}</b><span>Hasta la 1ª cotización (mediana, al tiro)</span></div>
+      <div class="stat"><b>${pct(s.terminadas || 0, cerradas)} %</b><span>Terminadas (de las ya cerradas)</span></div>
+      <div class="stat"><b>${s.vencidas ?? 0}</b><span>Vencidas sin que nadie la tomara</span></div>
+      <div class="stat"><b>${decimal(s.estrellas)}</b><span>Calificación promedio</span></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card"><h3 style="margin-top:0">Metas del piloto</h3>
+        ${meta('12 o más prestadores listos', pt.listos ?? 0, (pt.listos ?? 0) >= 12)}
+        ${meta('7 de cada 10 solicitudes con al menos 1 cotización', s.total ? pct(s.con_cotizacion, s.total) + ' %' : null, pct(s.con_cotizacion, s.total) >= 70)}
+        ${meta('Primera cotización en menos de 30 minutos', s.min_primera_cot == null ? null : minutos(s.min_primera_cot), (s.min_primera_cot ?? 999) < 30)}
+        ${meta('5 de cada 10 terminan en trabajo hecho', cerradas ? pct(s.terminadas, cerradas) + ' %' : null, pct(s.terminadas, cerradas) >= 50)}
+        ${meta('Calificación 4,5 o más', s.estrellas == null ? null : decimal(s.estrellas), (s.estrellas ?? 0) >= 4.5)}
+      </div>
+      <div class="card"><h3 style="margin-top:0">Abiertas sin ninguna cotización</h3>
+        <p class="muted">Solicitudes esperando ahora mismo. Si alguna lleva mucho, busca un prestador de ese oficio.</p>
+        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Comuna', (x) => esc(x.comuna || '—')], ['Esperando', (x) => `<b>${minutos(x.esperando_min)}</b>`], ['Tipo', (x) => (x.scheduled_at ? 'Agendada ' + fecha(x.scheduled_at) : 'Al tiro')]], r.abiertas_sin_cotizacion || [], 'Ninguna: todas tienen cotización.')}
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Prestadores por oficio</h3>
+      <p class="muted">Listos = cuenta activa + cédula verificada + certificado de antecedentes vigente + oficio aprobado (portafolio o documento).</p>
+      ${tabla([['Oficio', (x) => `<b>${esc(x.oficio)}</b><br><span class="muted">${esc(x.grupo)}</span>`], ['Inscritos', (x) => x.inscritos], ['Cédula', (x) => x.identidad], ['Certificado', (x) => x.certificado], ['Oficio aprobado', (x) => x.oficio_ok], ['Listos', (x) => `<b>${x.listos}</b>`], ['Reciben hoy', (x) => x.reciben_hoy]], r.prestadores || [], 'Todavía no hay prestadores inscritos.')}
+    </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por oficio</h3>
+        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['1ª cotización', (x) => minutos(x.min_primera_cot)], ['Terminadas', (x) => x.terminadas], ['Vencidas', (x) => x.vencidas], ['★', (x) => decimal(x.estrellas)]], r.por_oficio || [], 'Sin solicitudes en este período.')}
+    </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por comuna</h3>
+        ${tabla([['Comuna', (x) => esc(x.comuna)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['Terminadas', (x) => x.terminadas]], r.por_comuna || [], 'Sin solicitudes en este período.')}
+    </div>`;
+  $('#pActualizar').onclick = () => { const v = $('#pDesde').value; if (v) pilotoDesde = v; mostrar('piloto'); };
 }
 
 // ---------------------------------------------------------------- resumen
