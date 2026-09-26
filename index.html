@@ -6,7 +6,7 @@
 <meta name="description" content="Hazlo Ahora: más de 360 servicios a domicilio en Santiago. Gásfiter, electricista, belleza, salud, niñeras, mecánica, eventos y clases, con profesionales verificados y certificado de antecedentes. Al tiro o agendado.">
 <meta name="theme-color" content="#FF6B2C">
 <meta property="og:title" content="Hazlo Ahora · Cualquier servicio a domicilio">
-<meta property="og:description" content="Escribe lo que te pasa, te llegan precios de profesionales verificados cerca de ti y eliges. Más de 360 servicios. Partimos en La Florida.">
+<meta property="og:description" content="Escribe lo que te pasa, te llegan precios de profesionales verificados cerca de ti y eliges. Más de 360 servicios. Partimos en el Gran Santiago.">
 <meta property="og:url" content="https://hazlochile.com/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CL">
@@ -485,7 +485,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   <section class="hero">
     <div>
-      <p class="eyebrow"><span class="beat"></span> Partimos en La Florida, Santiago</p>
+      <p class="eyebrow"><span class="beat"></span> Partimos en el Gran Santiago</p>
       <h1>Cualquier servicio a domicilio.<em>Al tiro.</em></h1>
       <p class="lead">Escribe lo que necesitas, te llegan precios de profesionales verificados cerca de ti y eliges. Más de 360 servicios, <strong>ahora mismo o agendados</strong>.</p>
 
@@ -503,7 +503,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             <label for="p-comuna">¿Dónde?</label>
             <div class="ask-in">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-              <input id="p-comuna" type="text" value="La Florida" maxlength="40" autocomplete="address-level2">
+              <input id="p-comuna" type="text" placeholder="Tu comuna" maxlength="40" autocomplete="address-level2">
             </div>
           </div>
           <div class="ask-f">
@@ -699,7 +699,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       </div>
     </div>
     <div class="wanted">
-      <p>Buscamos gásfiter, electricistas y cerrajeros de La Florida para el lanzamiento.<span>Si trabajas en otro oficio o en otra comuna, anótate igual: vamos sumando por etapas.</span></p>
+      <p>Buscamos gásfiter, electricistas y cerrajeros del Gran Santiago para el lanzamiento.<span>Si trabajas en otro oficio, anótate igual: vamos sumando por etapas.</span></p>
       <a class="btn btn-brand" href="#registro" data-side="prestador">Quiero sumarme</a>
     </div>
   </section>
@@ -707,7 +707,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   <section class="signup" id="registro">
     <p class="label">Lista de espera</p>
     <h2>Anótate y te avisamos</h2>
-    <p class="sub">Partimos en La Florida y seguimos comuna por comuna por Santiago. Déjanos tu contacto y te escribimos cuando llegue a la tuya. Los primeros prueban antes que nadie.</p>
+    <p class="sub">Partimos en el Gran Santiago. Déjanos tu contacto y te escribimos apenas puedas pedir en tu comuna. Los primeros prueban antes que nadie.</p>
 
     <div class="tabs" role="tablist" aria-label="Tipo de registro">
       <button class="tab" type="button" id="tab-cliente" role="tab" aria-selected="true" data-side="cliente">Necesito un servicio</button>
@@ -720,7 +720,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
       <div class="row2">
         <div class="field"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" maxlength="80" placeholder="Tu nombre" autocomplete="given-name"></div>
-        <div class="field"><label for="comuna">Comuna</label><input id="comuna" name="comuna" maxlength="60" placeholder="La Florida" autocomplete="address-level2"></div>
+        <div class="field"><label for="comuna">Comuna</label><input id="comuna" name="comuna" maxlength="60" placeholder="Tu comuna" autocomplete="address-level2"></div>
       </div>
 
       <div class="field"><label for="contacto">WhatsApp o correo</label><input id="contacto" name="contacto" maxlength="120" placeholder="+56 9 1234 5678 o tu@correo.cl" autocomplete="tel"></div>
@@ -762,7 +762,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <div class="faq">
       <details>
         <summary>¿Cuándo puedo usar Hazlo Ahora?</summary>
-        <p>Estamos terminando las pruebas con usuarios reales. Partimos con un piloto en La Florida, con gásfiter, electricistas y cerrajeros, y después sumamos más oficios y comunas de Santiago. Si te anotas, te avisamos antes que a nadie.</p>
+        <p>Estamos terminando las pruebas con usuarios reales. Partimos en el Gran Santiago con gásfiter, electricistas y cerrajeros, y después vamos sumando más oficios y el resto de Chile. Si te anotas, te avisamos antes que a nadie.</p>
       </details>
       <details>
         <summary>¿Cuánto cuesta para el cliente?</summary>
@@ -1308,7 +1308,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   var D, ultimoPaso = null;
   function nuevo() {
-    D = { paso: 'buscar', q: '', it: null, texto: '', foto: false, cuando: 'ahora', hora: HORAS[1], comuna: 'La Florida',
+    D = { paso: 'buscar', q: '', it: null, texto: '', foto: false, cuando: 'ahora', hora: HORAS[1], comuna: '',
       quotes: [], vis: 0, perfil: -1, el: null, eta: 12, resp: 0, tip: 0, estrellas: 0, faltaEstrellas: false };
   }
   function reiniciar() { parar(); nuevo(); ultimoPaso = null; render(); }
@@ -1461,7 +1461,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
               onclick: function () { D.hora = x; render(); } }, [x]);
           })) : null,
           h('div', { class: 'd-lock' }, [h('span', { 'aria-hidden': 'true' }, ['🔒']),
-            h('span', null, [h('b', null, ['Tu dirección en ' + D.comuna + '. ']), 'Los profesionales ven solo la zona aproximada hasta que elijas a uno.'])])
+            h('span', null, [h('b', null, [(D.comuna ? 'Tu dirección en ' + D.comuna : 'Tu dirección exacta') + '. ']), 'Los profesionales ven solo la zona aproximada hasta que elijas a uno.'])])
         ],
         pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () { prepararCotizaciones(); ir('cotizando'); } }, ['Pedir cotizaciones'])
       };
@@ -1471,7 +1471,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       var it = D.it;
       var estado = D.vis < D.quotes.length
         ? h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }),
-            h('span', null, ['Avisamos a 7 profesionales de ' + it.o + ' cerca de ti en ' + D.comuna + '…'])])
+            h('span', null, ['Avisamos a 7 profesionales de ' + it.o + ' cerca de ti' + (D.comuna ? ' en ' + D.comuna : '') + '…'])])
         : h('p', { class: 'd-p' }, ['Llegaron 3 cotizaciones. Mira sus perfiles y elige la que más te guste.']);
       return {
         titulo: 'Cotizaciones', atras: function () { ir('detalle'); },
@@ -1645,9 +1645,9 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('button', { type: 'button', class: 'd-link', style: 'justify-self:center', onclick: reiniciar }, ['Probar otra vez'])
         ],
         pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () {
-          if (!form.comuna.value.trim()) form.comuna.value = D.comuna;
+          if (D.comuna && !form.comuna.value.trim()) form.comuna.value = D.comuna;
           elegirOficio(D.it.o);
-        } }, ['Avísame cuando llegue a ' + D.comuna])
+        } }, [D.comuna ? 'Avísame cuando llegue a ' + D.comuna : 'Avísame cuando esté disponible'])
       };
     }
   };
@@ -1712,7 +1712,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     pCerrar();
     parar(); nuevo();
     D.it = it; D.texto = textoInicial(it); D.cuando = pCuando;
-    D.comuna = pcom.value.trim().slice(0, 40) || 'La Florida';
+    D.comuna = pcom.value.trim().slice(0, 40);
     prepararCotizaciones();
     ir('cotizando');
     var r = demoEl.getBoundingClientRect();
