@@ -340,6 +340,9 @@ async function piloto(el) {
   const pt = r.prestadores_total || {};
   const cerradas = (s.total || 0) - (s.abiertas || 0);
   const pr = r.modo_prueba || {};
+  const ci = r.cierre || {};
+  const RESP = { con_hazlo_fuera: 'Sí, con un profesional que conoció aquí', otro_lado: 'Sí, por otro lado', sin_profesionales: 'No, nadie le cotizó', precio: 'No, no le convencieron los precios', ya_no: 'Ya no lo necesita', omitido: 'Omitió la pregunta' };
+  const cierreFilas = Object.entries(ci.respuestas || {}).map(([clave, n]) => ({ clave, n, texto: RESP[clave] || clave })).sort((a, b) => b.n - a.n);
   // Metas del plan del piloto: se muestran con ✓ / ✗ (— si todavía no hay datos).
   const meta = (texto, valor, ok) => `<div class="meta"><b class="${valor == null ? 'na' : ok ? 'si' : 'no'}">${valor == null ? '—' : ok ? '✓' : '✗'}</b><span style="flex:1">${texto}</span><b>${valor == null ? 'sin datos' : esc(String(valor))}</b></div>`;
   el.innerHTML = `
@@ -368,12 +371,16 @@ async function piloto(el) {
         ${tabla([['Oficio', (x) => esc(x.oficio)], ['Comuna', (x) => esc(x.comuna || '—')], ['Esperando', (x) => `<b>${minutos(x.esperando_min)}</b>`], ['Tipo', (x) => (x.scheduled_at ? 'Agendada ' + fecha(x.scheduled_at) : 'Al tiro')]], r.abiertas_sin_cotizacion || [], 'Ninguna: todas tienen cotización.')}
       </div>
     </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">¿Cómo terminaron las canceladas?</h3>
+      <p class="muted">Lo que responde el cliente cuando cancela su solicitud o se le cierra sola ("¿Pudiste resolverlo?"). Los profesionales no ven estas respuestas. Canceladas: <b>${ci.canceladas ?? 0}</b> · sin responder todavía: <b>${ci.sin_responder ?? 0}</b>.</p>
+      ${tabla([['Respuesta', (x) => x.clave === 'con_hazlo_fuera' ? `${esc(x.texto)} <span class="pill warn">se fue por fuera</span>` : esc(x.texto)], ['Cuántas', (x) => `<b>${x.n}</b>`], ['De las canceladas', (x) => `${pct(x.n, ci.canceladas || 0)} %`]], cierreFilas, 'Todavía nadie responde.')}
+    </div>
     <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Prestadores por oficio</h3>
       <p class="muted">Listos = cuenta activa + cédula verificada + certificado de antecedentes vigente + oficio aprobado (portafolio o documento).</p>
       ${tabla([['Oficio', (x) => `<b>${esc(x.oficio)}</b><br><span class="muted">${esc(x.grupo)}</span>`], ['Inscritos', (x) => x.inscritos], ['Cédula', (x) => x.identidad], ['Certificado', (x) => x.certificado], ['Oficio aprobado', (x) => x.oficio_ok], ['Listos', (x) => `<b>${x.listos}</b>`], ['Reciben hoy', (x) => x.reciben_hoy]], r.prestadores || [], 'Todavía no hay prestadores inscritos.')}
     </div>
     <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por oficio</h3>
-        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['1ª cotización', (x) => minutos(x.min_primera_cot)], ['Terminadas', (x) => x.terminadas], ['Vencidas', (x) => x.vencidas], ['★', (x) => decimal(x.estrellas)]], r.por_oficio || [], 'Sin solicitudes en este período.')}
+        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['1ª cotización', (x) => minutos(x.min_primera_cot)], ['Terminadas', (x) => x.terminadas], ['Vencidas', (x) => x.vencidas], ['Nadie cotizó (dice el cliente)', (x) => x.sin_profesionales ?? 0], ['★', (x) => decimal(x.estrellas)]], r.por_oficio || [], 'Sin solicitudes en este período.')}
     </div>
     <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por comuna</h3>
         ${tabla([['Comuna', (x) => esc(x.comuna)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['Terminadas', (x) => x.terminadas]], r.por_comuna || [], 'Sin solicitudes en este período.')}
