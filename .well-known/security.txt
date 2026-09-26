@@ -1,0 +1,5 @@
+# Hazlo Ahora — política de divulgación responsable
+Contact: mailto:soporte@hazlochile.com
+Expires: 2027-09-23T12:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://hazlochile.com/.well-known/security.txt
