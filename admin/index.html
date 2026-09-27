@@ -64,6 +64,15 @@
   details summary { cursor: pointer; color: var(--brand-ink); font-weight: 600; font-size: 12px; }
   .chat { max-height: 320px; overflow: auto; background: #FBF8F4; border-radius: 10px; padding: 8px; font-size: 12px; }
   .chat div { padding: 4px 0; border-bottom: 1px dashed var(--line); }
+  .filtros { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .filtros select, .filtros input { padding: 7px 10px; }
+  .filtros input[type=search] { flex: 1; min-width: 180px; }
+  .acc { display: inline-flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+  .acc a { font-size: 11px; font-weight: 700; text-decoration: none; padding: 2px 8px; border-radius: 999px; background: #E4F5EA; color: var(--ok); }
+  .acc a.mail { background: var(--soft); color: var(--brand-ink); }
+  td select.estado { padding: 4px 6px; font-size: 12px; }
+  .top { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+  .top:last-child { border-bottom: 0; }
   @media (max-width: 640px) { main, header, nav { padding-left: 12px; padding-right: 12px; } }
 </style>
 </head>
@@ -104,6 +113,7 @@
 <nav id="nav" class="hidden">
   <button data-tab="resumen" class="on">Resumen</button>
   <button data-tab="piloto">Piloto</button>
+  <button data-tab="lista">Lista de espera <span class="n hidden" id="nLista"></span></button>
   <button data-tab="solicitudes">Solicitudes</button>
   <button data-tab="personas">Personas</button>
   <button data-tab="verificaciones">Verificaciones <span class="n hidden" id="nVerif"></span></button>
@@ -119,6 +129,7 @@
   <div id="globalMsg"></div>
   <section id="tab-resumen"></section>
   <section id="tab-piloto" class="hidden"></section>
+  <section id="tab-lista" class="hidden"></section>
   <section id="tab-solicitudes" class="hidden"></section>
   <section id="tab-personas" class="hidden"></section>
   <section id="tab-verificaciones" class="hidden"></section>
@@ -315,7 +326,7 @@ const cat = (id) => esc(catNombre.get(id) || id || '—');
 
 // ---------------------------------------------------------------- pestañas
 document.querySelectorAll('#nav button').forEach((b) => (b.onclick = () => mostrar(b.dataset.tab)));
-const vistas = { resumen, piloto, solicitudes, personas, verificaciones, saldos, alertas, reportes, cargos, sugerencias, ajustes };
+const vistas = { resumen, piloto, lista, solicitudes, personas, verificaciones, saldos, alertas, reportes, cargos, sugerencias, ajustes };
 async function mostrar(tab) {
   document.querySelectorAll('#nav button').forEach((b) => b.classList.toggle('on', b.dataset.tab === tab));
   document.querySelectorAll('main section').forEach((s) => s.classList.toggle('hidden', s.id !== 'tab-' + tab));
@@ -388,11 +399,155 @@ async function piloto(el) {
   $('#pActualizar').onclick = () => { const v = $('#pDesde').value; if (v) pilotoDesde = v; mostrar('piloto'); };
 }
 
+// ---------------------------------------------------------------- lista de espera (hazlochile.com, hazlo_fix_47)
+// Todo lo de la gente que se anota en la web, en un solo lugar: quiénes son, qué piden, de dónde llegan,
+// a quién ya le escribiste, notas, y descarga para Excel. Se lee con admin_leads (la tabla está cerrada).
+let listaDatos = [];
+const listaFiltro = { lado: '', estado: '', comuna: '', q: '' };
+const LADO = { cliente: 'Cliente', prestador: 'Profesional' };
+const FUENTE = { instagram: 'Instagram', tiktok: 'TikTok', flyer: 'Flyer o QR', correo: 'Correo de bienvenida', directo: 'Directo (escribió la dirección)' };
+const ESTADO_LEAD = [['nuevo', 'Nuevo'], ['contactado', 'Contactado'], ['convertido', 'Ya se inscribió'], ['descartado', 'Descartado']];
+const normCom = (c) => String(c || '').trim().toLowerCase().replace(/\s+/g, ' ').replace(/(^|\s)\S/g, (x) => x.toUpperCase());
+const esCorreo = (c) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c || '').trim());
+function intereses(t) { t = String(t || ''); const i = t.indexOf('Otro:'); return (i >= 0 ? t.slice(0, i) : t).split(',').map((x) => x.trim()).filter(Boolean); }
+function otroDe(t) { t = String(t || ''); const i = t.indexOf('Otro:'); return i >= 0 ? t.slice(i + 5).trim() : ''; }
+function contar(xs) { const m = new Map(); xs.forEach((k) => m.set(k, (m.get(k) || 0) + 1)); return [...m.entries()].sort((a, b) => b[1] - a[1]); }
+function insigniaLista(d) { const n = d.filter((l) => l.status === 'nuevo').length; $('#nLista').textContent = n; $('#nLista').classList.toggle('hidden', !n); }
+function waLink(l) {
+  if (esCorreo(l.contact)) return '';
+  let d = String(l.contact || '').replace(/\D/g, '');
+  if (d.length === 9 && d.startsWith('9')) d = '56' + d; else if (d.length === 8) d = '569' + d;
+  if (d.length < 10 || d.length > 15) return '';
+  const nom = String(l.name || '').trim().split(/\s+/)[0] || '';
+  const txt = l.side === 'prestador'
+    ? `Hola ${nom}, soy Antonio de Hazlo Ahora. Te anotaste en hazlochile.com como profesional. ¿Tienes 5 minutos para contarte cómo inscribirte?`
+    : `Hola ${nom}, soy Antonio de Hazlo Ahora. Te anotaste en hazlochile.com y te escribo para contarte las novedades.`;
+  return `https://wa.me/${d}?text=${encodeURIComponent(txt)}`;
+}
+function bienvenida(l) {
+  if (!esCorreo(l.contact)) return '<span class="muted">Dejó WhatsApp: escríbele tú</span>';
+  if (l.bienvenida_estado === 'enviado') return '<span class="pill ok">Enviada</span>';
+  if (l.bienvenida_estado === 'repetido') return '<span class="pill">Ya la tenía</span>';
+  if (l.bienvenida_estado === 'error') return '<span class="pill bad">Correo con error</span>';
+  return Date.now() - new Date(l.created_at) > 2 * 864e5 ? '<span class="muted">No enviada</span>' : '<span class="pill warn">Pendiente</span>';
+}
+function topTabla(filas, vacio) {
+  return filas.length ? filas.slice(0, 8).map(([k, n]) => `<div class="top"><span>${esc(k)}</span><b>${n}</b></div>`).join('') : `<p class="muted">${esc(vacio)}</p>`;
+}
+async function lista(el) {
+  listaDatos = (await rpc('admin_leads', { p_limit: 2000 })) || [];
+  const d = listaDatos;
+  insigniaLista(d);
+  const cli = d.filter((l) => l.side === 'cliente');
+  const pro = d.filter((l) => l.side === 'prestador');
+  const semana = d.filter((l) => Date.now() - new Date(l.created_at) < 7 * 864e5).length;
+  const comunas = contar(d.map((l) => normCom(l.comuna)).filter(Boolean));
+  const otros = d.map((l) => ({ l, t: otroDe(l.interest) })).filter((x) => x.t);
+  el.innerHTML = `
+    <div class="stats">
+      <div class="stat"><b>${d.length}</b><span>Anotados en total</span></div>
+      <div class="stat"><b>${cli.length}</b><span>Clientes</span></div>
+      <div class="stat"><b>${pro.length}</b><span>Profesionales</span></div>
+      <div class="stat"><b>${semana}</b><span>Últimos 7 días</span></div>
+      <div class="stat"><b>${d.filter((l) => l.status === 'nuevo').length}</b><span>Sin contactar todavía</span></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card"><h3 style="margin-top:0">Qué piden los clientes</h3>${topTabla(contar(cli.flatMap((l) => intereses(l.interest))), 'Todavía nada.')}</div>
+      <div class="card"><h3 style="margin-top:0">Oficios de los profesionales</h3>${topTabla(contar(pro.flatMap((l) => intereses(l.interest))), 'Todavía nadie.')}</div>
+      <div class="card"><h3 style="margin-top:0">Comunas</h3>${topTabla(comunas, 'Nadie ha puesto su comuna.')}</div>
+      <div class="card"><h3 style="margin-top:0">De dónde llegan</h3>${topTabla(contar(d.map((l) => FUENTE[l.source || 'directo'] || l.source)), 'Todavía nada.')}
+        <p class="muted" style="margin-bottom:0">Para saber cuántos llegan de cada red, usa estos links: hazlochile.com/?s=instagram, ?s=tiktok o ?s=flyer.</p></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Personas anotadas</h3>
+      <div class="filtros">
+        <select id="lLado"><option value="">Clientes y profesionales</option><option value="cliente">Solo clientes</option><option value="prestador">Solo profesionales</option></select>
+        <select id="lEstado"><option value="">Todos los estados</option>${ESTADO_LEAD.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select>
+        <select id="lComuna"><option value="">Todas las comunas</option>${comunas.map(([c]) => `<option>${esc(c)}</option>`).join('')}</select>
+        <input id="lBuscar" type="search" placeholder="Buscar nombre, contacto, servicio o nota">
+        <button class="btn ghost sm" id="lExcel">Descargar para Excel</button>
+      </div>
+      <div id="lMsg"></div>
+      <div id="lTabla"></div>
+    </div>
+    <div class="card"><h3 style="margin-top:0">Lo que escribieron en «Otro»</h3>
+      <p class="muted">Servicios u oficios que no estaban en la lista. Si algo se repite, conviene agregarlo.</p>
+      ${tabla([['Cuándo', (x) => fecha(x.l.created_at)], ['Quién', (x) => `${esc(x.l.name)} <span class="pill">${esc(LADO[x.l.side] || x.l.side)}</span>`], ['Escribió', (x) => `<b>${esc(x.t)}</b>`]], otros, 'Nadie ha usado «Otro» todavía.')}
+    </div>`;
+  const f = listaFiltro;
+  $('#lLado').value = f.lado; $('#lEstado').value = f.estado; $('#lComuna').value = f.comuna; $('#lBuscar').value = f.q;
+  $('#lLado').onchange = (e) => { f.lado = e.target.value; tablaLista(); };
+  $('#lEstado').onchange = (e) => { f.estado = e.target.value; tablaLista(); };
+  $('#lComuna').onchange = (e) => { f.comuna = e.target.value; tablaLista(); };
+  $('#lBuscar').oninput = (e) => { f.q = e.target.value; tablaLista(); };
+  $('#lExcel').onclick = descargarLista;
+  tablaLista();
+}
+function filasLista() {
+  const f = listaFiltro, q = f.q.trim().toLowerCase();
+  return listaDatos.filter((l) => (!f.lado || l.side === f.lado) && (!f.estado || l.status === f.estado)
+    && (!f.comuna || normCom(l.comuna) === f.comuna)
+    && (!q || [l.name, l.contact, l.comuna, l.interest, l.nota].join(' ').toLowerCase().includes(q)));
+}
+function tablaLista() {
+  const filas = filasLista();
+  $('#lTabla').innerHTML = `<p class="muted">Mostrando ${filas.length} de ${listaDatos.length}.</p>` + tabla([
+    ['Cuándo', (l) => fecha(l.created_at)],
+    ['Quién', (l) => `<b>${esc(l.name)}</b><br><span class="pill ${l.side === 'prestador' ? 'brand' : ''}">${esc(LADO[l.side] || l.side)}</span>`],
+    ['Contacto', (l) => { const w = waLink(l); return `${esc(l.contact)}<div class="acc">${w ? `<a href="${esc(w)}" target="_blank" rel="noopener">WhatsApp</a>` : ''}${esCorreo(l.contact) ? `<a class="mail" href="mailto:${esc(String(l.contact).trim())}?subject=${encodeURIComponent('Hazlo Ahora')}">Correo</a>` : ''}</div>`; }],
+    ['Comuna', (l) => esc(normCom(l.comuna) || '—')],
+    ['Le interesa', (l) => esc(l.interest || '—')],
+    ['Desde', (l) => esc(FUENTE[l.source || 'directo'] || l.source)],
+    ['Bienvenida', (l) => bienvenida(l)],
+    ['Estado', (l) => `<select class="estado" data-id="${l.id}">${ESTADO_LEAD.map(([v, t]) => `<option value="${v}" ${l.status === v ? 'selected' : ''}>${t}</option>`).join('')}</select>`],
+    ['Nota', (l) => `${l.nota ? `<span class="muted">${esc(l.nota)}</span><br>` : ''}<button class="btn ghost sm" data-nota="${l.id}">${l.nota ? 'Editar' : 'Agregar'}</button>`],
+    ['', (l) => `<button class="btn ghost sm" data-borrar="${l.id}" title="Cuando la persona pida que borremos sus datos">Borrar</button>`],
+  ], filas, listaDatos.length ? 'Nadie calza con esos filtros.' : 'Todavía nadie se anota en hazlochile.com.');
+  $('#lTabla').querySelectorAll('select.estado').forEach((s) => (s.onchange = () => guardarLead(Number(s.dataset.id), { estado: s.value })));
+  $('#lTabla').querySelectorAll('[data-nota]').forEach((b) => (b.onclick = () => {
+    const l = listaDatos.find((x) => x.id === Number(b.dataset.nota));
+    const t = prompt(`Nota sobre ${l.name} (máx. 500 caracteres). Déjala vacía para borrarla.`, l.nota || '');
+    if (t !== null) guardarLead(l.id, { nota: t });
+  }));
+  $('#lTabla').querySelectorAll('[data-borrar]').forEach((b) => (b.onclick = async () => {
+    const l = listaDatos.find((x) => x.id === Number(b.dataset.borrar));
+    if (!confirm(`¿Borrar para siempre los datos de ${l.name} (${l.contact})?\n\nÚsalo cuando la persona pida que borremos sus datos. No se puede deshacer.`)) return;
+    try {
+      await rpc('admin_lead_borrar', { p_id: l.id });
+      listaDatos = listaDatos.filter((x) => x.id !== l.id);
+      msg($('#lMsg'), 'Datos borrados.', 'ok'); insigniaLista(listaDatos); tablaLista();
+    } catch (e) { msg($('#lMsg'), errorTexto(e), 'bad'); }
+  }));
+}
+async function guardarLead(id, { estado = null, nota = null }) {
+  try {
+    await rpc('admin_lead_actualizar', { p_id: id, p_estado: estado, p_nota: nota });
+    const l = listaDatos.find((x) => x.id === id);
+    if (estado) l.status = estado;
+    if (nota !== null) l.nota = nota.trim().slice(0, 500) || null;
+    msg($('#lMsg'), 'Guardado.', 'ok'); insigniaLista(listaDatos); tablaLista();
+  } catch (e) { msg($('#lMsg'), errorTexto(e), 'bad'); }
+}
+function descargarLista() {
+  // Con ";" y BOM para que Excel en español lo abra bien. Las celdas que parten con = + - @ se neutralizan
+  // (alguien podría escribir una fórmula en el formulario de la web).
+  const celda = (v) => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return '"' + t.replace(/"/g, '""') + '"'; };
+  const cols = [['Fecha', (l) => fecha(l.created_at)], ['Tipo', (l) => LADO[l.side] || l.side], ['Nombre', (l) => l.name], ['Contacto', (l) => l.contact],
+    ['Comuna', (l) => normCom(l.comuna)], ['Le interesa', (l) => l.interest], ['Desde', (l) => FUENTE[l.source || 'directo'] || l.source],
+    ['Estado', (l) => (ESTADO_LEAD.find(([v]) => v === l.status) || [, l.status])[1]], ['Nota', (l) => l.nota], ['Bienvenida', (l) => l.bienvenida_estado || '']];
+  const csv = '﻿' + [cols.map((c) => celda(c[0])).join(';'), ...filasLista().map((l) => cols.map((c) => celda(c[1](l))).join(';'))].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = `lista-de-espera-hazlo-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
 // ---------------------------------------------------------------- resumen
 async function resumen(el) {
   const s = await rpc('admin_stats');
   const n = s.reportes_nuevos || 0;
   $('#nReportes').textContent = n; $('#nReportes').classList.toggle('hidden', !n);
+  rpc('admin_leads', { p_limit: 2000 }).then((d) => insigniaLista(d || [])).catch(() => {});
   const p = s.ajustes?.pruebas || {};
   el.innerHTML = `
     ${p.activo ? '<div class="msg">Modo prueba ACTIVO: nadie necesita verificar identidad ni subir certificado de antecedentes, y los prestadores ven solicitudes de todo Chile. Apágalo en Ajustes antes de lanzar.</div>' : ''}
@@ -686,9 +841,8 @@ function palabrasRepetidas(filas) {
 }
 
 async function sugerencias(el) {
-  const [sug, leads, otros] = await Promise.all([
+  const [sug, otros] = await Promise.all([
     sel('service_suggestions', (q) => q.order('created_at', { ascending: false }).limit(200)),
-    sel('leads', (q) => q.order('created_at', { ascending: false }).limit(200)),
     rpc('admin_otros', { p_dias: 90 }).catch(() => []),
   ]);
   const top = palabrasRepetidas(otros || []);
@@ -704,16 +858,10 @@ async function sugerencias(el) {
     <div class="card"><h3 style="margin-top:0">Servicios que la gente pidió agregar</h3><div id="sgMsg"></div>
     ${tabla([['Cuándo', (s) => fecha(s.created_at)], ['Quién', (s) => `${nombre(s.user_id)} <span class="pill">${esc(s.side)}</span>`], ['Qué pidió', (s) => `<b>${esc(s.text)}</b>`], ['Comuna', (s) => esc(s.comuna || '—')], ['Estado', (s) => pill(s.status)],
       ['', (s) => s.status === 'nueva' ? `<button class="btn ghost sm" onclick="sugerenciaVista('${s.id}')">Marcar como vista</button>` : '']], sug, 'Nadie ha sugerido servicios todavía.')}</div>
-    <div class="card"><h3 style="margin-top:0">Contactos desde hazlochile.com (lista de espera)</h3>
-    ${tabla([['Cuándo', (l) => fecha(l.created_at)], ['Lado', (l) => `<span class="pill ${l.side === 'prestador' ? 'brand' : ''}">${esc(l.side)}</span>`], ['Nombre', (l) => esc(l.name)], ['Contacto', (l) => esc(l.contact)], ['Comuna', (l) => esc(l.comuna || '—')], ['Interés', (l) => esc(l.interest || '—')], ['Estado', (l) => pill(l.status)],
-      ['', (l) => l.status === 'nuevo' ? `<button class="btn ghost sm" onclick="leadContactado('${l.id}')">Contactado</button>` : '']], leads, 'Todavía no llegan contactos desde la web.')}</div>`;
+    <p class="muted">Las personas que se anotan en hazlochile.com están en la pestaña <b>Lista de espera</b>.</p>`;
 }
 window.sugerenciaVista = async (id) => {
   const { error } = await db.from('service_suggestions').update({ status: 'revisada' }).eq('id', id);
-  if (error) msg($('#sgMsg'), errorTexto(error), 'bad'); else mostrar('sugerencias');
-};
-window.leadContactado = async (id) => {
-  const { error } = await db.from('leads').update({ status: 'contactado' }).eq('id', id);
   if (error) msg($('#sgMsg'), errorTexto(error), 'bad'); else mostrar('sugerencias');
 };
 
