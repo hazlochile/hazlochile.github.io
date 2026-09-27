@@ -268,9 +268,34 @@ h1 em{font-style:normal; color:var(--brand); display:block}
 .d-sum div:last-child{border-bottom:0}
 .d-sum span{color:var(--muted)}
 .d-sum b{text-align:right}
+/* demo de Hazlo Ahora Pro */
+#pd-mk{transition:transform .8s linear}
+.d-mk-pro{background:var(--night); box-shadow:0 0 0 1px var(--line)}
+.d-online{width:12px; height:12px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 4px var(--ok-soft); flex:none; margin:0 4px}
+.d-brand{color:var(--brand-dark)}
+.d-nueva{border:1.5px solid var(--brand)}
+.d-pic{display:flex; align-items:center; justify-content:center; gap:8px; min-height:84px; border-radius:14px; background:linear-gradient(135deg, var(--brand-soft), var(--card)); color:var(--brand-dark); font-weight:700; font-size:13px; flex:none}
+.d-tipsbox{display:grid; gap:6px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:11px 12px; font-size:13px; line-height:1.4; color:var(--ink-soft)}
+.d-money{position:relative}
+.d-money span{position:absolute; left:14px; top:50%; transform:translateY(-50%); font-weight:800; color:var(--ink-soft); pointer-events:none}
+.d-money .d-in{padding-left:30px; font-weight:800; font-variant-numeric:tabular-nums}
+.d-lock.d-open{border-color:var(--ok); background:var(--ok-soft)}
+.d-note.d-okn{border-color:var(--ok); background:var(--ok-soft); color:var(--ok); font-weight:500}
+.d-sum .d-sumtot{font-size:15px}
+.d-sum .d-sumtot span{color:var(--ink); font-weight:700}
+.d-sum .d-sumtot b{color:var(--ok); font-size:16px}
+.d-bigstars{text-align:center; font-size:30px; letter-spacing:4px; color:#F5A524; line-height:1.2}
+.pro-demo{display:grid; gap:28px; margin-top:36px; padding-top:32px; border-top:1px solid var(--line); align-items:center}
+@media(min-width:900px){.pro-demo{grid-template-columns:minmax(0,1fr) 360px; gap:48px}}
+.pro-demo-txt h3{font-size:clamp(22px,3vw,28px); margin:6px 0 10px; letter-spacing:-.02em}
+.pro-demo-txt > p{color:var(--ink-soft); max-width:34em}
+.pd-pasos{counter-reset:pp; list-style:none; padding:0; margin:20px 0 0; display:grid; gap:10px}
+.pd-pasos li{counter-increment:pp; display:flex; gap:10px; align-items:center; font-weight:700; font-size:15px}
+.pd-pasos li::before{content:counter(pp); width:26px; height:26px; border-radius:8px; background:var(--brand-soft); color:var(--brand-dark); display:grid; place-items:center; font-size:13px; flex:none}
+.demo-cap a{color:var(--brand-dark); font-weight:700}
 @media (prefers-reduced-motion:reduce){
   .pulse::after,.d-q{animation:none}
-  #d-mk,.m-hecha,.d-bar i{transition:none}
+  #d-mk,#pd-mk,.m-hecha,.d-bar i{transition:none}
 }
 
 /* ---------- stats ---------- */
@@ -549,6 +574,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         </div>
       </div>
       <p class="demo-cap">Tócalo y pruébalo. Es una demostración: no se envía nada.</p>
+      <p class="demo-cap">¿Trabajas a domicilio? <a href="#demo-pro">Prueba la demo para profesionales</a></p>
       <p class="sr" id="d-estado" aria-live="polite"></p>
     </div>
   </section>
@@ -661,7 +687,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       </div>
       <div class="rule">
         <h3>Pagar <span>Al terminar</span></h3>
-        <p>Le pagas directo al profesional cuando termina, en efectivo o por transferencia. El precio es el que aceptaste en la app, y cualquier cambio lo apruebas tú.</p>
+        <p>Le pagas directo al profesional cuando termina, en efectivo o con tarjeta. El precio es el que aceptaste en la app, y cualquier cambio lo apruebas tú.</p>
       </div>
       <div class="rule">
         <h3>Cancelar</h3>
@@ -707,6 +733,32 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             <li><span><b>Título o documento</b>, si tu oficio lo exige.</span></li>
           </ol>
         </div>
+      </div>
+    </div>
+    <div class="pro-demo">
+      <div class="pro-demo-txt">
+        <p class="label">Pruébalo</p>
+        <h3>Así te llega un trabajo</h3>
+        <p>Elige tu oficio y recorre un trabajo completo en un minuto: la solicitud con fotos, tu cotización, el camino a la casa del cliente y cuánto ganas.</p>
+        <ol class="pd-pasos">
+          <li>Te llega el trabajo, cerca de ti</li>
+          <li>Cotizas a tu precio</li>
+          <li>Vas y lo haces</li>
+          <li>Cobras y sumas estrellas</li>
+        </ol>
+      </div>
+      <div class="demo-wrap" id="demo-pro">
+        <div class="dphone">
+          <div class="dscreen" role="region" aria-label="Demostración de la app Hazlo Ahora Pro">
+            <div class="dbar"><span>9:41</span><span class="dtag">DEMO</span></div>
+            <div class="dhead" id="pd-head"></div>
+            <p class="dpaso" id="pd-paso"></p>
+            <div class="dbody" id="pd-body"></div>
+            <div class="dfoot" id="pd-foot" hidden></div>
+          </div>
+        </div>
+        <p class="demo-cap">Tócalo y pruébalo. Es una demostración: no hay ningún trabajo real.</p>
+        <p class="sr" id="pd-estado" aria-live="polite"></p>
       </div>
     </div>
     <div class="wanted">
@@ -802,7 +854,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       </details>
       <details>
         <summary>¿Cómo pago? ¿Aceptan tarjeta?</summary>
-        <p>Por ahora le pagas directo al profesional al terminar, en efectivo o por transferencia. El pago con tarjeta dentro de la app viene más adelante.</p>
+        <p>Le pagas directo al profesional al terminar, en efectivo o con tarjeta. El pago con tarjeta dentro de la app viene más adelante.</p>
       </details>
       <details>
         <summary>Soy profesional, ¿cuánto me cobra Hazlo Ahora?</summary>
@@ -1667,7 +1719,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('h3', { class: 'd-h' }, [nom + ' terminó el trabajo']),
           h('div', { class: 'd-after' }, [h('span', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']), h('span', null, ['Foto del trabajo terminado'])]),
           h('div', { class: 'd-total' }, [h('span', null, ['Total acordado']), h('b', null, [plata(q.precio)])]),
-          h('p', { class: 'd-p' }, ['Le pagas directo a ' + nom + ', en efectivo o por transferencia.']),
+          h('p', { class: 'd-p' }, ['Le pagas directo a ' + nom + ', en efectivo o con tarjeta.']),
           h('p', { class: 'd-lbl', id: 'd-tip-l' }, ['¿Le dejas propina?']),
           h('div', { class: 'd-tips', role: 'group', 'aria-labelledby': 'd-tip-l' }, [0, 10, 15, 20].map(function (p) {
             return h('button', { type: 'button', 'aria-pressed': String(D.tip === p), 'data-k': 't' + p,
@@ -1716,6 +1768,403 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   nuevo();
   render();
+
+  // =========== Demostración de Hazlo Ahora Pro (para profesionales) ===========
+  // Todo ocurre en esta página: no se envía nada a ningún servidor.
+  var CASOS_PRO = [
+    { o: 'Gasfitería', s: 'Llaves y grifería', et: 'Gásfiter', ico: '🚰', quien: 'gásfiter', cli: 'Carolina', ini: 'CA', km: '2,1', com: 'Ñuñoa', precio: 25000,
+      txt: 'La llave de la cocina gotea aunque esté cerrada. Es monomando.',
+      tips: ['Pregunta si la llave es monomando o de dos manillas.', 'Lleva cartuchos y sellos de las medidas más comunes.', 'Si hay que cambiar la llave completa, propón el extra en la app antes de hacerlo.'],
+      msg: 'Hola, puedo ir al tiro. Llevo cartuchos y sellos. Si hay que cambiar algo más, te lo propongo en la app antes de hacerlo.',
+      extra: [8000, 'Cambiar el flexible, que está gastado'] },
+    { o: 'Electricidad', s: 'Enchufes y focos', et: 'Electricista', ico: '💡', quien: 'electricista', cli: 'Andrés', ini: 'AN', km: '3,4', com: 'Macul', precio: 28000,
+      txt: 'Un enchufe del living no funciona y el foco del baño parpadea.',
+      tips: ['Pregunta si salta el automático al enchufar algo.', 'Corta la luz del circuito antes de trabajar.', 'Si hay que cambiar el tablero, propónlo como extra en la app.'],
+      msg: 'Hola, puedo ir hoy. Reviso el enchufe y el foco, y si hay que cambiar algo más te lo propongo en la app antes.',
+      extra: [12000, 'Cambiar el interruptor del baño, que está quemado'] },
+    { o: 'Cerrajería', s: 'Apertura de puerta', et: 'Cerrajero', ico: '🔑', quien: 'cerrajero', cli: 'Macarena', ini: 'MA', km: '1,8', com: 'Providencia', precio: 30000,
+      txt: 'Se me quedaron las llaves adentro. La puerta tiene chapa de seguridad.',
+      tips: ['Antes de abrir, pide ver un documento con la dirección.', 'Pregunta el tipo de chapa: de seguridad, de pomo o electrónica.', 'Si hay que cambiar el cilindro, propónlo como extra en la app.'],
+      msg: 'Hola, estoy cerca y puedo ir ahora. Antes de abrir te voy a pedir un documento con la dirección, por seguridad.',
+      extra: [18000, 'Cambiar el cilindro de la chapa'] },
+    { o: 'Uñas', s: 'Manicura', et: 'Uñas', ico: '💅', quien: 'manicurista', cli: 'Fernanda', ini: 'FE', km: '2,7', com: 'San Miguel', precio: 16000,
+      txt: 'Manicure con esmaltado permanente, en tono nude.',
+      tips: ['Pregunta si quiere esmaltado tradicional o permanente.', 'Lleva tus herramientas esterilizadas y en su bolsa.', 'Confirma que haya una mesa con buena luz.'],
+      msg: 'Hola, tengo hora disponible. Llevo todo esterilizado y varios tonos nude para que elijas.',
+      extra: [4000, 'Agregar decoración en dos uñas'] },
+    { o: 'Fletes y mudanzas', s: 'Flete menor', et: 'Flete', ico: '🚚', quien: 'fletero', cli: 'Rodrigo', ini: 'RO', km: '4,2', com: 'Maipú', precio: 35000,
+      txt: 'Llevar un refrigerador y 10 cajas a 5 km. Es un segundo piso sin ascensor.',
+      tips: ['Pregunta el piso y si hay ascensor.', 'Confirma si necesita ayudante para subir o bajar.', 'Lleva frazadas y amarras para proteger los muebles.'],
+      msg: 'Hola, tengo camión disponible y voy con ayudante. Llevo frazadas y amarras para proteger todo.',
+      extra: [10000, 'Subir un sofá que no estaba en la lista'] },
+    { o: 'Aseo del hogar', s: 'Limpieza profunda', et: 'Aseo', ico: '🧹', quien: 'profesional de aseo', cli: 'Paula', ini: 'PA', km: '2,3', com: 'La Reina', precio: 38000,
+      txt: 'Limpieza profunda de un departamento de 2 dormitorios, con cocina y baño.',
+      tips: ['Pregunta cuántos baños hay y si hay mascotas.', 'Confirma si llevas tú los productos o los pone el cliente.', 'Acuerda qué incluye antes de empezar: ventanas, horno, refrigerador.'],
+      msg: 'Hola, puedo ir con mis productos. Te confirmo lo que incluye antes de empezar.',
+      extra: [10000, 'Limpiar el horno y el refrigerador por dentro'] }
+  ];
+  var PASOS_PRO = {
+    oficio: [1, 'Te llega el trabajo'], cerca: [1, 'Te llega el trabajo'],
+    cotizar: [2, 'Cotizas a tu precio'], espera: [2, 'Cotizas a tu precio'],
+    camino: [3, 'Vas y lo haces'], trabajo: [3, 'Vas y lo haces'],
+    fin: [4, 'Cobras y sumas estrellas']
+  };
+  var LLEGA = ['20 min', '40 min', '1 hora'];
+  var TASA = 0.10;
+  var MARCA_PRO = '<svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#FF7C42"/></svg>';
+  var MAPA_PRO = '<svg viewBox="0 0 300 150" aria-hidden="true">' +
+    '<path class="m-calle" d="M0 30H300M0 78H300M0 126H300M52 0V150M142 0V150M232 0V150"/>' +
+    '<path class="m-ruta" id="pd-ruta" d="M28 30H142V78H232V126H274"/>' +
+    '<path class="m-hecha" id="pd-hecha" d="M28 30H142V78H232V126H274"/>' +
+    '<circle class="m-casa" cx="274" cy="126" r="9"/><circle cx="274" cy="126" r="3" fill="#fff"/>' +
+    '<g id="pd-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
+
+  function servicioPro(c) {
+    return INDICE.filter(function (x) { return x.o === c.o && x.s === c.s; })[0] || { s: c.s, o: c.o, g: (OF[c.o] || {}).g };
+  }
+  function icoPro(c) { var o = OF[c.o] || { color: '#FF6B2C' }; return icono({ ico: c.ico || o.ico || '🔧', color: o.color }); }
+  function soloNumero(t) { return parseInt(String(t).replace(/\D/g, ''), 10) || 0; }
+
+  var proEl = document.getElementById('demo-pro');
+  if (proEl) (function () {
+    var pBody = document.getElementById('pd-body');
+    var pFoot = document.getElementById('pd-foot');
+    var pHead = document.getElementById('pd-head');
+    var pPaso = document.getElementById('pd-paso');
+    var pAnuncia = document.getElementById('pd-estado');
+    var pRelojes = [];
+    function pLuego(fn, ms) { pRelojes.push(setTimeout(fn, ms)); }
+    function pParar() { pRelojes.forEach(clearTimeout); pRelojes = []; }
+
+    var P, pUltimo = null;
+    function pNuevo() {
+      P = { paso: 'oficio', c: null, it: null, llego: false, precio: 0, llega: LLEGA[0], msg: '', err: '',
+        elegido: false, eta: 10, resp: 0, extra: 'no', foto: false, faltaFoto: false };
+    }
+    function pReiniciar() { pParar(); pNuevo(); pUltimo = null; pRender(); }
+    function pIr(paso) { pParar(); P.paso = paso; pRender(); }
+    function total() { return P.precio + (P.extra === 'si' ? P.c.extra[0] : 0); }
+    function comision() { return redondear(total() * TASA, 1); }
+    function propinaPro() { return redondear(total() * 0.15, 100); }
+    function nom() { return P.c.cli; }
+
+    function pRender() {
+      var cambio = P.paso !== pUltimo;
+      pUltimo = P.paso;
+      var foco = document.activeElement && proEl.contains(document.activeElement) ? document.activeElement.getAttribute('data-k') : null;
+      var dentro = document.activeElement && proEl.contains(document.activeElement);
+      var scroll = pBody.scrollTop;
+      var p = PASOS_PRO[P.paso];
+      pPaso.textContent = 'Paso ' + p[0] + ' de 4 · ' + p[1];
+      var s = PRO[P.paso]();
+
+      pHead.textContent = '';
+      if (s.atras) pHead.appendChild(h('button', { type: 'button', class: 'd-back', 'aria-label': 'Volver', onclick: s.atras }, ['‹']));
+      var mk = h('span', { class: 'd-mk d-mk-pro' }); mk.appendChild(svg(MARCA_PRO));
+      pHead.appendChild(h('span', { class: 'd-ttl' }, [mk, s.titulo || 'Hazlo Ahora Pro']));
+      if (P.paso !== 'oficio') pHead.appendChild(h('button', { type: 'button', class: 'd-rst', onclick: pReiniciar }, ['Reiniciar']));
+
+      pBody.textContent = '';
+      s.cuerpo.forEach(function (n) { if (n) pBody.appendChild(n); });
+      pFoot.textContent = '';
+      pFoot.hidden = !s.pie;
+      if (s.pie) pFoot.appendChild(s.pie);
+
+      if (cambio) {
+        pBody.scrollTop = 0;
+        pAnuncia.textContent = pPaso.textContent;
+        var t = pBody.querySelector('.d-h');
+        if (t && dentro) { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }
+        if (s.entrar) s.entrar();
+      } else {
+        pBody.scrollTop = scroll;
+        if (foco) { var f = proEl.querySelector('[data-k="' + foco + '"]'); if (f) f.focus({ preventScroll: true }); }
+      }
+    }
+
+    function fila(a, b, cls) { return h('div', cls ? { class: cls } : null, [h('span', null, [a]), h('b', null, [b])]); }
+
+    var PRO = {
+      oficio: function () {
+        return { cuerpo: [
+          h('h3', { class: 'd-h' }, ['¿En qué trabajas?']),
+          h('p', { class: 'd-p' }, ['Elige tu oficio y te mostramos cómo te llega un trabajo, de principio a fin.']),
+          h('div', { class: 'd-tiles' }, CASOS_PRO.map(function (c) {
+            return h('button', { type: 'button', class: 'd-tile', onclick: function () {
+              pParar(); pNuevo(); P.c = c; P.it = servicioPro(c); P.precio = c.precio; pIr('cerca');
+            } }, [icoPro(c), c.et]);
+          })),
+          h('p', { class: 'd-note' }, ['En la app eliges tus oficios y el radio en que quieres trabajar. Solo te llegan solicitudes de lo tuyo.'])
+        ] };
+      },
+
+      cerca: function () {
+        var c = P.c;
+        var estado = h('div', { class: 'd-status' }, [h('span', { class: 'd-online', 'aria-hidden': 'true' }),
+          h('div', null, [h('p', { class: 'd-qn' }, ['Estás en línea']), h('p', { class: 'd-qm' }, [c.o + ' · radio de 10 km'])])]);
+        var cuerpo = [h('h3', { class: 'd-h d-h-sm' }, ['Solicitudes cerca de ti']), estado];
+        if (!P.llego) {
+          cuerpo.push(h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }),
+            h('span', null, ['Buscando solicitudes de ' + c.o.toLowerCase() + ' cerca de ti…'])]));
+        } else {
+          cuerpo.push(h('article', { class: 'd-q d-nueva', 'aria-label': 'Nueva solicitud' }, [
+            h('p', { class: 'd-mini d-brand' }, ['● Nueva solicitud']),
+            h('div', { class: 'd-sel', style: 'margin-top:6px' }, [icoPro(c), h('div', null, [h('p', { class: 'd-qn' }, [P.it.s]), h('p', { class: 'd-qm' }, ['Al tiro · a ' + c.km + ' km · ' + c.com])])]),
+            h('p', { class: 'd-msg', style: 'margin-top:8px' }, ['«' + c.txt + '»']),
+            h('p', { class: 'd-qm', style: 'margin-top:6px' }, ['📷 1 foto · 3 profesionales la están viendo']),
+            h('div', { class: 'd-acts' }, [h('button', { type: 'button', class: 'btn btn-brand btn-sm', 'data-k': 'ver', onclick: function () { pIr('cotizar'); } }, ['Ver y cotizar'])])
+          ]));
+          cuerpo.push(h('p', { class: 'd-note' }, ['Si no te sirve, simplemente no cotizas. No hay castigo ni horario obligatorio.']));
+        }
+        return {
+          titulo: 'Hazlo Ahora Pro', atras: function () { pIr('oficio'); }, cuerpo: cuerpo,
+          entrar: function () {
+            if (P.llego) return;
+            pLuego(function () {
+              P.llego = true; pRender();
+              pAnuncia.textContent = 'Nueva solicitud: ' + P.it.s + ' en ' + c.com + ', a ' + c.km + ' kilómetros.';
+            }, 1700);
+          }
+        };
+      },
+
+      cotizar: function () {
+        var c = P.c;
+        var monto = h('input', { class: 'd-in', id: 'pd-precio', inputmode: 'numeric', autocomplete: 'off', maxlength: '9', 'data-k': 'precio', 'aria-describedby': 'pd-gana' });
+        monto.value = P.precio ? String(P.precio).replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+        var recibe = h('b'), ahorro = h('b'), cobra = h('b');
+        var err = h('p', { class: 'd-err', role: 'alert', hidden: !P.err }, [P.err]);
+        function actualizar() {
+          cobra.textContent = plata(P.precio);
+          recibe.textContent = plata(P.precio);
+          ahorro.textContent = '$0';
+          nota.textContent = 'Es tu bienvenida: tus primeros 2 meses no pagas comisión. Después sería ' + plata(redondear(P.precio * TASA, 1)) + ' (10 %, con IVA incluido).';
+        }
+        var nota = h('p', { class: 'd-qm', style: 'padding:0 0 9px' });
+        monto.addEventListener('input', function () {
+          P.precio = soloNumero(monto.value);
+          monto.value = P.precio ? String(P.precio).replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+          if (P.err) { P.err = ''; err.hidden = true; }
+          actualizar();
+        });
+        var ta = h('textarea', { class: 'd-ta', rows: '3', id: 'pd-msg', maxlength: '300', 'data-k': 'msg', placeholder: 'Un saludo corto y qué incluye tu precio' });
+        ta.value = P.msg;
+        ta.addEventListener('input', function () { P.msg = ta.value; });
+        var caja = h('div', { class: 'd-sum', id: 'pd-gana' }, [
+          fila('Cobras al cliente', ''), fila('Comisión Hazlo Ahora', ''), fila('Recibes', ''), nota
+        ]);
+        caja.children[0].replaceChild(cobra, caja.children[0].lastChild);
+        caja.children[1].replaceChild(ahorro, caja.children[1].lastChild);
+        caja.children[2].replaceChild(recibe, caja.children[2].lastChild);
+        actualizar();
+        var money = h('div', { class: 'd-money' }, [h('span', { 'aria-hidden': 'true' }, ['$']), monto]);
+        return {
+          titulo: c.o, atras: function () { pIr('cerca'); },
+          cuerpo: [
+            h('div', { class: 'd-sel' }, [icoPro(c), h('div', null, [h('h3', { class: 'd-h d-h-sm' }, [P.it.s]), h('p', { class: 'd-p' }, ['Al tiro · a ' + c.km + ' km'])])]),
+            h('div', { class: 'd-pic', 'aria-label': 'Foto que subió el cliente' }, [h('span', { 'aria-hidden': 'true' }, ['📷']), h('span', null, ['Foto del problema'])]),
+            h('p', { class: 'd-msg' }, ['«' + c.txt + '»']),
+            h('div', { class: 'd-lock' }, [h('span', { 'aria-hidden': 'true' }, ['🔒']),
+              h('span', null, [h('b', null, ['Zona aproximada: ' + c.com + '. ']), 'La dirección exacta la ves cuando el cliente te elige.'])]),
+            h('div', { class: 'd-tipsbox' }, [h('p', { class: 'd-mini' }, ['Antes de cotizar'])].concat(c.tips.map(function (t) { return h('p', null, ['· ' + t]); }))),
+            h('label', { class: 'd-lbl', for: 'pd-precio' }, ['Tu precio (tú decides)']), money, err,
+            h('p', { class: 'd-lbl', id: 'pd-llega-l' }, ['¿En cuánto llegas?']),
+            h('div', { class: 'd-chips', role: 'group', 'aria-labelledby': 'pd-llega-l' }, LLEGA.map(function (x, i) {
+              return h('button', { type: 'button', class: 'd-chip', 'aria-pressed': String(P.llega === x), 'data-k': 'l' + i,
+                onclick: function () { P.llega = x; pRender(); } }, [x]);
+            })),
+            h('label', { class: 'd-lbl', for: 'pd-msg' }, ['Mensaje para ' + nom()]), ta,
+            h('button', { type: 'button', class: 'd-link', 'data-k': 'sug', onclick: function () { P.msg = c.msg; pRender(); } }, ['Usar mensaje sugerido']),
+            caja
+          ],
+          pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () {
+            if (P.precio < 1000) { P.err = 'Escribe tu precio (mínimo $1.000).'; pRender(); return; }
+            if (!P.msg.trim()) P.msg = c.msg;
+            P.msg = ocultar(P.msg);
+            pIr('espera');
+          } }, ['Enviar cotización'])
+        };
+      },
+
+      espera: function () {
+        var c = P.c;
+        var tuya = h('article', { class: 'd-q', 'aria-label': 'Tu cotización' }, [
+          h('div', { class: 'd-qtop' }, [
+            h('span', { class: 'd-av', 'aria-hidden': 'true' }, ['TÚ']),
+            h('div', null, [h('p', { class: 'd-qn' }, ['Tu cotización']), h('p', { class: 'd-qm' }, [P.it.s])]),
+            h('p', { class: 'd-amt' }, [plata(P.precio), h('small', null, ['llegas en ' + P.llega])])
+          ]),
+          h('p', { class: 'd-msg', style: 'margin-top:8px' }, ['«' + P.msg + '»'])
+        ]);
+        var cuerpo = [h('h3', { class: 'd-h' }, [P.elegido ? '¡' + nom() + ' te eligió!' : 'Cotización enviada']), tuya];
+        if (!P.elegido) {
+          cuerpo.push(h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }),
+            h('span', null, [nom() + ' está comparando cotizaciones. Ve tus estrellas, tu presentación y fotos de tus trabajos.'])]));
+        } else {
+          cuerpo.unshift(h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']));
+          cuerpo.push(h('div', { class: 'd-lock d-open' }, [h('span', { 'aria-hidden': 'true' }, ['📍']),
+            h('span', null, [h('b', null, ['Ahora ves la dirección exacta en ' + c.com + '. ']), 'Pueden conversar por el chat de la app, sin dar teléfonos.'])]));
+          cuerpo.push(h('p', { class: 'd-note' }, ['Si ' + nom() + ' cancela después de que marcas «Voy en camino», recibes $2.000 por tu tiempo.']));
+        }
+        return {
+          titulo: 'Tu cotización', atras: P.elegido ? null : function () { pIr('cotizar'); }, cuerpo: cuerpo,
+          pie: P.elegido ? h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () { pIr('camino'); } }, ['Voy en camino']) : null,
+          entrar: function () {
+            if (P.elegido) return;
+            pLuego(function () {
+              P.elegido = true; pUltimo = null; pRender();
+              pAnuncia.textContent = nom() + ' te eligió. Toca Voy en camino.';
+            }, 2600);
+          }
+        };
+      },
+
+      camino: function () {
+        var c = P.c;
+        var mapa = h('div', { class: 'd-map' }); mapa.innerHTML = MAPA_PRO;
+        var eta = h('span', { class: 'd-eta' }, [P.eta + ' min']);
+        var est = h('p', { class: 'd-qn' }, ['Vas a la casa de ' + nom()]);
+        var msgs = h('div', { class: 'd-msgs', role: 'log', 'aria-label': 'Chat con ' + nom() });
+        var inp = h('input', { class: 'd-in', placeholder: 'Escribe un mensaje', 'aria-label': 'Mensaje para ' + nom(), maxlength: '140', autocomplete: 'off' });
+        function agregar(txt, cls) { msgs.appendChild(h('p', { class: 'd-m' + (cls ? ' ' + cls : '') }, [txt])); msgs.scrollTop = msgs.scrollHeight; }
+        function enviarMsg(txt) {
+          txt = txt.trim();
+          if (!txt) return;
+          var limpio = ocultar(txt);
+          agregar(limpio, 'yo');
+          if (limpio !== txt) {
+            agregar('Hazlo Ahora ocultó un dato de contacto: todo se conversa aquí, así el trabajo queda protegido.', 'sys');
+            pAnuncia.textContent = 'La app ocultó el dato de contacto del mensaje.';
+          }
+          if (P.resp < 2) {
+            var r = ['Perfecto, te espero.', 'Dale, gracias.'][P.resp++];
+            pLuego(function () { agregar(r); }, 1100);
+          }
+        }
+        var envio = h('form', { class: 'd-send' }, [inp, h('button', { type: 'submit', class: 'btn btn-brand btn-sm' }, ['Enviar'])]);
+        envio.addEventListener('submit', function (e) { e.preventDefault(); enviarMsg(inp.value); inp.value = ''; });
+        var rapidos = h('div', { class: 'd-chips' }, [['Voy llegando', 'Voy llegando, estoy a unas cuadras.'], ['Intentar pasarle mi número', 'Mi WhatsApp es +56 9 8765 4321']].map(function (t) {
+          return h('button', { type: 'button', class: 'd-chip', onclick: function () { enviarMsg(t[1]); } }, [t[0]]);
+        }));
+        var aviso = h('p', { class: 'd-p d-c' }, ['Demo acelerada: cada minuto dura menos de un segundo.']);
+        var seguir = h('button', { type: 'button', class: 'btn btn-brand d-cta', hidden: true, onclick: function () { pIr('trabajo'); } }, ['Llegué']);
+        return {
+          titulo: 'En camino',
+          cuerpo: [
+            h('h3', { class: 'd-h d-h-sm' }, [nom() + ' te ve venir en el mapa']),
+            mapa,
+            h('div', { class: 'd-status' }, [h('span', { class: 'd-av', 'aria-hidden': 'true' }, [c.ini]),
+              h('div', null, [est, h('p', { class: 'd-qm' }, ['Precio acordado: ' + plata(P.precio)])]), eta]),
+            h('div', { class: 'd-chat' }, [msgs, rapidos, envio])
+          ],
+          pie: h('div', { style: 'display:grid; gap:8px' }, [aviso, seguir]),
+          entrar: function () {
+            var ruta = mapa.querySelector('#pd-ruta'), hecha = mapa.querySelector('#pd-hecha'), marca = mapa.querySelector('#pd-mk');
+            var L = ruta.getTotalLength(), totalMin = 10;
+            P.eta = totalMin;
+            hecha.style.strokeDasharray = L;
+            function mover() {
+              var f = 1 - P.eta / totalMin, pt = ruta.getPointAtLength(L * f);
+              marca.style.transform = 'translate(' + pt.x + 'px,' + pt.y + 'px)';
+              hecha.style.strokeDashoffset = L * (1 - f);
+            }
+            mover();
+            pLuego(function () { agregar('¡Hola! Te espero. La reja es la blanca.'); }, 1200);
+            (function tic() {
+              pLuego(function () {
+                P.eta--;
+                mover();
+                if (P.eta > 0) { eta.textContent = P.eta + ' min'; tic(); return; }
+                eta.textContent = 'Llegaste';
+                est.textContent = 'Llegaste a la casa de ' + nom();
+                aviso.hidden = true; seguir.hidden = false;
+                pAnuncia.textContent = 'Llegaste. Toca Llegué.';
+              }, 800);
+            })();
+          }
+        };
+      },
+
+      trabajo: function () {
+        var c = P.c;
+        var etapas = [['Te eligió', 'ok'], ['En camino', 'ok'], ['Llegaste', 'ok'], ['Trabajando', 'now'], ['Terminado', '']];
+        var bloqueExtra;
+        if (P.extra === 'no') {
+          bloqueExtra = h('div', { class: 'd-tipsbox' }, [
+            h('p', { class: 'd-mini' }, ['¿Apareció algo más?']),
+            h('p', null, [c.extra[1] + ': ' + plata(c.extra[0]) + '.']),
+            h('button', { type: 'button', class: 'btn btn-line btn-sm', 'data-k': 'extra', style: 'justify-self:start',
+              onclick: function () {
+                P.extra = 'enviado'; pRender();
+                pLuego(function () { P.extra = 'si'; pRender(); pAnuncia.textContent = nom() + ' aprobó el extra en la app.'; }, 1400);
+              } }, ['Proponer el extra en la app'])
+          ]);
+        } else if (P.extra === 'enviado') {
+          bloqueExtra = h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }), h('span', null, ['Extra enviado. Esperando que ' + nom() + ' lo apruebe…'])]);
+        } else {
+          bloqueExtra = h('p', { class: 'd-note d-okn' }, ['✓ ' + nom() + ' aprobó el extra. Nuevo total: ' + plata(total()) + '.']);
+        }
+        return {
+          titulo: 'Trabajando',
+          cuerpo: [
+            h('h3', { class: 'd-h' }, ['Estás trabajando']),
+            h('ol', { class: 'd-tl' }, etapas.map(function (e) {
+              return h('li', { class: e[1] }, [h('span', { class: 'dot', 'aria-hidden': 'true' }, [e[1] === 'ok' ? '✓' : '']), e[0] + (e[1] === 'now' ? ' (ahora)' : '')]);
+            })),
+            bloqueExtra,
+            h('p', { class: 'd-p' }, ['Cualquier cambio de precio lo aprueba el cliente en la app. Así nadie discute al final.']),
+            h('button', { type: 'button', class: 'd-foto' + (P.foto ? ' on' : ''), 'aria-pressed': String(P.foto), 'data-k': 'foto',
+              onclick: function () { P.foto = !P.foto; P.faltaFoto = false; pRender(); } }, [P.foto ? '✓ Foto del trabajo terminado' : '📷 Subir foto del trabajo terminado']),
+            P.faltaFoto ? h('p', { class: 'd-err', role: 'alert' }, ['Sube la foto del trabajo terminado para cerrar.']) : null
+          ],
+          pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () {
+            if (P.extra === 'enviado') return;
+            if (!P.foto) { P.faltaFoto = true; pRender(); return; }
+            pIr('fin');
+          } }, ['Terminar trabajo'])
+        };
+      },
+
+      fin: function () {
+        var tip = propinaPro(), ahorro = comision();
+        var estrellas = h('p', { class: 'd-bigstars', 'aria-label': nom() + ' te dio 5 estrellas' }, ['★★★★★']);
+        return {
+          titulo: 'Terminado',
+          cuerpo: [
+            h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']),
+            h('h3', { class: 'd-h d-c' }, ['¡Buen trabajo!']),
+            h('div', { class: 'd-sum' }, [
+              fila(nom() + ' te pagó directo', plata(total())),
+              fila('Propina (15 %)', '+' + plata(tip) + ' · 100 % tuya'),
+              fila('Comisión Hazlo Ahora', '$0'),
+              fila('Ganaste', plata(total() + tip), 'd-sumtot')
+            ]),
+            h('p', { class: 'd-note d-okn' }, ['En Mi saldo: «Sin comisión por tu bienvenida (te ahorras ' + plata(ahorro) + ')». Después de tus 2 primeros meses, la comisión es 10 % y solo por trabajo hecho.']),
+            h('p', { class: 'd-lbl d-c', style: 'margin:4px 0 -8px' }, [nom() + ' te calificó']),
+            estrellas,
+            h('p', { class: 'd-p d-c' }, ['Cada trabajo suma estrellas a tu perfil, y los próximos clientes las ven antes de elegirte.']),
+            h('p', { class: 'd-qm d-c' }, ['Esto fue una demostración: no hay ningún trabajo ni cliente real.']),
+            h('button', { type: 'button', class: 'd-link', style: 'justify-self:center', onclick: pReiniciar }, ['Probar con otro oficio'])
+          ],
+          pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () { sumarmeComo(P.c.o); } }, ['Quiero sumarme como ' + P.c.quien])
+        };
+      }
+    };
+
+    function sumarmeComo(oficio) {
+      setSide('prestador');
+      if (OF[oficio] && elegidos.indexOf(oficio) < 0) elegidos.push(oficio);
+      var enTop = TOP_PRO.some(function (t) { return t[0] === oficio; });
+      if (!enTop) abrirTodas(true);
+      refrescar();
+      irAlFormulario();
+      setTimeout(function () { document.getElementById('nombre').focus({ preventScroll: true }); }, 450);
+    }
+
+    pNuevo();
+    pRender();
+  })();
+
 
   // ---- Cuadro "Ver precios" (como el de Uber) ----
   var pq = document.getElementById('p-que'), plist = document.getElementById('p-lista');
