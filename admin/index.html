@@ -785,7 +785,7 @@ async function alertas(el) {
 
 // ---------------------------------------------------------------- reportes
 async function reportes(el) {
-  const rows = await sel('reports', (q) => q.order('created_at', { ascending: false }).limit(200));
+  const rows = await rpc('admin_reports', { p_limit: 200 }); // hazlo_fix_50: la nota de resolución no es legible directo
   el.innerHTML = `<div class="card"><h3 style="margin-top:0">Reportes de usuarios</h3><div id="rMsg"></div>
     ${tabla([
       ['Cuándo', (r) => fecha(r.created_at)], ['Reporta', (r) => nombre(r.reporter_id)], ['A quién', (r) => nombre(r.reported_id)],
