@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FF6B2C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23FF6B2C%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
+<title>Hazlo Ahora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Página del cartel de un profesional: hazlochile.com/p/?c=CODIGO. A ella lleva el QR del cartel que el
+     profesional comparte desde la app Pro. Los datos vienen de cartel_publico() (hazlo_fix_52), que nunca
+     entrega teléfono, correo, RUT ni dirección. Todo lo que viene de la base se muestra con textContent.
+     El CSS, el formulario y el catálogo son copia de ../index.html: si cambian allá, cópialos aquí. -->
+<style>
+:root{
+  --brand:#FF6B2C; --brand-dark:#D9501A; --brand-soft:#FFF1EA; --brand-glow:#FFD3BF;
+  --ink:#1A1714; --ink-soft:#5B554E; --muted:#8F887F;
+  --line:#EDE7DF; --bg:#FAF7F3; --card:#FFFFFF; --night:#211D1A; --on-night:#FFFFFF;
+  --night-soft:rgba(255,255,255,.72); --night-line:rgba(255,255,255,.14); --night-fill:rgba(255,255,255,.06);
+  --ok:#0E8F6E; --ok-soft:#E3F6F0; --danger:#D63B35; --danger-soft:#FDECEB;
+  --shadow:0 8px 24px rgba(26,23,20,.07); --shadow-lift:0 24px 50px rgba(26,23,20,.16);
+  --gutter:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --brand:#FF7C42; --brand-dark:#FF9463; --brand-soft:#2E1D14; --brand-glow:#4A2D1C;
+    --ink:#F6F1EB; --ink-soft:#BAB2A8; --muted:#8B837A;
+    --line:#332C25; --bg:#14110E; --card:#1E1A16; --night:#0D0B09; --on-night:#F6F1EB;
+    --night-soft:rgba(246,241,235,.68); --night-line:rgba(246,241,235,.14); --night-fill:rgba(246,241,235,.05);
+    --ok:#3BC7A2; --ok-soft:#10352C; --danger:#FF7A74; --danger-soft:#3A1C1A;
+    --shadow:0 8px 24px rgba(0,0,0,.4); --shadow-lift:0 24px 50px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  --brand:#FF7C42; --brand-dark:#FF9463; --brand-soft:#2E1D14; --brand-glow:#4A2D1C;
+  --ink:#F6F1EB; --ink-soft:#BAB2A8; --muted:#8B837A;
+  --line:#332C25; --bg:#14110E; --card:#1E1A16; --night:#0D0B09; --on-night:#F6F1EB;
+  --night-soft:rgba(246,241,235,.68); --night-line:rgba(246,241,235,.14); --night-fill:rgba(246,241,235,.05);
+  --ok:#3BC7A2; --ok-soft:#10352C; --danger:#FF7A74; --danger-soft:#3A1C1A;
+  --shadow:0 8px 24px rgba(0,0,0,.4); --shadow-lift:0 24px 50px rgba(0,0,0,.55);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth; scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3{margin:0; text-wrap:balance; letter-spacing:-.02em; font-weight:800}
+p{margin:0}
+ul{margin:0; padding:0; list-style:none}
+a{color:inherit}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:var(--gutter)}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ---------- header ---------- */
+.bar{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line);
+}
+.bar-in{display:flex; align-items:center; justify-content:space-between; gap:16px; height:62px}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; text-decoration:none; letter-spacing:-.03em; flex:none}
+.mark{width:32px; height:32px; border-radius:10px; background:var(--brand); display:grid; place-items:center; flex:none}
+.nav{display:none; gap:4px}
+.nav a{text-decoration:none; font-weight:600; font-size:14.5px; color:var(--ink-soft); padding:8px 11px; border-radius:10px; white-space:nowrap}
+.nav a:hover{color:var(--ink); background:var(--card)}
+@media(min-width:960px){.nav{display:flex}}
+.bar-cta{display:flex; gap:8px; flex:none}
+@media(max-width:600px){.bar .logo-t{display:none} .bar-cta .btn-sm{padding:9px 13px}}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 22px; border-radius:999px; font:inherit; font-weight:700; font-size:15px;
+  text-decoration:none; border:1.5px solid transparent; cursor:pointer;
+  transition:transform .12s ease, background .15s ease, border-color .15s ease, color .15s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,.nav a:focus-visible,a:focus-visible{outline:3px solid var(--brand); outline-offset:2px}
+.btn-brand{background:var(--brand); color:#fff; box-shadow:0 10px 26px rgba(255,107,44,.28)}
+.btn-brand:hover{background:#E4551A}
+.btn-line{background:transparent; color:var(--ink); border-color:var(--line)}
+.btn-line:hover{border-color:var(--brand); color:var(--brand-dark)}
+.btn-sm{padding:9px 16px; font-size:14px}
+
+/* ---------- sections ---------- */
+section{padding-block:56px}
+.label{text-transform:uppercase; letter-spacing:.11em; font-size:12px; font-weight:700; color:var(--brand-dark); margin-bottom:10px}
+h2{font-size:clamp(27px,4.4vw,38px); line-height:1.1}
+.sub{color:var(--ink-soft); font-size:17px; margin-top:10px; max-width:36em}
+.sub a.inl{color:var(--brand-dark); font-weight:700}
+/* ---------- signup ---------- */
+.signup{background:var(--night); color:var(--on-night); border-radius:30px; padding:40px var(--gutter); margin-block:16px}
+@media(min-width:760px){.signup{padding:52px}}
+.signup h2{color:var(--on-night)}
+.signup .label{color:var(--brand)}
+.signup .sub{color:var(--night-soft)}
+.tabs{display:inline-flex; flex-wrap:wrap; background:var(--night-fill); padding:5px; border-radius:22px; margin-block:24px 18px; gap:4px}
+.tab{padding:10px 18px; border-radius:999px; font:inherit; font-weight:700; font-size:14px; color:var(--night-soft); background:transparent; border:0; cursor:pointer; transition:background .15s, color .15s}
+.tab[aria-selected="true"]{background:var(--brand); color:#fff}
+@media(max-width:520px){
+  .tabs{display:grid; grid-template-columns:1fr 1fr; width:100%}
+  .tab{padding:10px 8px; font-size:13.5px; line-height:1.25}
+  #opts-top{display:grid; grid-template-columns:1fr 1fr}
+  #opts-top .opt{padding:9px 11px}
+}
+.tab:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.side-note{font-size:14.5px; color:var(--night-soft); margin:-8px 0 18px; max-width:40em}
+.side-note b{color:var(--on-night)}
+form{display:grid; gap:15px; max-width:620px}
+.field label{display:block; font-size:13px; font-weight:600; color:var(--night-soft); margin-bottom:6px}
+.signup input,.signup textarea{
+  width:100%; font:inherit; font-size:16px; padding:13px 14px; border-radius:14px;
+  border:1.5px solid var(--night-line); background:var(--night-fill); color:var(--on-night); outline:0;
+}
+.signup input::placeholder,.signup textarea::placeholder{color:var(--muted)}
+.signup input:focus,.signup textarea:focus{border-color:var(--brand); background:color-mix(in srgb, var(--brand) 10%, transparent)}
+textarea{min-height:82px; resize:vertical}
+.row2{display:grid; gap:15px}
+@media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+.trap{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.pick{display:grid; gap:10px}
+.pick-h{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.pick-h label{margin:0}
+.pick-h .hint{font-size:12.5px; color:var(--muted)}
+.mini{text-transform:uppercase; letter-spacing:.1em; font-size:11px; font-weight:700; color:var(--night-soft); margin-bottom:8px}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opt{
+  font:inherit; font-size:14px; font-weight:600; color:var(--on-night);
+  background:var(--night-fill); border:1.5px solid var(--night-line);
+  padding:9px 14px; border-radius:12px; cursor:pointer; text-align:left;
+  transition:background .14s, border-color .14s, color .14s;
+}
+.opt:hover{border-color:var(--brand)}
+.opt:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.opt[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff}
+.opt[aria-pressed="true"]::before{content:"✓ "; font-weight:800}
+.opt small{display:block; font-weight:500; font-size:11.5px; opacity:.72; margin-top:1px}
+.opt .now{display:inline-block; margin-top:4px; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--brand)}
+.opt[aria-pressed="true"] .now{color:#fff}
+.vermas{
+  background:transparent; border:1.5px dashed var(--night-line); color:var(--night-soft);
+  font:inherit; font-weight:700; font-size:13.5px; padding:9px 14px; border-radius:12px; cursor:pointer;
+}
+.vermas:hover{border-color:var(--brand); color:var(--brand)}
+.cats-all{display:grid; gap:16px; padding-top:12px; border-top:1px solid var(--night-line); margin-top:4px}
+.ya{display:grid; gap:10px; padding:13px 14px; border-radius:14px; background:color-mix(in srgb, var(--ok) 18%, transparent); border:1px solid color-mix(in srgb, var(--ok) 45%, transparent)}
+.ya p{font-size:14.5px; font-weight:700; color:var(--on-night)}
+.ya .opts:empty{display:none}
+.cuenta{font-size:12.5px; font-weight:700; color:var(--brand)}
+.msg{padding:13px 16px; border-radius:14px; font-weight:600; font-size:15px}
+.msg[data-kind="ok"]{background:var(--ok-soft); color:var(--ok)}
+.msg[data-kind="err"]{background:var(--danger-soft); color:var(--danger)}
+.legal{font-size:12.5px; color:var(--muted); max-width:46em}
+.legal a{color:var(--night-soft)}
+
+/* ---------- footer ---------- */
+footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); margin-top:40px}
+.foot{display:grid; gap:22px}
+@media(min-width:760px){.foot{grid-template-columns:1fr auto; align-items:start}}
+.foot-brand .logo{color:var(--ink)}
+.foot-brand p{margin-top:8px; line-height:1.6}
+.links{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:12px}
+.links a{color:var(--ink-soft); text-decoration:none; font-weight:600}
+.links a:hover{color:var(--brand-dark)}
+.social{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; color:var(--ink-soft); background:var(--card); border:1.5px solid var(--line); padding:8px 14px; border-radius:999px}
+.social:hover{border-color:var(--brand); color:var(--brand-dark)}
+
+/* ---------- cartel del profesional ---------- */
+main{padding-block:28px 8px}
+.pro{background:var(--card); border:1.5px solid var(--line); border-radius:26px; padding:22px; box-shadow:var(--shadow); max-width:620px}
+.pro-top{display:flex; align-items:center; gap:14px}
+.pro-av{width:58px; height:58px; border-radius:18px; background:var(--brand); color:#fff; display:grid; place-items:center; font-weight:800; font-size:22px; flex:none}
+.pro-n{font-size:24px; font-weight:800; letter-spacing:-.03em; line-height:1.15; overflow-wrap:anywhere}
+.pro-of{color:var(--brand-dark); font-weight:700; font-size:15px; margin-top:2px}
+.sellos{display:flex; flex-wrap:wrap; gap:6px; margin-top:16px}
+.sello{display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:700; padding:6px 11px; border-radius:999px; background:var(--line); color:var(--ink-soft)}
+.sello.ok{background:var(--ok-soft); color:var(--ok)}
+.sello.star{background:var(--brand-soft); color:var(--brand-dark)}
+.pedile{padding-block:30px 8px}
+.pedile .sub{max-width:40em}
+.pedile .sub strong{color:var(--ink)}
+.tiendas{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.nada{max-width:640px; padding-block:30px}
+.nada .sub strong{color:var(--ink)}
+.nada .btn{margin-top:22px}
+.cargando{color:var(--muted); font-weight:600; padding-block:40px}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="logo" href="/" aria-label="Hazlo Ahora, inicio">
+      <span class="mark"><svg width="19" height="19" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+      <span class="logo-t">Hazlo Ahora</span>
+    </a>
+    <div class="bar-cta">
+      <a class="btn btn-line btn-sm" href="/">Qué es Hazlo Ahora</a>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <p class="cargando" id="cargando">Cargando…</p>
+
+  <!-- Si el código existe -->
+  <div id="con-cartel" hidden>
+    <article class="pro" aria-labelledby="pro-nombre">
+      <div class="pro-top">
+        <span class="pro-av" id="pro-av" aria-hidden="true"></span>
+        <div>
+          <p class="pro-n" id="pro-nombre"></p>
+          <p class="pro-of" id="pro-oficios"></p>
+        </div>
+      </div>
+      <div class="sellos" id="pro-sellos"></div>
+    </article>
+
+    <section class="pedile">
+      <h2 id="titulo-pedile"></h2>
+      <p class="sub">Hazlo Ahora es una app inteligente que conecta lo que necesitas (un gásfiter, un electricista, una manicurista, un flete y más de 360 servicios) con una red de profesionales verificados cerca de ti.</p>
+      <p class="sub"><strong>Cuentas qué pasa, te llegan precios, eliges y pagas al terminar.</strong> Ahora mismo o agendado.</p>
+      <div class="tiendas" id="tiendas" hidden>
+        <!-- Enlaces por completar cuando las apps estén en las tiendas (APP_STORE y GOOGLE_PLAY en el script) -->
+        <a class="btn btn-brand" id="app-store" href="/">Descargar en App Store</a>
+        <a class="btn btn-line" id="google-play" href="/">Descargar en Google Play</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Si el código no existe o viene vacío -->
+  <section class="nada" id="sin-cartel" hidden>
+    <h2>No encontramos este cartel, pero te contamos qué es Hazlo Ahora</h2>
+    <p class="sub">Hazlo Ahora es una app inteligente que conecta lo que necesitas (un gásfiter, un electricista, una manicurista, un flete y más de 360 servicios) con una red de profesionales verificados cerca de ti.</p>
+    <p class="sub"><strong>Cuentas qué pasa, te llegan precios, eliges y pagas al terminar.</strong> Ahora mismo o agendado.</p>
+    <a class="btn btn-brand" href="/">Conoce Hazlo Ahora</a>
+  </section>
+
+  <!-- Lista de espera (mientras las apps no estén en las tiendas): el mismo formulario de index.html -->
+  <section class="signup" id="registro" hidden>
+    <p class="label">Lista de espera</p>
+    <h2>Anótate y te avisamos</h2>
+    <p class="sub">Estamos partiendo en el Gran Santiago. Déjanos tus datos y te avisamos apenas puedas pedir.</p>
+
+    <div class="tabs" role="tablist" aria-label="Tipo de registro">
+      <button class="tab" type="button" id="tab-cliente" role="tab" aria-selected="true" data-side="cliente">Necesito un servicio</button>
+      <button class="tab" type="button" id="tab-prestador" role="tab" aria-selected="false" data-side="prestador">Soy profesional</button>
+    </div>
+    <p class="side-note" id="side-note"></p>
+
+    <form id="lead-form" novalidate>
+      <input type="hidden" id="side" name="side" value="cliente">
+      <div class="trap" aria-hidden="true"><label for="website">No llenar</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+
+      <div class="row2">
+        <div class="field"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" maxlength="80" placeholder="Tu nombre" autocomplete="given-name"></div>
+        <div class="field"><label for="comuna">Comuna</label><input id="comuna" name="comuna" maxlength="60" placeholder="Tu comuna" autocomplete="address-level2"></div>
+      </div>
+
+      <div class="field"><label for="contacto">WhatsApp o correo</label><input id="contacto" name="contacto" maxlength="120" placeholder="+56 9 1234 5678 o tu@correo.cl" autocomplete="tel"></div>
+
+      <div class="field pick">
+        <div class="pick-h">
+          <label id="interes-label" for="top-opts">¿Qué servicios te gustaría pedir?</label>
+          <span class="hint" id="cuenta-hint">Marca los que quieras</span>
+        </div>
+
+        <div id="top-opts">
+          <p class="mini" id="top-titulo">Los más pedidos</p>
+          <div class="opts" id="opts-top"></div>
+        </div>
+
+        <div class="opts">
+          <button class="vermas" type="button" id="vermas" aria-expanded="false" aria-controls="cats-all">Ver todos los oficios</button>
+        </div>
+
+        <div class="cats-all" id="cats-all" hidden></div>
+
+        <div id="otro-box" hidden>
+          <label for="interes">Cuéntanos cuál</label>
+          <textarea id="interes" name="interes" maxlength="200" placeholder="Afilar cuchillos, tapicería, instalar paneles solares…"></textarea>
+        </div>
+        <div class="ya" id="ya" role="status" aria-live="polite" hidden>
+          <p id="ya-txt"></p>
+          <div class="opts" id="ya-opts"></div>
+        </div>
+      </div>
+
+      <p class="msg" id="msg" role="status" hidden></p>
+
+      <div><button class="btn btn-brand" type="submit" id="enviar">Avisarme</button></div>
+
+      <p class="legal">Usamos tus datos solo para avisarte del lanzamiento y para saber qué servicios hacen falta en cada comuna. No se los damos a nadie. Si quieres que los borremos, escríbenos a <a href="mailto:contacto@hazlochile.com">contacto@hazlochile.com</a>. Más detalle en la <a href="/legales.html#privacidad">política de privacidad</a>.</p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <a class="logo" href="/" aria-label="Hazlo Ahora, inicio">
+        <span class="mark"><svg width="19" height="19" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
+        Hazlo Ahora
+      </a>
+      <p>© 2026 HAZLO AHORA SpA · RUT 78.516.069-K · Santiago de Chile</p>
+      <nav class="links" aria-label="Enlaces">
+        <a href="/soporte.html">Soporte</a>
+        <a href="/legales.html#privacidad">Privacidad</a>
+        <a href="/legales.html#terminos">Términos</a>
+        <a href="/eliminar-cuenta.html">Eliminar cuenta</a>
+        <a href="mailto:contacto@hazlochile.com">contacto@hazlochile.com</a>
+      </nav>
+    </div>
+    <a class="social" href="https://www.instagram.com/hazlo_app" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      @hazlo_app
+    </a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Mientras las apps no estén en las tiendas: formulario de lista de espera. Con true: botones de las tiendas.
+  const TIENDAS = false;
+  var APP_STORE = '';   // por completar
+  var GOOGLE_PLAY = ''; // por completar
+
+  // Misma URL de Supabase y misma clave pública que index.html.
+  var SUPABASE_URL = 'https://qimechlfblfmdvzspkmt.supabase.co';
+  var KEY = 'sb_publishable_TEAlP8dlpwr-7H7rrq1ICQ_13KFdG9m';
+  var URL_API = SUPABASE_URL + '/rest/v1/leads';
+
+  // Código del cartel (?c=VADA682S): solo letras y números.
+  var CODIGO = (new URLSearchParams(location.search).get('c') || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 20);
+
+  // ---- Catálogo (el mismo de index.html), para el formulario ----
+  var CATALOGO = [
+    ['Hogar y reparaciones', '🔧', '#FF6B2C', [
+      ['Electricidad', 0, 'Electricidad|Enchufes y focos|Tablero eléctrico|Cortocircuito|Cambio de automáticos|Instalación de lámparas|Certificado SEC TE1', 'electricista luz enchufe corte automatico se corta la luz'],
+      ['Gasfitería', 0, 'Gasfitería (agua)|Filtraciones|Llaves y grifería|WC y estanque|Calefont|Termo eléctrico|Instalación de lavaplatos', 'gasfiter gasfitero fuga agua gotea goteo llave cañeria baño wc'],
+      ['Destape y alcantarillado', 0, 'Desatoro de WC|Desatoro de lavaplatos|Hidrolavado de cañerías|Cámara de inspección', 'tapado tapada desatorar desatascar alcantarillado'],
+      ['Gas (instalador SEC)', 1, 'Revisión y reparación de fugas de gas|Instalación o mantención de calefont|Conexión de cocina o encimera a gas|Mantención de estufas a gas|Conversión de artefactos (licuado a natural)', 'gas olor a gas gasista sec'],
+      ['Pintura', 0, 'Pintura|Pintura interior|Pintura exterior|Esmalte|Empaste y estucado|Reparación de muros', 'pintor pintar muro pared'],
+      ['Cerrajería', 0, 'Cerrajería|Apertura de puerta|Cambio de chapa|Cerradura de seguridad|Copia de llave|Cerrajería de auto', 'cerrajero chapa cerradura llaves me quede afuera'],
+      ['Carpintería y muebles', 0, 'Reparación de muebles|Puertas: ajustar, cambiar o instalar|Closets y muebles a medida|Muebles de cocina (reparar o instalar)|Bisagras, correderas y manillas', 'carpintero mueble closet puerta'],
+      ['Armado de muebles', 0, 'Armado de mueble en caja|Desarmar y trasladar|Instalación de repisas', 'armar mueble ikea'],
+      ['Instalaciones menores', 0, 'Instalar soporte y colgar TV en el muro|Repisas|Cuadros y espejos|Cortineros|Accesorios de baño|Ocultar cables del TV (canaletas)|Soporte de monitor o proyector', 'colgar tv televisor soporte cuadro maestro chasquilla'],
+      ['Cerámica y pisos', 0, 'Instalación de cerámica o porcelanato|Piso flotante o vinílico|Cambio o reparación de fragüe|Cambiar cerámicas sueltas o quebradas|Guardapolvos y terminaciones', 'ceramica porcelanato piso flotante ceramista'],
+      ['Techumbre y canaletas', 0, 'Reparar goteras|Limpieza y reparación de canaletas|Impermeabilización de techo|Cambio de planchas o tejas', 'techo gotera canaleta techumbre'],
+      ['Vidrios y ventanas', 0, 'Cambio de vidrio quebrado|Termopanel|Reparación de ventanas (correderas, manillas, cierres)|Burletes y sellado (entra aire o agua)|Mosquiteros', 'vidrio ventana vidriero termopanel'],
+      ['Climatización', 0, 'Instalación de aire acondicionado|Mantención y limpieza de aire acondicionado|Reparación de aire acondicionado (no enfría, gotea)|Carga de gas refrigerante|Mantención de estufa a pellet o eléctrica', 'aire acondicionado split no enfria estufa pellet calefaccion'],
+      ['Electrodomésticos y línea blanca', 0, 'Reparación de electrodomésticos|Lavadora|Secadora|Refrigerador|Cocina y horno|Lavavajillas|Microondas|Instalación de línea blanca', 'lavadora refri refrigerador secadora horno microondas tecnico'],
+      ['Cámaras y seguridad del hogar', 0, 'Instalación de cámaras de seguridad|Configurar cámaras para verlas en el celular|Reparación o mantención de cámaras|Instalación de alarmas|Timbre con cámara o videoportero', 'camara camaras alarma seguridad'],
+      ['Piscinas', 0, 'Mantención y limpieza de piscina|Puesta en marcha de temporada|Recuperar agua verde o turbia|Reparación de bomba o filtro', 'piscina agua verde']
+    ]],
+    ['Limpieza y mantención', '🧹', '#0E9F7A', [
+      ['Aseo del hogar', 0, 'Limpieza regular|Limpieza profunda|Limpieza post mudanza|Limpieza post obra|Limpieza de vidrios|Orden y organización', 'aseo limpieza nana asesora del hogar'],
+      ['Lavado de muebles y textiles', 0, 'Lavado de sillones|Lavado de alfombras|Lavado de colchones|Lavado de cortinas|Sanitización', 'sillon alfombra colchon lavado']
+    ]],
+    ['Belleza y estética', '💅', '#C0367A', [
+      ['Uñas', 0, 'Manicure y pedicure|Manicura|Pedicura|Esmaltado semipermanente|Uñas acrílicas|Uñas de gel|Kapping|Manicura rusa|Retiro de acrílico o gel|Reparación de uña|Nail art|Spa de manos|Spa de pies', 'manicure manicurista pedicure uñas'],
+      ['Cabello', 0, 'Peluquería: corte y color|Corte de pelo mujer|Corte de pelo hombre|Corte infantil|Peinado|Peinado de novia|Peinado de evento|Color y tintura|Retoque de raíz|Mechas y balayage|Decoloración|Alisado y keratina|Permanente|Tratamiento capilar|Extensiones de cabello|Trenzas', 'peluquera peluqueria pelo corte tintura'],
+      ['Barbería', 0, 'Barbero a domicilio|Corte de barba|Perfilado y afeitado|Corte y barba|Diseño de líneas|Coloración de barba', 'barbero barba'],
+      ['Cejas y pestañas', 0, 'Pestañas y cejas|Diseño de cejas|Henna de cejas|Tinte de cejas|Laminado de cejas|Extensiones pelo a pelo|Volumen ruso|Lifting de pestañas|Tinte de pestañas|Retiro de extensiones', 'pestañas cejas lashista'],
+      ['Facial y limpieza de piel', 0, 'Limpieza facial profunda|Hidratación facial|Exfoliación facial|Limpieza de espalda|Masaje facial', 'facial piel cosmetologa'],
+      ['Maquillaje', 0, 'Maquillaje|Maquillaje social|Maquillaje de novia|Maquillaje de 15 años|Maquillaje y peinado|Clase de automaquillaje|Caracterización', 'maquilladora maquillaje'],
+      ['Podología', 1, 'Atención podológica general|Uñas encarnadas|Hongos en uñas o pies|Callosidades y durezas|Pie diabético (control)', 'podologo podologa pies']
+    ]],
+    ['Salud a domicilio', '🩺', '#2F6FED', [
+      ['Kinesiología', 1, 'Rehabilitación (lesiones, post operatorio)|Kinesiología respiratoria|Kinesiología para adulto mayor|Rehabilitación neurológica|Lesiones deportivas', 'kinesiologo kine rehabilitacion'],
+      ['Fonoaudiología', 1, 'Lenguaje infantil|Habla y pronunciación|Voz|Deglución|Audiología|Evaluación inicial|Adulto mayor', 'fono fonoaudiologo fonoaudiologa lenguaje habla'],
+      ['Masoterapia', 1, 'Masaje de relajación|Masaje descontracturante|Masaje deportivo|Drenaje linfático|Masaje con piedras calientes', 'masaje masajes masajista'],
+      ['Terapia ocupacional', 1, 'Evaluación inicial|Adulto mayor y autonomía|Niños y neurodesarrollo|Rehabilitación de mano y movilidad|Adaptación del hogar y ayudas técnicas', 'terapeuta ocupacional to'],
+      ['Enfermería', 1, 'Curaciones|Inyecciones (con receta)|Control de presión y glicemia|Cambio de sondas|Cuidados post operatorios', 'enfermera enfermero tens curacion inyeccion']
+    ]],
+    ['Cuidado de personas', '🤝', '#7C3AED', [
+      ['Niñera y cuidado de niños', 1, 'Niñera por horas|Niñera de noche o para una salida|Cuidado de bebés (0 a 2 años)|Retiro del colegio y ayuda con tareas|Cuidado de niños en eventos', 'niñera nana cuidar niños guagua bebe'],
+      ['Cuidado de adulto mayor', 1, 'Acompañamiento por horas|Cuidado de día o de noche|Acompañar a controles médicos o trámites|Ayuda con higiene y alimentación', 'cuidadora cuidador abuelo abuela adulto mayor']
+    ]],
+    ['Mascotas', '🐾', '#B7731A', [
+      ['Peluquería canina y felina', 0, 'Baño|Corte de pelo|Corte de uñas|Limpieza de oídos|Deslanado|Baño medicado|Grooming de gatos', 'perro gato mascota peluqueria canina bañar perro'],
+      ['Paseo y cuidado', 0, 'Paseo de perros|Paseo grupal|Cuidado en casa|Guardería|Visita de alimentación', 'paseador perro mascota cuidar']
+    ]],
+    ['Vehículos', '🚗', '#3C4A63', [
+      ['Mecánica a domicilio', 0, 'Mecánica a domicilio|Diagnóstico|Frenos|Correas|Suspensión|Embrague|Electricidad del auto (luces, batería, alternador)', 'mecanico auto frenos'],
+      ['Mantención rápida', 0, 'Cambio de aceite|Batería a domicilio|Neumáticos y parchado|Cambio de filtros', 'aceite bateria neumatico rueda'],
+      ['Diagnóstico y revisión', 0, 'Scanner electrónico|Inspección pre-compra|Inspección pre-compra en automotora|Peritaje de carrocería y pintura|Preparación para revisión técnica', 'scanner revision tecnica comprar auto usado'],
+      ['Aire acondicionado del auto', 0, 'Carga de gas del aire acondicionado|Revisión (no enfría, mal olor)|Cambio de filtro de habitáculo', 'aire del auto'],
+      ['Limpieza de auto', 0, 'Lavado a domicilio|Limpieza de tapiz|Sanitización', 'lavado de auto tapiz'],
+      ['Asistencia en ruta', 0, 'Batería descargada (partir con cables)|Cambio de neumático pinchado|Me quedé sin bencina|Cambio de batería en el lugar', 'pana auto no parte pinchazo bencina'],
+      ['Bicicletas y motos', 0, 'Mantención de bicicleta|Reparación de bicicleta (frenos, cambios, pinchazo)|Bicicletas y scooters eléctricos|Mantención de moto|Reparación de moto', 'bici bicicleta moto scooter']
+    ]],
+    ['Tecnología', '💻', '#2F6FED', [
+      ['Celulares', 0, 'Cambio de pantalla|Cambio de batería|Puerto de carga|Traspaso de datos', 'celular telefono iphone pantalla'],
+      ['Computadores', 0, 'Informática|Reparación de computador|Notebook|Formateo|Limpieza de computador o notebook|Cambio de disco', 'computador notebook pc informatica formatear'],
+      ['Redes y wifi', 0, 'Instalación de wifi|Repetidores|Cableado de red|Configuración de router', 'wifi internet router red'],
+      ['Consolas de videojuegos', 0, 'Limpieza y mantención de consola|Reparación de consola (no enciende, se apaga, sin imagen)|Reparación de controles (drift, botones, batería)|Ampliar almacenamiento (SSD o disco)|Instalación y configuración (TV, internet, cuentas)', 'play playstation xbox nintendo switch control drift']
+    ]],
+    ['Eventos y celebraciones', '🎉', '#FF6B2C', [
+      ['Personal de evento', 0, 'Garzón|Bartender|Parrillero|Cocinero|Anfitriona', 'garzon garzones mesero bartender parrillero evento'],
+      ['Seguridad de evento', 1, 'Guardia|Control de acceso', 'guardia seguridad evento'],
+      ['Música y registro', 0, 'DJ|Sonido y amplificación|Iluminación|Karaoke|Música en vivo|Fotógrafo|Video|Cabina de fotos', 'dj fotografo musica sonido'],
+      ['Entretención y juegos', 0, 'Juegos inflables|Máquina arcade|Taca taca|Mesa de pool|Ping pong|Algodón de azúcar|Cabritas|Toro mecánico', 'inflable cumpleaños juegos'],
+      ['Mobiliario y vajilla', 0, 'Vajilla y cristalería|Mesas y sillas|Manteles|Toldos y carpas|Calefactores|Mesón de bar', 'arriendo mesas sillas toldo'],
+      ['Decoración', 0, 'Globos y arcos|Ambientación temática|Mesa dulce|Flores y centros de mesa|Letras luminosas|Backdrop', 'globos decoracion cumpleaños'],
+      ['Comida', 0, 'Catering|Chef a domicilio|Cena privada|Asado completo|Torta personalizada|Coctelería', 'catering chef asado torta comida coffee']
+    ]],
+    ['Clases y educación', '📚', '#0E9F7A', [
+      ['Reforzamiento escolar', 0, 'Matemáticas|Lenguaje|Inglés|Física|Química|Biología|Historia|Tareas dirigidas|Preparación PAES', 'profesor profesora clases particulares paes'],
+      ['Idiomas', 0, 'Clases de inglés|Conversación en inglés|Otros idiomas (portugués, francés, italiano…)|Español para extranjeros|Preparación de exámenes (TOEFL, IELTS…)', 'ingles idioma profesor'],
+      ['Clases de música', 0, 'Clases de guitarra|Clases de piano o teclado|Clases de canto|Clases de batería|Clases de violín|Otros instrumentos (ukelele, bajo, charango…)', 'guitarra piano canto musica'],
+      ['Baile', 0, 'Salsa|Bachata|Urbano|Zumba|Danza árabe|Ballet infantil|Vals de novios|Vals de 15 años', 'baile bailar clases de baile'],
+      ['Deporte y bienestar', 0, 'Entrenador personal|Yoga|Pilates|Natación|Defensa personal|Running', 'personal trainer entrenador gimnasia']
+    ]],
+    ['Exteriores y jardín', '🌿', '#0E9F7A', [
+      ['Jardinería', 0, 'Jardinería y poda|Corte de pasto|Poda|Mantención de jardín|Plantación|Limpieza de patio', 'jardinero pasto patio arboles']
+    ]],
+    ['Transporte y logística', '🚚', '#2F6FED', [
+      ['Fletes y mudanzas', 0, 'Fletes y mudanzas|Flete menor|Mudanza completa|Traslado de electrodomésticos|Traslado de piano', 'flete mudanza camion'],
+      ['Retiros', 0, 'Retiro de escombros|Retiro de muebles|Chatarra|Reciclaje', 'escombros basura retiro cachureos'],
+      ['Conductor (maneja tu auto)', 1, 'Conductor por horas (maneja tu auto)|Conductor para volver de un evento en tu auto|Llevar tu auto al taller o a la revisión técnica', 'chofer conductor manejar']
+    ]],
+    ['Cuidado de cosas', '🧵', '#8A6A2E', [
+      ['Zapatillas y calzado', 0, 'Lavado de zapatillas|Restauración|Teñido|Reparación de calzado', 'zapatillas zapatos zapatero'],
+      ['Costura y arreglos de ropa', 0, 'Bastas y largo de pantalones o faldas|Ajuste de talla (entallar, achicar o agrandar)|Cambio de cierre o botones|Arreglo de roturas y costuras abiertas|Confección a medida|Vestidos de fiesta y de novia|Cortinas, cojines y fundas (confección o arreglo)|Disfraces y trajes típicos|Bordados, parches y nombres en uniformes', 'costurera modista costura ropa basta cierre']
+    ]]
+  ];
+
+  function el(tag, cls, txt) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function norm(s) {
+    return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ñ ]/g, ' ');
+  }
+  var INDICE = [];
+  CATALOGO.forEach(function (g) {
+    g[3].forEach(function (o) {
+      o[2].split('|').forEach(function (s) {
+        INDICE.push({ s: s, o: o[0], g: g[0], k: norm(s + ' ' + o[0] + ' ' + o[3]), sn: norm(s), on: norm(o[0] + ' ' + o[3]) });
+      });
+    });
+  });
+
+  function buscarServicios(texto, max, estricto, soloMejores) {
+    var q = norm(texto).trim();
+    if (q.length < 3) return [];
+    var palabras = q.split(/\s+/).filter(function (w) { return w.length >= 3 && ['del','las','los','una','uno','unos','unas','con','para','que','por','mis','hay','esta','tiene','soy','hago','trabajo','necesito','quiero','busco','alguien','algo','como','mas','tambien','cosas','casa','depto','departamento'].indexOf(w) < 0 && w.indexOf('arregl') !== 0; });
+    if (!palabras.length) palabras = [q];
+    var hits = [];
+    INDICE.forEach(function (it) {
+      var pts = 0, todas = true;
+      palabras.forEach(function (w) {
+        var raiz = w.length > 4 ? w.slice(0, Math.max(4, w.length - 2)) : w;
+        if (it.sn.indexOf(raiz) >= 0) pts += 3;
+        else if (it.k.indexOf(raiz) >= 0) pts += 1;
+        else todas = false;
+        if (it.on.indexOf(raiz) >= 0) pts += 2;
+        if (it.sn.indexOf(w) >= 0) pts += 2;
+      });
+      if (palabras.length > 1 && it.sn.indexOf(q) >= 0) pts += 4;
+      if (pts > 0) hits.push({ it: it, pts: pts + (todas ? 2 : 0), todas: todas });
+    });
+    // Si algo calza con todas las palabras, se muestran solo esos.
+    if (estricto || hits.some(function (x) { return x.todas; })) hits = hits.filter(function (x) { return x.todas; });
+    hits.sort(function (a, b) { return b.pts - a.pts; });
+    if (soloMejores && hits.length) hits = hits.filter(function (x) { return x.pts === hits[0].pts; });
+    var vistos = {}, lista = [];
+    hits.forEach(function (x) {
+      if (lista.length >= max) return;
+      var id = x.it.o + '|' + x.it.s;
+      if (vistos[id]) return;
+      vistos[id] = 1; lista.push(x.it);
+    });
+    return lista;
+  }
+
+  // ---- El cartel ----
+  var cargando = document.getElementById('cargando');
+  var conCartel = document.getElementById('con-cartel');
+  var sinCartel = document.getElementById('sin-cartel');
+  var registro = document.getElementById('registro');
+
+  function iniciales(nombre) {
+    var p = String(nombre || '').trim().split(/\s+/).filter(Boolean);
+    if (!p.length) return 'H';
+    return (p[0][0] + (p[1] ? p[1][0] : '')).toUpperCase();
+  }
+
+  function mostrarCartel(c) {
+    var nombre = String(c.nombre || '').trim() || 'Profesional de Hazlo Ahora';
+    document.title = nombre + ' · Hazlo Ahora';
+    document.getElementById('pro-av').textContent = iniciales(nombre);
+    document.getElementById('pro-nombre').textContent = nombre;
+    var oficios = Array.isArray(c.oficios) ? c.oficios.slice(0, 3).map(String) : [];
+    document.getElementById('pro-oficios').textContent = oficios.join(' · ');
+    var sellos = document.getElementById('pro-sellos');
+    sellos.textContent = '';
+    sellos.appendChild(el('span', 'sello', '📍 ' + (String(c.zona || '').trim() || 'Gran Santiago')));
+    // Solo los sellos que son verdad.
+    if (c.identidad_verificada === true) sellos.appendChild(el('span', 'sello ok', '✓ Identidad verificada'));
+    if (c.antecedentes_revisados === true) sellos.appendChild(el('span', 'sello ok', '✓ Antecedentes revisados'));
+    var n = Number(c.calificaciones) || 0;
+    if (n >= 1) {
+      var est = (Number(c.estrellas) || 0).toFixed(1).replace('.', ',');
+      sellos.appendChild(el('span', 'sello star', '★ ' + est + ' · ' + n + (n === 1 ? ' calificación' : ' calificaciones')));
+    }
+    document.getElementById('titulo-pedile').textContent = 'Pídele a ' + nombre + ' por Hazlo Ahora';
+
+    if (TIENDAS) {
+      if (APP_STORE) document.getElementById('app-store').href = APP_STORE;
+      if (GOOGLE_PLAY) document.getElementById('google-play').href = GOOGLE_PLAY;
+      document.getElementById('tiendas').hidden = false;
+    } else {
+      registro.hidden = false;
+    }
+    cargando.hidden = true;
+    conCartel.hidden = false;
+  }
+
+  function noEncontrado() {
+    cargando.hidden = true;
+    sinCartel.hidden = false;
+  }
+
+  if (!CODIGO) {
+    noEncontrado();
+  } else {
+    fetch(SUPABASE_URL + '/rest/v1/rpc/cartel_publico', {
+      method: 'POST',
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_codigo: CODIGO })
+    }).then(function (r) {
+      return r.ok ? r.json() : null;
+    }).then(function (c) {
+      if (Array.isArray(c)) c = c[0];
+      if (c && typeof c === 'object' && c.nombre) mostrarCartel(c);
+      else noEncontrado();
+    }).catch(noEncontrado);
+  }
+
+  // ---- Lista de espera (igual que index.html; el origen queda como cartel:CODIGO) ----
+  var form = document.getElementById('lead-form');
+  var side = document.getElementById('side');
+  var interes = document.getElementById('interes');
+  var interesLabel = document.getElementById('interes-label');
+  var msg = document.getElementById('msg');
+  var enviar = document.getElementById('enviar');
+  var hint = document.getElementById('cuenta-hint');
+  var otroBox = document.getElementById('otro-box');
+  var todas = document.getElementById('cats-all');
+  var vermas = document.getElementById('vermas');
+  var OTRO = 'Otro';
+  var elegidos = [];
+
+
+  var TOP_CLIENTE = [
+    ['Gasfitería', 'Fugas, llaves, WC, calefont'],
+    ['Electricidad', 'Enchufes, cortes, tablero'],
+    ['Cerrajería', 'Chapas y apertura'],
+    ['Aseo del hogar', 'Limpieza regular o profunda'],
+    ['Fletes y mudanzas', 'Camión con ayudantes'],
+    ['Uñas', 'Manicure y pedicure'],
+    ['Cabello', 'Corte, color, peinado'],
+    ['Mecánica a domicilio', 'Frenos, diagnóstico, batería']
+  ];
+  var TOP_PRO = [
+    ['Gasfitería', 'Fugas, llaves, WC, calefont', 1],
+    ['Electricidad', 'Enchufes, cortes, tablero', 1],
+    ['Cerrajería', 'Chapas y apertura', 1],
+    ['Aseo del hogar', 'Limpieza regular o profunda'],
+    ['Fletes y mudanzas', 'Tienes camión o camioneta'],
+    ['Pintura', 'Interior y exterior'],
+    ['Uñas', 'Manicure y pedicure'],
+    ['Personal de evento', 'Garzón, bartender, parrillero']
+  ];
+
+  function boton(nombre, detalle, ahora) {
+    var b = el('button', 'opt');
+    b.type = 'button';
+    b.dataset.name = nombre;
+    b.setAttribute('aria-pressed', 'false');
+    b.appendChild(el('span', null, nombre));
+    if (detalle) b.appendChild(el('small', null, detalle));
+    if (ahora) b.appendChild(el('span', 'now', 'Buscamos ahora'));
+    b.addEventListener('click', function () { alternar(nombre); });
+    return b;
+  }
+
+  function alternar(nombre) {
+    var i = elegidos.indexOf(nombre);
+    if (i >= 0) elegidos.splice(i, 1); else elegidos.push(nombre);
+    refrescar();
+    if (nombre === OTRO && !otroBox.hidden) interes.focus();
+  }
+
+  function refrescar() {
+    document.querySelectorAll('.opt').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(elegidos.indexOf(b.dataset.name) >= 0));
+    });
+    otroBox.hidden = elegidos.indexOf(OTRO) < 0;
+    hint.textContent = elegidos.length
+      ? elegidos.length + (elegidos.length === 1 ? ' elegido' : ' elegidos')
+      : 'Marca los que quieras';
+    hint.className = elegidos.length ? 'cuenta' : 'hint';
+    msg.hidden = true;
+  }
+
+  function pintarTop(lista) {
+    var cont = document.getElementById('opts-top');
+    cont.textContent = '';
+    lista.forEach(function (t) { cont.appendChild(boton(t[0], t[1], t[2])); });
+    cont.appendChild(boton(OTRO, 'No está en la lista'));
+    refrescar();
+  }
+
+  CATALOGO.forEach(function (g) {
+    var w = el('div');
+    w.appendChild(el('p', 'mini', g[0]));
+    var fila = el('div', 'opts');
+    g[3].forEach(function (o) { fila.appendChild(boton(o[0], '')); });
+    w.appendChild(fila);
+    todas.appendChild(w);
+  });
+
+  function abrirTodas(abrir) {
+    todas.hidden = !abrir;
+    vermas.setAttribute('aria-expanded', String(abrir));
+    vermas.textContent = abrir ? 'Ocultar oficios' : 'Ver todos los oficios';
+  }
+  vermas.addEventListener('click', function () { abrirTodas(todas.hidden); });
+
+
+  // Texto bajo las pestañas (armado con textContent, sin innerHTML).
+  function nota(negrita, resto, alFinal) {
+    var n = document.getElementById('side-note');
+    n.textContent = '';
+    var b = el('b', null, negrita);
+    if (alFinal) { n.appendChild(document.createTextNode(resto + ' ')); n.appendChild(b); }
+    else { n.appendChild(b); n.appendChild(document.createTextNode(' ' + resto)); }
+  }
+
+  function setSide(s) {
+    side.value = s;
+    var cajaYa = document.getElementById('ya'); if (cajaYa) cajaYa.hidden = true;
+    document.querySelectorAll('.tab').forEach(function (t) {
+      t.setAttribute('aria-selected', String(t.dataset.side === s));
+    });
+    if (s === 'prestador') {
+      interesLabel.textContent = '¿En qué oficios trabajas?';
+      document.getElementById('top-titulo').textContent = 'Oficios';
+      interes.placeholder = 'Mi oficio no está en la lista: …';
+      nota('Tus primeros 2 meses en la app, sin comisión.', 'Te escribimos con los pasos para inscribirte y respondemos todas tus dudas.');
+      pintarTop(TOP_PRO);
+    } else {
+      interesLabel.textContent = '¿Qué servicios te gustaría pedir?';
+      document.getElementById('top-titulo').textContent = 'Los más pedidos';
+      interes.placeholder = 'Afilar cuchillos, tapicería, instalar paneles solares…';
+      nota('Pedir y comparar precios es gratis.', 'Te avisamos apenas puedas pedir en tu comuna y te contamos cómo funciona.', true);
+      pintarTop(TOP_CLIENTE);
+    }
+  }
+  document.querySelectorAll('[data-side]').forEach(function (x) {
+    x.addEventListener('click', function () { setSide(x.dataset.side); });
+  });
+  setSide('cliente');
+
+  // Quién trajo a quién: el origen es el código del cartel (la base acepta hasta 40 letras).
+  var origen = ('cartel:' + CODIGO).slice(0, 40);
+
+  function aviso(kind, text) { msg.dataset.kind = kind; msg.textContent = text; msg.hidden = false; }
+
+  // Si en "Otro" escriben algo que ya existe, se lo recomendamos para marcarlo con un toque.
+  var ya = document.getElementById('ya'), yaTxt = document.getElementById('ya-txt'), yaOpts = document.getElementById('ya-opts'), tYa;
+  interes.addEventListener('input', function () { clearTimeout(tYa); tYa = setTimeout(sugerirExistente, 250); });
+  function sugerirExistente() {
+    var vistos = {}, ofs = [];
+    buscarServicios(interes.value, 8, true, true).forEach(function (it) {
+      if (vistos[it.o] || elegidos.indexOf(it.o) >= 0 || ofs.length >= 3) return;
+      vistos[it.o] = 1; ofs.push(it);
+    });
+    yaOpts.textContent = '';
+    if (!ofs.length) { ya.hidden = true; return; }
+    yaTxt.textContent = side.value === 'prestador' ? '¡Ese oficio ya está en Hazlo Ahora! Márcalo aquí:' : '¡Eso ya lo tenemos! Márcalo aquí:';
+    ofs.forEach(function (it) {
+      var b = el('button', 'opt');
+      b.type = 'button';
+      b.appendChild(el('span', null, '+ ' + it.o));
+      b.appendChild(el('small', null, it.s));
+      b.addEventListener('click', function () { marcarExistente(it.o); });
+      yaOpts.appendChild(b);
+    });
+    ya.hidden = false;
+  }
+  function marcarExistente(oficio) {
+    if (elegidos.indexOf(oficio) < 0) elegidos.push(oficio);
+    interes.value = '';
+    var i = elegidos.indexOf(OTRO);
+    if (i >= 0) elegidos.splice(i, 1);
+    var top = side.value === 'prestador' ? TOP_PRO : TOP_CLIENTE;
+    if (!top.some(function (t) { return t[0] === oficio; })) abrirTodas(true);
+    refrescar();
+    yaOpts.textContent = '';
+    yaTxt.textContent = '✓ Listo, marcamos ' + oficio + '.';
+    ya.hidden = false;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (document.getElementById('website').value) return;
+
+    var nombre = form.nombre.value.trim();
+    var contacto = form.contacto.value.trim();
+    if (nombre.length < 2) { aviso('err', 'Escribe tu nombre para poder saludarte bien.'); form.nombre.focus(); return; }
+    var esMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto);
+    var esFono = /^\+?[\d\s().-]{8,}$/.test(contacto);
+    if (!esMail && !esFono) { aviso('err', 'Necesitamos un WhatsApp o un correo para avisarte.'); form.contacto.focus(); return; }
+
+    // Lo elegido + lo escrito en "Otro", en un solo texto.
+    var libre = interes.value.trim();
+    var partes = elegidos.filter(function (n) { return n !== OTRO; });
+    if (libre) partes.push('Otro: ' + libre);
+    var detalle = partes.join(', ').slice(0, 300) || null;
+
+    enviar.disabled = true; enviar.textContent = 'Enviando…'; msg.hidden = true;
+
+    fetch(URL_API, {
+      method: 'POST',
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({
+        side: side.value, name: nombre, contact: contacto,
+        comuna: form.comuna.value.trim() || null,
+        interest: detalle,
+        source: origen
+      })
+    }).then(function (r) {
+      if (r.ok) {
+        var s = side.value;
+        form.reset();
+        elegidos = [];
+        setSide(s);
+        aviso('ok', s === 'prestador'
+          ? '¡Gracias! Te escribimos para sumarte a Hazlo Ahora antes del lanzamiento.'
+          : '¡Listo! Te avisamos apenas Hazlo Ahora esté disponible en tu comuna.');
+        return;
+      }
+      return r.text().then(function (t) {
+        if (/LEADS_REPETIDO/.test(t)) aviso('ok', 'Ya te teníamos anotado. ¡Gracias!');
+        else if (/LEADS_LIMITE/.test(t)) aviso('err', 'Estamos recibiendo muchos registros. Prueba en unos minutos.');
+        else aviso('err', 'No pudimos guardar tus datos. Inténtalo de nuevo.');
+      });
+    }).catch(function () {
+      aviso('err', 'No hay conexión. Inténtalo de nuevo en un momento.');
+    }).finally(function () {
+      enviar.disabled = false; enviar.textContent = 'Avisarme';
+    });
+  });
+})();
+</script>
+</body>
+</html>
