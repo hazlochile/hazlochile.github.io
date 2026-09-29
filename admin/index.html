@@ -772,16 +772,27 @@ async function saldos(el) {
 
 // ---------------------------------------------------------------- alertas de desvío
 async function alertas(el) {
-  const [rows, intentos] = await Promise.all([
+  const [rows, intentos, lenguaje] = await Promise.all([
     sel('alertas_desvio', (q) => q.order('intentos_30d', { ascending: false })),
     sel('contact_attempts', (q) => q.order('created_at', { ascending: false }).limit(100)),
+    // hazlo_fix_51: textos bloqueados por mencionar drogas (los garabatos solo se bloquean, no se registran)
+    sel('alertas_lenguaje', (q) => q.limit(100)).catch(() => []),
   ]);
   el.innerHTML = `<div class="card"><h3 style="margin-top:0">Quién intenta pasar su contacto (últimos 30 días)</h3>
     <p class="muted">El servidor oculta teléfonos, correos y enlaces. Aquí ves quién lo intenta y cuántas veces; muchos intentos + cancelaciones = se están arreglando por fuera.</p>
     ${tabla([['Persona', (a) => `<b>${esc(a.full_name || '—')}</b> ${a.es_prestador ? '<span class="pill brand">Prestador</span>' : '<span class="pill">Cliente</span>'}`], ['Intentos', (a) => a.intentos_30d], ['Ocultados', (a) => a.ocultados_30d], ['Cancelaciones con intento', (a) => a.cancelaciones_con_intento_30d], ['Último', (a) => fecha(a.ultimo_intento)]], rows, 'Nadie ha intentado pasar datos de contacto. 🎉')}</div>
     <div class="card"><h3 style="margin-top:0">Últimos intentos</h3>
-    ${tabla([['Cuándo', (i) => fecha(i.created_at)], ['Quién', (i) => nombre(i.user_id)], ['Dónde', (i) => esc(i.source)], ['Qué detectó', (i) => (i.motivos || []).map(esc).join(', ')], ['Oculto', (i) => i.oculto ? 'Sí' : 'No'], ['Solicitud', (i) => corto(i.request_id)]], intentos)}</div>`;
+    ${tabla([['Cuándo', (i) => fecha(i.created_at)], ['Quién', (i) => nombre(i.user_id)], ['Dónde', (i) => esc(i.source)], ['Qué detectó', (i) => (i.motivos || []).map(esc).join(', ')], ['Oculto', (i) => i.oculto ? 'Sí' : 'No'], ['Solicitud', (i) => corto(i.request_id)]], intentos)}</div>
+    <div class="card"><h3 style="margin-top:0">Lenguaje: menciones de drogas (para revisar)</h3>
+    <p class="muted">El texto no se publicó: la app no deja enviarlo. Revisa si es un intento real de vender o comprar y, si corresponde, suspende la cuenta. Los garabatos también se bloquean, pero no quedan registrados.</p>
+    <div id="lMsg"></div>
+    ${tabla([['Cuándo', (a) => fecha(a.created_at)], ['Quién', (a) => `<b>${esc(a.full_name || '—')}</b> ${a.es_prestador ? '<span class="pill brand">Prestador</span>' : '<span class="pill">Cliente</span>'}`], ['Dónde', (a) => esc(a.source)], ['Palabras', (a) => (a.terminos || []).map(esc).join(', ')], ['Texto', (a) => `<span class="muted">${esc(a.texto)}</span>`], ['', (a) => a.revisada ? 'Revisada' : `<button class="btn ghost sm" onclick="lenguajeRevisada(${Number(a.id)})">Marcar revisada</button>`]], lenguaje, 'Nadie ha intentado publicar textos sobre drogas.')}</div>`;
 }
+window.lenguajeRevisada = async (id) => {
+  const { error } = await db.from('lenguaje_alertas').update({ revisada: true }).eq('id', id);
+  if (error) return msg($('#lMsg'), errorTexto(error), 'bad');
+  mostrar('alertas');
+};
 
 // ---------------------------------------------------------------- reportes
 async function reportes(el) {
