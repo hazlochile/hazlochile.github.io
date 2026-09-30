@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hazlo Ahora · Tarjeta</title>
+<style>
+  body { margin: 0; padding: 40px 20px; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #FAF7F3; color: #1A1714; text-align: center; }
+  .caja { max-width: 420px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 28px 22px; box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+  .icono { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #fff; }
+  .ok .icono { background: #1E6B3A } .no .icono { background: #B3261E }
+  h1 { font-size: 22px; margin: 0 0 10px; }
+  p { font-size: 15px; line-height: 1.5; color: #4A443D; margin: 0 0 12px; }
+  .chica { font-size: 13px; color: #8F887F; }
+  .boton { display: inline-block; margin-top: 10px; padding: 13px 24px; background: #FF6B2C; color: #fff; text-decoration: none; font-weight: 700; border-radius: 999px; font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="caja" id="caja">
+  <div class="icono" id="icono"></div>
+  <h1 id="titulo"></h1>
+  <p id="texto"></p>
+  <a class="boton" id="volver" href="hazlo://pago">Volver a Hazlo Ahora</a>
+  <p class="chica" style="margin-top:16px">Si la app no se abre sola, toca el botón. Si ya la cerraste, ábrela de nuevo: la tarjeta aparece en tu perfil.</p>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var ok = q.get('ok') === '1';
+  var marca = q.get('marca') || 'tarjeta';
+  var u4 = q.get('ultimos4') || '';
+  var motivo = q.get('motivo') || '';
+  document.getElementById('caja').className = 'caja ' + (ok ? 'ok' : 'no');
+  document.getElementById('icono').textContent = ok ? '✓' : '✕';
+  document.getElementById('titulo').textContent = ok ? '¡Tarjeta guardada!' : 'No se guardó la tarjeta';
+  document.getElementById('texto').textContent = ok
+    ? 'Tu ' + marca + (u4 ? ' terminada en ' + u4 : '') + ' quedó lista. Los trabajos se cobrarán solos cuando el profesional los termine y tú los confirmes.'
+    : (motivo || 'Puedes intentarlo de nuevo desde la app.');
+  // Vuelta: a la app instalada (hazlo://pago) o, si la inscripción partió desde la versión web, a la web
+  var WEB_APP = 'https://app.hazlochile.com/pago';
+  var app = (q.get('origen') === 'web' ? WEB_APP + '?' : 'hazlo://pago?') + q.toString();
+  document.getElementById('volver').href = app;
+  if (q.get('origen') === 'web') document.getElementById('volver').textContent = 'Volver a Hazlo Ahora (web)';
+  // Intento automático de volver (funciona en Android y iOS cuando la app está instalada)
+  setTimeout(function () { location.href = app; }, 400);
+})();
+</script>
+</body>
+</html>

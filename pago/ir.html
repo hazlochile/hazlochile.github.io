@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hazlo Ahora · Guardar tarjeta</title>
+<style>
+  body { margin: 0; padding: 40px 20px; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; background: #FAF7F3; color: #1A1714; text-align: center; }
+  .caja { max-width: 420px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 28px 22px; box-shadow: 0 6px 24px rgba(0,0,0,.06); }
+  h1 { font-size: 20px; margin: 0 0 10px; }
+  p { font-size: 15px; line-height: 1.5; color: #4A443D; margin: 0 0 12px; }
+  .chica { font-size: 13px; color: #8F887F; }
+  .punto { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #FF6B2C; margin: 18px 3px; animation: p 1s infinite alternate; }
+  .punto:nth-child(2) { animation-delay: .2s } .punto:nth-child(3) { animation-delay: .4s }
+  @keyframes p { from { opacity: .25 } to { opacity: 1 } }
+  .boton { display: inline-block; margin-top: 14px; padding: 13px 24px; background: #FF6B2C; color: #fff; text-decoration: none; font-weight: 700; border-radius: 999px; border: 0; font-size: 15px; }
+  .error { color: #B3261E; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="caja">
+  <h1>Te estamos llevando a Transbank…</h1>
+  <p>Ahí vas a ingresar tu tarjeta de forma segura. Hazlo Ahora <b>nunca ve ni guarda</b> el número de tu tarjeta.</p>
+  <p class="chica">Transbank hace un cargo de validación de $50 que se devuelve solo.</p>
+  <div id="espera"><span class="punto"></span><span class="punto"></span><span class="punto"></span></div>
+  <div id="falla" style="display:none">
+    <p class="error" id="motivo"></p>
+    <a class="boton" id="volver" href="hazlo://pago?ok=0">Volver a Hazlo Ahora</a>
+  </div>
+</div>
+<script>
+(async function () {
+  var FN = 'https://qimechlfblfmdvzspkmt.supabase.co/functions/v1/pagos';
+  var c = new URLSearchParams(location.search).get('c') || '';
+  function fallar(msg) {
+    document.getElementById('espera').style.display = 'none';
+    document.getElementById('motivo').textContent = msg;
+    document.getElementById('volver').href = 'hazlo://pago?ok=0&motivo=' + encodeURIComponent(msg);
+    document.getElementById('falla').style.display = 'block';
+  }
+  if (!/^[0-9a-f-]{36}$/.test(c)) return fallar('Enlace inválido. Vuelve a la app e intenta de nuevo.');
+  try {
+    var r = await fetch(FN + '/ir?c=' + encodeURIComponent(c), { cache: 'no-store' });
+    var j = await r.json();
+    if (!r.ok || !j.url_webpay || !j.token) return fallar(j.error || 'No pudimos iniciar la inscripción.');
+    var host = new URL(j.url_webpay).hostname;
+    if (!/\.transbank\.cl$/.test(host)) return fallar('Dirección de pago no válida.');
+    var f = document.createElement('form'); f.method = 'POST'; f.action = j.url_webpay;
+    var i = document.createElement('input'); i.type = 'hidden'; i.name = 'TBK_TOKEN'; i.value = j.token;
+    f.appendChild(i); document.body.appendChild(f); f.submit();
+  } catch (e) {
+    fallar('No pudimos conectar con Transbank. Revisa tu conexión e intenta de nuevo.');
+  }
+})();
+</script>
+</body>
+</html>
