@@ -78,7 +78,8 @@ a{color:inherit}
 .nav a:hover{color:var(--ink); background:var(--card)}
 @media(min-width:960px){.nav{display:flex}}
 .bar-cta{display:flex; gap:8px; flex:none}
-@media(max-width:600px){.bar .logo-t{display:none} .bar-cta .btn-sm{padding:9px 13px}}
+@media(max-width:600px){.bar .logo-t{display:none} .bar-cta .btn-sm{padding:9px 13px} .bar-cta .solo-ancho{display:none}}
+@media(max-width:420px){.bar-cta .corto{display:none}}
 
 /* ---------- buttons ---------- */
 .btn{
@@ -511,7 +512,8 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       <a href="#preguntas">Preguntas</a>
     </nav>
     <div class="bar-cta">
-      <a class="btn btn-line btn-sm" href="#registro" data-side="cliente">Anótate</a>
+      <a class="btn btn-line btn-sm solo-ancho" href="#registro" data-side="cliente">Anótate</a>
+      <a class="btn btn-brand btn-sm" href="https://app.hazlochile.com">Pedir<span class="corto"> un servicio</span></a>
       <a class="btn btn-brand btn-sm" href="#registro" data-side="prestador">Soy profesional</a>
     </div>
   </div>
