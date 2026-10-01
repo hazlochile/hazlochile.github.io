@@ -352,9 +352,9 @@ h2{font-size:clamp(27px,4.4vw,38px); line-height:1.1}
 .ofs{display:flex; flex-wrap:wrap; gap:6px}
 .of{font-size:13px; font-weight:600; color:var(--ink-soft); background:var(--bg); border:1px solid var(--line); padding:4px 9px; border-radius:9px}
 .of.doc{color:var(--ink)}
-.of.doc::after{content:""; display:inline-block; width:11px; height:12px; margin-left:5px; vertical-align:-1px;
-  background:var(--ok); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cpath d='M11 0 0 4v7c0 6.6 4.7 11.8 11 13 6.3-1.2 11-6.4 11-13V4z'/%3E%3C/svg%3E") center/contain no-repeat;
-  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 24'%3E%3Cpath d='M11 0 0 4v7c0 6.6 4.7 11.8 11 13 6.3-1.2 11-6.4 11-13V4z'/%3E%3C/svg%3E") center/contain no-repeat}
+.of.doc::after{content:""; display:inline-block; width:14px; height:14px; margin-left:5px; vertical-align:-2px; background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22translate%281.3 1.3%29%22 fill=%22#0E8F6E%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3C/g%3E%3Cg fill=%22none%22 stroke=%22#1A1714%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3Cpath d=%22m8.8 12.2 2.3 2.3 4.2-4.4%22/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .of.doc::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22translate%281.3 1.3%29%22 fill=%22#3BC7A2%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3C/g%3E%3Cg fill=%22none%22 stroke=%22#F6F1EB%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3Cpath d=%22m8.8 12.2 2.3 2.3 4.2-4.4%22/%3E%3C/g%3E%3C/svg%3E")}}
+:root[data-theme="dark"] .of.doc::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22translate%281.3 1.3%29%22 fill=%22#3BC7A2%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3C/g%3E%3Cg fill=%22none%22 stroke=%22#F6F1EB%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3 19.5 5.8v5.4c0 4.6-3.2 8.3-7.5 9.8-4.3-1.5-7.5-5.2-7.5-9.8V5.8z%22/%3E%3Cpath d=%22m8.8 12.2 2.3 2.3 4.2-4.4%22/%3E%3C/g%3E%3C/svg%3E")}
 .legend{display:flex; flex-wrap:wrap; gap:8px 20px; align-items:center; margin-top:16px; font-size:14px; color:var(--ink-soft)}
 .legend .of{font-size:12.5px}
 .legend a{color:var(--brand-dark); font-weight:700}
@@ -449,7 +449,7 @@ textarea{min-height:82px; resize:vertical}
 .opt:hover{border-color:var(--brand)}
 .opt:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
 .opt[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff}
-.opt[aria-pressed="true"]::before{content:"✓ "; font-weight:800}
+.opt[aria-pressed="true"]::before{content:""; display:inline-block; width:15px; height:15px; margin-right:5px; vertical-align:-2px; background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22translate%281.3 1.3%29%22 fill=%22none%22%3E%3C/g%3E%3Cg fill=%22none%22 stroke=%22#fff%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m5.5 12.6 4.1 4.1 8.9-9.3%22/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
 .opt small{display:block; font-weight:500; font-size:11.5px; opacity:.72; margin-top:1px}
 .opt .now{display:inline-block; margin-top:4px; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--brand)}
 .opt[aria-pressed="true"] .now{color:#fff}
@@ -494,9 +494,41 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 .links a:hover{color:var(--brand-dark)}
 .social{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; color:var(--ink-soft); background:var(--card); border:1.5px solid var(--line); padding:8px 14px; border-radius:999px}
 .social:hover{border-color:var(--brand); color:var(--brand-dark)}
+
+/* ---------- íconos propios de Hazlo ("sello corrido") ---------- */
+.hz{display:inline-block; flex:none; vertical-align:-3px; overflow:visible}
+.hz-est{display:inline-flex; gap:2px; vertical-align:-3px}
+
+.ico,.d-ico{color:var(--c)}
+.ico .hz{width:26px; height:26px}
+.ask-in .hz,.finder-in .hz,.d-search .hz{color:var(--brand)}
+.d-foto .hz,.d-qm .hz,.d-pic .hz,.d-okn .hz,.ya .hz{color:var(--brand); margin-right:6px}
+.d-qm .hz{color:#F5A524; margin-right:3px}
+.d-okn .hz,.ya .hz{color:var(--ok)}
+.d-lock>.hz{color:var(--brand); margin-top:1px}
+.d-lock.d-open>.hz{color:var(--ok)}
+.d-seal .hz{color:var(--ok); margin-right:4px; vertical-align:-2px}
+.checks .hz{color:var(--brand); margin-top:1px}
+.tico .hz{color:var(--ok)}
+.d-okc{background:none !important; color:var(--ok) !important}
+.d-tl .dot .hz{color:transparent; --hz-l:#fff}
+.d-stars button{color:transparent}
+.d-stars button .hz{--hz-l:var(--muted)}
+.d-stars button.on{color:#F5A524}
+.d-stars button.on .hz{--hz-l:var(--ink)}
+.d-bigstars{color:#F5A524}
+.d-bigstars .hz-est{gap:6px}
+
+/* ---------- imágenes 3D de categorías ---------- */
+.ico{width:62px !important; height:62px !important; border-radius:18px !important}
+.ico .hz3d,.d-ico .hz3d{display:block; object-fit:contain}
+.d-ico{width:44px !important; height:44px !important; border-radius:13px !important}
+.d-tile .d-ico{width:54px !important; height:54px !important}
+.d-tile .d-ico .hz3d{width:48px; height:48px}
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-identidad" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="9" cy="11" r="2.4"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h4M14.5 13.5h3"/></g></symbol><symbol id="hz-antecedentes" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M7 3h7l5 5v13H7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 14l2 2 4-4"/></g></symbol><symbol id="hz-portafolio" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M4 19 11 12.6l3 2.4 3-2.6 3 3.1V19z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="9.5" r="1.8"/><path d="m3.5 18.5 7.5-6 3 2.5 3-2.6 3.5 3.6"/></g></symbol><symbol id="hz-titulo" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3 2 8l10 5 10-5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.2V15c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.8M22 8v5"/></g></symbol><symbol id="hz-direccion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><rect x="9.6" y="9.2" width="4.8" height="4" rx="1"/><path d="M10.6 9.2v-.7a1.4 1.4 0 0 1 2.8 0v.7"/></g></symbol><symbol id="hz-contigo" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.5"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="m6 6 3.5 3.5M18 6l-3.5 3.5M6 18l3.5-3.5M18 18l-3.5-3.5"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol></svg>
 
 <header class="bar">
   <div class="wrap bar-in">
@@ -531,7 +563,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         <div class="ask-f">
           <label for="p-que">¿Qué necesitas?</label>
           <div class="ask-in">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>
             <input id="p-que" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="p-lista" placeholder="Busca un servicio o problema" maxlength="80">
           </div>
           <ul class="p-lista" id="p-lista" role="listbox" aria-label="Servicios sugeridos" hidden></ul>
@@ -540,7 +572,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           <div class="ask-f">
             <label for="p-comuna">¿Dónde?</label>
             <div class="ask-in">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-ubicacion"/></svg>
               <input id="p-comuna" type="text" placeholder="Tu comuna" maxlength="40" autocomplete="address-level2">
             </div>
           </div>
@@ -624,7 +656,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <div class="finder">
       <label for="buscar">¿Qué necesitas? Búscalo aquí</label>
       <div class="finder-in">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>
         <input id="buscar" type="search" autocomplete="off" placeholder="Busca un servicio o problema" aria-describedby="buscar-estado">
       </div>
       <p class="sr" id="buscar-estado" aria-live="polite"></p>
@@ -646,32 +678,32 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <p class="sub">Detrás de cada profesional de la red hay un equipo que revisó su identidad, sus antecedentes y su trabajo antes de que pueda cotizar. Así eliges con confianza.</p>
     <div class="trust">
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h4M14.5 13.5h3"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-identidad"/></svg></div>
         <h3>Identidad comprobada</h3>
         <p>Cédula vigente y una selfie que se compara con la foto de la cédula. Una cédula, una cuenta: detrás de cada perfil hay una persona real.</p>
       </div>
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13l2 2 4-4"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-antecedentes"/></svg></div>
         <h3>Certificado de antecedentes</h3>
         <p>Cada profesional lo presenta antes de recibir solicitudes, como en las apps de transporte, y lo renueva cuando vence. Lo revisa nuestro equipo.</p>
       </div>
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-portafolio"/></svg></div>
         <h3>Trabajos reales, por oficio</h3>
         <p>Para cotizar, cada profesional sube fotos de trabajos suyos de ese oficio: cañerías si es gásfiter, uñas si es manicurista. Las revisamos una por una.</p>
       </div>
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.2V15c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.8M22 8v5"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-titulo"/></svg></div>
         <h3>Título donde corresponde</h3>
         <p>En salud, cuidado de niños y adultos mayores, gas, podología, seguridad y conductores pedimos el título, la licencia o el documento que corresponde.</p>
       </div>
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><rect x="9.5" y="8" width="5" height="4.5" rx="1"/><path d="M10.5 8V7a1.5 1.5 0 0 1 3 0v1"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-direccion"/></svg></div>
         <h3>Tu dirección y tu número, protegidos</h3>
         <p>Antes de aceptar, el profesional ve solo la zona aproximada. La dirección exacta la ve únicamente quien elegiste, y el chat oculta teléfonos y correos.</p>
       </div>
       <div class="tcard">
-        <div class="tico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div>
+        <div class="tico"><svg class="hz" width="24" height="24" aria-hidden="true" focusable="false"><use href="#hz-contigo"/></svg></div>
         <h3>Estamos contigo</h3>
         <p>Si algo no te gusta, puedes reportar o bloquear desde el trabajo o el chat, y una persona de nuestro equipo lo revisa. Cuidamos que Hazlo Ahora sea un espacio de respeto para todos: aquí no hay lugar para la violencia, el acoso ni la discriminación.</p>
       </div>
@@ -714,11 +746,11 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <p class="sub">Cuando alguien cerca de ti necesita justo tu oficio, la app te avisa. Tú eliges qué tomar y a qué precio. Para maestros, técnicos, estilistas, profesionales de la salud y todos los que trabajan a domicilio, con o sin empresa.</p>
     <div class="pro-grid">
       <ul class="checks">
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Oportunidades a tu medida.</b> Te avisamos al celular cuando alguien necesita tu oficio, con fotos, en el radio que tú elijas.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tú decides.</b> Pones tu precio y eliges qué trabajos tomas. Antes de cotizar ves consejos para ese servicio y un mensaje listo para mandar.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Al tiro o agendado.</b> Si tienes equipo o dos camiones, dices cuántos trabajos atiendes a la misma hora y tomas varios.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Te ayudamos a presentarte.</b> Marcas en qué eres bueno y qué te destaca, y la app arma tu presentación para los clientes en dos minutos.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Tu reputación crece contigo.</b> Cada trabajo suma estrellas a tu perfil, y el cliente las ve junto a tus fotos antes de elegirte.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Oportunidades a tu medida.</b> Te avisamos al celular cuando alguien necesita tu oficio, con fotos, en el radio que tú elijas.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Tú decides.</b> Pones tu precio y eliges qué trabajos tomas. Antes de cotizar ves consejos para ese servicio y un mensaje listo para mandar.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Al tiro o agendado.</b> Si tienes equipo o dos camiones, dices cuántos trabajos atiendes a la misma hora y tomas varios.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Te ayudamos a presentarte.</b> Marcas en qué eres bueno y qué te destaca, y la app arma tu presentación para los clientes en dos minutos.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Tu reputación crece contigo.</b> Cada trabajo suma estrellas a tu perfil, y el cliente las ve junto a tus fotos antes de elegirte.</span></li>
       </ul>
       <div class="side">
         <div class="box">
@@ -903,7 +935,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   // ---- Catálogo encendido en la app (26-sep-2026): 13 categorías, 63 oficios, 363 servicios ----
   // [categoría, ícono, color, [[oficio, exige título (1/0), 'servicio|servicio|…', 'palabras de búsqueda']]]
   var CATALOGO = [
-    ['Hogar y reparaciones', '🔧', '#FF6B2C', [
+    ['Hogar y reparaciones', 'hogar', '#FF6B2C', [
       ['Electricidad', 0, 'Electricidad|Enchufes y focos|Tablero eléctrico|Cortocircuito|Cambio de automáticos|Instalación de lámparas|Certificado SEC TE1', 'electricista luz enchufe corte automatico se corta la luz'],
       ['Gasfitería', 0, 'Gasfitería (agua)|Filtraciones|Llaves y grifería|WC y estanque|Calefont|Termo eléctrico|Instalación de lavaplatos', 'gasfiter gasfitero fuga agua gotea goteo llave cañeria baño wc'],
       ['Destape y alcantarillado', 0, 'Desatoro de WC|Desatoro de lavaplatos|Hidrolavado de cañerías|Cámara de inspección', 'tapado tapada desatorar desatascar alcantarillado'],
@@ -921,11 +953,11 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       ['Cámaras y seguridad del hogar', 0, 'Instalación de cámaras de seguridad|Configurar cámaras para verlas en el celular|Reparación o mantención de cámaras|Instalación de alarmas|Timbre con cámara o videoportero', 'camara camaras alarma seguridad'],
       ['Piscinas', 0, 'Mantención y limpieza de piscina|Puesta en marcha de temporada|Recuperar agua verde o turbia|Reparación de bomba o filtro', 'piscina agua verde']
     ]],
-    ['Limpieza y mantención', '🧹', '#0E9F7A', [
+    ['Limpieza y mantención', 'limpieza', '#0E9F7A', [
       ['Aseo del hogar', 0, 'Limpieza regular|Limpieza profunda|Limpieza post mudanza|Limpieza post obra|Limpieza de vidrios|Orden y organización', 'aseo limpieza nana asesora del hogar'],
       ['Lavado de muebles y textiles', 0, 'Lavado de sillones|Lavado de alfombras|Lavado de colchones|Lavado de cortinas|Sanitización', 'sillon alfombra colchon lavado']
     ]],
-    ['Belleza y estética', '💅', '#C0367A', [
+    ['Belleza y estética', 'belleza', '#C0367A', [
       ['Uñas', 0, 'Manicure y pedicure|Manicura|Pedicura|Esmaltado semipermanente|Uñas acrílicas|Uñas de gel|Kapping|Manicura rusa|Retiro de acrílico o gel|Reparación de uña|Nail art|Spa de manos|Spa de pies', 'manicure manicurista pedicure uñas'],
       ['Cabello', 0, 'Peluquería: corte y color|Corte de pelo mujer|Corte de pelo hombre|Corte infantil|Peinado|Peinado de novia|Peinado de evento|Color y tintura|Retoque de raíz|Mechas y balayage|Decoloración|Alisado y keratina|Permanente|Tratamiento capilar|Extensiones de cabello|Trenzas', 'peluquera peluqueria pelo corte tintura'],
       ['Barbería', 0, 'Barbero a domicilio|Corte de barba|Perfilado y afeitado|Corte y barba|Diseño de líneas|Coloración de barba', 'barbero barba'],
@@ -934,22 +966,22 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       ['Maquillaje', 0, 'Maquillaje|Maquillaje social|Maquillaje de novia|Maquillaje de 15 años|Maquillaje y peinado|Clase de automaquillaje|Caracterización', 'maquilladora maquillaje'],
       ['Podología', 1, 'Atención podológica general|Uñas encarnadas|Hongos en uñas o pies|Callosidades y durezas|Pie diabético (control)', 'podologo podologa pies']
     ]],
-    ['Salud a domicilio', '🩺', '#2F6FED', [
+    ['Salud a domicilio', 'salud', '#2F6FED', [
       ['Kinesiología', 1, 'Rehabilitación (lesiones, post operatorio)|Kinesiología respiratoria|Kinesiología para adulto mayor|Rehabilitación neurológica|Lesiones deportivas', 'kinesiologo kine rehabilitacion'],
       ['Fonoaudiología', 1, 'Lenguaje infantil|Habla y pronunciación|Voz|Deglución|Audiología|Evaluación inicial|Adulto mayor', 'fono fonoaudiologo fonoaudiologa lenguaje habla'],
       ['Masoterapia', 1, 'Masaje de relajación|Masaje descontracturante|Masaje deportivo|Drenaje linfático|Masaje con piedras calientes', 'masaje masajes masajista'],
       ['Terapia ocupacional', 1, 'Evaluación inicial|Adulto mayor y autonomía|Niños y neurodesarrollo|Rehabilitación de mano y movilidad|Adaptación del hogar y ayudas técnicas', 'terapeuta ocupacional to'],
       ['Enfermería', 1, 'Curaciones|Inyecciones (con receta)|Control de presión y glicemia|Cambio de sondas|Cuidados post operatorios', 'enfermera enfermero tens curacion inyeccion']
     ]],
-    ['Cuidado de personas', '🤝', '#7C3AED', [
+    ['Cuidado de personas', 'cuidado', '#7C3AED', [
       ['Niñera y cuidado de niños', 1, 'Niñera por horas|Niñera de noche o para una salida|Cuidado de bebés (0 a 2 años)|Retiro del colegio y ayuda con tareas|Cuidado de niños en eventos', 'niñera nana cuidar niños guagua bebe'],
       ['Cuidado de adulto mayor', 1, 'Acompañamiento por horas|Cuidado de día o de noche|Acompañar a controles médicos o trámites|Ayuda con higiene y alimentación', 'cuidadora cuidador abuelo abuela adulto mayor']
     ]],
-    ['Mascotas', '🐾', '#B7731A', [
+    ['Mascotas', 'mascotas', '#B7731A', [
       ['Peluquería canina y felina', 0, 'Baño|Corte de pelo|Corte de uñas|Limpieza de oídos|Deslanado|Baño medicado|Grooming de gatos', 'perro gato mascota peluqueria canina bañar perro'],
       ['Paseo y cuidado', 0, 'Paseo de perros|Paseo grupal|Cuidado en casa|Guardería|Visita de alimentación', 'paseador perro mascota cuidar']
     ]],
-    ['Vehículos', '🚗', '#3C4A63', [
+    ['Vehículos', 'vehiculos', '#3C4A63', [
       ['Mecánica a domicilio', 0, 'Mecánica a domicilio|Diagnóstico|Frenos|Correas|Suspensión|Embrague|Electricidad del auto (luces, batería, alternador)', 'mecanico auto frenos'],
       ['Mantención rápida', 0, 'Cambio de aceite|Batería a domicilio|Neumáticos y parchado|Cambio de filtros', 'aceite bateria neumatico rueda'],
       ['Diagnóstico y revisión', 0, 'Scanner electrónico|Inspección pre-compra|Inspección pre-compra en automotora|Peritaje de carrocería y pintura|Preparación para revisión técnica', 'scanner revision tecnica comprar auto usado'],
@@ -958,13 +990,13 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       ['Asistencia en ruta', 0, 'Batería descargada (partir con cables)|Cambio de neumático pinchado|Me quedé sin bencina|Cambio de batería en el lugar', 'pana auto no parte pinchazo bencina'],
       ['Bicicletas y motos', 0, 'Mantención de bicicleta|Reparación de bicicleta (frenos, cambios, pinchazo)|Bicicletas y scooters eléctricos|Mantención de moto|Reparación de moto', 'bici bicicleta moto scooter']
     ]],
-    ['Tecnología', '💻', '#2F6FED', [
+    ['Tecnología', 'tecnologia', '#2F6FED', [
       ['Celulares', 0, 'Cambio de pantalla|Cambio de batería|Puerto de carga|Traspaso de datos', 'celular telefono iphone pantalla'],
       ['Computadores', 0, 'Informática|Reparación de computador|Notebook|Formateo|Limpieza de computador o notebook|Cambio de disco', 'computador notebook pc informatica formatear'],
       ['Redes y wifi', 0, 'Instalación de wifi|Repetidores|Cableado de red|Configuración de router', 'wifi internet router red'],
       ['Consolas de videojuegos', 0, 'Limpieza y mantención de consola|Reparación de consola (no enciende, se apaga, sin imagen)|Reparación de controles (drift, botones, batería)|Ampliar almacenamiento (SSD o disco)|Instalación y configuración (TV, internet, cuentas)', 'play playstation xbox nintendo switch control drift']
     ]],
-    ['Eventos y celebraciones', '🎉', '#FF6B2C', [
+    ['Eventos y celebraciones', 'eventos', '#FF6B2C', [
       ['Personal de evento', 0, 'Garzón|Bartender|Parrillero|Cocinero|Anfitriona', 'garzon garzones mesero bartender parrillero evento'],
       ['Seguridad de evento', 1, 'Guardia|Control de acceso', 'guardia seguridad evento'],
       ['Música y registro', 0, 'DJ|Sonido y amplificación|Iluminación|Karaoke|Música en vivo|Fotógrafo|Video|Cabina de fotos', 'dj fotografo musica sonido'],
@@ -973,27 +1005,51 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       ['Decoración', 0, 'Globos y arcos|Ambientación temática|Mesa dulce|Flores y centros de mesa|Letras luminosas|Backdrop', 'globos decoracion cumpleaños'],
       ['Comida', 0, 'Catering|Chef a domicilio|Cena privada|Asado completo|Torta personalizada|Coctelería', 'catering chef asado torta comida coffee']
     ]],
-    ['Clases y educación', '📚', '#0E9F7A', [
+    ['Clases y educación', 'clases', '#0E9F7A', [
       ['Reforzamiento escolar', 0, 'Matemáticas|Lenguaje|Inglés|Física|Química|Biología|Historia|Tareas dirigidas|Preparación PAES', 'profesor profesora clases particulares paes'],
       ['Idiomas', 0, 'Clases de inglés|Conversación en inglés|Otros idiomas (portugués, francés, italiano…)|Español para extranjeros|Preparación de exámenes (TOEFL, IELTS…)', 'ingles idioma profesor'],
       ['Clases de música', 0, 'Clases de guitarra|Clases de piano o teclado|Clases de canto|Clases de batería|Clases de violín|Otros instrumentos (ukelele, bajo, charango…)', 'guitarra piano canto musica'],
       ['Baile', 0, 'Salsa|Bachata|Urbano|Zumba|Danza árabe|Ballet infantil|Vals de novios|Vals de 15 años', 'baile bailar clases de baile'],
       ['Deporte y bienestar', 0, 'Entrenador personal|Yoga|Pilates|Natación|Defensa personal|Running', 'personal trainer entrenador gimnasia']
     ]],
-    ['Exteriores y jardín', '🌿', '#0E9F7A', [
+    ['Exteriores y jardín', 'exteriores', '#0E9F7A', [
       ['Jardinería', 0, 'Jardinería y poda|Corte de pasto|Poda|Mantención de jardín|Plantación|Limpieza de patio', 'jardinero pasto patio arboles']
     ]],
-    ['Transporte y logística', '🚚', '#2F6FED', [
+    ['Transporte y logística', 'transporte', '#2F6FED', [
       ['Fletes y mudanzas', 0, 'Fletes y mudanzas|Flete menor|Mudanza completa|Traslado de electrodomésticos|Traslado de piano', 'flete mudanza camion'],
       ['Retiros', 0, 'Retiro de escombros|Retiro de muebles|Chatarra|Reciclaje', 'escombros basura retiro cachureos'],
       ['Conductor (maneja tu auto)', 1, 'Conductor por horas (maneja tu auto)|Conductor para volver de un evento en tu auto|Llevar tu auto al taller o a la revisión técnica', 'chofer conductor manejar']
     ]],
-    ['Cuidado de cosas', '🧵', '#8A6A2E', [
+    ['Cuidado de cosas', 'cosas', '#8A6A2E', [
       ['Zapatillas y calzado', 0, 'Lavado de zapatillas|Restauración|Teñido|Reparación de calzado', 'zapatillas zapatos zapatero'],
       ['Costura y arreglos de ropa', 0, 'Bastas y largo de pantalones o faldas|Ajuste de talla (entallar, achicar o agrandar)|Cambio de cierre o botones|Arreglo de roturas y costuras abiertas|Confección a medida|Vestidos de fiesta y de novia|Cortinas, cojines y fundas (confección o arreglo)|Disfraces y trajes típicos|Bordados, parches y nombres en uniformes', 'costurera modista costura ropa basta cierre']
     ]]
   ];
 
+
+  // Íconos propios de Hazlo (sprite al inicio del <body>): línea de tinta + mancha de color desplazada.
+  function hzIco(n, s) {
+    var NS = 'http://www.w3.org/2000/svg', e = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
+    s = s || 24;
+    e.setAttribute('width', s); e.setAttribute('height', s); e.setAttribute('class', 'hz');
+    e.setAttribute('aria-hidden', 'true'); e.setAttribute('focusable', 'false');
+    u.setAttribute('href', '#hz-' + n); e.appendChild(u);
+    return e;
+  }
+  // Imágenes 3D de categorías y oficios (img/cat/<nombre>-128.webp y -256.webp).
+  var HZ_IMG_ALIAS = { grifo: 'gasfiteria', ampolleta: 'electricidad', llave: 'cerrajeria' };
+  function hzImg(n, s) {
+    n = HZ_IMG_ALIAS[n] || n;
+    var e = document.createElement('img');
+    e.src = '/img/cat/' + n + '-128.webp'; e.srcset = '/img/cat/' + n + '-256.webp 2x';
+    e.width = s; e.height = s; e.alt = ''; e.decoding = 'async'; e.loading = 'lazy'; e.className = 'hz3d';
+    return e;
+  }
+  function hzEstrellas(n, s) {
+    var sp = document.createElement('span'); sp.className = 'hz-est';
+    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella', s || 16));
+    return sp;
+  }
   function el(tag, cls, txt) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -1008,11 +1064,12 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   var cat = document.getElementById('catalogo');
   var INDICE = [];
   var OF = {};
+  var ICO_OFICIO = { 'Gasfitería': 'gasfiteria', 'Electricidad': 'electricidad', 'Cerrajería': 'cerrajeria', 'Pintura': 'pintura', 'Techumbre y canaletas': 'construccion', 'Comida': 'cocina', 'Deporte y bienestar': 'deporte' };
   CATALOGO.forEach(function (g) {
     var card = el('article', 'cat');
     card.style.setProperty('--c', g[2]);
     var h = el('div', 'cat-h');
-    var ico = el('span', 'ico', g[1]); ico.setAttribute('aria-hidden', 'true');
+    var ico = el('span', 'ico'); ico.setAttribute('aria-hidden', 'true'); ico.appendChild(hzImg(g[1], 54));
     var tt = el('div');
     tt.appendChild(el('h3', null, g[0]));
     var nServ = 0;
@@ -1021,7 +1078,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     h.appendChild(ico); h.appendChild(tt);
     var ofs = el('div', 'ofs');
     g[3].forEach(function (o) {
-      OF[o[0]] = { g: g[0], ico: g[1], color: g[2], doc: !!o[1] };
+      OF[o[0]] = { g: g[0], ico: ICO_OFICIO[o[0]] || g[1], color: g[2], doc: !!o[1] };
       var chip = el('span', 'of' + (o[1] ? ' doc' : ''), o[0]);
       if (o[1]) chip.title = 'Exige título, licencia o documento';
       ofs.appendChild(chip);
@@ -1286,7 +1343,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     if (!top.some(function (t) { return t[0] === oficio; })) abrirTodas(true);
     refrescar();
     yaOpts.textContent = '';
-    yaTxt.textContent = '✓ Listo, marcamos ' + oficio + '.';
+    yaTxt.textContent = ''; yaTxt.appendChild(hzIco('visto', 16)); yaTxt.appendChild(document.createTextNode(' Listo, marcamos ' + oficio + '.'));
     ya.hidden = false;
   }
 
@@ -1365,8 +1422,8 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   };
   var HORAS = ['Hoy 19:00', 'Mañana 10:00', 'Sáb 11:00'];
   var HORA_TXT = { 'Hoy 19:00': 'hoy a las 19:00', 'Mañana 10:00': 'mañana a las 10:00', 'Sáb 11:00': 'el sábado a las 11:00' };
-  var ACCESOS = [['Gasfitería', 'Llaves y grifería', 'Gásfiter'], ['Electricidad', 'Enchufes y focos', 'Electricista'], ['Cerrajería', 'Apertura de puerta', 'Cerrajero'],
-    ['Aseo del hogar', 'Limpieza profunda', 'Aseo'], ['Uñas', 'Manicura', 'Uñas'], ['Fletes y mudanzas', 'Flete menor', 'Flete']];
+  var ACCESOS = [['Gasfitería', 'Llaves y grifería', 'Gásfiter', 'grifo'], ['Electricidad', 'Enchufes y focos', 'Electricista', 'ampolleta'], ['Cerrajería', 'Apertura de puerta', 'Cerrajero', 'llave'],
+    ['Aseo del hogar', 'Limpieza profunda', 'Aseo', 'limpieza'], ['Uñas', 'Manicura', 'Uñas', 'belleza'], ['Fletes y mudanzas', 'Flete menor', 'Flete', 'transporte']];
   var PASOS = {
     buscar: [1, 'Cuenta qué pasa'], detalle: [1, 'Cuenta qué pasa'], cotizando: [2, 'Compara precios'],
     agendado: [3, 'Síguelo en el mapa'], camino: [3, 'Síguelo en el mapa'], trabajo: [3, 'Síguelo en el mapa'],
@@ -1379,7 +1436,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     '<circle class="m-casa" cx="272" cy="30" r="9"/><circle cx="272" cy="30" r="3" fill="#fff"/>' +
     '<g id="d-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
   var MARCA = '<svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg>';
-  var LUPA = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+  var LUPA = '<svg class="hz" width="18" height="18" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>';
 
   function h(tag, props, kids) {
     var e = document.createElement(tag);
@@ -1401,7 +1458,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   function redondear(n, a) { return Math.round(n / a) * a; }
   function hash(s) { var x = 0; for (var i = 0; i < s.length; i++) x = (x * 31 + s.charCodeAt(i)) >>> 0; return x; }
   function primerNombre(q) { return q.nombre.split(' ')[0]; }
-  function icono(o) { return h('span', { class: 'd-ico', style: '--c:' + o.color, 'aria-hidden': 'true' }, [o.ico]); }
+  function icono(o) { return h('span', { class: 'd-ico', style: '--c:' + o.color, 'aria-hidden': 'true' }, [hzImg(o.ico, 38)]); }
   function textoInicial(it) { return TEXTOS[it.s] || ('Hola, necesito ayuda con: ' + it.s.charAt(0).toLowerCase() + it.s.slice(1) + '.'); }
   // Igual que en la app: teléfonos, correos, enlaces y usuarios de redes se ocultan en el chat.
   function ocultar(t) {
@@ -1491,15 +1548,15 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   function tarjeta(q, i) {
     var o = OF[D.it.o], abierto = D.perfil === i;
-    var sellos = ['✓ Cédula', '✓ Antecedentes', '✓ ' + D.it.o].concat(o.doc ? ['✓ Título'] : []);
+    var sellos = ['Cédula', 'Antecedentes', D.it.o].concat(o.doc ? ['Título'] : []);
     var cuando = q.horas ? 'por 4 horas' : (D.cuando === 'agendar' ? D.hora : 'llega en ' + q.eta + ' min');
     return h('article', { class: 'd-q', 'aria-label': 'Cotización de ' + q.nombre }, [
       h('div', { class: 'd-qtop' }, [
         h('span', { class: 'd-av', 'aria-hidden': 'true' }, [q.ini]),
-        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, [q.st ? '★ ' + q.st + ' (' + q.tr + ' trabajos)' : 'Nuevo en Hazlo Ahora'])]),
+        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, (q.st ? [hzIco('estrella', 13), q.st + ' (' + q.tr + ' trabajos)'] : ['Nuevo en Hazlo Ahora']))]),
         h('p', { class: 'd-amt' }, [plata(q.precio), h('small', null, [cuando])])
       ]),
-      h('div', { class: 'd-seals' }, sellos.map(function (x) { return h('span', { class: 'd-seal' }, [x]); })),
+      h('div', { class: 'd-seals' }, sellos.map(function (x) { return h('span', { class: 'd-seal' }, [hzIco('visto', 15), x]); })),
       h('p', { class: 'd-msg' }, ['«' + q.msg + '»']),
       abierto ? h('div', { class: 'd-perfil' }, [
         h('b', null, [q.anos + ' años de experiencia']),
@@ -1533,7 +1590,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             var it = INDICE.filter(function (x) { return x.o === a[0] && x.s === a[1]; })[0];
             if (!it) return null;
             return h('button', { type: 'button', class: 'd-tile', onclick: function () { D.it = it; D.texto = textoInicial(it); ir('detalle'); } },
-              [icono(OF[it.o]), a[2]]);
+              [icono({ ico: a[3] || OF[it.o].ico, color: OF[it.o].color }), a[2]]);
           })));
           return;
         }
@@ -1565,7 +1622,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('div', { class: 'd-sel' }, [icono(o), h('div', null, [h('h3', { class: 'd-h d-h-sm' }, [it.s]), h('p', { class: 'd-p' }, [it.g])])]),
           h('label', { class: 'd-lbl', for: 'd-ta' }, ['Cuéntale qué pasa']), ta,
           h('button', { type: 'button', class: 'd-foto' + (D.foto ? ' on' : ''), 'aria-pressed': String(D.foto), 'data-k': 'foto',
-            onclick: function () { D.foto = !D.foto; render(); } }, [D.foto ? '✓ Foto agregada' : '📷 Agregar una foto (opcional)']),
+            onclick: function () { D.foto = !D.foto; render(); } }, (D.foto ? [hzIco('visto', 17), 'Foto agregada'] : [hzIco('camara', 17), 'Agregar una foto (opcional)'])),
           h('p', { class: 'd-lbl', id: 'd-cuando' }, ['¿Cuándo?']),
           h('div', { class: 'd-seg', role: 'group', 'aria-labelledby': 'd-cuando' }, [
             h('button', { type: 'button', 'aria-pressed': String(D.cuando === 'ahora'), 'data-k': 'ahora', onclick: function () { marcar('ahora'); } }, ['Al tiro']),
@@ -1575,7 +1632,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             return h('button', { type: 'button', class: 'd-chip', 'aria-pressed': String(D.hora === x), 'data-k': 'h' + i,
               onclick: function () { D.hora = x; render(); } }, [x]);
           })) : null,
-          h('div', { class: 'd-lock' }, [h('span', { 'aria-hidden': 'true' }, ['🔒']),
+          h('div', { class: 'd-lock' }, [hzIco('candado', 18),
             h('span', null, [h('b', null, [(D.comuna ? 'Tu dirección en ' + D.comuna : 'Tu dirección exacta') + '. ']), 'Los profesionales ven solo la zona aproximada hasta que elijas a uno.'])])
         ],
         pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () { prepararCotizaciones(); ir('cotizando'); } }, ['Pedir cotizaciones'])
@@ -1613,7 +1670,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       return {
         titulo: 'Agendado',
         cuerpo: [
-          h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']),
+          h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]),
           h('h3', { class: 'd-h d-c' }, ['Listo: ' + nom + ' irá ' + HORA_TXT[D.hora]]),
           h('p', { class: 'd-p d-c' }, ['Precio acordado: ' + plata(q.precio) + '. Te avisamos cuando ' + nom + ' salga hacia tu casa, y mientras tanto pueden conversar por el chat de la app.'])
         ],
@@ -1701,7 +1758,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         cuerpo: [
           h('h3', { class: 'd-h' }, [nom + ' está trabajando']),
           h('ol', { class: 'd-tl' }, etapas.map(function (e) {
-            return h('li', { class: e[1] }, [h('span', { class: 'dot', 'aria-hidden': 'true' }, [e[1] === 'ok' ? '✓' : '']), e[0] + (e[1] === 'now' ? ' (ahora)' : '')]);
+            return h('li', { class: e[1] }, [h('span', { class: 'dot', 'aria-hidden': 'true' }, [e[1] === 'ok' ? hzIco('tic', 14) : null]), e[0] + (e[1] === 'now' ? ' (ahora)' : '')]);
           })),
           h('div', { class: 'd-bar', 'aria-hidden': 'true' }, [barra]),
           h('p', { class: 'd-note' }, ['Si aparece algo extra, ' + nom + ' te propone el cambio de precio en la app y solo corre si tú lo apruebas.'])
@@ -1719,7 +1776,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         titulo: 'Terminado',
         cuerpo: [
           h('h3', { class: 'd-h' }, [nom + ' terminó el trabajo']),
-          h('div', { class: 'd-after' }, [h('span', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']), h('span', null, ['Foto del trabajo terminado'])]),
+          h('div', { class: 'd-after' }, [h('span', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 40)]), h('span', null, ['Foto del trabajo terminado'])]),
           h('div', { class: 'd-total' }, [h('span', null, ['Total acordado']), h('b', null, [plata(q.precio)])]),
           h('p', { class: 'd-p' }, ['Le pagas directo a ' + nom + ', en efectivo o con tarjeta.']),
           h('p', { class: 'd-lbl', id: 'd-tip-l' }, ['¿Le dejas propina?']),
@@ -1732,7 +1789,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('div', { class: 'd-stars', role: 'group', 'aria-labelledby': 'd-st-l' }, [1, 2, 3, 4, 5].map(function (n) {
             return h('button', { type: 'button', class: n <= D.estrellas ? 'on' : '', 'aria-pressed': String(n === D.estrellas),
               'aria-label': n + (n === 1 ? ' estrella' : ' estrellas'), 'data-k': 's' + n,
-              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, ['★']);
+              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, [hzIco('estrella', 30)]);
           })),
           D.faltaEstrellas ? h('p', { class: 'd-err', role: 'alert' }, ['Elige de 1 a 5 estrellas.']) : null
         ],
@@ -1749,13 +1806,13 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       return {
         titulo: 'Listo',
         cuerpo: [
-          h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']),
+          h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]),
           h('h3', { class: 'd-h d-c' }, ['¡Así de fácil!']),
           h('p', { class: 'd-p d-c' }, ['Esto fue una demostración: no se envió ninguna solicitud y no va a llegar nadie.']),
           h('div', { class: 'd-sum' }, [
             fila('Servicio', D.it.s), fila('Profesional', q.nombre),
             fila('Pagaste', plata(q.precio + tip) + (tip ? ' con propina' : '')),
-            fila('Calificaste', '★'.repeat(D.estrellas))
+            fila('Calificaste', hzEstrellas(D.estrellas, 16))
           ]),
           h('button', { type: 'button', class: 'd-link', style: 'justify-self:center', onclick: reiniciar }, ['Probar otra vez'])
         ],
@@ -1774,32 +1831,32 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   // =========== Demostración de Hazlo Ahora Pro (para profesionales) ===========
   // Todo ocurre en esta página: no se envía nada a ningún servidor.
   var CASOS_PRO = [
-    { o: 'Gasfitería', s: 'Llaves y grifería', et: 'Gásfiter', ico: '🚰', quien: 'gásfiter', cli: 'Carolina', ini: 'CA', km: '2,1', com: 'Ñuñoa', precio: 25000,
+    { o: 'Gasfitería', s: 'Llaves y grifería', et: 'Gásfiter', ico: 'grifo', quien: 'gásfiter', cli: 'Carolina', ini: 'CA', km: '2,1', com: 'Ñuñoa', precio: 25000,
       txt: 'La llave de la cocina gotea aunque esté cerrada. Es monomando.',
       tips: ['Pregunta si la llave es monomando o de dos manillas.', 'Lleva cartuchos y sellos de las medidas más comunes.', 'Si hay que cambiar la llave completa, propón el extra en la app antes de hacerlo.'],
       msg: 'Hola, puedo ir al tiro. Llevo cartuchos y sellos. Si hay que cambiar algo más, te lo propongo en la app antes de hacerlo.',
       extra: [8000, 'Cambiar el flexible, que está gastado'] },
-    { o: 'Electricidad', s: 'Enchufes y focos', et: 'Electricista', ico: '💡', quien: 'electricista', cli: 'Andrés', ini: 'AN', km: '3,4', com: 'Macul', precio: 28000,
+    { o: 'Electricidad', s: 'Enchufes y focos', et: 'Electricista', ico: 'ampolleta', quien: 'electricista', cli: 'Andrés', ini: 'AN', km: '3,4', com: 'Macul', precio: 28000,
       txt: 'Un enchufe del living no funciona y el foco del baño parpadea.',
       tips: ['Pregunta si salta el automático al enchufar algo.', 'Corta la luz del circuito antes de trabajar.', 'Si hay que cambiar el tablero, propónlo como extra en la app.'],
       msg: 'Hola, puedo ir hoy. Reviso el enchufe y el foco, y si hay que cambiar algo más te lo propongo en la app antes.',
       extra: [12000, 'Cambiar el interruptor del baño, que está quemado'] },
-    { o: 'Cerrajería', s: 'Apertura de puerta', et: 'Cerrajero', ico: '🔑', quien: 'cerrajero', cli: 'Macarena', ini: 'MA', km: '1,8', com: 'Providencia', precio: 30000,
+    { o: 'Cerrajería', s: 'Apertura de puerta', et: 'Cerrajero', ico: 'llave', quien: 'cerrajero', cli: 'Macarena', ini: 'MA', km: '1,8', com: 'Providencia', precio: 30000,
       txt: 'Se me quedaron las llaves adentro. La puerta tiene chapa de seguridad.',
       tips: ['Antes de abrir, pide ver un documento con la dirección.', 'Pregunta el tipo de chapa: de seguridad, de pomo o electrónica.', 'Si hay que cambiar el cilindro, propónlo como extra en la app.'],
       msg: 'Hola, estoy cerca y puedo ir ahora. Antes de abrir te voy a pedir un documento con la dirección, por seguridad.',
       extra: [18000, 'Cambiar el cilindro de la chapa'] },
-    { o: 'Uñas', s: 'Manicura', et: 'Uñas', ico: '💅', quien: 'manicurista', cli: 'Fernanda', ini: 'FE', km: '2,7', com: 'San Miguel', precio: 16000,
+    { o: 'Uñas', s: 'Manicura', et: 'Uñas', ico: 'belleza', quien: 'manicurista', cli: 'Fernanda', ini: 'FE', km: '2,7', com: 'San Miguel', precio: 16000,
       txt: 'Manicure con esmaltado permanente, en tono nude.',
       tips: ['Pregunta si quiere esmaltado tradicional o permanente.', 'Lleva tus herramientas esterilizadas y en su bolsa.', 'Confirma que haya una mesa con buena luz.'],
       msg: 'Hola, tengo hora disponible. Llevo todo esterilizado y varios tonos nude para que elijas.',
       extra: [4000, 'Agregar decoración en dos uñas'] },
-    { o: 'Fletes y mudanzas', s: 'Flete menor', et: 'Flete', ico: '🚚', quien: 'fletero', cli: 'Rodrigo', ini: 'RO', km: '4,2', com: 'Maipú', precio: 35000,
+    { o: 'Fletes y mudanzas', s: 'Flete menor', et: 'Flete', ico: 'transporte', quien: 'fletero', cli: 'Rodrigo', ini: 'RO', km: '4,2', com: 'Maipú', precio: 35000,
       txt: 'Llevar un refrigerador y 10 cajas a 5 km. Es un segundo piso sin ascensor.',
       tips: ['Pregunta el piso y si hay ascensor.', 'Confirma si necesita ayudante para subir o bajar.', 'Lleva frazadas y amarras para proteger los muebles.'],
       msg: 'Hola, tengo camión disponible y voy con ayudante. Llevo frazadas y amarras para proteger todo.',
       extra: [10000, 'Subir un sofá que no estaba en la lista'] },
-    { o: 'Aseo del hogar', s: 'Limpieza profunda', et: 'Aseo', ico: '🧹', quien: 'profesional de aseo', cli: 'Paula', ini: 'PA', km: '2,3', com: 'La Reina', precio: 38000,
+    { o: 'Aseo del hogar', s: 'Limpieza profunda', et: 'Aseo', ico: 'limpieza', quien: 'profesional de aseo', cli: 'Paula', ini: 'PA', km: '2,3', com: 'La Reina', precio: 38000,
       txt: 'Limpieza profunda de un departamento de 2 dormitorios, con cocina y baño.',
       tips: ['Pregunta cuántos baños hay y si hay mascotas.', 'Confirma si llevas tú los productos o los pone el cliente.', 'Acuerda qué incluye antes de empezar: ventanas, horno, refrigerador.'],
       msg: 'Hola, puedo ir con mis productos. Te confirmo lo que incluye antes de empezar.',
@@ -1824,7 +1881,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   function servicioPro(c) {
     return INDICE.filter(function (x) { return x.o === c.o && x.s === c.s; })[0] || { s: c.s, o: c.o, g: (OF[c.o] || {}).g };
   }
-  function icoPro(c) { var o = OF[c.o] || { color: '#FF6B2C' }; return icono({ ico: c.ico || o.ico || '🔧', color: o.color }); }
+  function icoPro(c) { var o = OF[c.o] || { color: '#FF6B2C' }; return icono({ ico: c.ico || o.ico || 'hogar', color: o.color }); }
   function soloNumero(t) { return parseInt(String(t).replace(/\D/g, ''), 10) || 0; }
 
   var proEl = document.getElementById('demo-pro');
@@ -1913,7 +1970,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             h('p', { class: 'd-mini d-brand' }, ['● Nueva solicitud']),
             h('div', { class: 'd-sel', style: 'margin-top:6px' }, [icoPro(c), h('div', null, [h('p', { class: 'd-qn' }, [P.it.s]), h('p', { class: 'd-qm' }, ['Al tiro · a ' + c.km + ' km · ' + c.com])])]),
             h('p', { class: 'd-msg', style: 'margin-top:8px' }, ['«' + c.txt + '»']),
-            h('p', { class: 'd-qm', style: 'margin-top:6px' }, ['📷 1 foto · 3 profesionales la están viendo']),
+            h('p', { class: 'd-qm', style: 'margin-top:6px' }, [hzIco('camara', 15), '1 foto · 3 profesionales la están viendo']),
             h('div', { class: 'd-acts' }, [h('button', { type: 'button', class: 'btn btn-brand btn-sm', 'data-k': 'ver', onclick: function () { pIr('cotizar'); } }, ['Ver y cotizar'])])
           ]));
           cuerpo.push(h('p', { class: 'd-note' }, ['Si no te sirve, simplemente no cotizas. No hay castigo ni horario obligatorio.']));
@@ -1964,9 +2021,9 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           titulo: c.o, atras: function () { pIr('cerca'); },
           cuerpo: [
             h('div', { class: 'd-sel' }, [icoPro(c), h('div', null, [h('h3', { class: 'd-h d-h-sm' }, [P.it.s]), h('p', { class: 'd-p' }, ['Al tiro · a ' + c.km + ' km'])])]),
-            h('div', { class: 'd-pic', 'aria-label': 'Foto que subió el cliente' }, [h('span', { 'aria-hidden': 'true' }, ['📷']), h('span', null, ['Foto del problema'])]),
+            h('div', { class: 'd-pic', 'aria-label': 'Foto que subió el cliente' }, [hzIco('camara', 24), h('span', null, ['Foto del problema'])]),
             h('p', { class: 'd-msg' }, ['«' + c.txt + '»']),
-            h('div', { class: 'd-lock' }, [h('span', { 'aria-hidden': 'true' }, ['🔒']),
+            h('div', { class: 'd-lock' }, [hzIco('candado', 18),
               h('span', null, [h('b', null, ['Zona aproximada: ' + c.com + '. ']), 'La dirección exacta la ves cuando el cliente te elige.'])]),
             h('div', { class: 'd-tipsbox' }, [h('p', { class: 'd-mini' }, ['Antes de cotizar'])].concat(c.tips.map(function (t) { return h('p', null, ['· ' + t]); }))),
             h('label', { class: 'd-lbl', for: 'pd-precio' }, ['Tu precio (tú decides)']), money, err,
@@ -2003,8 +2060,8 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           cuerpo.push(h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }),
             h('span', null, [nom() + ' está comparando cotizaciones. Ve tus estrellas, tu presentación y fotos de tus trabajos.'])]));
         } else {
-          cuerpo.unshift(h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']));
-          cuerpo.push(h('div', { class: 'd-lock d-open' }, [h('span', { 'aria-hidden': 'true' }, ['📍']),
+          cuerpo.unshift(h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]));
+          cuerpo.push(h('div', { class: 'd-lock d-open' }, [hzIco('ubicacion', 18),
             h('span', null, [h('b', null, ['Ahora ves la dirección exacta en ' + c.com + '. ']), 'Pueden conversar por el chat de la app, sin dar teléfonos.'])]));
           cuerpo.push(h('p', { class: 'd-note' }, ['Si ' + nom() + ' cancela después de que marcas «Voy en camino», recibes $2.000 por tu tiempo.']));
         }
@@ -2104,19 +2161,19 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         } else if (P.extra === 'enviado') {
           bloqueExtra = h('div', { class: 'd-radar' }, [h('span', { class: 'pulse', 'aria-hidden': 'true' }), h('span', null, ['Extra enviado. Esperando que ' + nom() + ' lo apruebe…'])]);
         } else {
-          bloqueExtra = h('p', { class: 'd-note d-okn' }, ['✓ ' + nom() + ' aprobó el extra. Nuevo total: ' + plata(total()) + '.']);
+          bloqueExtra = h('p', { class: 'd-note d-okn' }, [hzIco('visto', 16), ' ' + nom() + ' aprobó el extra. Nuevo total: ' + plata(total()) + '.']);
         }
         return {
           titulo: 'Trabajando',
           cuerpo: [
             h('h3', { class: 'd-h' }, ['Estás trabajando']),
             h('ol', { class: 'd-tl' }, etapas.map(function (e) {
-              return h('li', { class: e[1] }, [h('span', { class: 'dot', 'aria-hidden': 'true' }, [e[1] === 'ok' ? '✓' : '']), e[0] + (e[1] === 'now' ? ' (ahora)' : '')]);
+              return h('li', { class: e[1] }, [h('span', { class: 'dot', 'aria-hidden': 'true' }, [e[1] === 'ok' ? hzIco('tic', 14) : null]), e[0] + (e[1] === 'now' ? ' (ahora)' : '')]);
             })),
             bloqueExtra,
             h('p', { class: 'd-p' }, ['Cualquier cambio de precio lo aprueba el cliente en la app. Así nadie discute al final.']),
             h('button', { type: 'button', class: 'd-foto' + (P.foto ? ' on' : ''), 'aria-pressed': String(P.foto), 'data-k': 'foto',
-              onclick: function () { P.foto = !P.foto; P.faltaFoto = false; pRender(); } }, [P.foto ? '✓ Foto del trabajo terminado' : '📷 Subir foto del trabajo terminado']),
+              onclick: function () { P.foto = !P.foto; P.faltaFoto = false; pRender(); } }, (P.foto ? [hzIco('visto', 17), 'Foto del trabajo terminado'] : [hzIco('camara', 17), 'Subir foto del trabajo terminado'])),
             P.faltaFoto ? h('p', { class: 'd-err', role: 'alert' }, ['Sube la foto del trabajo terminado para cerrar.']) : null
           ],
           pie: h('button', { type: 'button', class: 'btn btn-brand d-cta', onclick: function () {
@@ -2129,11 +2186,11 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
       fin: function () {
         var tip = propinaPro(), ahorro = comision();
-        var estrellas = h('p', { class: 'd-bigstars', 'aria-label': nom() + ' te dio 5 estrellas' }, ['★★★★★']);
+        var estrellas = h('p', { class: 'd-bigstars', 'aria-label': nom() + ' te dio 5 estrellas' }, [hzEstrellas(5, 30)]);
         return {
           titulo: 'Terminado',
           cuerpo: [
-            h('div', { class: 'd-okc', 'aria-hidden': 'true' }, ['✓']),
+            h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]),
             h('h3', { class: 'd-h d-c' }, ['¡Buen trabajo!']),
             h('div', { class: 'd-sum' }, [
               fila(nom() + ' te pagó directo', plata(total())),

@@ -141,7 +141,7 @@ textarea{min-height:82px; resize:vertical}
 .opt:hover{border-color:var(--brand)}
 .opt:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
 .opt[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff}
-.opt[aria-pressed="true"]::before{content:"✓ "; font-weight:800}
+.opt[aria-pressed="true"]::before{content:""; display:inline-block; width:15px; height:15px; margin-right:5px; vertical-align:-2px; background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg transform=%22translate%281.3 1.3%29%22 fill=%22none%22%3E%3C/g%3E%3Cg fill=%22none%22 stroke=%22#fff%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m5.5 12.6 4.1 4.1 8.9-9.3%22/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
 .opt small{display:block; font-weight:500; font-size:11.5px; opacity:.72; margin-top:1px}
 .opt .now{display:inline-block; margin-top:4px; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--brand)}
 .opt[aria-pressed="true"] .now{color:#fff}
@@ -192,9 +192,16 @@ main{padding-block:28px 8px}
 .nada .sub strong{color:var(--ink)}
 .nada .btn{margin-top:22px}
 .cargando{color:var(--muted); font-weight:600; padding-block:40px}
+
+/* ---------- íconos propios de Hazlo ("sello corrido") ---------- */
+.hz{display:inline-block; flex:none; vertical-align:-3px; overflow:visible}
+.hz-est{display:inline-flex; gap:2px; vertical-align:-3px}
+.sello .hz{flex:none; color:var(--brand)} .sello.ok .hz{color:var(--ok)} .sello.star .hz{color:#F5A524}
+.ya .hz{color:var(--ok)}
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-hogar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="3" y="9" width="18" height="11" rx="2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="9" width="18" height="11" rx="2"/><path d="M9 9V6.6c0-.6.4-1 1-1h4c.6 0 1 .4 1 1V9"/><path d="M3 13.5h7.5M13.5 13.5H21"/><rect x="10.5" y="12" width="3" height="3" rx=".6"/></g></symbol><symbol id="hz-limpieza" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M6.5 14.5H16v5a1.5 1.5 0 0 1-1.5 1.5H8a1.5 1.5 0 0 1-1.5-1.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 21h6.5a1.5 1.5 0 0 0 1.5-1.5v-7C16 10.6 14.4 9 12.5 9H10C8.1 9 6.5 10.6 6.5 12.5v7A1.5 1.5 0 0 0 8 21z"/><path d="M9.5 9V6.5H13V9"/><path d="M8.7 6.5V3.8H14l2.7 1.4v1.3z"/><path d="M18.8 5.2h1.8M18.6 3.2l1.5-.8M18.6 7.2l1.5.8"/></g></symbol><symbol id="hz-belleza" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M7.5 13.5h9V19a2.5 2.5 0 0 1-2.5 2.5h-4A2.5 2.5 0 0 1 7.5 19z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="10" y="2.5" width="4" height="7" rx="1"/><path d="M7.5 11.5c0-1.1.9-2 2-2h5c1.1 0 2 .9 2 2V19a2.5 2.5 0 0 1-2.5 2.5h-4A2.5 2.5 0 0 1 7.5 19z"/><path d="M10 14.5v3"/></g></symbol><symbol id="hz-salud" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 20.5C6 16.5 3 13.3 3 9.6a4.6 4.6 0 0 1 9-2.3 4.6 4.6 0 0 1 9 2.3c0 3.7-3 6.9-9 10.9z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 20.5C6 16.5 3 13.3 3 9.6a4.6 4.6 0 0 1 9-2.3 4.6 4.6 0 0 1 9 2.3c0 3.7-3 6.9-9 10.9z"/><path d="M4.5 12.3h3.4l1.6-2.8 2.2 5.4 1.7-3.1h6.1"/></g></symbol><symbol id="hz-cuidado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 11.6c-2.8-1.8-4.3-3.3-4.3-5a2.15 2.15 0 0 1 4.3-.9 2.15 2.15 0 0 1 4.3.9c0 1.7-1.5 3.2-4.3 5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 11.6c-2.8-1.8-4.3-3.3-4.3-5a2.15 2.15 0 0 1 4.3-.9 2.15 2.15 0 0 1 4.3.9c0 1.7-1.5 3.2-4.3 5z"/><path d="M2.5 15h2.8l3.4-1.4h4.4a1.3 1.3 0 0 1 0 2.6H9.8"/><path d="m13.1 16.2 4.9-2.5a1.4 1.4 0 0 1 1.6 2.2l-5.3 4.3H6.8l-1.9-1H2.5"/></g></symbol><symbol id="hz-mascotas" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 13c-3 0-5.2 2.9-5.2 5 0 1.4 1 2.2 2.3 2.2 1.1 0 1.8-.6 2.9-.6s1.8.6 2.9.6c1.3 0 2.3-.8 2.3-2.2 0-2.1-2.2-5-5.2-5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 13c-3 0-5.2 2.9-5.2 5 0 1.4 1 2.2 2.3 2.2 1.1 0 1.8-.6 2.9-.6s1.8.6 2.9.6c1.3 0 2.3-.8 2.3-2.2 0-2.1-2.2-5-5.2-5z"/><ellipse cx="5.6" cy="11" rx="1.6" ry="2.1" transform="rotate(-22 5.6 11)"/><ellipse cx="9.4" cy="6.4" rx="1.7" ry="2.3" transform="rotate(-8 9.4 6.4)"/><ellipse cx="14.6" cy="6.4" rx="1.7" ry="2.3" transform="rotate(8 14.6 6.4)"/><ellipse cx="18.4" cy="11" rx="1.6" ry="2.1" transform="rotate(22 18.4 11)"/></g></symbol><symbol id="hz-vehiculos" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="7.5" cy="16.8" r="2.3"/><circle cx="16.5" cy="16.8" r="2.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M5.2 16.8H3.6a.6.6 0 0 1-.6-.6v-2.9c0-.8.5-1.4 1.2-1.6l2.3-.7 2.2-3.3c.4-.6 1-.9 1.7-.9h4.6c.7 0 1.3.3 1.7.8l2.6 3.2 2.3.6c.8.2 1.4 1 1.4 1.8v2.9a.6.6 0 0 1-.6.6h-1.6M9.8 16.8h4.4"/><circle cx="7.5" cy="16.8" r="2.3"/><circle cx="16.5" cy="16.8" r="2.3"/><path d="M8.6 11h9"/></g></symbol><symbol id="hz-tecnologia" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="7.8" y="6.3" width="8.4" height="11.6" rx=".8"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><path d="M10.5 4.8h3"/><path d="M8.2 12.4l2.3 1.4 1.3-2.1 1.7 2.5 1.8-1.1"/></g></symbol><symbol id="hz-eventos" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M4.3 6.2 9.6 8.1 5.9 14.6z"/><path d="M10.2 8.7h3.6L12 15.6z"/><path d="M14.4 8.1 19.7 6.2 18.1 14.6z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M2.5 4.8Q12 10.6 21.5 4.8"/><path d="M4.3 6.2 9.6 8.1 5.9 14.6z"/><path d="M10.2 8.7h3.6L12 15.6z"/><path d="M14.4 8.1 19.7 6.2 18.1 14.6z"/></g></symbol><symbol id="hz-clases" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 7c1.7-1.4 4.2-2 8-2v12.5c-3.8 0-6.3.6-8 2z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 7C10.3 5.6 7.8 5 4 5v12.5c3.8 0 6.3.6 8 2 1.7-1.4 4.2-2 8-2V5c-3.8 0-6.3.6-8 2zM12 7v12.5"/><path d="M15.8 5.4v4.2l1.2-.9 1.2.9V5.1"/></g></symbol><symbol id="hz-exteriores" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M5 10h9v7.5a2.5 2.5 0 0 1-2.5 2.5h-4A2.5 2.5 0 0 1 5 17.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M5 10h9v7.5a2.5 2.5 0 0 1-2.5 2.5h-4A2.5 2.5 0 0 1 5 17.5z"/><path d="M7.5 10V8.3a2 2 0 0 1 4 0V10"/><path d="M14 15.5 19 9.6M17.8 8.4l2.4 2.4"/><path d="M21.2 13.4v1.3M19.4 15.1v1.3"/></g></symbol><symbol id="hz-transporte" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="11" y="12" width="7.4" height="6.2" rx=".6"/><rect x="11.8" y="6.2" width="5.8" height="5.8" rx=".6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M5.5 3.5h2l2.3 15.6H20"/><circle cx="8.8" cy="19.8" r="1.6"/><rect x="11" y="12" width="7.4" height="6.2" rx=".6"/><rect x="11.8" y="6.2" width="5.8" height="5.8" rx=".6"/><path d="M14.7 12v2.2"/></g></symbol><symbol id="hz-cosas" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="11.2" y="12.4" width="4.2" height="4.2" rx=".5"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8.5 3.5 3.5 6.5l1.8 3.8 2.4-1.1v11.3h8.6V9.2l2.4 1.1 1.8-3.8-5-3c-.5 1.4-1.8 2.3-3.5 2.3s-3-.9-3.5-2.3z"/><rect x="11.2" y="12.4" width="4.2" height="4.2" rx=".5" stroke-dasharray="1.3 1.1"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-cuenta" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="8" r="3.8"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c.8-3.9 3.8-6 7.5-6s6.7 2.1 7.5 6"/></g></symbol><symbol id="hz-mas" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M5 12h14"/></g></symbol><symbol id="hz-enviar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M21 3 3 10.5l7 2.5 2.5 7z"/><path d="M21 3 10 13"/></g></symbol></svg>
 
 <header class="bar">
   <div class="wrap bar-in">
@@ -344,7 +351,7 @@ main{padding-block:28px 8px}
 
   // ---- Catálogo (el mismo de index.html), para el formulario ----
   var CATALOGO = [
-    ['Hogar y reparaciones', '🔧', '#FF6B2C', [
+    ['Hogar y reparaciones', 'hogar', '#FF6B2C', [
       ['Electricidad', 0, 'Electricidad|Enchufes y focos|Tablero eléctrico|Cortocircuito|Cambio de automáticos|Instalación de lámparas|Certificado SEC TE1', 'electricista luz enchufe corte automatico se corta la luz'],
       ['Gasfitería', 0, 'Gasfitería (agua)|Filtraciones|Llaves y grifería|WC y estanque|Calefont|Termo eléctrico|Instalación de lavaplatos', 'gasfiter gasfitero fuga agua gotea goteo llave cañeria baño wc'],
       ['Destape y alcantarillado', 0, 'Desatoro de WC|Desatoro de lavaplatos|Hidrolavado de cañerías|Cámara de inspección', 'tapado tapada desatorar desatascar alcantarillado'],
@@ -362,11 +369,11 @@ main{padding-block:28px 8px}
       ['Cámaras y seguridad del hogar', 0, 'Instalación de cámaras de seguridad|Configurar cámaras para verlas en el celular|Reparación o mantención de cámaras|Instalación de alarmas|Timbre con cámara o videoportero', 'camara camaras alarma seguridad'],
       ['Piscinas', 0, 'Mantención y limpieza de piscina|Puesta en marcha de temporada|Recuperar agua verde o turbia|Reparación de bomba o filtro', 'piscina agua verde']
     ]],
-    ['Limpieza y mantención', '🧹', '#0E9F7A', [
+    ['Limpieza y mantención', 'limpieza', '#0E9F7A', [
       ['Aseo del hogar', 0, 'Limpieza regular|Limpieza profunda|Limpieza post mudanza|Limpieza post obra|Limpieza de vidrios|Orden y organización', 'aseo limpieza nana asesora del hogar'],
       ['Lavado de muebles y textiles', 0, 'Lavado de sillones|Lavado de alfombras|Lavado de colchones|Lavado de cortinas|Sanitización', 'sillon alfombra colchon lavado']
     ]],
-    ['Belleza y estética', '💅', '#C0367A', [
+    ['Belleza y estética', 'belleza', '#C0367A', [
       ['Uñas', 0, 'Manicure y pedicure|Manicura|Pedicura|Esmaltado semipermanente|Uñas acrílicas|Uñas de gel|Kapping|Manicura rusa|Retiro de acrílico o gel|Reparación de uña|Nail art|Spa de manos|Spa de pies', 'manicure manicurista pedicure uñas'],
       ['Cabello', 0, 'Peluquería: corte y color|Corte de pelo mujer|Corte de pelo hombre|Corte infantil|Peinado|Peinado de novia|Peinado de evento|Color y tintura|Retoque de raíz|Mechas y balayage|Decoloración|Alisado y keratina|Permanente|Tratamiento capilar|Extensiones de cabello|Trenzas', 'peluquera peluqueria pelo corte tintura'],
       ['Barbería', 0, 'Barbero a domicilio|Corte de barba|Perfilado y afeitado|Corte y barba|Diseño de líneas|Coloración de barba', 'barbero barba'],
@@ -375,22 +382,22 @@ main{padding-block:28px 8px}
       ['Maquillaje', 0, 'Maquillaje|Maquillaje social|Maquillaje de novia|Maquillaje de 15 años|Maquillaje y peinado|Clase de automaquillaje|Caracterización', 'maquilladora maquillaje'],
       ['Podología', 1, 'Atención podológica general|Uñas encarnadas|Hongos en uñas o pies|Callosidades y durezas|Pie diabético (control)', 'podologo podologa pies']
     ]],
-    ['Salud a domicilio', '🩺', '#2F6FED', [
+    ['Salud a domicilio', 'salud', '#2F6FED', [
       ['Kinesiología', 1, 'Rehabilitación (lesiones, post operatorio)|Kinesiología respiratoria|Kinesiología para adulto mayor|Rehabilitación neurológica|Lesiones deportivas', 'kinesiologo kine rehabilitacion'],
       ['Fonoaudiología', 1, 'Lenguaje infantil|Habla y pronunciación|Voz|Deglución|Audiología|Evaluación inicial|Adulto mayor', 'fono fonoaudiologo fonoaudiologa lenguaje habla'],
       ['Masoterapia', 1, 'Masaje de relajación|Masaje descontracturante|Masaje deportivo|Drenaje linfático|Masaje con piedras calientes', 'masaje masajes masajista'],
       ['Terapia ocupacional', 1, 'Evaluación inicial|Adulto mayor y autonomía|Niños y neurodesarrollo|Rehabilitación de mano y movilidad|Adaptación del hogar y ayudas técnicas', 'terapeuta ocupacional to'],
       ['Enfermería', 1, 'Curaciones|Inyecciones (con receta)|Control de presión y glicemia|Cambio de sondas|Cuidados post operatorios', 'enfermera enfermero tens curacion inyeccion']
     ]],
-    ['Cuidado de personas', '🤝', '#7C3AED', [
+    ['Cuidado de personas', 'cuidado', '#7C3AED', [
       ['Niñera y cuidado de niños', 1, 'Niñera por horas|Niñera de noche o para una salida|Cuidado de bebés (0 a 2 años)|Retiro del colegio y ayuda con tareas|Cuidado de niños en eventos', 'niñera nana cuidar niños guagua bebe'],
       ['Cuidado de adulto mayor', 1, 'Acompañamiento por horas|Cuidado de día o de noche|Acompañar a controles médicos o trámites|Ayuda con higiene y alimentación', 'cuidadora cuidador abuelo abuela adulto mayor']
     ]],
-    ['Mascotas', '🐾', '#B7731A', [
+    ['Mascotas', 'mascotas', '#B7731A', [
       ['Peluquería canina y felina', 0, 'Baño|Corte de pelo|Corte de uñas|Limpieza de oídos|Deslanado|Baño medicado|Grooming de gatos', 'perro gato mascota peluqueria canina bañar perro'],
       ['Paseo y cuidado', 0, 'Paseo de perros|Paseo grupal|Cuidado en casa|Guardería|Visita de alimentación', 'paseador perro mascota cuidar']
     ]],
-    ['Vehículos', '🚗', '#3C4A63', [
+    ['Vehículos', 'vehiculos', '#3C4A63', [
       ['Mecánica a domicilio', 0, 'Mecánica a domicilio|Diagnóstico|Frenos|Correas|Suspensión|Embrague|Electricidad del auto (luces, batería, alternador)', 'mecanico auto frenos'],
       ['Mantención rápida', 0, 'Cambio de aceite|Batería a domicilio|Neumáticos y parchado|Cambio de filtros', 'aceite bateria neumatico rueda'],
       ['Diagnóstico y revisión', 0, 'Scanner electrónico|Inspección pre-compra|Inspección pre-compra en automotora|Peritaje de carrocería y pintura|Preparación para revisión técnica', 'scanner revision tecnica comprar auto usado'],
@@ -399,13 +406,13 @@ main{padding-block:28px 8px}
       ['Asistencia en ruta', 0, 'Batería descargada (partir con cables)|Cambio de neumático pinchado|Me quedé sin bencina|Cambio de batería en el lugar', 'pana auto no parte pinchazo bencina'],
       ['Bicicletas y motos', 0, 'Mantención de bicicleta|Reparación de bicicleta (frenos, cambios, pinchazo)|Bicicletas y scooters eléctricos|Mantención de moto|Reparación de moto', 'bici bicicleta moto scooter']
     ]],
-    ['Tecnología', '💻', '#2F6FED', [
+    ['Tecnología', 'tecnologia', '#2F6FED', [
       ['Celulares', 0, 'Cambio de pantalla|Cambio de batería|Puerto de carga|Traspaso de datos', 'celular telefono iphone pantalla'],
       ['Computadores', 0, 'Informática|Reparación de computador|Notebook|Formateo|Limpieza de computador o notebook|Cambio de disco', 'computador notebook pc informatica formatear'],
       ['Redes y wifi', 0, 'Instalación de wifi|Repetidores|Cableado de red|Configuración de router', 'wifi internet router red'],
       ['Consolas de videojuegos', 0, 'Limpieza y mantención de consola|Reparación de consola (no enciende, se apaga, sin imagen)|Reparación de controles (drift, botones, batería)|Ampliar almacenamiento (SSD o disco)|Instalación y configuración (TV, internet, cuentas)', 'play playstation xbox nintendo switch control drift']
     ]],
-    ['Eventos y celebraciones', '🎉', '#FF6B2C', [
+    ['Eventos y celebraciones', 'eventos', '#FF6B2C', [
       ['Personal de evento', 0, 'Garzón|Bartender|Parrillero|Cocinero|Anfitriona', 'garzon garzones mesero bartender parrillero evento'],
       ['Seguridad de evento', 1, 'Guardia|Control de acceso', 'guardia seguridad evento'],
       ['Música y registro', 0, 'DJ|Sonido y amplificación|Iluminación|Karaoke|Música en vivo|Fotógrafo|Video|Cabina de fotos', 'dj fotografo musica sonido'],
@@ -414,27 +421,42 @@ main{padding-block:28px 8px}
       ['Decoración', 0, 'Globos y arcos|Ambientación temática|Mesa dulce|Flores y centros de mesa|Letras luminosas|Backdrop', 'globos decoracion cumpleaños'],
       ['Comida', 0, 'Catering|Chef a domicilio|Cena privada|Asado completo|Torta personalizada|Coctelería', 'catering chef asado torta comida coffee']
     ]],
-    ['Clases y educación', '📚', '#0E9F7A', [
+    ['Clases y educación', 'clases', '#0E9F7A', [
       ['Reforzamiento escolar', 0, 'Matemáticas|Lenguaje|Inglés|Física|Química|Biología|Historia|Tareas dirigidas|Preparación PAES', 'profesor profesora clases particulares paes'],
       ['Idiomas', 0, 'Clases de inglés|Conversación en inglés|Otros idiomas (portugués, francés, italiano…)|Español para extranjeros|Preparación de exámenes (TOEFL, IELTS…)', 'ingles idioma profesor'],
       ['Clases de música', 0, 'Clases de guitarra|Clases de piano o teclado|Clases de canto|Clases de batería|Clases de violín|Otros instrumentos (ukelele, bajo, charango…)', 'guitarra piano canto musica'],
       ['Baile', 0, 'Salsa|Bachata|Urbano|Zumba|Danza árabe|Ballet infantil|Vals de novios|Vals de 15 años', 'baile bailar clases de baile'],
       ['Deporte y bienestar', 0, 'Entrenador personal|Yoga|Pilates|Natación|Defensa personal|Running', 'personal trainer entrenador gimnasia']
     ]],
-    ['Exteriores y jardín', '🌿', '#0E9F7A', [
+    ['Exteriores y jardín', 'exteriores', '#0E9F7A', [
       ['Jardinería', 0, 'Jardinería y poda|Corte de pasto|Poda|Mantención de jardín|Plantación|Limpieza de patio', 'jardinero pasto patio arboles']
     ]],
-    ['Transporte y logística', '🚚', '#2F6FED', [
+    ['Transporte y logística', 'transporte', '#2F6FED', [
       ['Fletes y mudanzas', 0, 'Fletes y mudanzas|Flete menor|Mudanza completa|Traslado de electrodomésticos|Traslado de piano', 'flete mudanza camion'],
       ['Retiros', 0, 'Retiro de escombros|Retiro de muebles|Chatarra|Reciclaje', 'escombros basura retiro cachureos'],
       ['Conductor (maneja tu auto)', 1, 'Conductor por horas (maneja tu auto)|Conductor para volver de un evento en tu auto|Llevar tu auto al taller o a la revisión técnica', 'chofer conductor manejar']
     ]],
-    ['Cuidado de cosas', '🧵', '#8A6A2E', [
+    ['Cuidado de cosas', 'cosas', '#8A6A2E', [
       ['Zapatillas y calzado', 0, 'Lavado de zapatillas|Restauración|Teñido|Reparación de calzado', 'zapatillas zapatos zapatero'],
       ['Costura y arreglos de ropa', 0, 'Bastas y largo de pantalones o faldas|Ajuste de talla (entallar, achicar o agrandar)|Cambio de cierre o botones|Arreglo de roturas y costuras abiertas|Confección a medida|Vestidos de fiesta y de novia|Cortinas, cojines y fundas (confección o arreglo)|Disfraces y trajes típicos|Bordados, parches y nombres en uniformes', 'costurera modista costura ropa basta cierre']
     ]]
   ];
 
+
+  // Íconos propios de Hazlo (sprite al inicio del <body>): línea de tinta + mancha de color desplazada.
+  function hzIco(n, s) {
+    var NS = 'http://www.w3.org/2000/svg', e = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
+    s = s || 24;
+    e.setAttribute('width', s); e.setAttribute('height', s); e.setAttribute('class', 'hz');
+    e.setAttribute('aria-hidden', 'true'); e.setAttribute('focusable', 'false');
+    u.setAttribute('href', '#hz-' + n); e.appendChild(u);
+    return e;
+  }
+  function hzEstrellas(n, s) {
+    var sp = document.createElement('span'); sp.className = 'hz-est';
+    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella', s || 16));
+    return sp;
+  }
   function el(tag, cls, txt) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -507,14 +529,16 @@ main{padding-block:28px 8px}
     document.getElementById('pro-oficios').textContent = oficios.join(' · ');
     var sellos = document.getElementById('pro-sellos');
     sellos.textContent = '';
-    sellos.appendChild(el('span', 'sello', '📍 ' + (String(c.zona || '').trim() || 'Gran Santiago')));
+    var zona = el('span', 'sello', String(c.zona || '').trim() || 'Gran Santiago');
+    zona.insertBefore(hzIco('ubicacion', 15), zona.firstChild);
+    sellos.appendChild(zona);
     // Solo los sellos que son verdad.
-    if (c.identidad_verificada === true) sellos.appendChild(el('span', 'sello ok', '✓ Identidad verificada'));
-    if (c.antecedentes_revisados === true) sellos.appendChild(el('span', 'sello ok', '✓ Antecedentes revisados'));
+    if (c.identidad_verificada === true) { var s1 = el('span', 'sello ok', 'Identidad verificada'); s1.insertBefore(hzIco('visto', 15), s1.firstChild); sellos.appendChild(s1); }
+    if (c.antecedentes_revisados === true) { var s2 = el('span', 'sello ok', 'Antecedentes revisados'); s2.insertBefore(hzIco('visto', 15), s2.firstChild); sellos.appendChild(s2); }
     var n = Number(c.calificaciones) || 0;
     if (n >= 1) {
       var est = (Number(c.estrellas) || 0).toFixed(1).replace('.', ',');
-      sellos.appendChild(el('span', 'sello star', '★ ' + est + ' · ' + n + (n === 1 ? ' calificación' : ' calificaciones')));
+      { var s3 = el('span', 'sello star', est + ' · ' + n + (n === 1 ? ' calificación' : ' calificaciones')); s3.insertBefore(hzIco('estrella', 15), s3.firstChild); sellos.appendChild(s3); }
     }
     document.getElementById('titulo-pedile').textContent = 'Pídele a ' + nombre + ' por Hazlo Ahora';
 
@@ -712,7 +736,7 @@ main{padding-block:28px 8px}
     if (!top.some(function (t) { return t[0] === oficio; })) abrirTodas(true);
     refrescar();
     yaOpts.textContent = '';
-    yaTxt.textContent = '✓ Listo, marcamos ' + oficio + '.';
+    yaTxt.textContent = ''; yaTxt.appendChild(hzIco('visto', 16)); yaTxt.appendChild(document.createTextNode(' Listo, marcamos ' + oficio + '.'));
     ya.hidden = false;
   }
 

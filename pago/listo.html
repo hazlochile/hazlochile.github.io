@@ -14,9 +14,16 @@
   p { font-size: 15px; line-height: 1.5; color: #4A443D; margin: 0 0 12px; }
   .chica { font-size: 13px; color: #8F887F; }
   .boton { display: inline-block; margin-top: 10px; padding: 13px 24px; background: #FF6B2C; color: #fff; text-decoration: none; font-weight: 700; border-radius: 999px; font-size: 15px; }
+
+/* ---------- íconos propios de Hazlo ("sello corrido") ---------- */
+.hz{display:inline-block; flex:none; vertical-align:-3px; overflow:visible}
+.hz-est{display:inline-flex; gap:2px; vertical-align:-3px}
+.icono{background:none !important; width:72px !important; height:72px !important}
+.ok .icono{color:#1E6B3A} .no .icono{color:#B3261E}
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-titulo" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3 2 8l10 5 10-5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.2V15c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.8M22 8v5"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-cruz" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m9.2 9.2 5.6 5.6M14.8 9.2l-5.6 5.6"/></g></symbol><symbol id="hz-tarjeta" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2"/><path d="M2.5 10h19M6 14.5h4"/></g></symbol></svg>
 <div class="caja" id="caja">
   <div class="icono" id="icono"></div>
   <h1 id="titulo"></h1>
@@ -32,7 +39,8 @@
   var u4 = q.get('ultimos4') || '';
   var motivo = q.get('motivo') || '';
   document.getElementById('caja').className = 'caja ' + (ok ? 'ok' : 'no');
-  document.getElementById('icono').textContent = ok ? '✓' : '✕';
+  var ic = document.getElementById('icono'); ic.textContent = '';
+  ic.insertAdjacentHTML('beforeend', ok ? '<svg class="hz" width="72" height="72" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg>' : '<svg class="hz" width="72" height="72" aria-hidden="true" focusable="false"><use href="#hz-cruz"/></svg>');
   document.getElementById('titulo').textContent = ok ? '¡Tarjeta guardada!' : 'No se guardó la tarjeta';
   document.getElementById('texto').textContent = ok
     ? 'Tu ' + marca + (u4 ? ' terminada en ' + u4 : '') + ' quedó lista. Los trabajos se cobrarán solos cuando el profesional los termine y tú los confirmes.'

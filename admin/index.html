@@ -8,7 +8,12 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://qimechlfblfmdvzspkmt.supabase.co; img-src 'self' data: https://qimechlfblfmdvzspkmt.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <!-- Contra clickjacking: si alguien mete el panel dentro de otra página (iframe), no se muestra. -->
-<style id="antiFrame">html{display:none}</style>
+<style id="antiFrame">html{display:none}
+/* ---------- íconos propios de Hazlo ("sello corrido") ---------- */
+.hz{display:inline-block; flex:none; vertical-align:-3px; overflow:visible}
+.hz-est{display:inline-flex; gap:2px; vertical-align:-3px}
+.meta .si .hz{color:#1E6B3A} .meta .no .hz{color:#B3261E} .hz.est{color:#F5A524; vertical-align:-2px}
+</style>
 <script>if (self === top) { document.getElementById('antiFrame').remove(); } else { top.location = self.location; }</script>
 <title>Hazlo Ahora · Panel</title>
 <link rel="icon" href="../favicon.png">
@@ -77,6 +82,7 @@
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-antecedentes" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M7 3h7l5 5v13H7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 14l2 2 4-4"/></g></symbol><symbol id="hz-portafolio" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M4 19 11 12.6l3 2.4 3-2.6 3 3.1V19z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="9.5" r="1.8"/><path d="m3.5 18.5 7.5-6 3 2.5 3-2.6 3.5 3.6"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-cruz" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m9.2 9.2 5.6 5.6M14.8 9.2l-5.6 5.6"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-solicitudes" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5" y="4" width="14" height="17" rx="2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="4" width="14" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></g></symbol></svg>
 <header>
   <div class="logo">H</div>
   <h1>Panel de Hazlo Ahora</h1>
@@ -355,7 +361,7 @@ async function piloto(el) {
   const RESP = { con_hazlo_fuera: 'Sí, con un profesional que conoció aquí', otro_lado: 'Sí, por otro lado', sin_profesionales: 'No, nadie le cotizó', precio: 'No, no le convencieron los precios', ya_no: 'Ya no lo necesita', omitido: 'Omitió la pregunta' };
   const cierreFilas = Object.entries(ci.respuestas || {}).map(([clave, n]) => ({ clave, n, texto: RESP[clave] || clave })).sort((a, b) => b.n - a.n);
   // Metas del plan del piloto: se muestran con ✓ / ✗ (— si todavía no hay datos).
-  const meta = (texto, valor, ok) => `<div class="meta"><b class="${valor == null ? 'na' : ok ? 'si' : 'no'}">${valor == null ? '—' : ok ? '✓' : '✗'}</b><span style="flex:1">${texto}</span><b>${valor == null ? 'sin datos' : esc(String(valor))}</b></div>`;
+  const meta = (texto, valor, ok) => `<div class="meta"><b class="${valor == null ? 'na' : ok ? 'si' : 'no'}">${valor == null ? '—' : ok ? '<svg class="hz" width="18" height="18" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg>' : '<svg class="hz" width="18" height="18" aria-hidden="true" focusable="false"><use href="#hz-cruz"/></svg>'}</b><span style="flex:1">${texto}</span><b>${valor == null ? 'sin datos' : esc(String(valor))}</b></div>`;
   el.innerHTML = `
     ${pr.activo ? '<div class="msg">Modo prueba activo: "reciben hoy" cuenta prestadores sin identidad ni certificado. "Listos" cuenta solo a los que tienen todo verificado de verdad.</div>' : ''}
     <div class="card"><div class="row"><label style="margin:0">Desde <input id="pDesde" type="date" value="${esc(pilotoDesde)}" style="width:auto;display:inline-block;margin-left:6px"></label>
@@ -391,7 +397,7 @@ async function piloto(el) {
       ${tabla([['Oficio', (x) => `<b>${esc(x.oficio)}</b><br><span class="muted">${esc(x.grupo)}</span>`], ['Inscritos', (x) => x.inscritos], ['Cédula', (x) => x.identidad], ['Certificado', (x) => x.certificado], ['Oficio aprobado', (x) => x.oficio_ok], ['Listos', (x) => `<b>${x.listos}</b>`], ['Reciben hoy', (x) => x.reciben_hoy]], r.prestadores || [], 'Todavía no hay prestadores inscritos.')}
     </div>
     <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por oficio</h3>
-        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['1ª cotización', (x) => minutos(x.min_primera_cot)], ['Terminadas', (x) => x.terminadas], ['Vencidas', (x) => x.vencidas], ['Nadie cotizó (dice el cliente)', (x) => x.sin_profesionales ?? 0], ['★', (x) => decimal(x.estrellas)]], r.por_oficio || [], 'Sin solicitudes en este período.')}
+        ${tabla([['Oficio', (x) => esc(x.oficio)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['1ª cotización', (x) => minutos(x.min_primera_cot)], ['Terminadas', (x) => x.terminadas], ['Vencidas', (x) => x.vencidas], ['Nadie cotizó (dice el cliente)', (x) => x.sin_profesionales ?? 0], ['<svg class="hz est" width="15" height="15" aria-hidden="true" focusable="false"><use href="#hz-estrella"/></svg>', (x) => decimal(x.estrellas)]], r.por_oficio || [], 'Sin solicitudes en este período.')}
     </div>
     <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Solicitudes por comuna</h3>
         ${tabla([['Comuna', (x) => esc(x.comuna)], ['Total', (x) => x.total], ['Con cotización', (x) => `${x.con_cotizacion} (${pct(x.con_cotizacion, x.total)} %)`], ['Terminadas', (x) => x.terminadas]], r.por_comuna || [], 'Sin solicitudes en este período.')}
@@ -636,7 +642,7 @@ async function personas(el) {
       ['Tipo', (u) => u.provider_status ? `Prestador ${pill(u.provider_status)}` : 'Cliente'],
       ['Oficios', (u) => esc(u.oficios || '—')],
       ['Identidad', (u) => u.identity_verified_until ? `<span class="pill ok">Verificada hasta ${dia(u.identity_verified_until)}</span>` : '<span class="pill">Sin verificar</span>'],
-      ['Calificación', (u) => u.rating_count ? `${Number(u.rating_avg).toFixed(1)} ★ (${u.rating_count})` : '—'],
+      ['Calificación', (u) => u.rating_count ? `${Number(u.rating_avg).toFixed(1)} <svg class="hz est" width="14" height="14" aria-hidden="true" focusable="false"><use href="#hz-estrella"/></svg> (${u.rating_count})` : '—'],
       ['Saldo', (u) => u.saldo == null ? '—' : `<b style="color:${u.saldo < 0 ? 'var(--bad)' : 'var(--ok)'}">${clp(u.saldo)}</b>`],
       ['Desde', (u) => `${dia(u.created_at.slice(0, 10))}${u.deleted_at ? '<br><span class="pill bad">Cuenta eliminada</span>' : ''}${u.banned ? '<br><span class="pill bad">Bloqueada</span>' : ''}`],
       ['', (u) => u.provider_status ? (u.provider_status === 'activo'
@@ -780,7 +786,7 @@ async function alertas(el) {
   ]);
   el.innerHTML = `<div class="card"><h3 style="margin-top:0">Quién intenta pasar su contacto (últimos 30 días)</h3>
     <p class="muted">El servidor oculta teléfonos, correos y enlaces. Aquí ves quién lo intenta y cuántas veces; muchos intentos + cancelaciones = se están arreglando por fuera.</p>
-    ${tabla([['Persona', (a) => `<b>${esc(a.full_name || '—')}</b> ${a.es_prestador ? '<span class="pill brand">Prestador</span>' : '<span class="pill">Cliente</span>'}`], ['Intentos', (a) => a.intentos_30d], ['Ocultados', (a) => a.ocultados_30d], ['Cancelaciones con intento', (a) => a.cancelaciones_con_intento_30d], ['Último', (a) => fecha(a.ultimo_intento)]], rows, 'Nadie ha intentado pasar datos de contacto. 🎉')}</div>
+    ${tabla([['Persona', (a) => `<b>${esc(a.full_name || '—')}</b> ${a.es_prestador ? '<span class="pill brand">Prestador</span>' : '<span class="pill">Cliente</span>'}`], ['Intentos', (a) => a.intentos_30d], ['Ocultados', (a) => a.ocultados_30d], ['Cancelaciones con intento', (a) => a.cancelaciones_con_intento_30d], ['Último', (a) => fecha(a.ultimo_intento)]], rows, 'Nadie ha intentado pasar datos de contacto.')}</div>
     <div class="card"><h3 style="margin-top:0">Últimos intentos</h3>
     ${tabla([['Cuándo', (i) => fecha(i.created_at)], ['Quién', (i) => nombre(i.user_id)], ['Dónde', (i) => esc(i.source)], ['Qué detectó', (i) => (i.motivos || []).map(esc).join(', ')], ['Oculto', (i) => i.oculto ? 'Sí' : 'No'], ['Solicitud', (i) => corto(i.request_id)]], intentos)}</div>
     <div class="card"><h3 style="margin-top:0">Lenguaje: menciones de drogas (para revisar)</h3>

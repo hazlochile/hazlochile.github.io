@@ -393,9 +393,17 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 .links a:hover{color:var(--brand-dark)}
 .social{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; color:var(--ink-soft); background:var(--card); border:1.5px solid var(--line); padding:8px 14px; border-radius:999px; justify-self:start}
 .social:hover{border-color:var(--brand); color:var(--brand-dark)}
+
+/* ---------- íconos propios de Hazlo ("sello corrido") ---------- */
+.hz{display:inline-block; flex:none; vertical-align:-3px; overflow:visible}
+.hz-est{display:inline-flex; gap:2px; vertical-align:-3px}
+.checks .hz{color:var(--brand); margin-top:1px}
+.checks.alertas .hz,.checks .hz.al{color:#F5A524}
+.app-note .hz{color:var(--brand); margin-top:1px}
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-alerta" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.8 21.2 19.6H2.8z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M10.6 4.6a1.6 1.6 0 0 1 2.8 0l7.6 13.2a1.6 1.6 0 0 1-1.4 2.4H4.4a1.6 1.6 0 0 1-1.4-2.4z"/><path d="M12 9.4v4.4M12 16.9h.01"/></g></symbol><symbol id="hz-celular" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="7.8" y="5.2" width="8.4" height="11.8" rx=".8"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M10.8 19h2.4"/></g></symbol></svg>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header class="bar">
@@ -451,11 +459,11 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <p class="sub">Hazlo Ahora no te pide inicio de actividades para inscribirte. Pero formalizarte tiene ventajas concretas, y es lo que pide la ley: si trabajas por tu cuenta, el SII espera que des aviso de inicio de actividades y que entregues boleta por tus servicios.</p>
     <div class="grid2">
       <ul class="checks">
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Quedas cubierto.</b> Lo que se retiene de tus boletas paga tus cotizaciones: salud (Fonasa o isapre), pensión, seguro de accidentes del trabajo y Ley SANNA, entre otras.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Más clientes.</b> Empresas, oficinas y administraciones de edificios suelen pedir boleta para poder pagarte.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Ingresos que puedes demostrar.</b> Tus boletas y tu declaración de renta muestran cuánto ganas. Eso ayuda, por ejemplo, al arrendar o al pedir un crédito.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Devolución en abril.</b> Si lo retenido es más de lo que te toca pagar, el SII te devuelve la diferencia en la Operación Renta.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M6 10.5l2.5 2.5L14 7.5" stroke="var(--brand-dark)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Sigues siendo independiente.</b> No necesitas crear una empresa: te formalizas como persona natural, con tu RUT.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Quedas cubierto.</b> Lo que se retiene de tus boletas paga tus cotizaciones: salud (Fonasa o isapre), pensión, seguro de accidentes del trabajo y Ley SANNA, entre otras.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Más clientes.</b> Empresas, oficinas y administraciones de edificios suelen pedir boleta para poder pagarte.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Ingresos que puedes demostrar.</b> Tus boletas y tu declaración de renta muestran cuánto ganas. Eso ayuda, por ejemplo, al arrendar o al pedir un crédito.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Devolución en abril.</b> Si lo retenido es más de lo que te toca pagar, el SII te devuelve la diferencia en la Operación Renta.</span></li>
+        <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Sigues siendo independiente.</b> No necesitas crear una empresa: te formalizas como persona natural, con tu RUT.</span></li>
       </ul>
       <div class="box soft">
         <h3>¿Tu oficio califica?</h3>
@@ -531,7 +539,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       <li><span>Completa la fecha, el detalle del trabajo (por ejemplo, «Cambio de llave de paso») y el monto. Si son más de cuatro trabajos distintos, usa <b>más prestaciones</b>.</span></li>
       <li><span>Revisa el borrador y presiona <b>Emitir boleta de honorarios electrónica</b>. Después la puedes descargar, imprimir o enviar por correo a tu cliente.</span></li>
     </ol>
-    <p class="app-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span><b>Desde el celular:</b> el SII tiene una app gratuita, <a class="inl" href="https://www.sii.cl/ayudas/apps/ehonorarios/index.html" rel="noopener">e-Honorarios</a>, para emitir y revisar tus boletas (Android, iPhone y Huawei).</span></p>
+    <p class="app-note"><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-celular"/></svg><span><b>Desde el celular:</b> el SII tiene una app gratuita, <a class="inl" href="https://www.sii.cl/ayudas/apps/ehonorarios/index.html" rel="noopener">e-Honorarios</a>, para emitir y revisar tus boletas (Android, iPhone y Huawei).</span></p>
 
     <h3 class="h3-gap" id="h-opcion">¿Qué opción de retención elijo?</h3>
     <div class="choice">
@@ -654,9 +662,9 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <p class="sub">La boleta de honorarios es por <b>tu trabajo</b>. Si además compras materiales o repuestos y se los vendes a tus clientes como negocio (por ejemplo, un gásfiter que compra llaves y flexibles y los revende con ganancia), esa venta es otra actividad:</p>
     <div class="grid2">
       <ul class="checks">
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M10 5.5v5.5M10 14v.5" stroke="var(--brand-dark)" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span>Es de <b>primera categoría</b> y está <b>afecta a IVA</b>.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M10 5.5v5.5M10 14v.5" stroke="var(--brand-dark)" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span>Se documenta con <b>boleta de venta o factura electrónica</b>, no con boleta de honorarios.</span></li>
-        <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="var(--brand-soft)"/><path d="M10 5.5v5.5M10 14v.5" stroke="var(--brand-dark)" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span>Te obliga a <b>declarar el IVA cada mes</b> en el F29.</span></li>
+        <li><svg class="hz al" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-alerta"/></svg><span>Es de <b>primera categoría</b> y está <b>afecta a IVA</b>.</span></li>
+        <li><svg class="hz al" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-alerta"/></svg><span>Se documenta con <b>boleta de venta o factura electrónica</b>, no con boleta de honorarios.</span></li>
+        <li><svg class="hz al" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-alerta"/></svg><span>Te obliga a <b>declarar el IVA cada mes</b> en el F29.</span></li>
       </ul>
       <div class="box">
         <h3>¿Cómo lo ordeno?</h3>
