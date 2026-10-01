@@ -1064,7 +1064,20 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   var cat = document.getElementById('catalogo');
   var INDICE = [];
   var OF = {};
-  var ICO_OFICIO = { 'Gasfitería': 'gasfiteria', 'Electricidad': 'electricidad', 'Cerrajería': 'cerrajeria', 'Pintura': 'pintura', 'Techumbre y canaletas': 'construccion', 'Comida': 'cocina', 'Deporte y bienestar': 'deporte' };
+  // Imagen 3D propia por oficio (1-oct-2026). Los que no están usan la de su categoría.
+  var ICO_OFICIO = { 'Gasfitería': 'gasfiteria', 'Electricidad': 'electricidad', 'Cerrajería': 'cerrajeria', 'Pintura': 'pintura', 'Techumbre y canaletas': 'construccion', 'Comida': 'cocina', 'Deporte y bienestar': 'deporte',
+    'Destape y alcantarillado': 'destape', 'Gas (instalador SEC)': 'gas', 'Carpintería y muebles': 'carpinteria', 'Armado de muebles': 'armado_muebles',
+    'Instalaciones menores': 'instalaciones_menores', 'Cerámica y pisos': 'revestimientos', 'Vidrios y ventanas': 'vidrios', 'Climatización': 'climatizacion',
+    'Electrodomésticos y línea blanca': 'electrodomesticos', 'Cámaras y seguridad del hogar': 'seguridad_hogar', 'Piscinas': 'piscinas', 'Lavado de muebles y textiles': 'lavado_muebles',
+    'Cabello': 'cabello', 'Barbería': 'barberia', 'Cejas y pestañas': 'cejas_pestanas', 'Facial y limpieza de piel': 'facial',
+    'Maquillaje': 'maquillaje', 'Podología': 'podologia', 'Kinesiología': 'kinesiologia', 'Fonoaudiología': 'fonoaudiologia',
+    'Masoterapia': 'masoterapia', 'Terapia ocupacional': 'terapia_ocupacional', 'Enfermería': 'enfermeria', 'Cuidado de adulto mayor': 'adulto_mayor',
+    'Peluquería canina y felina': 'grooming', 'Mecánica a domicilio': 'mecanica', 'Mantención rápida': 'mantencion_auto', 'Diagnóstico y revisión': 'diagnostico_auto',
+    'Aire acondicionado del auto': 'clima_auto', 'Limpieza de auto': 'lavado_auto', 'Asistencia en ruta': 'asistencia_ruta', 'Bicicletas y motos': 'dos_ruedas',
+    'Computadores': 'computadores', 'Redes y wifi': 'redes', 'Consolas de videojuegos': 'consolas', 'Personal de evento': 'personal_evento',
+    'Seguridad de evento': 'seguridad_evento', 'Música y registro': 'musica_evento', 'Entretención y juegos': 'juegos_evento', 'Mobiliario y vajilla': 'mobiliario_evento',
+    'Idiomas': 'idiomas', 'Clases de música': 'musica_clases', 'Baile': 'baile', 'Retiros': 'retiros',
+    'Conductor (maneja tu auto)': 'chofer', 'Costura y arreglos de ropa': 'ropa' };
   CATALOGO.forEach(function (g) {
     var card = el('article', 'cat');
     card.style.setProperty('--c', g[2]);
