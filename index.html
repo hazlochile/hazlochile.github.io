@@ -1447,6 +1447,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     }).then(function (r) {
       if (r.ok) {
         var s = side.value;
+        if (window.hzContar) window.hzContar('form-enviado-' + s);
         form.reset();
         elegidos = [];
         setSide(s);
@@ -2337,6 +2338,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   document.getElementById('p-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var it = pSel || buscarServicios(pq.value, 1, true)[0];
+    if (window.hzContar) window.hzContar(it ? 'ver-precios' : 'pedir-sin-servicio');
     if (!it) {
       perr.textContent = '';
       if (norm(pq.value).trim().length < 3) perr.textContent = 'Escribe el servicio que necesitas.';
@@ -2361,5 +2363,73 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 })();
 </script>
 
+<!-- Contador Hazlo -->
+<script>
+/* Contador de clics (hazlo_fix_58, 2-oct-2026): suma contadores por día en Supabase.
+   Sin cookies, sin IP, sin texto escrito por la persona. Cada evento cuenta una vez por visita. */
+(function () {
+  var prueba = !!window.__hzContadorPrueba;
+  if (!prueba && (navigator.webdriver || /^(localhost|127\.|\[::1\])/.test(location.hostname) || location.protocol === 'file:')) {
+    window.hzContar = function () {}; return;
+  }
+  var URL_RPC = 'https://qimechlfblfmdvzspkmt.supabase.co/rest/v1/rpc/web_contar';
+  var KEY = 'sb_publishable_TEAlP8dlpwr-7H7rrq1ICQ_13KFdG9m';
+  var PAGINA = location.pathname.indexOf('/pro') === 0 ? 'pro' : 'portada';
+  var hechos = {};
+  function contar(ev) {
+    if (!ev || hechos[ev]) return;
+    hechos[ev] = 1;
+    try {
+      fetch(URL_RPC, {
+        method: 'POST', keepalive: true,
+        headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_pagina: PAGINA, p_evento: ev })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  window.hzContar = contar;
+  contar('visita');
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var b = t.closest && t.closest('.caja-h, .caja-abrir');
+    if (b) {
+      setTimeout(function () {
+        if (b.getAttribute('aria-expanded') === 'true') contar('caja:' + (b.getAttribute('aria-controls') || 'otra'));
+      }, 0);
+      return;
+    }
+    if (t.closest && t.closest('#demo-b, #demo-pro-b')) contar('demo-uso');
+    var a = t.closest && t.closest('a[href]');
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (h.indexOf('/pro/') === 0) contar('ir-pro');
+    else if (/app\.hazlochile\.com/.test(h)) contar('ir-app');
+    else if (h.indexOf('/guia-sii/') === 0) contar('ir-guia-sii');
+    else if (/instagram\.com/.test(h)) contar('ir-instagram');
+    else if (h === '/') contar('ir-portada');
+    else if (h.indexOf('#registro') === 0) contar('ir-registro');
+  }, true);
+
+  document.addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (d.tagName !== 'DETAILS' || !d.open) return;
+    var todos = document.querySelectorAll('details');
+    for (var i = 0; i < todos.length; i++) if (todos[i] === d) { contar('faq:' + (i + 1)); break; }
+  }, true);
+
+  document.addEventListener('input', function (e) {
+    var id = e.target && e.target.id;
+    if (id === 'buscar') contar('buscar');
+    else if (id === 'p-que') contar('pedir-escribe');
+  }, true);
+
+  document.addEventListener('focusin', function (e) {
+    if (e.target.closest && e.target.closest('#lead-form')) contar('form-inicio');
+  }, true);
+})();
+</script>
+<!-- Fin contador Hazlo -->
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0b1ebd4f98c74b618248ff7bed644fc3"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
