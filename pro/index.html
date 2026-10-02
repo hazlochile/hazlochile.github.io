@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Hazlo Ahora es la app que conecta lo que necesitas (gásfiter, electricista, belleza, salud, niñeras, mecánica, eventos y clases) con una red de profesionales verificados cerca de ti. Más de 360 servicios a domicilio en Santiago, al tiro o agendados.">
+<meta name="description" content="Hazlo Ahora Pro es la app para gásfiter, electricistas, cerrajeros, estilistas, profesionales de la salud y todos los que trabajan a domicilio en Santiago. Te avisamos cuando alguien cerca necesita tu oficio, tú pones el precio y cobras directo. Sin mensualidad: tus primeros 2 meses, sin comisión.">
 <meta name="theme-color" content="#FF6B2C">
-<meta property="og:title" content="Hazlo Ahora · Profesionales de confianza, a tu casa">
-<meta property="og:description" content="Cuentas qué necesitas, te llegan precios de profesionales verificados cerca de ti, eliges y pagas al terminar. Más de 360 servicios. Partimos en el Gran Santiago.">
-<meta property="og:url" content="https://hazlochile.com/">
+<meta property="og:title" content="Hazlo Ahora Pro · Más clientes cerca de ti, tú pones el precio">
+<meta property="og:description" content="La app para profesionales a domicilio en Santiago: te avisamos cuando alguien cerca necesita tu oficio, cotizas a tu precio y cobras directo. Sin mensualidad y 2 meses sin comisión.">
+<meta property="og:url" content="https://hazlochile.com/pro/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CL">
-<link rel="canonical" href="https://hazlochile.com/">
+<link rel="canonical" href="https://hazlochile.com/pro/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23FF6B2C%22/%3E%3Cpath d=%22M18 4 8 18h7l-2 10 10-14h-7z%22 fill=%22white%22/%3E%3C/svg%3E">
-<title>Hazlo Ahora · Profesionales de confianza, a tu casa</title>
+<title>Hazlo Ahora Pro · Más clientes cerca de ti, tú pones el precio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Hazlo Ahora","legalName":"HAZLO AHORA SpA","url":"https://hazlochile.com/","email":"contacto@hazlochile.com","areaServed":"Santiago, Chile","sameAs":["https://www.instagram.com/hazlo_app"]}
+{"@context":"https://schema.org","@type":"WebPage","name":"Hazlo Ahora Pro","url":"https://hazlochile.com/pro/","inLanguage":"es-CL","isPartOf":{"@type":"WebSite","name":"Hazlo Ahora","url":"https://hazlochile.com/"},"about":{"@type":"Organization","name":"Hazlo Ahora","legalName":"HAZLO AHORA SpA","url":"https://hazlochile.com/","email":"contacto@hazlochile.com","areaServed":"Santiago, Chile","sameAs":["https://www.instagram.com/hazlo_app"]}}
 </script>
 <style>
 :root{
@@ -588,245 +588,223 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 .d-ico{width:44px !important; height:44px !important; border-radius:13px !important}
 .d-tile .d-ico{width:54px !important; height:54px !important}
 .d-tile .d-ico .hz3d{width:48px; height:48px}
+
+/* ---- Página para profesionales ---- */
+.hero-pro .pro-cta{margin-top:24px}
+.gana{display:grid; gap:12px; margin-top:28px}
+@media(min-width:760px){.gana{grid-template-columns:repeat(3,1fr)}}
+.gana .box{background:var(--card)}
+.gana .big{font-size:34px}
+.ejemplo{display:grid; gap:6px; margin-top:12px}
+.ejemplo div{display:flex; justify-content:space-between; gap:12px; font-size:14px; padding:8px 12px; border-radius:11px; background:var(--bg)}
+.ejemplo b{font-variant-numeric:tabular-nums; white-space:nowrap}
+.ejemplo .free{color:var(--ok)}
+.req-box{margin-top:24px; background:var(--card)}
+.req-box .req{margin:0}
+.ahora{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:22px 0 18px}
+.ahora div{background:var(--card); border:1.5px solid var(--line); border-radius:18px; padding:14px 10px; display:grid; justify-items:center; gap:8px; text-align:center; font-weight:700; font-size:14px}
+.ahora img{display:block}
+.ahora small{font-weight:600; color:var(--muted); font-size:12px}
+.sii{display:flex; gap:14px; align-items:center; background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:16px 18px; margin-top:16px}
+.sii img{flex:none}
+.sii p{font-size:15px; color:var(--ink-soft)} .sii p a{color:var(--brand-dark); font-weight:700}
 </style>
 </head>
-<body>
+<body data-side="prestador">
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol></svg>
-
 <header class="bar">
   <div class="wrap bar-in">
-    <a class="logo" href="#top" aria-label="Hazlo Ahora, inicio">
+    <a class="logo" href="/" aria-label="Hazlo Ahora, inicio">
       <span class="mark"><svg width="19" height="19" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span>
-      <span class="logo-t">Hazlo Ahora</span>
+      <span class="logo-t">Hazlo Ahora <span style="color:var(--brand-dark)">Pro</span></span>
     </a>
     <nav class="nav" aria-label="Secciones">
       <a href="#como">Cómo funciona</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#seguridad">Seguridad</a>
-      <a href="#reglas">Precios</a>
-      <a href="/pro/">Profesionales</a>
+      <a href="#ganas">Lo que ganas</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#oficios">Oficios</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
     <div class="bar-cta">
-      <a class="btn btn-line btn-sm solo-ancho" href="#registro" data-side="cliente">Anótate</a>
-      <a class="btn btn-brand btn-sm" href="https://app.hazlochile.com">Pedir<span class="corto"> un servicio</span></a>
-      <a class="btn btn-brand btn-sm" href="/pro/">Soy profesional</a>
+      <a class="btn btn-line btn-sm solo-ancho" href="/">Para clientes</a>
+      <a class="btn btn-brand btn-sm" href="#registro" data-side="prestador">Quiero sumarme</a>
     </div>
   </div>
 </header>
 
 <main id="top" class="wrap">
 
-  <section class="hero">
+  <section class="hero hero-pro">
     <div>
-      <p class="eyebrow"><span class="beat"></span> Partimos en el Gran Santiago</p>
-      <h1>Profesionales de confianza, a tu casa.<em>Al tiro.</em></h1>
-      <p class="lead">Un gásfiter, un electricista, una manicurista, un flete: más de 360 servicios con profesionales verificados cerca de ti. <strong>Cuentas qué pasa, te llegan precios, eliges y pagas al terminar.</strong> Ahora mismo o agendado.</p>
-
-      <form class="ask" id="p-form" autocomplete="off" role="search" aria-label="Pedir un servicio" novalidate>
-        <div class="ask-f">
-          <label for="p-que">¿Qué necesitas?</label>
-          <div class="ask-in">
-            <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>
-            <input id="p-que" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="p-lista" placeholder="Busca un servicio o problema" maxlength="80">
-          </div>
-          <ul class="p-lista" id="p-lista" role="listbox" aria-label="Servicios sugeridos" hidden></ul>
-        </div>
-        <div class="ask-row">
-          <div class="ask-f">
-            <label for="p-comuna">¿Dónde?</label>
-            <div class="ask-in">
-              <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-ubicacion"/></svg>
-              <input id="p-comuna" type="text" placeholder="Tu comuna" maxlength="40" autocomplete="address-level2">
-            </div>
-          </div>
-          <div class="ask-f">
-            <span class="ask-l" id="p-cuando-l">¿Cuándo?</span>
-            <div class="d-seg" role="group" aria-labelledby="p-cuando-l">
-              <button type="button" id="p-ahora" aria-pressed="true">Al tiro</button>
-              <button type="button" id="p-agendar" aria-pressed="false">Agendar</button>
-            </div>
-          </div>
-        </div>
-        <p class="p-err" id="p-err" role="alert" hidden></p>
-        <button class="btn btn-brand ask-btn" type="submit">Ver precios</button>
-        <p class="ask-note">Mientras lanzamos, te mostramos una simulación con precios de ejemplo. No se envía nada. <a href="#reglas">Precios y cancelación</a></p>
-      </form>
-
-      <p class="note">¿Trabajas a domicilio? <a href="/pro/">Conoce Hazlo Ahora Pro</a>: tus primeros 2 meses, sin comisión. ¿Quieres que te avisemos cuando partamos? <a href="#registro" data-side="cliente">Anótate en la lista de espera</a>.</p>
-      <div class="apps" aria-label="Las dos apps">
-        <span class="app-pill"><span class="mk"><svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span><span><b>Hazlo Ahora</b> para pedir</span></span>
-        <span class="app-pill"><span class="mk mk-pro"><svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#FF7C42"/></svg></span><span><b>Hazlo Ahora Pro</b> para trabajar</span></span>
+      <p class="eyebrow"><span class="beat"></span> Hazlo Ahora Pro · Partimos en el Gran Santiago</p>
+      <h1>Más clientes cerca de ti.<em>Tú pones el precio.</em></h1>
+      <p class="lead">Cuando alguien cerca necesita justo tu oficio, la app te avisa. Cotizas a tu precio, vas, cobras directo y sumas estrellas. <strong>Sin mensualidad, y tus primeros 2 meses sin comisión.</strong></p>
+      <div class="pro-cta">
+        <a class="btn btn-brand" href="#registro" data-side="prestador">Quiero sumarme</a>
+        <a class="btn btn-line" href="#demo-pro">Ver cómo me llega un trabajo</a>
+      </div>
+      <p class="note">Para maestros, técnicos, estilistas, profesionales de la salud y todos los que trabajan a domicilio, con o sin empresa. ¿Buscas un servicio para tu casa? <a href="/">Ve a la página para clientes</a>.</p>
+      <div class="apps" aria-label="La app">
+        <span class="app-pill"><span class="mk mk-pro"><svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg></span><b>Hazlo Ahora Pro</b> para trabajar</span>
         <span class="soon">Pronto en Google Play y App Store</span>
       </div>
     </div>
 
-    <div class="caja caja-demo" id="demo">
-      <button class="caja-h" type="button" aria-expanded="false" aria-controls="demo-b"><span class="caja-t"><b>Prueba la app en un minuto</b><small>Pide un servicio de ejemplo y mira cómo llegan los precios</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="caja-b demo-wrap" id="demo-b" hidden>
+    <div class="caja caja-demo" id="demo-pro">
+      <button class="caja-h" type="button" aria-expanded="false" aria-controls="demo-pro-b"><span class="caja-t"><b>Mira cómo te llega un trabajo</b><small>Elige tu oficio y recorre un trabajo completo en un minuto</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="caja-b demo-wrap" id="demo-pro-b" hidden>
       <div class="dphone">
-        <div class="dscreen" role="region" aria-label="Demostración de la app Hazlo Ahora">
-          <div class="dbar"><span>9:41</span><span class="dtag">DEMO</span></div>
-          <div class="dhead" id="d-head"></div>
-          <p class="dpaso" id="d-paso"></p>
-          <div class="dbody" id="d-body"></div>
-          <div class="dfoot" id="d-foot" hidden></div>
+          <div class="dscreen" role="region" aria-label="Demostración de la app Hazlo Ahora Pro">
+            <div class="dbar"><span>9:41</span><span class="dtag">DEMO</span></div>
+            <div class="dhead" id="pd-head"></div>
+            <p class="dpaso" id="pd-paso"></p>
+            <div class="dbody" id="pd-body"></div>
+            <div class="dfoot" id="pd-foot" hidden></div>
+          </div>
         </div>
-      </div>
-      <p class="demo-cap">Tócalo y pruébalo. Es una demostración: no se envía nada.</p>
-      <p class="demo-cap">¿Trabajas a domicilio? <a href="/pro/#demo-pro">Prueba la demo para profesionales</a></p>
-      <p class="sr" id="d-estado" aria-live="polite"></p>
+        <p class="demo-cap">Tócalo y pruébalo. Es una demostración: no hay ningún trabajo real.</p>
+        <p class="sr" id="pd-estado" aria-live="polite"></p>
       </div>
     </div>
   </section>
 
   <div class="stats" role="list">
-    <div class="stat" role="listitem"><b>+360</b><span>servicios a domicilio</span></div>
-    <div class="stat" role="listitem"><b>+60</b><span>oficios en 13 categorías</span></div>
-    <div class="stat" role="listitem"><b>24 h</b><span>agenda a cualquier hora, hasta 30 días antes</span></div>
-    <div class="stat" role="listitem"><b>100 %</b><span>de la propina para el profesional</span></div>
+    <div class="stat" role="listitem"><b>2 meses</b><span>sin comisión, desde que te inscribes</span></div>
+    <div class="stat" role="listitem"><b>10 %</b><span>después, por trabajo hecho, con IVA incluido</span></div>
+    <div class="stat" role="listitem"><b>$0</b><span>de mensualidad: si no trabajas, no pagas</span></div>
+    <div class="stat" role="listitem"><b>100 %</b><span>de las propinas y de los cargos por cancelación, para ti</span></div>
   </div>
 
   <section id="como">
     <p class="label">Cómo funciona</p>
-    <h2>Pides, comparas y eliges, todo desde tu celular</h2>
-    <p class="sub">Primero cuentas qué pasa, después comparas precios y recién ahí alguien va a tu casa. Toca cada paso para ver el detalle, o <a href="#demo" class="inl">pruébalo en la demo</a>.</p>
+    <h2>Así te llega un trabajo</h2>
+    <p class="sub">Tú decides cuándo estás disponible, qué tomas y a qué precio. Toca cada paso para ver el detalle, o <a href="#demo-pro" class="inl">pruébalo en la demo</a>.</p>
     <div class="flow">
       <div class="stepbox caja" data-abrir-ancho>
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-1"><span class="stepno">1</span><h3>Cuenta qué pasa</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="paso-1" hidden><p>Escríbelo con tus palabras, como «fuga de agua» o «no enfría el aire»: la app entiende el problema y te sugiere el servicio. Agregas una foto y respondes un par de preguntas del oficio, como el modelo del auto o el tamaño de tu perro.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-1"><span class="stepno">1</span><h3>Te llega el trabajo, cerca de ti</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-1" hidden><p>Marcas tus oficios y tu radio. Cuando alguien cerca pide justo eso, te avisamos al celular: ves la descripción, las fotos, la comuna aproximada y cuándo lo necesita. Si estás ocupado, pausas los avisos por unas horas o hasta mañana.</p></div>
       </div>
       <div class="stepbox caja" data-abrir-ancho>
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-2"><span class="stepno">2</span><h3>Compara precios</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="paso-2" hidden><p>Los profesionales de ese oficio que están cerca te mandan su precio, cuándo llegan y un mensaje. Antes de elegir ves sus estrellas, su presentación y fotos de trabajos reales.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-2"><span class="stepno">2</span><h3>Cotizas a tu precio</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-2" hidden><p>Pones tu precio, en cuánto llegas y un mensaje. Te damos consejos antes de cotizar y un mensaje sugerido. El cliente compara y elige: ve tus estrellas, tu presentación y fotos de trabajos tuyos.</p></div>
       </div>
       <div class="stepbox caja" data-abrir-ancho>
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-3"><span class="stepno">3</span><h3>Síguelo en el mapa</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="paso-3" hidden><p>Ves al profesional venir en el mapa y conversan por el chat de la app, sin dar tu número. Si aparece algo extra, el cambio de precio solo corre si tú lo apruebas.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-3"><span class="stepno">3</span><h3>Vas y lo haces</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-3" hidden><p>Cuando te eligen, recién ahí ves la dirección exacta. Conversan por el chat de la app, sin dar tu número. Si aparece algo extra, lo propones desde la app y el cliente lo aprueba antes de que sigas. Al terminar, subes una foto del trabajo listo.</p></div>
       </div>
       <div class="stepbox caja" data-abrir-ancho>
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-4"><span class="stepno">4</span><h3>Paga y califica</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="paso-4" hidden><p>Al terminar, el profesional sube fotos del trabajo listo, le pagas directo y se califican los dos. Si quieres, dejas propina desde la app: es entera para él.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-4"><span class="stepno">4</span><h3>Cobras y sumas estrellas</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-4" hidden><p>El cliente te paga directo al terminar, en efectivo o con tarjeta. Si deja propina, es toda tuya. Se califican los dos, y cada trabajo suma a tu perfil: los clientes lo ven antes de elegirte.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="servicios">
-    <p class="label">Servicios</p>
-    <h2>Más de 360 servicios, de la casa a tu auto</h2>
-    <p class="sub">Escribe lo que necesitas o toca una categoría para ver sus oficios.</p>
-
-    <div class="finder">
-      <label for="buscar">¿Qué necesitas? Búscalo aquí</label>
-      <div class="finder-in">
-        <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>
-        <input id="buscar" type="search" autocomplete="off" placeholder="Busca un servicio o problema" aria-describedby="buscar-estado">
+  <section id="ganas">
+    <p class="label">Lo que ganas y lo que cuesta</p>
+    <h2>Pagas solo cuando trabajas</h2>
+    <p class="sub">Sin mensualidad ni costo de inscripción. La comisión es una sola y te la mostramos antes de cada cotización.</p>
+    <div class="gana">
+      <div class="box">
+        <h3>Tus primeros 2 meses</h3>
+        <p class="big">$0 <small>de comisión, desde que te inscribes</small></p>
+        <p>Todo lo que cobres en ese tiempo es tuyo. Es nuestra bienvenida.</p>
       </div>
-      <p class="sr" id="buscar-estado" aria-live="polite"></p>
-      <div class="results" id="resultados"></div>
+      <div class="box">
+        <h3>Después</h3>
+        <p class="big">10 % <small>por trabajo hecho, con IVA incluido</small></p>
+        <p>Se calcula sobre el precio final que aceptó el cliente. Si no trabajas, no pagas nada.</p>
+      </div>
+      <div class="box">
+        <h3>Un ejemplo</h3>
+        <p>Un trabajo de <b>$40.000</b>:</p>
+        <div class="ejemplo">
+          <div><span>Los primeros 2 meses recibes</span><b class="free">$40.000</b></div>
+          <div><span>Después, recibes</span><b>$36.000</b></div>
+          <div><span>Propina de $5.000</span><b class="free">+ $5.000 íntegros</b></div>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <section id="requisitos">
+    <p class="label">Requisitos</p>
+    <h2>Para sumarte necesitas</h2>
+    <p class="sub">Lo mismo que le pediríamos a alguien que entra a nuestra propia casa. Se hace desde la app, en minutos.</p>
+    <div class="box req-box">
+      <ol class="req">
+            <li><span><b>Cédula vigente.</b> Se verifica con una selfie en un par de minutos.</span></li>
+            <li><span><b>Certificado de antecedentes.</b> Es gratis en registrocivil.cl con tu ClaveÚnica.</span></li>
+            <li><span><b>Fotos de trabajos tuyos</b> de cada oficio que ofreces.</span></li>
+            <li><span><b>Título o documento</b>, si tu oficio lo exige.</span></li>
+          </ol>
+    </div>
+    <div class="sii">
+      <img src="/img/conf/antecedentes-64.webp" srcset="/img/conf/antecedentes-128.webp 2x" width="48" height="48" alt="" loading="lazy" decoding="async">
+      <p><b>¿Y las boletas?</b> Cada profesional es independiente y responsable de sus impuestos. Si quieres formalizarte, preparamos una <a href="/guia-sii/">guía paso a paso para iniciar actividades en el SII</a>, con los códigos de cada oficio.</p>
+    </div>
+  </section>
+
+  <section id="oficios">
+    <p class="label">Oficios</p>
+    <h2>¿Está tu oficio? Míralo aquí</h2>
+    <p class="sub">Partimos con tres oficios en el Gran Santiago. Si trabajas en otro, anótate igual: vamos sumando por etapas y te avisamos cuando te toque.</p>
+    <div class="ahora" aria-label="Buscamos ahora">
+      <div><img src="/img/cat/gasfiteria-128.webp" width="56" height="56" alt="" loading="lazy" decoding="async">Gásfiter<small>Buscamos ahora</small></div>
+      <div><img src="/img/cat/electricidad-128.webp" width="56" height="56" alt="" loading="lazy" decoding="async">Electricistas<small>Buscamos ahora</small></div>
+      <div><img src="/img/cat/cerrajeria-128.webp" width="56" height="56" alt="" loading="lazy" decoding="async">Cerrajeros<small>Buscamos ahora</small></div>
+    </div>
     <div class="cats" id="catalogo"></div>
-
     <div class="legend">
       <span><span class="of doc">Con título</span>&nbsp; exige título, licencia o documento, revisado por nosotros</span>
-      <a href="#registro" id="falta">¿No está lo que buscas? Cuéntanos</a>
+      <a href="#registro" id="falta">¿No está tu oficio? Cuéntanos</a>
     </div>
   </section>
 
   <section id="seguridad">
-    <p class="label">Seguridad</p>
-    <h2>Tranquilidad para abrir la puerta</h2>
-    <p class="sub">Detrás de cada profesional de la red hay un equipo que revisó su identidad, sus antecedentes y su trabajo antes de que pueda cotizar. Así eliges con confianza.</p>
+    <p class="label">Tu tranquilidad</p>
+    <h2>También cuidamos al profesional</h2>
+    <p class="sub">Las mismas reglas que protegen al cliente te protegen a ti.</p>
     <div class="trust">
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-1"><div class="tico"><img src="/img/conf/identidad-64.webp" srcset="/img/conf/identidad-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Identidad comprobada</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-1" hidden><p>Cédula vigente y una selfie que se compara con la foto de la cédula. Una cédula, una cuenta: detrás de cada perfil hay una persona real.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-1"><div class="tico"><img src="/img/conf/direccion-64.webp" srcset="/img/conf/direccion-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Tu número y tu dirección, privados</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-1" hidden><p>El cliente nunca ve tu teléfono: conversan por el chat de la app, que oculta números y correos. Tú ves su dirección exacta solo cuando te eligió.</p></div>
       </div>
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-2"><div class="tico"><img src="/img/conf/antecedentes-64.webp" srcset="/img/conf/antecedentes-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Certificado de antecedentes</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-2" hidden><p>Cada profesional lo presenta antes de recibir solicitudes, como en las apps de transporte, y lo renueva cuando vence. Lo revisa nuestro equipo.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-2"><div class="tico"><img src="/img/conf/efectivo-64.webp" srcset="/img/conf/efectivo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Si cancelan tarde, el cargo es tuyo</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-2" hidden><p>Si el cliente cancela cuando ya vas en camino, recibes $2.000; si ya llegaste o estás trabajando, $5.000. Hazlo Ahora no se queda con nada de eso, y además te devuelve la comisión.</p></div>
       </div>
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-3"><div class="tico"><img src="/img/conf/portafolio-64.webp" srcset="/img/conf/portafolio-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Trabajos reales, por oficio</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-3" hidden><p>Para cotizar, cada profesional sube fotos de trabajos suyos de ese oficio: cañerías si es gásfiter, uñas si es manicurista. Las revisamos una por una.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-3"><div class="tico"><img src="/img/conf/identidad-64.webp" srcset="/img/conf/identidad-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Clientes con nombre y apellido</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-3" hidden><p>Cada cliente tiene una cuenta con su identidad y sus calificaciones. Antes de ir, ves su nombre y cómo lo han calificado otros profesionales.</p></div>
       </div>
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-4"><div class="tico"><img src="/img/conf/titulo-64.webp" srcset="/img/conf/titulo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Título donde corresponde</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-4" hidden><p>En salud, cuidado de niños y adultos mayores, gas, podología, seguridad y conductores pedimos el título, la licencia o el documento que corresponde.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-4"><div class="tico"><img src="/img/conf/estrella-64.webp" srcset="/img/conf/estrella-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Tu reputación es tuya</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-4" hidden><p>Cada trabajo terminado suma estrellas y fotos a tu perfil. Mientras más trabajas, más te eligen. Además, te ayudamos a armar tu presentación en dos minutos.</p></div>
       </div>
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-5"><div class="tico"><img src="/img/conf/direccion-64.webp" srcset="/img/conf/direccion-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Tu dirección y tu número, protegidos</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-5" hidden><p>Antes de aceptar, el profesional ve solo la zona aproximada. La dirección exacta la ve únicamente quien elegiste, y el chat oculta teléfonos y correos.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-5"><div class="tico"><img src="/img/conf/contigo-64.webp" srcset="/img/conf/contigo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Estamos contigo</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-5" hidden><p>Si un cliente se porta mal, puedes reportarlo o bloquearlo desde el trabajo o el chat, y una persona de nuestro equipo lo revisa. Aquí no hay lugar para la violencia, el acoso ni la discriminación.</p></div>
       </div>
       <div class="tcard caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-6"><div class="tico"><img src="/img/conf/contigo-64.webp" srcset="/img/conf/contigo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Estamos contigo</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="seg-6" hidden><p>Si algo no te gusta, puedes reportar o bloquear desde el trabajo o el chat, y una persona de nuestro equipo lo revisa. Cuidamos que Hazlo Ahora sea un espacio de respeto para todos: aquí no hay lugar para la violencia, el acoso ni la discriminación.</p></div>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-6"><div class="tico"><img src="/img/conf/antecedentes-64.webp" srcset="/img/conf/antecedentes-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Sin letra chica</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-6" hidden><p>Antes de cada cotización ves cuánto cobras, cuánto es la comisión y cuánto recibes. Las reglas de cancelación y de pago son las mismas para todos y están publicadas.</p></div>
       </div>
-    </div>
-  </section>
-
-  <section id="reglas">
-    <p class="label">Todo claro</p>
-    <h2>Te lo contamos todo antes de que pidas</h2>
-    <p class="sub">Lo que pagas, lo que cuesta cancelar y adónde va cada peso. No tenemos letra chica.</p>
-    <div class="rules">
-      <div class="rule caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-1"><h3>Pedir y cotizar <span>Gratis</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="regla-1" hidden>
-        <p>Pedir un servicio y comparar precios no te cuesta nada. Hazlo Ahora no le cobra al cliente: pagas solo el trabajo que aceptaste.</p>
-      </div>
-      </div>
-      <div class="rule caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-2"><h3>Pagar <span>Al terminar</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="regla-2" hidden>
-        <p>Le pagas directo al profesional cuando termina, en efectivo o con tarjeta. El precio es el que aceptaste en la app, y cualquier cambio lo apruebas tú.</p>
-      </div>
-      </div>
-      <div class="rule caja" id="cancelar">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-3"><h3>Cancelar <span>Casi siempre gratis</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="regla-3" hidden>
-        <p>Casi siempre es gratis. Si el profesional ya salió, el cargo va completo a él, por el tiempo que te dedicó.</p>
-        <div class="fees">
-          <div class="fee"><span>Antes de que salga (y siempre en los primeros 5 minutos)</span><b class="free">Gratis</b></div>
-          <div class="fee"><span>Ya va en camino</span><b>$2.000</b></div>
-          <div class="fee"><span>Ya llegó o está trabajando</span><b>$5.000</b></div>
-          <div class="fee"><span>Llega con más de 30 minutos de atraso</span><b class="free">Gratis</b></div>
-        </div>
-      </div>
-      </div>
-      <div class="rule caja">
-        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-4"><h3>Propina <span>Opcional</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="caja-b" id="regla-4" hidden>
-        <p>Al final del trabajo puedes dejar 10 %, 15 %, 20 % u otro monto desde la app. Va completa al profesional: Hazlo Ahora no se queda con nada.</p>
-      </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pro" id="profesionales">
-    <p class="label">Hazlo Ahora Pro · Trabajemos juntos</p>
-    <h2>¿Trabajas a domicilio?</h2>
-    <p class="sub">Te avisamos cuando alguien cerca necesita justo tu oficio. Tú eliges qué tomar y pones tu precio. <b>Tus primeros 2 meses, sin comisión.</b></p>
-    <div class="pro-cta">
-      <a class="btn btn-brand" href="/pro/">Ver cómo funciona para profesionales</a>
-      <a class="btn btn-line" href="#registro" data-side="prestador">Quiero sumarme</a>
     </div>
   </section>
 
   <section class="signup" id="registro">
     <p class="label">Lista de espera</p>
     <h2>Anótate y te escribimos</h2>
-    <p class="sub">Partimos en el Gran Santiago. Déjanos tu contacto y te contamos cómo funciona, sin compromiso. Los primeros prueban antes que nadie.</p>
+    <p class="sub">Partimos en el Gran Santiago. Déjanos tu contacto y te escribimos con los pasos para inscribirte, sin compromiso. Los primeros empiezan antes que nadie.</p>
 
     <div class="tabs" role="tablist" aria-label="Tipo de registro">
-      <button class="tab" type="button" id="tab-cliente" role="tab" aria-selected="true" data-side="cliente">Necesito un servicio</button>
-      <button class="tab" type="button" id="tab-prestador" role="tab" aria-selected="false" data-side="prestador">Soy profesional</button>
+      <button class="tab" type="button" id="tab-prestador" role="tab" aria-selected="true" data-side="prestador">Soy profesional</button>
+      <button class="tab" type="button" id="tab-cliente" role="tab" aria-selected="false" data-side="cliente">Necesito un servicio</button>
     </div>
     <p class="side-note" id="side-note"></p>
 
     <form id="lead-form" novalidate>
-      <input type="hidden" id="side" name="side" value="cliente">
+      <input type="hidden" id="side" name="side" value="prestador">
       <div class="trap" aria-hidden="true"><label for="website">No llenar</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 
       <div class="row2">
@@ -873,46 +851,50 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 
   <section id="preguntas">
     <p class="label">Preguntas frecuentes</p>
-    <h2>Lo que más nos preguntan</h2>
+    <h2>Lo que más nos preguntan los profesionales</h2>
     <div class="faq">
       <details>
-        <summary>¿Cuándo puedo usar Hazlo Ahora?</summary>
-        <p>Estamos terminando las pruebas con usuarios reales. Partimos en el Gran Santiago con gásfiter, electricistas y cerrajeros, y después vamos sumando más oficios y el resto de Chile. Si te anotas, te avisamos antes que a nadie.</p>
+        <summary>¿Cuánto me cobra Hazlo Ahora?</summary>
+        <p>Nada los primeros 2 meses desde que te inscribes. Después, el 10 % de cada trabajo hecho, con el IVA incluido en ese 10 %. No hay mensualidad ni costo de inscripción: si un mes no trabajas, no pagas.</p>
       </details>
       <details>
-        <summary>¿Cuánto cuesta para el cliente?</summary>
-        <p>Nada. Descargar la app, pedir y comparar precios es gratis. Pagas solo el trabajo que aceptaste, directo al profesional.</p>
+        <summary>¿Cómo y cuándo cobro?</summary>
+        <p>Directo al cliente, al terminar el trabajo, en efectivo o con tarjeta. El precio es el que aceptó en la app; si hubo extras, los aprobó antes. Las propinas son 100 % tuyas.</p>
       </details>
       <details>
-        <summary>¿Cómo sé que puedo confiar en quien llega a mi casa?</summary>
-        <p>Porque lo conocemos antes que tú: cada profesional verifica su cédula con una selfie, presenta su certificado de antecedentes y sube fotos de trabajos reales de su oficio, y nuestro equipo lo revisa. En salud, cuidado de personas, gas y otros oficios sensibles pedimos además el título o la licencia. Antes de elegir ves sus estrellas, su presentación y fotos de sus trabajos.</p>
+        <summary>¿Cómo se paga la comisión?</summary>
+        <p>Se anota en tu saldo dentro de la app cuando marcas «Voy en camino», y la pagas por transferencia cuando quieras, hasta un tope. Si el cliente cancela, se te devuelve. Antes de cada cotización ves cuánto cobras, cuánto es la comisión y cuánto recibes.</p>
       </details>
       <details>
-        <summary>¿Quiénes están detrás de Hazlo Ahora?</summary>
-        <p>Somos HAZLO AHORA SpA, una empresa chilena con sede en Santiago. Detrás de la app hay un equipo que revisa cada perfil, responde en <a href="mailto:soporte@hazlochile.com">soporte@hazlochile.com</a> y sigue sumando oficios con lo que ustedes nos piden.</p>
+        <summary>¿Tengo que estar conectado todo el día?</summary>
+        <p>No. Marcas cuándo estás disponible y puedes pausar los avisos por unas horas, hasta mañana o una semana. Y cada trabajo lo tomas solo si quieres: nadie te asigna nada.</p>
       </details>
       <details>
-        <summary>¿Tengo que dar mi teléfono o mi dirección?</summary>
-        <p>Tu teléfono nunca se comparte: todo se conversa por el chat de la app, que oculta números y correos. Tu dirección exacta la ve solo el profesional que aceptaste, y la ubicación en vivo se borra cuando termina el trabajo.</p>
+        <summary>¿Qué pasa si el cliente cancela?</summary>
+        <p>Si cancela antes de que salgas, no pasa nada y la comisión se te devuelve. Si cancela cuando ya vas en camino, recibes $2.000; si ya llegaste o estás trabajando, $5.000. Ese cargo es completo para ti.</p>
       </details>
       <details>
-        <summary>¿Puedo agendar para otro día?</summary>
-        <p>Sí. Todos los servicios se pueden pedir al tiro o agendados, hasta 30 días antes y a cualquier hora, también de noche: un coffee break a las 7 de la mañana o garzones para un cumpleaños hasta las 2 de la madrugada.</p>
+        <summary>¿Puedo ofrecer varios oficios?</summary>
+        <p>Sí. Para cada oficio subes fotos de trabajos tuyos (las revisamos una por una) y, si el oficio exige título, licencia o documento, también ese documento. Los clientes ven tus trabajos del oficio que están pidiendo.</p>
       </details>
       <details>
-        <summary>¿Cómo pago? ¿Aceptan tarjeta?</summary>
-        <p>Le pagas directo al profesional al terminar, en efectivo o con tarjeta. El pago con tarjeta dentro de la app viene más adelante.</p>
+        <summary>¿Qué datos míos ve el cliente?</summary>
+        <p>Tu nombre, tu foto, tus estrellas, tu presentación y las fotos de trabajos que aprobamos. Nunca tu teléfono, tu correo ni tu dirección. Toda la conversación va por el chat de la app.</p>
       </details>
       <details>
-        <summary>Soy profesional, ¿cuánto me cobra Hazlo Ahora?</summary>
-        <p>Tus primeros 2 meses desde que te inscribes en la app, nada: es nuestra bienvenida. Después, un 10 % del trabajo, con IVA incluido, y solo cuando haces el trabajo. No hay mensualidad ni costo por inscribirte, y las propinas son 100 % tuyas. Todo el detalle está en <a href="/soporte.html">Soporte</a>.</p>
+        <summary>¿Y si tengo un equipo o más de un vehículo?</summary>
+        <p>Puedes decir cuántos trabajos atiendes a la misma hora y tomar varios. Hazlo Ahora sirve igual para una persona que trabaja sola que para un pequeño negocio.</p>
       </details>
       <details>
-        <summary>¿En qué celulares funciona?</summary>
-        <p>En Android y iPhone. Son dos apps: Hazlo Ahora, para pedir servicios, y Hazlo Ahora Pro, para quienes trabajan.</p>
+        <summary>¿Necesito tener iniciación de actividades o dar boleta?</summary>
+        <p>Cada profesional es independiente y responsable de sus impuestos; Hazlo Ahora no te exige boleta para trabajar. Si quieres formalizarte, tenemos una <a href="/guia-sii/">guía paso a paso para iniciar actividades en el SII</a>.</p>
+      </details>
+      <details>
+        <summary>¿Cuándo parte y dónde?</summary>
+        <p>Estamos terminando las pruebas con profesionales reales. Partimos en el Gran Santiago con gásfiter, electricistas y cerrajeros, y después vamos sumando oficios y comunas. Si te anotas, te escribimos apenas te toque.</p>
       </details>
     </div>
-    <p class="more-help">¿Otra duda? Revisa <a href="/soporte.html">Soporte</a> o escríbenos a <a href="mailto:contacto@hazlochile.com">contacto@hazlochile.com</a>.</p>
+    <p class="sub" style="font-size:15px; margin-top:18px">¿Otra duda? Revisa <a href="/soporte.html" class="inl">Soporte</a> o escríbenos a <a href="mailto:contacto@hazlochile.com" class="inl">contacto@hazlochile.com</a>.</p>
   </section>
 
 </main>
