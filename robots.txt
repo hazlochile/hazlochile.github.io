@@ -1,0 +1,7 @@
+# hazlochile.com
+User-agent: *
+Allow: /
+Disallow: /pago/
+Disallow: /nueva-clave.html
+
+Sitemap: https://hazlochile.com/sitemap.xml
