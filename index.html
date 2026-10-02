@@ -74,10 +74,11 @@ a{color:inherit}
 .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; text-decoration:none; letter-spacing:-.03em; flex:none}
 .mark{width:32px; height:32px; border-radius:10px; background:var(--brand); display:grid; place-items:center; flex:none}
 .nav{display:none; gap:4px}
-.nav a{text-decoration:none; font-weight:600; font-size:14.5px; color:var(--ink-soft); padding:8px 11px; border-radius:10px; white-space:nowrap}
+.nav a{text-decoration:none; font-weight:600; font-size:14px; color:var(--ink-soft); padding:8px 9px; border-radius:10px; white-space:nowrap}
 .nav a:hover{color:var(--ink); background:var(--card)}
-@media(min-width:960px){.nav{display:flex}}
+@media(min-width:1000px){.nav{display:flex; min-width:0; overflow:hidden}}
 .bar-cta{display:flex; gap:8px; flex:none}
+@media(max-width:1279px){.bar-cta .solo-ancho{display:none}}
 @media(max-width:600px){.bar .logo-t{display:none} .bar-cta .btn-sm{padding:9px 13px} .bar-cta .solo-ancho{display:none}}
 @media(max-width:420px){.bar-cta .corto{display:none}}
 
@@ -384,6 +385,67 @@ h2{font-size:clamp(27px,4.4vw,38px); line-height:1.1}
 
 /* ---------- profesionales ---------- */
 .pro{background:var(--card); border-radius:30px; padding:34px var(--gutter); box-shadow:var(--shadow); margin-block:12px}
+/* ---- Cajitas (2-oct-2026): cuadros cortos que se abren al tocar ---- */
+.caja-h{all:unset; box-sizing:border-box; display:flex; align-items:center; gap:12px; width:100%; cursor:pointer; text-align:left; color:inherit}
+.caja-h:focus-visible{outline:3px solid var(--brand); outline-offset:3px; border-radius:12px}
+.caja-h .chev{flex:none; margin-left:auto; color:var(--muted); transition:transform .18s ease}
+.caja-h[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.caja-t{display:grid; gap:2px} .caja-t b{font-size:15.5px} .caja-t small{font-size:13px; color:var(--muted)}
+.caja-b[hidden]{display:none}
+/* demo del hero: cajita en celular, siempre abierta en pantalla ancha */
+.caja-demo{justify-self:center; width:min(360px,100%); background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:14px 16px}
+.caja-demo > .caja-b{margin-top:14px}
+@media(min-width:960px){.caja-demo{background:none; border:0; padding:0} .caja-demo > .caja-h{display:none} .caja-demo > .caja-b{display:grid !important; margin-top:0}}
+/* pasos */
+.stepbox.caja{padding:0}
+.stepbox > .caja-h{padding:16px 18px}
+.stepbox > .caja-h .stepno{margin:0}
+.stepbox > .caja-h h3{margin:0; font-size:16.5px}
+.stepbox > .caja-b{padding:0 18px 18px 60px}
+@media(min-width:1000px){.stepbox > .caja-h{flex-wrap:wrap; padding:22px 20px 0} .stepbox > .caja-h .chev{display:none} .stepbox > .caja-h h3{flex-basis:100%; margin-top:10px} .stepbox > .caja-b{padding:8px 20px 24px}}
+/* catálogo: cuadros compactos en 2 columnas; el abierto ocupa todo el ancho */
+.cats{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; columns:auto}
+@media(min-width:360px){.cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:639px){.cat h3{font-size:13.5px} .cat-n{font-size:11.5px} .cat{padding:10px} .cat-h.caja-h .ico{width:42px !important; height:42px !important; border-radius:12px !important} .cat-h.caja-h .ico img{width:36px; height:36px} .cat-h.caja-h .chev{right:8px; top:8px}}
+@media(min-width:980px){.cats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.cat{padding:12px; margin-bottom:0}
+.cat.abierta{grid-column:1 / -1}
+.cat-h.caja-h{flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:0}
+.cat-h.caja-h .ico{width:48px !important; height:48px !important; border-radius:14px !important}
+.cat-h.caja-h .ico img{width:40px; height:40px}
+.cat h3{font-size:14.5px}
+.cat-n{font-size:12px}
+.cat-h.caja-h .chev{position:absolute; right:12px; top:12px; margin:0}
+.cat{position:relative}
+.cat.abierta .cat-h.caja-h{flex-direction:row; align-items:center; gap:12px}
+.cat > .ofs{margin-top:12px}
+/* seguridad: 2 columnas compactas; la abierta ocupa todo el ancho */
+.trust{grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+@media(min-width:1000px){.trust{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tcard{padding:14px; display:block}
+.tcard.caja.abierta{grid-column:1 / -1}
+.tcard > .caja-h{flex-direction:column; align-items:flex-start; gap:10px; position:relative}
+.tcard > .caja-h .tico{width:52px; height:52px; border-radius:15px; margin:0}
+.tcard > .caja-h .tico img{width:44px; height:44px}
+.tcard > .caja-h h3{font-size:14.5px; margin:0; padding-right:22px}
+.tcard > .caja-h .chev{position:absolute; right:0; top:0}
+.tcard.abierta > .caja-h{flex-direction:row; align-items:center}
+.tcard > .caja-b{margin-top:10px}
+@media(max-width:679px){.tcard{display:block; grid-template-columns:none}}
+/* reglas: filas */
+.rules{grid-template-columns:1fr; gap:8px}
+.rule{padding:0}
+.rule > .caja-h{padding:16px 18px}
+.rule > .caja-h h3{margin:0; flex:1; justify-content:flex-start; gap:10px; flex-wrap:wrap}
+.rule > .caja-b{padding:0 18px 18px}
+/* profesionales: una cajita */
+.pro-cta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.pro-cta .caja-abrir{gap:8px}
+.pro-cta .caja-abrir .chev{transition:transform .18s ease}
+.pro-cta .caja-abrir[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.pro > .caja-b{margin-top:8px}
+.pro-sub2{margin-top:18px}
+
 @media(min-width:760px){.pro{padding:48px}}
 .pro-grid{display:grid; gap:28px; margin-top:28px}
 @media(min-width:900px){.pro-grid{grid-template-columns:1.15fr .85fr; gap:40px}}
@@ -541,6 +603,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       <a href="#como">Cómo funciona</a>
       <a href="#servicios">Servicios</a>
       <a href="#seguridad">Seguridad</a>
+      <a href="#reglas">Precios</a>
       <a href="#profesionales">Profesionales</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
@@ -558,7 +621,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <div>
       <p class="eyebrow"><span class="beat"></span> Partimos en el Gran Santiago</p>
       <h1>Profesionales de confianza, a tu casa.<em>Al tiro.</em></h1>
-      <p class="lead">Hazlo Ahora es una app inteligente que conecta lo que necesitas (un gásfiter, un electricista, una manicurista, un flete y más de 360 servicios) con una red de profesionales verificados cerca de ti. <strong>Cuentas qué pasa, te llegan precios, eliges y pagas al terminar.</strong> Ahora mismo o agendado.</p>
+      <p class="lead">Un gásfiter, un electricista, una manicurista, un flete: más de 360 servicios con profesionales verificados cerca de ti. <strong>Cuentas qué pasa, te llegan precios, eliges y pagas al terminar.</strong> Ahora mismo o agendado.</p>
 
       <form class="ask" id="p-form" autocomplete="off" role="search" aria-label="Pedir un servicio" novalidate>
         <div class="ask-f">
@@ -587,7 +650,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
         </div>
         <p class="p-err" id="p-err" role="alert" hidden></p>
         <button class="btn btn-brand ask-btn" type="submit">Ver precios</button>
-        <p class="ask-note">Mientras lanzamos, te mostramos una simulación con precios de ejemplo. No se envía nada.</p>
+        <p class="ask-note">Mientras lanzamos, te mostramos una simulación con precios de ejemplo. No se envía nada. <a href="#reglas">Precios y cancelación</a></p>
       </form>
 
       <p class="note">¿Trabajas a domicilio? <a href="#profesionales" data-side="prestador">Conoce Hazlo Ahora Pro</a>: tus primeros 2 meses, sin comisión. ¿Quieres que te avisemos cuando partamos? <a href="#registro" data-side="cliente">Anótate en la lista de espera</a>.</p>
@@ -598,7 +661,9 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       </div>
     </div>
 
-    <div class="demo-wrap" id="demo">
+    <div class="caja caja-demo" id="demo">
+      <button class="caja-h" type="button" aria-expanded="false" aria-controls="demo-b"><span class="caja-t"><b>Prueba la app en un minuto</b><small>Pide un servicio de ejemplo y mira cómo llegan los precios</small></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="caja-b demo-wrap" id="demo-b" hidden>
       <div class="dphone">
         <div class="dscreen" role="region" aria-label="Demostración de la app Hazlo Ahora">
           <div class="dbar"><span>9:41</span><span class="dtag">DEMO</span></div>
@@ -611,6 +676,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       <p class="demo-cap">Tócalo y pruébalo. Es una demostración: no se envía nada.</p>
       <p class="demo-cap">¿Trabajas a domicilio? <a href="#demo-pro">Prueba la demo para profesionales</a></p>
       <p class="sr" id="d-estado" aria-live="polite"></p>
+      </div>
     </div>
   </section>
 
@@ -624,27 +690,23 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   <section id="como">
     <p class="label">Cómo funciona</p>
     <h2>Pides, comparas y eliges, todo desde tu celular</h2>
-    <p class="sub">Primero cuentas qué pasa, después comparas precios y recién ahí alguien va a tu casa. <a href="#demo" class="inl">Pruébalo en el teléfono de arriba</a>.</p>
+    <p class="sub">Primero cuentas qué pasa, después comparas precios y recién ahí alguien va a tu casa. Toca cada paso para ver el detalle, o <a href="#demo" class="inl">pruébalo en la demo</a>.</p>
     <div class="flow">
-      <div class="stepbox">
-        <span class="stepno">1</span>
-        <h3>Cuenta qué pasa</h3>
-        <p>Escríbelo con tus palabras, como «fuga de agua» o «no enfría el aire»: la app entiende el problema y te sugiere el servicio. Agregas una foto y respondes un par de preguntas del oficio, como el modelo del auto o el tamaño de tu perro.</p>
+      <div class="stepbox caja" data-abrir-ancho>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-1"><span class="stepno">1</span><h3>Cuenta qué pasa</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-1" hidden><p>Escríbelo con tus palabras, como «fuga de agua» o «no enfría el aire»: la app entiende el problema y te sugiere el servicio. Agregas una foto y respondes un par de preguntas del oficio, como el modelo del auto o el tamaño de tu perro.</p></div>
       </div>
-      <div class="stepbox">
-        <span class="stepno">2</span>
-        <h3>Compara precios</h3>
-        <p>Los profesionales de ese oficio que están cerca te mandan su precio, cuándo llegan y un mensaje. Antes de elegir ves sus estrellas, su presentación y fotos de trabajos reales.</p>
+      <div class="stepbox caja" data-abrir-ancho>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-2"><span class="stepno">2</span><h3>Compara precios</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-2" hidden><p>Los profesionales de ese oficio que están cerca te mandan su precio, cuándo llegan y un mensaje. Antes de elegir ves sus estrellas, su presentación y fotos de trabajos reales.</p></div>
       </div>
-      <div class="stepbox">
-        <span class="stepno">3</span>
-        <h3>Síguelo en el mapa</h3>
-        <p>Ves al profesional venir en el mapa y conversan por el chat de la app, sin dar tu número. Si aparece algo extra, el cambio de precio solo corre si tú lo apruebas.</p>
+      <div class="stepbox caja" data-abrir-ancho>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-3"><span class="stepno">3</span><h3>Síguelo en el mapa</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-3" hidden><p>Ves al profesional venir en el mapa y conversan por el chat de la app, sin dar tu número. Si aparece algo extra, el cambio de precio solo corre si tú lo apruebas.</p></div>
       </div>
-      <div class="stepbox">
-        <span class="stepno">4</span>
-        <h3>Paga y califica</h3>
-        <p>Al terminar, el profesional sube fotos del trabajo listo, le pagas directo y se califican los dos. Si quieres, dejas propina desde la app: es entera para él.</p>
+      <div class="stepbox caja" data-abrir-ancho>
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="paso-4"><span class="stepno">4</span><h3>Paga y califica</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="paso-4" hidden><p>Al terminar, el profesional sube fotos del trabajo listo, le pagas directo y se califican los dos. Si quieres, dejas propina desde la app: es entera para él.</p></div>
       </div>
     </div>
   </section>
@@ -652,7 +714,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   <section id="servicios">
     <p class="label">Servicios</p>
     <h2>Más de 360 servicios, de la casa a tu auto</h2>
-    <p class="sub">Hogar, belleza, salud, cuidado de niños y adultos mayores, mascotas, vehículos, tecnología, eventos y clases. Y seguimos sumando lo que ustedes nos piden.</p>
+    <p class="sub">Escribe lo que necesitas o toca una categoría para ver sus oficios.</p>
 
     <div class="finder">
       <label for="buscar">¿Qué necesitas? Búscalo aquí</label>
@@ -664,8 +726,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
       <div class="results" id="resultados"></div>
     </div>
 
-    <div class="cats cut" id="catalogo"></div>
-    <button class="btn btn-line vertodo" type="button" id="vertodo">Ver las 13 categorías</button>
+    <div class="cats" id="catalogo"></div>
 
     <div class="legend">
       <span><span class="of doc">Con título</span>&nbsp; exige título, licencia o documento, revisado por nosotros</span>
@@ -678,35 +739,29 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <h2>Tranquilidad para abrir la puerta</h2>
     <p class="sub">Detrás de cada profesional de la red hay un equipo que revisó su identidad, sus antecedentes y su trabajo antes de que pueda cotizar. Así eliges con confianza.</p>
     <div class="trust">
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/identidad-64.webp" srcset="/img/conf/identidad-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Identidad comprobada</h3>
-        <p>Cédula vigente y una selfie que se compara con la foto de la cédula. Una cédula, una cuenta: detrás de cada perfil hay una persona real.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-1"><div class="tico"><img src="/img/conf/identidad-64.webp" srcset="/img/conf/identidad-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Identidad comprobada</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-1" hidden><p>Cédula vigente y una selfie que se compara con la foto de la cédula. Una cédula, una cuenta: detrás de cada perfil hay una persona real.</p></div>
       </div>
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/antecedentes-64.webp" srcset="/img/conf/antecedentes-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Certificado de antecedentes</h3>
-        <p>Cada profesional lo presenta antes de recibir solicitudes, como en las apps de transporte, y lo renueva cuando vence. Lo revisa nuestro equipo.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-2"><div class="tico"><img src="/img/conf/antecedentes-64.webp" srcset="/img/conf/antecedentes-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Certificado de antecedentes</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-2" hidden><p>Cada profesional lo presenta antes de recibir solicitudes, como en las apps de transporte, y lo renueva cuando vence. Lo revisa nuestro equipo.</p></div>
       </div>
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/portafolio-64.webp" srcset="/img/conf/portafolio-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Trabajos reales, por oficio</h3>
-        <p>Para cotizar, cada profesional sube fotos de trabajos suyos de ese oficio: cañerías si es gásfiter, uñas si es manicurista. Las revisamos una por una.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-3"><div class="tico"><img src="/img/conf/portafolio-64.webp" srcset="/img/conf/portafolio-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Trabajos reales, por oficio</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-3" hidden><p>Para cotizar, cada profesional sube fotos de trabajos suyos de ese oficio: cañerías si es gásfiter, uñas si es manicurista. Las revisamos una por una.</p></div>
       </div>
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/titulo-64.webp" srcset="/img/conf/titulo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Título donde corresponde</h3>
-        <p>En salud, cuidado de niños y adultos mayores, gas, podología, seguridad y conductores pedimos el título, la licencia o el documento que corresponde.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-4"><div class="tico"><img src="/img/conf/titulo-64.webp" srcset="/img/conf/titulo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Título donde corresponde</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-4" hidden><p>En salud, cuidado de niños y adultos mayores, gas, podología, seguridad y conductores pedimos el título, la licencia o el documento que corresponde.</p></div>
       </div>
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/direccion-64.webp" srcset="/img/conf/direccion-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Tu dirección y tu número, protegidos</h3>
-        <p>Antes de aceptar, el profesional ve solo la zona aproximada. La dirección exacta la ve únicamente quien elegiste, y el chat oculta teléfonos y correos.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-5"><div class="tico"><img src="/img/conf/direccion-64.webp" srcset="/img/conf/direccion-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Tu dirección y tu número, protegidos</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-5" hidden><p>Antes de aceptar, el profesional ve solo la zona aproximada. La dirección exacta la ve únicamente quien elegiste, y el chat oculta teléfonos y correos.</p></div>
       </div>
-      <div class="tcard">
-        <div class="tico"><img src="/img/conf/contigo-64.webp" srcset="/img/conf/contigo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div>
-        <h3>Estamos contigo</h3>
-        <p>Si algo no te gusta, puedes reportar o bloquear desde el trabajo o el chat, y una persona de nuestro equipo lo revisa. Cuidamos que Hazlo Ahora sea un espacio de respeto para todos: aquí no hay lugar para la violencia, el acoso ni la discriminación.</p>
+      <div class="tcard caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="seg-6"><div class="tico"><img src="/img/conf/contigo-64.webp" srcset="/img/conf/contigo-128.webp 2x" width="54" height="54" alt="" decoding="async" loading="lazy"></div><h3>Estamos contigo</h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="seg-6" hidden><p>Si algo no te gusta, puedes reportar o bloquear desde el trabajo o el chat, y una persona de nuestro equipo lo revisa. Cuidamos que Hazlo Ahora sea un espacio de respeto para todos: aquí no hay lugar para la violencia, el acoso ni la discriminación.</p></div>
       </div>
     </div>
   </section>
@@ -716,16 +771,21 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <h2>Te lo contamos todo antes de que pidas</h2>
     <p class="sub">Lo que pagas, lo que cuesta cancelar y adónde va cada peso. No tenemos letra chica.</p>
     <div class="rules">
-      <div class="rule">
-        <h3>Pedir y cotizar <span>Gratis</span></h3>
+      <div class="rule caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-1"><h3>Pedir y cotizar <span>Gratis</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="regla-1" hidden>
         <p>Pedir un servicio y comparar precios no te cuesta nada. Hazlo Ahora no le cobra al cliente: pagas solo el trabajo que aceptaste.</p>
       </div>
-      <div class="rule">
-        <h3>Pagar <span>Al terminar</span></h3>
+      </div>
+      <div class="rule caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-2"><h3>Pagar <span>Al terminar</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="regla-2" hidden>
         <p>Le pagas directo al profesional cuando termina, en efectivo o con tarjeta. El precio es el que aceptaste en la app, y cualquier cambio lo apruebas tú.</p>
       </div>
-      <div class="rule">
-        <h3>Cancelar</h3>
+      </div>
+      <div class="rule caja" id="cancelar">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-3"><h3>Cancelar <span>Casi siempre gratis</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="regla-3" hidden>
         <p>Casi siempre es gratis. Si el profesional ya salió, el cargo va completo a él, por el tiempo que te dedicó.</p>
         <div class="fees">
           <div class="fee"><span>Antes de que salga (y siempre en los primeros 5 minutos)</span><b class="free">Gratis</b></div>
@@ -734,17 +794,26 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           <div class="fee"><span>Llega con más de 30 minutos de atraso</span><b class="free">Gratis</b></div>
         </div>
       </div>
-      <div class="rule">
-        <h3>Propina <span>Opcional</span></h3>
+      </div>
+      <div class="rule caja">
+        <button class="caja-h" type="button" aria-expanded="false" aria-controls="regla-4"><h3>Propina <span>Opcional</span></h3><svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="caja-b" id="regla-4" hidden>
         <p>Al final del trabajo puedes dejar 10 %, 15 %, 20 % u otro monto desde la app. Va completa al profesional: Hazlo Ahora no se queda con nada.</p>
+      </div>
       </div>
     </div>
   </section>
 
-  <section class="pro" id="profesionales">
+  <section class="pro caja" id="profesionales">
     <p class="label">Hazlo Ahora Pro · Trabajemos juntos</p>
-    <h2>Una red que te conecta con los clientes que te están buscando</h2>
-    <p class="sub">Cuando alguien cerca de ti necesita justo tu oficio, la app te avisa. Tú eliges qué tomar y a qué precio. Para maestros, técnicos, estilistas, profesionales de la salud y todos los que trabajan a domicilio, con o sin empresa.</p>
+    <h2>¿Trabajas a domicilio?</h2>
+    <p class="sub">Te avisamos cuando alguien cerca necesita justo tu oficio. Tú eliges qué tomar y pones tu precio. <b>Tus primeros 2 meses, sin comisión.</b></p>
+    <div class="pro-cta">
+      <button class="btn btn-line caja-abrir" type="button" aria-expanded="false" aria-controls="pro-b">Ver cómo funciona para profesionales <svg class="chev" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <a class="btn btn-brand" href="#registro" data-side="prestador">Quiero sumarme</a>
+    </div>
+    <div class="caja-b" id="pro-b" hidden>
+    <p class="sub pro-sub2">Cuando alguien cerca de ti necesita justo tu oficio, la app te avisa. Tú eliges qué tomar y a qué precio. Para maestros, técnicos, estilistas, profesionales de la salud y todos los que trabajan a domicilio, con o sin empresa.</p>
     <div class="pro-grid">
       <ul class="checks">
         <li><svg class="hz" width="21" height="21" aria-hidden="true" focusable="false"><use href="#hz-visto"/></svg><span><b>Oportunidades a tu medida.</b> Te avisamos al celular cuando alguien necesita tu oficio, con fotos, en el radio que tú elijas.</span></li>
@@ -799,6 +868,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     <div class="wanted">
       <p>Buscamos gásfiter, electricistas y cerrajeros del Gran Santiago para el lanzamiento.<span>Si trabajas en otro oficio, anótate igual: vamos sumando por etapas. Te escribimos con los pasos y resolvemos tus dudas.</span></p>
       <a class="btn btn-brand" href="#registro" data-side="prestador">Quiero sumarme</a>
+    </div>
     </div>
   </section>
 
@@ -1028,6 +1098,39 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   ];
 
 
+  // ---- Cajitas: cada cuadro se abre al tocar. Un enlace a algo que está dentro de una cajita la abre.
+  function chev() {
+    var NS = 'http://www.w3.org/2000/svg', e = document.createElementNS(NS, 'svg'), p = document.createElementNS(NS, 'path');
+    e.setAttribute('class', 'chev'); e.setAttribute('width', '18'); e.setAttribute('height', '18'); e.setAttribute('viewBox', '0 0 24 24'); e.setAttribute('aria-hidden', 'true'); e.setAttribute('focusable', 'false');
+    p.setAttribute('d', 'M6 9l6 6 6-6'); p.setAttribute('fill', 'none'); p.setAttribute('stroke', 'currentColor'); p.setAttribute('stroke-width', '2.2'); p.setAttribute('stroke-linecap', 'round'); p.setAttribute('stroke-linejoin', 'round');
+    e.appendChild(p); return e;
+  }
+  function cajaDe(btn) { return btn.closest('.caja'); }
+  function ponerCaja(caja, abierta) {
+    if (!caja) return;
+    var btn = caja.querySelector(':scope > .caja-h, :scope > .pro-cta > .caja-abrir'), body = caja.querySelector(':scope > .caja-b');
+    if (!btn || !body) return;
+    btn.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+    body.hidden = !abierta;
+    caja.classList.toggle('abierta', abierta);
+  }
+  function abrirHasta(el) {  // abre todas las cajitas que contienen a el
+    var c = el && el.closest ? el.closest('.caja-b') : null;
+    while (c) { ponerCaja(c.closest('.caja'), true); c = c.parentElement && c.parentElement.closest('.caja-b'); }
+    if (el && el.classList && el.classList.contains('caja')) ponerCaja(el, true);
+  }
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('.caja-h, .caja-abrir');
+    if (btn) { var caja = cajaDe(btn); ponerCaja(caja, btn.getAttribute('aria-expanded') !== 'true'); return; }
+    var a = ev.target.closest('a[href^="#"]');
+    if (a && a.getAttribute('href').length > 1) { var dest = document.getElementById(a.getAttribute('href').slice(1)); if (dest) abrirHasta(dest); }
+  });
+  function abrirDelHash() { if (location.hash.length > 1) abrirHasta(document.getElementById(location.hash.slice(1))); }
+  window.addEventListener('hashchange', abrirDelHash);
+  abrirDelHash();
+  if (matchMedia('(min-width:1000px)').matches) document.querySelectorAll('.caja[data-abrir-ancho]').forEach(function (c) { ponerCaja(c, true); });
+  window.hzAbrir = abrirHasta;
+
   // Íconos propios de Hazlo (sprite al inicio del <body>): línea de tinta + mancha de color desplazada.
   function hzIco(n, s) {
     var NS = 'http://www.w3.org/2000/svg', e = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
@@ -1079,18 +1182,18 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     'Seguridad de evento': 'seguridad_evento', 'Música y registro': 'musica_evento', 'Entretención y juegos': 'juegos_evento', 'Mobiliario y vajilla': 'mobiliario_evento',
     'Idiomas': 'idiomas', 'Clases de música': 'musica_clases', 'Baile': 'baile', 'Retiros': 'retiros',
     'Conductor (maneja tu auto)': 'chofer', 'Costura y arreglos de ropa': 'ropa' };
-  CATALOGO.forEach(function (g) {
-    var card = el('article', 'cat');
+  CATALOGO.forEach(function (g, gi) {
+    var card = el('article', 'cat caja');
     card.style.setProperty('--c', g[2]);
-    var h = el('div', 'cat-h');
-    var ico = el('span', 'ico'); ico.setAttribute('aria-hidden', 'true'); ico.appendChild(hzImg(g[1], 54));
+    var h = el('button', 'cat-h caja-h'); h.type = 'button'; h.setAttribute('aria-expanded', 'false'); h.setAttribute('aria-controls', 'cat-' + gi);
+    var ico = el('span', 'ico'); ico.setAttribute('aria-hidden', 'true'); ico.appendChild(hzImg(g[1], 44));
     var tt = el('div');
     tt.appendChild(el('h3', null, g[0]));
     var nServ = 0;
     g[3].forEach(function (o) { nServ += o[2].split('|').length; });
     tt.appendChild(el('p', 'cat-n', g[3].length + (g[3].length === 1 ? ' oficio' : ' oficios') + ' · ' + nServ + ' servicios'));
-    h.appendChild(ico); h.appendChild(tt);
-    var ofs = el('div', 'ofs');
+    h.appendChild(ico); h.appendChild(tt); h.appendChild(chev());
+    var ofs = el('div', 'ofs caja-b'); ofs.id = 'cat-' + gi; ofs.hidden = true;
     g[3].forEach(function (o) {
       OF[o[0]] = { g: g[0], ico: ICO_OFICIO[o[0]] || g[1], color: g[2], doc: !!o[1] };
       var chip = el('span', 'of' + (o[1] ? ' doc' : ''), o[0]);
@@ -1104,11 +1207,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     cat.appendChild(card);
   });
 
-  document.getElementById('vertodo').addEventListener('click', function () {
-    cat.classList.remove('cut');
-    var sexto = cat.children[5] && cat.children[5].querySelector('h3');
-    if (sexto) { sexto.setAttribute('tabindex', '-1'); sexto.focus(); }
-  });
+
 
   // ---- Buscador ----
   var buscar = document.getElementById('buscar');
@@ -2298,6 +2397,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     D.comuna = pcom.value.trim().slice(0, 40);
     prepararCotizaciones();
     ir('cotizando');
+    window.hzAbrir(demoEl);
     var r = demoEl.getBoundingClientRect();
     if (r.top < 0 || r.bottom > innerHeight) demoEl.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
   });
