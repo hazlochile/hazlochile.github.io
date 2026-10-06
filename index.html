@@ -600,11 +600,24 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 .d-ico{width:44px !important; height:44px !important; border-radius:13px !important}
 .d-tile .d-ico{width:54px !important; height:54px !important}
 .d-tile .d-ico .hz3d{width:48px; height:48px}
+
+
+
+/* ---- Colores universales (2-oct-2026): estrellas amarillas y pin rojo, siempre ---- */
+:root{--estrella:#FBBC04; --estrella-vacia:#DADCE0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--estrella-vacia:#4A443E}}
+:root[data-theme="dark"]{--estrella-vacia:#4A443E}
+.hz-est,.d-bigstars{color:var(--estrella)}
+.d-qm .hz{color:var(--estrella)}
+.d-stars button,.d-stars button .hz{color:var(--estrella-vacia)}
+.d-stars button.on,.d-stars button.on .hz{color:var(--estrella)}
+.d-stars button:hover .hz{transform:scale(1.08)}
+/* ---- fin colores universales ---- */
 </style>
 <script type="application/ld+json" id="hz-seo">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Hazlo Ahora","url":"https://hazlochile.com/","inLanguage":"es-CL","publisher":{"@type":"Organization","name":"Hazlo Ahora","url":"https://hazlochile.com/"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuándo puedo usar Hazlo Ahora?","acceptedAnswer":{"@type":"Answer","text":"Estamos terminando las pruebas con usuarios reales. Partimos en el Gran Santiago con gásfiter, electricistas y cerrajeros, y después vamos sumando más oficios y el resto de Chile. Si te anotas, te avisamos antes que a nadie."}},{"@type":"Question","name":"¿Cuánto cuesta para el cliente?","acceptedAnswer":{"@type":"Answer","text":"Nada. Descargar la app, pedir y comparar precios es gratis. Pagas solo el trabajo que aceptaste, directo al profesional."}},{"@type":"Question","name":"¿Cómo sé que puedo confiar en quien llega a mi casa?","acceptedAnswer":{"@type":"Answer","text":"Porque lo conocemos antes que tú: cada profesional verifica su cédula con una selfie, presenta su certificado de antecedentes y sube fotos de trabajos reales de su oficio, y nuestro equipo lo revisa. En salud, cuidado de personas, gas y otros oficios sensibles pedimos además el título o la licencia. Antes de elegir ves sus estrellas, su presentación y fotos de sus trabajos."}},{"@type":"Question","name":"¿Quiénes están detrás de Hazlo Ahora?","acceptedAnswer":{"@type":"Answer","text":"Somos HAZLO AHORA SpA, una empresa chilena con sede en Santiago. Detrás de la app hay un equipo que revisa cada perfil, responde en soporte@hazlochile.com y sigue sumando oficios con lo que ustedes nos piden."}},{"@type":"Question","name":"¿Tengo que dar mi teléfono o mi dirección?","acceptedAnswer":{"@type":"Answer","text":"Tu teléfono nunca se comparte: todo se conversa por el chat de la app, que oculta números y correos. Tu dirección exacta la ve solo el profesional que aceptaste, y la ubicación en vivo se borra cuando termina el trabajo."}},{"@type":"Question","name":"¿Puedo agendar para otro día?","acceptedAnswer":{"@type":"Answer","text":"Sí. Todos los servicios se pueden pedir al tiro o agendados, hasta 30 días antes y a cualquier hora, también de noche: un coffee break a las 7 de la mañana o garzones para un cumpleaños hasta las 2 de la madrugada."}},{"@type":"Question","name":"¿Cómo pago? ¿Aceptan tarjeta?","acceptedAnswer":{"@type":"Answer","text":"Le pagas directo al profesional al terminar, en efectivo o con tarjeta. El pago con tarjeta dentro de la app viene más adelante."}},{"@type":"Question","name":"Soy profesional, ¿cuánto me cobra Hazlo Ahora?","acceptedAnswer":{"@type":"Answer","text":"Tus primeros 2 meses desde que te inscribes en la app, nada: es nuestra bienvenida. Después, un 10 % del trabajo, con IVA incluido, y solo cuando haces el trabajo. No hay mensualidad ni costo por inscribirte, y las propinas son 100 % tuyas. Todo el detalle está en Soporte."}},{"@type":"Question","name":"¿En qué celulares funciona?","acceptedAnswer":{"@type":"Answer","text":"En Android y iPhone. Son dos apps: Hazlo Ahora, para pedir servicios, y Hazlo Ahora Pro, para quienes trabajan."}}]}]}</script>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol><symbol id="hz-estrella-llena" viewBox="0 0 24 24"><path d="M12.00 2.70L14.70 9.18L21.70 9.75L16.37 14.32L18.00 21.15L12.00 17.50L6.00 21.15L7.63 14.32L2.30 9.75L9.30 9.18Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol><symbol id="hz-pin" viewBox="0 0 24 24"><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></symbol></svg>
 
 <header class="bar">
   <div class="wrap bar-in">
@@ -649,7 +662,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           <div class="ask-f">
             <label for="p-comuna">¿Dónde?</label>
             <div class="ask-in">
-              <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-ubicacion"/></svg>
+              <svg class="hz" width="19" height="19" aria-hidden="true" focusable="false"><use href="#hz-pin"/></svg>
               <input id="p-comuna" type="text" placeholder="Tu comuna" maxlength="40" autocomplete="address-level2">
             </div>
           </div>
@@ -1106,7 +1119,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   }
   function hzEstrellas(n, s) {
     var sp = document.createElement('span'); sp.className = 'hz-est';
-    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella', s || 16));
+    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella-llena', s || 16));
     return sp;
   }
   function el(tag, cls, txt) {
@@ -1503,7 +1516,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     '<path class="m-calle" d="M0 30H300M0 78H300M0 126H300M52 0V150M142 0V150M232 0V150"/>' +
     '<path class="m-ruta" id="d-ruta" d="M18 126H142V78H232V30H272"/>' +
     '<path class="m-hecha" id="d-hecha" d="M18 126H142V78H232V30H272"/>' +
-    '<circle class="m-casa" cx="272" cy="30" r="9"/><circle cx="272" cy="30" r="3" fill="#fff"/>' +
+    '<g transform="translate(272 30) scale(1.15) translate(-12 -22.5)"><ellipse cx="12" cy="22.6" rx="3.2" ry="1.1" fill="rgba(0,0,0,.18)"/><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></g>' +
     '<g id="d-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
   var MARCA = '<svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg>';
   var LUPA = '<svg class="hz" width="18" height="18" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>';
@@ -1623,7 +1636,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     return h('article', { class: 'd-q', 'aria-label': 'Cotización de ' + q.nombre }, [
       h('div', { class: 'd-qtop' }, [
         h('span', { class: 'd-av', 'aria-hidden': 'true' }, [q.ini]),
-        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, (q.st ? [hzIco('estrella', 13), q.st + ' (' + q.tr + ' trabajos)'] : ['Nuevo en Hazlo Ahora']))]),
+        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, (q.st ? [hzIco('estrella-llena', 13), q.st + ' (' + q.tr + ' trabajos)'] : ['Nuevo en Hazlo Ahora']))]),
         h('p', { class: 'd-amt' }, [plata(q.precio), h('small', null, [cuando])])
       ]),
       h('div', { class: 'd-seals' }, sellos.map(function (x) { return h('span', { class: 'd-seal' }, [hzIco('visto', 15), x]); })),
@@ -1859,7 +1872,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('div', { class: 'd-stars', role: 'group', 'aria-labelledby': 'd-st-l' }, [1, 2, 3, 4, 5].map(function (n) {
             return h('button', { type: 'button', class: n <= D.estrellas ? 'on' : '', 'aria-pressed': String(n === D.estrellas),
               'aria-label': n + (n === 1 ? ' estrella' : ' estrellas'), 'data-k': 's' + n,
-              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, [hzIco('estrella', 30)]);
+              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, [hzIco('estrella-llena', 30)]);
           })),
           D.faltaEstrellas ? h('p', { class: 'd-err', role: 'alert' }, ['Elige de 1 a 5 estrellas.']) : null
         ],
@@ -1944,7 +1957,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     '<path class="m-calle" d="M0 30H300M0 78H300M0 126H300M52 0V150M142 0V150M232 0V150"/>' +
     '<path class="m-ruta" id="pd-ruta" d="M28 30H142V78H232V126H274"/>' +
     '<path class="m-hecha" id="pd-hecha" d="M28 30H142V78H232V126H274"/>' +
-    '<circle class="m-casa" cx="274" cy="126" r="9"/><circle cx="274" cy="126" r="3" fill="#fff"/>' +
+    '<g transform="translate(274 126) scale(1.15) translate(-12 -22.5)"><ellipse cx="12" cy="22.6" rx="3.2" ry="1.1" fill="rgba(0,0,0,.18)"/><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></g>' +
     '<g id="pd-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
 
   function servicioPro(c) {
@@ -2130,7 +2143,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             h('span', null, [nom() + ' está comparando cotizaciones. Ve tus estrellas, tu presentación y fotos de tus trabajos.'])]));
         } else {
           cuerpo.unshift(h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]));
-          cuerpo.push(h('div', { class: 'd-lock d-open' }, [hzIco('ubicacion', 18),
+          cuerpo.push(h('div', { class: 'd-lock d-open' }, [hzIco('pin', 18),
             h('span', null, [h('b', null, ['Ahora ves la dirección exacta en ' + c.com + '. ']), 'Pueden conversar por el chat de la app, sin dar teléfonos.'])]));
           cuerpo.push(h('p', { class: 'd-note' }, ['Si ' + nom() + ' cancela después de que marcas «Voy en camino», recibes $2.000 por tu tiempo.']));
         }

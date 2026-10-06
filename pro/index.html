@@ -620,11 +620,24 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
 .sii{display:flex; gap:14px; align-items:center; background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:16px 18px; margin-top:16px}
 .sii img{flex:none}
 .sii p{font-size:15px; color:var(--ink-soft)} .sii p a{color:var(--brand-dark); font-weight:700}
+
+
+
+/* ---- Colores universales (2-oct-2026): estrellas amarillas y pin rojo, siempre ---- */
+:root{--estrella:#FBBC04; --estrella-vacia:#DADCE0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--estrella-vacia:#4A443E}}
+:root[data-theme="dark"]{--estrella-vacia:#4A443E}
+.hz-est,.d-bigstars{color:var(--estrella)}
+.d-qm .hz{color:var(--estrella)}
+.d-stars button,.d-stars button .hz{color:var(--estrella-vacia)}
+.d-stars button.on,.d-stars button.on .hz{color:var(--estrella)}
+.d-stars button:hover .hz{transform:scale(1.08)}
+/* ---- fin colores universales ---- */
 </style>
 <script type="application/ld+json" id="hz-seo">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto me cobra Hazlo Ahora?","acceptedAnswer":{"@type":"Answer","text":"Nada los primeros 2 meses desde que te inscribes. Después, el 10 % de cada trabajo hecho, con el IVA incluido en ese 10 %. No hay mensualidad ni costo de inscripción: si un mes no trabajas, no pagas."}},{"@type":"Question","name":"¿Cómo y cuándo cobro?","acceptedAnswer":{"@type":"Answer","text":"Directo al cliente, al terminar el trabajo, en efectivo o con tarjeta. El precio es el que aceptó en la app; si hubo extras, los aprobó antes. Las propinas son 100 % tuyas."}},{"@type":"Question","name":"¿Cómo se paga la comisión?","acceptedAnswer":{"@type":"Answer","text":"Se anota en tu saldo dentro de la app cuando marcas «Voy en camino», y la pagas por transferencia cuando quieras, hasta un tope. Si el cliente cancela, se te devuelve. Antes de cada cotización ves cuánto cobras, cuánto es la comisión y cuánto recibes."}},{"@type":"Question","name":"¿Tengo que estar conectado todo el día?","acceptedAnswer":{"@type":"Answer","text":"No. Marcas cuándo estás disponible y puedes pausar los avisos por unas horas, hasta mañana o una semana. Y cada trabajo lo tomas solo si quieres: nadie te asigna nada."}},{"@type":"Question","name":"¿Qué pasa si el cliente cancela?","acceptedAnswer":{"@type":"Answer","text":"Si cancela antes de que salgas, no pasa nada y la comisión se te devuelve. Si cancela cuando ya vas en camino, recibes $2.000; si ya llegaste o estás trabajando, $5.000. Ese cargo es completo para ti."}},{"@type":"Question","name":"¿Puedo ofrecer varios oficios?","acceptedAnswer":{"@type":"Answer","text":"Sí. Para cada oficio subes fotos de trabajos tuyos (las revisamos una por una) y, si el oficio exige título, licencia o documento, también ese documento. Los clientes ven tus trabajos del oficio que están pidiendo."}},{"@type":"Question","name":"¿Qué datos míos ve el cliente?","acceptedAnswer":{"@type":"Answer","text":"Tu nombre, tu foto, tus estrellas, tu presentación y las fotos de trabajos que aprobamos. Nunca tu teléfono, tu correo ni tu dirección. Toda la conversación va por el chat de la app."}},{"@type":"Question","name":"¿Y si tengo un equipo o más de un vehículo?","acceptedAnswer":{"@type":"Answer","text":"Puedes decir cuántos trabajos atiendes a la misma hora y tomar varios. Hazlo Ahora sirve igual para una persona que trabaja sola que para un pequeño negocio."}},{"@type":"Question","name":"¿Necesito tener iniciación de actividades o dar boleta?","acceptedAnswer":{"@type":"Answer","text":"Cada profesional es independiente y responsable de sus impuestos; Hazlo Ahora no te exige boleta para trabajar. Si quieres formalizarte, tenemos una guía paso a paso para iniciar actividades en el SII."}},{"@type":"Question","name":"¿Cuándo parte y dónde?","acceptedAnswer":{"@type":"Answer","text":"Estamos terminando las pruebas con profesionales reales. Partimos en el Gran Santiago con gásfiter, electricistas y cerrajeros, y después vamos sumando oficios y comunas. Si te anotas, te escribimos apenas te toque."}}]}]}</script>
 </head>
 <body data-side="prestador">
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="hz-camara" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="13.5" r="3.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="m8.5 7 1.3-2.5h4.4L15.5 7"/><circle cx="12" cy="13.5" r="3.6"/><path d="M17.6 10.2h.01"/></g></symbol><symbol id="hz-candado" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><rect x="5.5" y="11" width="13" height="10" rx="2.2"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M8 11V8a4 4 0 0 1 8 0v3"/><rect x="5.5" y="11" width="13" height="10" rx="2.2"/><path d="M12 15v2.2"/></g></symbol><symbol id="hz-ubicacion" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21.5S5.5 15.2 5.5 10a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.4"/></g></symbol><symbol id="hz-buscar" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="10.5" cy="10.5" r="6.3"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="10.5" cy="10.5" r="6.3"/><path d="m15.2 15.2 5.3 5.3"/></g></symbol><symbol id="hz-visto" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><circle cx="12" cy="12" r="8.6"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="8.6"/><path d="m7.9 12.3 2.8 2.8 5.4-5.7"/></g></symbol><symbol id="hz-estrella" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.3 14.6 8.7 20.5 9.4 16.1 13.4 17.3 19.3 12 16.4 6.7 19.3 7.9 13.4 3.5 9.4 9.4 8.7z"/></g></symbol><symbol id="hz-tic" viewBox="0 0 24 24"><g transform="translate(1.3 1.3)" style="fill:var(--hz-f,currentColor);stroke:none"></g><g style="fill:none;stroke:var(--hz-l,var(--ink,#1A1714));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="m5.5 12.6 4.1 4.1 8.9-9.3"/></g></symbol><symbol id="hz-estrella-llena" viewBox="0 0 24 24"><path d="M12.00 2.70L14.70 9.18L21.70 9.75L16.37 14.32L18.00 21.15L12.00 17.50L6.00 21.15L7.63 14.32L2.30 9.75L9.30 9.18Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol><symbol id="hz-pin" viewBox="0 0 24 24"><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></symbol></svg>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="logo" href="/" aria-label="Hazlo Ahora, inicio">
@@ -1088,7 +1101,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
   }
   function hzEstrellas(n, s) {
     var sp = document.createElement('span'); sp.className = 'hz-est';
-    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella', s || 16));
+    for (var i = 0; i < n; i++) sp.appendChild(hzIco('estrella-llena', s || 16));
     return sp;
   }
   function el(tag, cls, txt) {
@@ -1485,7 +1498,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     '<path class="m-calle" d="M0 30H300M0 78H300M0 126H300M52 0V150M142 0V150M232 0V150"/>' +
     '<path class="m-ruta" id="d-ruta" d="M18 126H142V78H232V30H272"/>' +
     '<path class="m-hecha" id="d-hecha" d="M18 126H142V78H232V30H272"/>' +
-    '<circle class="m-casa" cx="272" cy="30" r="9"/><circle cx="272" cy="30" r="3" fill="#fff"/>' +
+    '<g transform="translate(272 30) scale(1.15) translate(-12 -22.5)"><ellipse cx="12" cy="22.6" rx="3.2" ry="1.1" fill="rgba(0,0,0,.18)"/><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></g>' +
     '<g id="d-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
   var MARCA = '<svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true"><path d="M35 13 19 35h11l-2 16 17-23H33z" fill="#fff"/></svg>';
   var LUPA = '<svg class="hz" width="18" height="18" aria-hidden="true" focusable="false"><use href="#hz-buscar"/></svg>';
@@ -1605,7 +1618,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     return h('article', { class: 'd-q', 'aria-label': 'Cotización de ' + q.nombre }, [
       h('div', { class: 'd-qtop' }, [
         h('span', { class: 'd-av', 'aria-hidden': 'true' }, [q.ini]),
-        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, (q.st ? [hzIco('estrella', 13), q.st + ' (' + q.tr + ' trabajos)'] : ['Nuevo en Hazlo Ahora']))]),
+        h('div', null, [h('p', { class: 'd-qn' }, [q.nombre]), h('p', { class: 'd-qm' }, (q.st ? [hzIco('estrella-llena', 13), q.st + ' (' + q.tr + ' trabajos)'] : ['Nuevo en Hazlo Ahora']))]),
         h('p', { class: 'd-amt' }, [plata(q.precio), h('small', null, [cuando])])
       ]),
       h('div', { class: 'd-seals' }, sellos.map(function (x) { return h('span', { class: 'd-seal' }, [hzIco('visto', 15), x]); })),
@@ -1841,7 +1854,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
           h('div', { class: 'd-stars', role: 'group', 'aria-labelledby': 'd-st-l' }, [1, 2, 3, 4, 5].map(function (n) {
             return h('button', { type: 'button', class: n <= D.estrellas ? 'on' : '', 'aria-pressed': String(n === D.estrellas),
               'aria-label': n + (n === 1 ? ' estrella' : ' estrellas'), 'data-k': 's' + n,
-              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, [hzIco('estrella', 30)]);
+              onclick: function () { D.estrellas = n; D.faltaEstrellas = false; render(); } }, [hzIco('estrella-llena', 30)]);
           })),
           D.faltaEstrellas ? h('p', { class: 'd-err', role: 'alert' }, ['Elige de 1 a 5 estrellas.']) : null
         ],
@@ -1926,7 +1939,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
     '<path class="m-calle" d="M0 30H300M0 78H300M0 126H300M52 0V150M142 0V150M232 0V150"/>' +
     '<path class="m-ruta" id="pd-ruta" d="M28 30H142V78H232V126H274"/>' +
     '<path class="m-hecha" id="pd-hecha" d="M28 30H142V78H232V126H274"/>' +
-    '<circle class="m-casa" cx="274" cy="126" r="9"/><circle cx="274" cy="126" r="3" fill="#fff"/>' +
+    '<g transform="translate(274 126) scale(1.15) translate(-12 -22.5)"><ellipse cx="12" cy="22.6" rx="3.2" ry="1.1" fill="rgba(0,0,0,.18)"/><path d="M12 22.5C10.8 20.2 4.5 14.6 4.5 9a7.5 7.5 0 0 1 15 0c0 5.6-6.3 11.2-7.5 13.5z" fill="#EA4335" stroke="#C5221F" stroke-width=".8"/><circle cx="12" cy="9" r="2.9" fill="#B31412"/></g>' +
     '<g id="pd-mk"><circle class="m-halo" r="16"/><circle class="m-yo" r="8"/></g></svg>';
 
   function servicioPro(c) {
@@ -2112,7 +2125,7 @@ footer{padding-block:40px 48px; color:var(--muted); font-size:14px; border-top:1
             h('span', null, [nom() + ' está comparando cotizaciones. Ve tus estrellas, tu presentación y fotos de tus trabajos.'])]));
         } else {
           cuerpo.unshift(h('div', { class: 'd-okc', 'aria-hidden': 'true' }, [hzIco('visto', 60)]));
-          cuerpo.push(h('div', { class: 'd-lock d-open' }, [hzIco('ubicacion', 18),
+          cuerpo.push(h('div', { class: 'd-lock d-open' }, [hzIco('pin', 18),
             h('span', null, [h('b', null, ['Ahora ves la dirección exacta en ' + c.com + '. ']), 'Pueden conversar por el chat de la app, sin dar teléfonos.'])]));
           cuerpo.push(h('p', { class: 'd-note' }, ['Si ' + nom() + ' cancela después de que marcas «Voy en camino», recibes $2.000 por tu tiempo.']));
         }
